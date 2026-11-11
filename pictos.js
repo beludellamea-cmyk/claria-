@@ -4,7 +4,7 @@
    sin comprobar que la palabra clave coincide. Estados de cada ficha:
      verificado  → diccionario local, sin ambigüedad
      revisar     → diccionario local, pero la palabra tiene varios sentidos / formas ambiguas
-     sugerido    → resultado de ARASAAC en línea con coincidencia exacta de palabra clave (lo asigna convertidor.js)
+     elegido     → la persona eligió el pictograma (otra opción local o un resultado de ARASAAC en línea con palabra clave exacta)
      sin         → sin pictograma: queda la palabra escrita (se puede buscar o elegir otro)
      texto       → la persona eligió dejar solo la palabra
      func        → palabra gramatical (artículo, preposición…) que se muestra solo como texto                       */

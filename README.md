@@ -30,3 +30,7 @@ Ninguna clave en el navegador ni en GitHub · respuestas fijas nunca se presenta
 - Tramitar un nuevo ejemplar de DNI: https://www.argentina.gob.ar/node/41622
 - Cómo obtener el CUD: https://www.argentina.gob.ar/servicio/como-obtener-el-certificado-unico-de-discapacidad-cud
 - Mi Argentina: https://www.argentina.gob.ar/miargentina · Validá tu identidad: https://www.argentina.gob.ar/miargentina/validar-identidad
+
+
+## Novedad (rama `etapa-1-pictogramas`)
+Convertidor de texto a pictogramas ARASAAC con exportación PNG/PDF. Ver `docs/ETAPAS.md` (plan por etapas, límites y cómo probar). Pictogramas: ARASAAC (Gobierno de Aragón, autor Sergio Palao), CC BY-NC-SA 4.0.

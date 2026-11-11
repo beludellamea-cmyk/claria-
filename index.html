@@ -7,9 +7,13 @@
   <meta name="description" content="CLARIA: lectura accesible y orientación sobre trámites, con una asistente digital en modo guía.">
   <title>CLARIA · La información, más clara para todos</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="picto.css">
   <script defer src="config.js"></script>
   <script defer src="privacy.js"></script>
+  <script defer src="pictos.js"></script>
+  <script defer src="exportar.js"></script>
   <script defer src="app.js"></script>
+  <script defer src="convertidor.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#principal">Saltar al contenido</a>
@@ -21,6 +25,7 @@
       </button>
       <nav class="main-nav" aria-label="Navegación principal">
         <button type="button" class="nav-link active" data-view="inicio" aria-current="page">Inicio</button>
+        <button type="button" class="nav-link" data-view="escribir">Escribir con pictogramas</button>
         <button type="button" class="nav-link" data-view="lectura">Leer y comprender</button>
         <button type="button" class="nav-link" data-view="tramites">Trámites</button>
         <button type="button" class="nav-link" data-view="acerca">Acerca de</button>
@@ -65,6 +70,10 @@
         </div>
         <div class="choice-intro"><p>¿Qué necesitás hacer hoy?</p><h2>Elegí por dónde empezar</h2></div>
         <div class="choice-grid">
+          <button type="button" class="choice-card choice-teal" data-view="escribir">
+            <span class="choice-icon" aria-hidden="true">✏️</span>
+            <span class="choice-info"><strong>Quiero escribir una palabra o frase</strong><small>Escribí lo que necesitás decir y CLARIA lo muestra con pictogramas. Vos revisás y elegís cada imagen.</small><span class="choice-link">Escribir con pictogramas <span aria-hidden="true">→</span></span></span>
+          </button>
           <button type="button" class="choice-card choice-blue" data-view="lectura">
             <span class="choice-icon" aria-hidden="true">📖</span>
             <span class="choice-info"><strong>Quiero comprender un documento</strong><small>Pegá un texto o cargá un archivo. Leelo por partes, escuchalo y ajustá la visualización.</small><span class="choice-link">Ir al lector <span aria-hidden="true">→</span></span></span>
@@ -75,6 +84,56 @@
           </button>
         </div>
         <div class="home-bottom"><span>✺ Escuchar en voz alta</span><span>✺ Ajustar el tamaño</span><span>✺ Avanzar por pasos</span><span>✺ Usar el teclado</span></div>
+      </section>
+
+      <section id="view-escribir" class="view page-view" aria-labelledby="escribirTitulo" hidden>
+        <div class="page-heading"><span class="eyebrow">COMUNICACIÓN CON PICTOGRAMAS</span><h1 id="escribirTitulo">Escribir con pictogramas</h1><p>Escribí una palabra, una frase o una oración. El texto original siempre queda visible y vos decidís qué pictograma usar en cada palabra.</p></div>
+        <div class="panel pc-input">
+          <label for="pcTexto"><strong>Tu texto</strong> <small id="pcAyuda">Hasta 120 palabras. No escribas datos personales: los pictogramas se buscan en un diccionario local.</small></label>
+          <textarea id="pcTexto" rows="3" maxlength="900" aria-describedby="pcAyuda" placeholder="Por ejemplo: Quiero agua"></textarea>
+          <div class="pc-actions">
+            <button type="button" class="primary" id="pcConvertir">Convertir a pictogramas</button>
+            <button type="button" id="pcEjemplos" aria-haspopup="true">Probar un ejemplo</button>
+            <span class="pc-ejemplos" id="pcEjemplosLista" hidden></span>
+          </div>
+        </div>
+        <div id="pcResultado" hidden>
+          <div class="panel pc-original" aria-labelledby="pcOrigTitulo"><h2 id="pcOrigTitulo">Texto original</h2><p id="pcOriginal" class="pc-original-text" lang="es"></p></div>
+          <div class="pc-toolbar" role="toolbar" aria-label="Controles de voz y formato">
+            <div class="pc-group" role="group" aria-label="Voz">
+              <button type="button" id="pcEscuchar">▶ Escuchar</button>
+              <button type="button" id="pcPausar" aria-pressed="false" disabled>⏸ Pausar</button>
+              <button type="button" id="pcRepetir" disabled>↻ Repetir</button>
+              <button type="button" id="pcDetener" disabled>■ Detener</button>
+              <label class="pc-inline">Velocidad <select id="pcVelocidad"><option value="0.65">Lenta</option><option value="0.9" selected>Normal</option><option value="1.1">Rápida</option></select></label>
+            </div>
+            <div class="pc-group" role="group" aria-label="Formato">
+              <button type="button" id="pcLetra" aria-pressed="false">Letra: habitual</button>
+              <label class="pc-inline">Tamaño <select id="pcTamano"><option value="s">Chico</option><option value="m" selected>Mediano</option><option value="l">Grande</option><option value="xl">Muy grande</option></select></label>
+              <button type="button" id="pcEditar">✎ Editar texto</button>
+            </div>
+            <div class="pc-group" role="group" aria-label="Guardar o imprimir">
+              <button type="button" id="pcImprimir">🖨 Imprimir</button>
+              <button type="button" id="pcPng">⬇ Descargar PNG</button>
+              <button type="button" id="pcPdf">⬇ Descargar PDF</button>
+            </div>
+          </div>
+          <p id="pcVozNota" class="pc-note" hidden></p>
+          <p id="pcResumen" class="pc-note" role="status"></p>
+          <ol id="pcTablero" class="pc-board" aria-label="Pictogramas de tu texto"></ol>
+          <ul class="pc-leyenda" aria-label="Significado de las marcas"><li><span class="pc-badge b-verificado">Verificado</span> del diccionario de CLARIA</li><li><span class="pc-badge b-revisar">Revisar</span> la palabra tiene varios sentidos</li><li><span class="pc-badge b-elegido">Elegido por vos</span> buscado en ARASAAC</li><li><span class="pc-badge b-sin">Sin pictograma</span> queda la palabra escrita</li></ul>
+          <p class="pc-credit" id="pcCredito">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Uso no comercial.</p>
+        </div>
+        <dialog id="pcDialogo" class="pc-dialog" aria-labelledby="pcDialogoTitulo">
+          <form method="dialog" class="pc-dialog-in">
+            <h2 id="pcDialogoTitulo">Elegir pictograma</h2>
+            <p id="pcDialogoInfo" class="pc-note"></p>
+            <div id="pcDialogoActual" class="pc-actual"></div>
+            <div id="pcDialogoAlt" role="group" aria-label="Opciones de pictograma" class="pc-opts"></div>
+            <div class="pc-buscar"><p id="pcBuscarAviso" class="pc-note"></p><label class="pc-inline" for="pcBuscarTermino">Palabra a buscar <input id="pcBuscarTermino" type="text" maxlength="30" autocomplete="off"></label> <button type="button" id="pcBuscar">Buscar en ARASAAC</button><p id="pcBuscarEstado" role="status" class="pc-note"></p><div id="pcBuscarRes" class="pc-opts" role="group" aria-label="Resultados de ARASAAC"></div></div>
+            <div class="pc-dialog-btns"><button type="button" id="pcSoloTexto">Dejar solo la palabra</button><button type="button" id="pcRestaurar">Volver a la propuesta original</button><button type="button" id="pcEscucharPal">▶ Escuchar palabra</button><button value="cancel" id="pcCerrar" class="primary">Listo</button></div>
+          </form>
+        </dialog>
       </section>
 
       <section id="view-lectura" class="view page-view" aria-labelledby="lecturaTitulo" hidden>
@@ -143,11 +202,11 @@
 
       <section id="view-acerca" class="view page-view" aria-labelledby="aboutTitle" hidden>
         <div class="page-heading"><span class="eyebrow">TECNOLOGÍA CON PROPÓSITO</span><h1 id="aboutTitle">¿Qué es CLARIA?</h1><p>Una propuesta de accesibilidad digital pensada para acercar la lectura y la orientación sobre trámites a más personas.</p></div>
-        <div class="about-grid"><div class="panel"><h2>Distintas maneras de acceder</h2><p>Un mismo contenido puede leerse en pantalla, escucharse o recorrerse por partes. La plataforma incluye controles de contraste, tamaño de letra y movimiento.</p></div><div class="panel"><h2>Una guía, no un reemplazo</h2><p>La información administrativa se basa en enlaces oficiales. CLARIA no verifica identidad, gestiona turnos ni decide sobre prestaciones.</p></div><div class="panel"><h2>Estado de esta versión</h2><p>El avatar es una ilustración animada y la voz es la del navegador: no hay video ni sincronización labial. Con IA conectada (modo conectado), el chat y las explicaciones las genera un modelo de lenguaje; sin ella (modo demo), el chat usa textos preparados y lo dice. Las guías de trámites salen de una base curada con fecha de consulta.</p></div><div class="panel" id="privacyPanel"><h2>Privacidad y datos</h2><p>Sin registro y sin cuentas. CLARIA no guarda tus textos ni tus chats: la conversación vive en esta pantalla y se borra al cerrarla. Para generar respuestas, tu consulta se envía a un servicio de IA externo, y solo después de que lo aceptes. Antes de enviarla se oculta lo que parece DNI, CUIL, correo o clave, aunque ningún filtro es perfecto: no cargues documentos personales. Los límites de uso por persona y por día protegen la demostración.</p></div></div>
+        <div class="about-grid"><div class="panel"><h2>Distintas maneras de acceder</h2><p>Un mismo contenido puede leerse en pantalla, escucharse o recorrerse por partes. La plataforma incluye controles de contraste, tamaño de letra y movimiento.</p></div><div class="panel"><h2>Una guía, no un reemplazo</h2><p>La información administrativa se basa en enlaces oficiales. CLARIA no verifica identidad, gestiona turnos ni decide sobre prestaciones.</p></div><div class="panel"><h2>Estado de esta versión</h2><p>El avatar es una ilustración animada y la voz es la del navegador: no hay video ni sincronización labial. Con IA conectada (modo conectado), el chat y las explicaciones las genera un modelo de lenguaje; sin ella (modo demo), el chat usa textos preparados y lo dice. Las guías de trámites salen de una base curada con fecha de consulta.</p></div><div class="panel" id="creditosPanel"><h2>Créditos y licencias</h2><p>Los pictogramas pertenecen a <strong>ARASAAC</strong> (<a href="https://arasaac.org" target="_blank" rel="noopener">arasaac.org</a>), origen: Gobierno de Aragón, autor: Sergio Palao. Se usan bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>: pueden usarse y compartirse con atribución, <strong>sin fines comerciales</strong> y con la misma licencia. CLARIA es un proyecto educativo independiente y no es una página oficial de ARASAAC ni de ningún organismo.</p></div><div class="panel" id="privacyPanel"><h2>Privacidad y datos</h2><p>Sin registro y sin cuentas. CLARIA no guarda tus textos ni tus chats: la conversación vive en esta pantalla y se borra al cerrarla. Para generar respuestas, tu consulta se envía a un servicio de IA externo, y solo después de que lo aceptes. Antes de enviarla se oculta lo que parece DNI, CUIL, correo o clave, aunque ningún filtro es perfecto: no cargues documentos personales. Los límites de uso por persona y por día protegen la demostración.</p></div></div>
       </section>
     </main>
 
-    <footer class="footer"><div><strong>CLARIA</strong> · La información, más clara para todos.</div><p>Prototipo educativo · Coloquio Final de IA · 2026</p><button type="button" id="footerAbout" class="footer-link">Información y privacidad</button></footer>
+    <footer class="footer"><div><strong>CLARIA</strong> · La información, más clara para todos.</div><p>Prototipo educativo · Coloquio Final de IA · 2026 · Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (CC BY-NC-SA 4.0)</p><button type="button" id="footerAbout" class="footer-link">Información y privacidad</button></footer>
   </div>
 
   <div class="assistant-area">

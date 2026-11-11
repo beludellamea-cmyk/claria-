@@ -1,13 +1,14 @@
 {
   "name": "claria-web",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0-etapa1",
   "description": "CLARIA · La información, más clara para todos",
   "scripts": {
     "start": "python3 -m http.server 8000",
     "test:worker": "cd worker && node --test test/*.test.mjs",
     "test:e2e": "node tests/e2e.mjs",
-    "test": "npm run test:worker && npm run test:e2e"
+    "test": "npm run test:worker && npm run test:e2e && npm run test:pictos",
+    "test:pictos": "node --test tests/pictos.test.mjs && node tests/e2e-pictos.mjs"
   },
   "devDependencies": {
     "playwright": "^1.50.0"

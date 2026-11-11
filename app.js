@@ -8,7 +8,7 @@
 
   // Navegación de una sola página
   function showView(name) {
-    if (!['inicio','lectura','tramites','acerca'].includes(name)) return;
+    if (!['inicio','escribir','lectura','tramites','acerca'].includes(name)) return;
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
     $$('button[data-view]').forEach((button) => {
       if (button.classList.contains('nav-link')) {
@@ -355,8 +355,9 @@
     r.onerror=()=>announce('El dictado no se completó. Podés escribir tu pregunta.');
     try{r.start();announce('Escuchando. Revisá el texto antes de enviarlo.');}catch(_){announce('No se pudo activar el micrófono.');}
   });}
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if($('consentDialog').open)return;
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if($('consentDialog').open||document.querySelector('dialog[open]'))return;
     if(!$('chatPanel').hidden)openChat(false);else if(!$('prefs').hidden)togglePrefs(false);
   }});
-  const hash=location.hash.slice(1);if(['lectura','tramites','acerca'].includes(hash))showView(hash);
+  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','acerca'].includes(hash))showView(hash);
+  window.ClariaUI={announce,showView,getPrefs:()=>({...prefs})};
 })();
