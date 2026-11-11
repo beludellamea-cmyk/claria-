@@ -27,55 +27,54 @@
     ctx.setLineDash(discontinuo ? [10, 8] : []); ctx.strokeStyle = trazo; ctx.lineWidth = 3; ctx.stroke(); ctx.setLineDash([]);
   }
 
-  /** opciones: { texto, fichas:[{orig, estado, pic:{src}|null}], mayus, tamano(px de imagen) } → Promise<HTMLCanvasElement[]> */
+  /** opciones: { titulo?, mayus, tamano, bloques:[{texto, fichas:[{orig, estado, pic:{src}|null}]}] }  (o texto+fichas = un solo bloque)
+      → Promise<HTMLCanvasElement[]> (páginas A4 a 150 ppp) */
   async function dibujarPaginas(op) {
-    const mayus = Boolean(op.mayus), IMG = op.tamano || 200, CARD = IMG + 34;
-    const pag = []; let c, ctx, y;
+    const mayus = Boolean(op.mayus), IMG = op.tamano || 200, CARD = IMG + 34; const unico = !op.bloques;
+    const bloques = op.bloques || [{ texto: op.texto, fichas: op.fichas }];
+    const pag = []; let c, ctx, y; const limite = H - M - 70; const altoCard = IMG + 30 + 56;
+    const cache = new Map(); const img = (src) => { if (!cache.has(src)) cache.set(src, cargarImagen(src)); return cache.get(src); };
     const nueva = (primera) => {
       c = document.createElement('canvas'); c.width = W; c.height = H; ctx = c.getContext('2d');
       ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H); ctx.textBaseline = 'alphabetic';
       ctx.fillStyle = '#555'; ctx.font = `20px ${FUENTE}`; CREDITO.forEach((t, i) => ctx.fillText(t, M, H - M + 6 + i * 26));
       y = M; pag.push(c);
-      if (primera) {
-        ctx.fillStyle = '#3f2a94'; ctx.font = `bold 30px ${FUENTE}`; ctx.fillText('CLARIA · Texto con pictogramas', M, y + 30); y += 70;
-        ctx.fillStyle = '#000'; ctx.font = `bold 40px ${FUENTE}`;
-        const t = mayus ? op.texto.toUpperCase() : op.texto;
-        for (const l of partirLineas(ctx, t, W - 2 * M)) { ctx.fillText(l, M, y + 40); y += 56; }
-        y += 24; ctx.strokeStyle = '#ccc'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.stroke(); y += 30;
-      }
+      if (primera) { ctx.fillStyle = '#3f2a94'; ctx.font = `bold 30px ${FUENTE}`; ctx.fillText(op.titulo || 'CLARIA · Texto con pictogramas', M, y + 30); y += 70; }
     };
     nueva(true);
-    const imgs = await Promise.all(op.fichas.map((f) => (f.pic ? cargarImagen(f.pic.src) : null)));
-    const limite = H - M - 70;
-    // medir tarjetas
-    ctx.font = `bold 32px ${FUENTE}`;
-    const tarjetas = op.fichas.map((f, i) => {
-      const etiqueta = mayus ? f.orig.toUpperCase() : f.orig; const sin = !f.pic || !imgs[i];
-      const w = f.estado === 'func' || (sin && !f.pic) ? Math.max(70, Math.ceil(ctx.measureText(etiqueta).width) + 36) : CARD;
-      return { f, im: imgs[i], etiqueta, w, soloTexto: !f.pic || !imgs[i] && f.estado === 'func' };
-    });
-    const altoCard = IMG + 30 + 56; let x = M, filaH = 0, fila = [];
-    const volcar = () => {
-      if (!fila.length) return;
-      if (y + altoCard > limite) nueva(false);
-      fila.forEach((t) => {
-        const yy = t.soloTexto ? y + altoCard - 70 : y; const hh = t.soloTexto ? 70 : altoCard;
-        rect(ctx, t.x, yy, t.w, hh, 18, t.f.estado === 'sugerido' ? '#7a62dc' : '#bbb', '#fff', t.soloTexto || t.f.estado === 'sin' || t.f.estado === 'texto');
-        if (!t.soloTexto) {
-          if (t.im) { const e = Math.min(IMG / t.im.width, IMG / t.im.height); const w = t.im.width * e, h = t.im.height * e; ctx.drawImage(t.im, t.x + (t.w - w) / 2, yy + 14 + (IMG - h) / 2, w, h); }
-          else { ctx.fillStyle = '#888'; ctx.font = `20px ${FUENTE}`; ctx.textAlign = 'center'; ctx.fillText('sin imagen', t.x + t.w / 2, yy + 14 + IMG / 2); ctx.textAlign = 'left'; }
-        }
-        ctx.fillStyle = '#000'; ctx.font = `bold 32px ${FUENTE}`; ctx.textAlign = 'center';
-        let tam = 32; while (ctx.measureText(t.etiqueta).width > t.w - 12 && tam > 16) { tam -= 2; ctx.font = `bold ${tam}px ${FUENTE}`; }
-        ctx.fillText(t.etiqueta, t.x + t.w / 2, t.soloTexto ? yy + 46 : yy + IMG + 52); ctx.textAlign = 'left';
+    for (const b of bloques) {
+      const tam = unico ? 40 : 34, lh = unico ? 56 : 48;
+      ctx.font = `bold ${tam}px ${FUENTE}`; const lineas = partirLineas(ctx, mayus ? b.texto.toUpperCase() : b.texto, W - 2 * M);
+      if (y + lineas.length * lh + altoCard > limite) nueva(false);
+      ctx.fillStyle = '#000'; ctx.font = `bold ${tam}px ${FUENTE}`; for (const l of lineas) { ctx.fillText(l, M, y + tam); y += lh; }
+      y += 16;
+      if (unico) { ctx.strokeStyle = '#ccc'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(M, y); ctx.lineTo(W - M, y); ctx.stroke(); y += 30; }
+      const imgs = await Promise.all(b.fichas.map((f) => (f.pic ? img(f.pic.src) : null)));
+      ctx.font = 'bold 32px ' + FUENTE;
+      const tarjetas = b.fichas.map((f, i) => {
+        const etiqueta = mayus ? f.orig.toUpperCase() : f.orig; const soloTexto = !f.pic || (!imgs[i] && f.estado === 'func');
+        const w = soloTexto ? Math.max(70, Math.ceil(ctx.measureText(etiqueta).width) + 36) : CARD;
+        return { f, im: imgs[i], etiqueta, w, soloTexto };
       });
-      y += altoCard + 24; fila = []; x = M;
-    };
-    for (const t of tarjetas) {
-      if (x + t.w > W - M && fila.length) volcar();
-      t.x = x; fila.push(t); x += t.w + 20;
+      let x = M, fila = [];
+      const volcar = () => {
+        if (!fila.length) return; if (y + altoCard > limite) nueva(false);
+        fila.forEach((t) => {
+          const yy = t.soloTexto ? y + altoCard - 70 : y; const hh = t.soloTexto ? 70 : altoCard;
+          rect(ctx, t.x, yy, t.w, hh, 18, t.f.estado === 'elegido' ? '#7a62dc' : '#bbb', '#fff', t.soloTexto || t.f.estado === 'sin' || t.f.estado === 'texto');
+          if (!t.soloTexto) {
+            if (t.im) { const e = Math.min(IMG / t.im.width, IMG / t.im.height); const w = t.im.width * e, h = t.im.height * e; ctx.drawImage(t.im, t.x + (t.w - w) / 2, yy + 14 + (IMG - h) / 2, w, h); }
+            else { ctx.fillStyle = '#888'; ctx.font = `20px ${FUENTE}`; ctx.textAlign = 'center'; ctx.fillText('sin imagen', t.x + t.w / 2, yy + 14 + IMG / 2); ctx.textAlign = 'left'; }
+          }
+          ctx.fillStyle = '#000'; ctx.font = `bold 32px ${FUENTE}`; ctx.textAlign = 'center';
+          let tm = 32; while (ctx.measureText(t.etiqueta).width > t.w - 12 && tm > 16) { tm -= 2; ctx.font = `bold ${tm}px ${FUENTE}`; }
+          ctx.fillText(t.etiqueta, t.x + t.w / 2, t.soloTexto ? yy + 46 : yy + IMG + 52); ctx.textAlign = 'left';
+        });
+        y += altoCard + 24; fila = []; x = M;
+      };
+      for (const t of tarjetas) { if (x + t.w > W - M && fila.length) volcar(); t.x = x; fila.push(t); x += t.w + 20; }
+      volcar(); y += unico ? 0 : 16;
     }
-    volcar();
     return pag;
   }
 

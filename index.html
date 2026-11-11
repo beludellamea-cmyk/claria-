@@ -14,6 +14,7 @@
   <script defer src="exportar.js"></script>
   <script defer src="app.js"></script>
   <script defer src="convertidor.js"></script>
+  <script defer src="pictocuento.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#principal">Saltar al contenido</a>
@@ -86,7 +87,7 @@
         <div class="home-bottom"><span>✺ Escuchar en voz alta</span><span>✺ Ajustar el tamaño</span><span>✺ Avanzar por pasos</span><span>✺ Usar el teclado</span></div>
       </section>
 
-      <section id="view-escribir" class="view page-view" aria-labelledby="escribirTitulo" hidden>
+      <section id="view-escribir" class="view page-view pc-scope" aria-labelledby="escribirTitulo" hidden>
         <div class="page-heading"><span class="eyebrow">COMUNICACIÓN CON PICTOGRAMAS</span><h1 id="escribirTitulo">Escribir con pictogramas</h1><p>Escribí una palabra, una frase o una oración. El texto original siempre queda visible y vos decidís qué pictograma usar en cada palabra.</p></div>
         <div class="panel pc-input">
           <label for="pcTexto"><strong>Tu texto</strong> <small id="pcAyuda">Hasta 120 palabras. No escribas datos personales: los pictogramas se buscan en un diccionario local.</small></label>
@@ -155,6 +156,8 @@
             <div id="readerEmpty" class="empty-state"><div aria-hidden="true">✨</div><p>Tu texto aparecerá acá cuando lo cargues.</p></div>
             <div id="readerReady" hidden>
               <div class="reading-tools"><button type="button" class="btn btn-soft" id="speakPart">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="stopSpeaking">■ Detener</button><button type="button" class="btn btn-soft" id="copyReading">Copiar</button></div>
+              <div class="button-line"><button type="button" class="btn btn-primary" id="abrirCuento">🖼 Ver con pictogramas (pictocuento)</button></div>
+              <p class="status-note">El pictocuento se arma en tu navegador con el diccionario local: no se envía tu texto a ningún servicio.</p>
               <div class="reading-progress"><span id="partCounter">Parte 1 de 1</span><span id="wordCount"></span></div>
               <div class="progress-track"><div id="progressFill"></div></div>
               <p class="origin-label origin-original">Texto original <small>(lo que cargaste, sin cambios)</small></p>
@@ -183,6 +186,49 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section id="view-cuento" class="view page-view pc-scope" aria-labelledby="cuentoTitulo" hidden>
+        <div class="page-heading"><span class="eyebrow">LECTURA CON PICTOGRAMAS</span><h1 id="cuentoTitulo">Tu texto como pictocuento</h1><p>Cada oración se muestra completa y, debajo, sus conceptos con pictogramas. Tocá un pictograma para ver qué significa y escucharlo. Todo se hace en este navegador.</p></div>
+        <div class="button-line"><button type="button" id="pqVolver">← Volver al texto</button></div>
+        <p id="pqEstado" class="pc-note" role="status"></p>
+        <div id="pqContenido" hidden>
+          <div class="pc-toolbar" role="toolbar" aria-label="Controles de lectura">
+            <div class="pc-group" role="group" aria-label="Voz">
+              <button type="button" id="pqEscuchar">▶ Escuchar esta página</button>
+              <button type="button" id="pqTodo" aria-pressed="false">▶▶ Leer todo</button>
+              <button type="button" id="pqPausar" aria-pressed="false" disabled>⏸ Pausar</button>
+              <button type="button" id="pqRepetir" disabled>↻ Repetir</button>
+              <button type="button" id="pqDetener" disabled>■ Detener</button>
+              <label class="pc-inline">Velocidad <select id="pqVelocidad"><option value="0.65">Lenta</option><option value="0.9" selected>Normal</option><option value="1.1">Rápida</option></select></label>
+            </div>
+            <div class="pc-group" role="group" aria-label="Formato">
+              <button type="button" id="pqLetra" aria-pressed="false">Letra: habitual</button>
+              <label class="pc-inline">Tamaño <select id="pqTamano"><option value="s">Chico</option><option value="m" selected>Mediano</option><option value="l">Grande</option><option value="xl">Muy grande</option></select></label>
+              <label class="pc-inline">Oraciones por página <select id="pqPorPagina"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option></select></label>
+            </div>
+            <div class="pc-group" role="group" aria-label="Guardar o imprimir">
+              <button type="button" id="pqImprimir">🖨 Imprimir todo</button>
+              <button type="button" id="pqPdf">⬇ Descargar PDF</button>
+            </div>
+          </div>
+          <p id="pqVozNota" class="pc-note" hidden></p>
+          <div class="pq-bar"><div class="pq-prog"><strong id="pqContador">Página 1 de 1</strong><div class="progress-track"><div id="pqProgreso"></div></div></div></div>
+          <ol id="pqPagina" class="pq-pagina" tabindex="-1" aria-label="Página del pictocuento"></ol>
+          <div class="pq-nav"><button type="button" id="pqAnterior">← Anterior</button><button type="button" id="pqSiguiente" class="primary">Siguiente →</button></div>
+          <p class="pc-note">Podés avanzar con las flechas ← → del teclado. Las palabras sin pictograma quedan escritas; las marcadas «Revisar» tienen varios sentidos.</p>
+          <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Uso no comercial.</p>
+        </div>
+        <dialog id="pqDialogo" class="pc-dialog" aria-labelledby="pqDialogoTitulo">
+          <form method="dialog" class="pc-dialog-in">
+            <h2 id="pqDialogoTitulo">Pictograma</h2>
+            <div id="pqDialogoImg" class="pc-actual"></div>
+            <p id="pqDialogoSig" class="pq-significado"></p>
+            <p id="pqDialogoAviso" class="pc-note"></p>
+            <div id="pqDialogoAlt" role="group" aria-label="Otras opciones" class="pc-opts"></div>
+            <div class="pc-dialog-btns"><button type="button" id="pqEscucharPal">▶ Escuchar palabra</button><button value="cancel" id="pqCerrar" class="primary">Cerrar</button></div>
+          </form>
+        </dialog>
       </section>
 
       <section id="view-tramites" class="view page-view" aria-labelledby="tramitesTitulo" hidden>

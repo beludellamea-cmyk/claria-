@@ -1,11 +1,12 @@
 # CLARIA · Plan por etapas (pictogramas, lectura accesible y humano digital)
 
-Estado: **Etapa 1 completa y verificada** en la rama `etapa-1-pictogramas` (pendiente de revisión; no está en `main`).
+Estado: **Etapa 1 y Etapa 2a completas y verificadas** (ramas `etapa-1-pictogramas` y `etapa-2-lectura-pictocuento`, pendientes de revisión; nada está en `main`).
 
 | Etapa | Contenido | Estado |
 |---|---|---|
 | **1** | Portada con 3 opciones · convertidor texto → pictogramas (diccionario ARASAAC verificado, búsqueda puntual en línea con elección manual) · voz con resaltado · letra habitual / MAYÚSCULA · imprimir · PNG y PDF reales · créditos y licencia ARASAAC | ✅ |
-| 2 | Lectura de documentos estilo pictocuento: oraciones, pictograma por concepto, narración por partes, tocar pictograma = significado + audio, anterior/siguiente, versión imprimible. Detección de conceptos con IA (modo conectado, sin enviar el documento completo: solo conceptos) | ⏳ |
+| **2a** | Lectura de documentos estilo pictocuento (botón «Ver con pictogramas» en Leer y comprender): oraciones, pictograma por concepto, narración por páginas y «Leer todo» con resaltado, tocar pictograma = significado + audio + otras opciones, anterior/siguiente/flechas, tamaño, letra, velocidad, 1–3 oraciones por página, imprimir y PDF de todo el documento. Todo local, sin enviar el texto a ningún servicio | ✅ |
+| 2b | Detección de conceptos con IA (solo modo conectado; se enviarían únicamente palabras sueltas pendientes, nunca el documento) y búsqueda en línea de palabras sin pictograma dentro del pictocuento | ⏳ |
 | 3 | Guías de trámites con pictogramas y pasos narrados (fuentes oficiales y fecha, sin datos inventados) | ⏳ |
 | 4 | Humano digital: estados saludo / escucha / procesamiento / habla (animación por capas sobre el avatar actual), interruptor de voz, sincronía labial aproximada (documentada como aproximada) | ⏳ |
 | 5 | Ampliar diccionario, pulido de accesibilidad (WCAG 2.2), prueba con usuarios y ensayo del coloquio | ⏳ |
@@ -32,3 +33,8 @@ node tests/e2e-pictos.mjs           # navegador real (17 pruebas; ARASAAC en lí
 node tests/e2e.mjs                  # regresión de la v0.2 (16 pruebas)
 ```
 Textos sugeridos: `HOLA` · `QUIERO AGUA` · `NECESITO SACAR UN TURNO PARA MI DNI` · `LA ESCUELA ES PARA TODOS` · un párrafo de una nota escolar.
+
+## Etapa 2a: límites y pruebas
+- Las oraciones se separan por punto, ?, ! y saltos de línea (abreviaturas como «Sr.» pueden cortar de más); las muy largas se parten cada ~25 palabras. Máximo 150 oraciones por documento.
+- Sin pictograma en el diccionario (261 conceptos) → la palabra queda escrita. No se consulta ARASAAC ni IA desde el pictocuento (llega en 2b).
+- Probar: cargar un texto en «Leer y comprender» → «Ver con pictogramas». `node tests/e2e-cuento.mjs` (13 pruebas de navegador).

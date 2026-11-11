@@ -8,11 +8,11 @@
 
   // Navegación de una sola página
   function showView(name) {
-    if (!['inicio','escribir','lectura','tramites','acerca'].includes(name)) return;
+    if (!['inicio','escribir','lectura','cuento','tramites','acerca'].includes(name)) return;
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
     $$('button[data-view]').forEach((button) => {
       if (button.classList.contains('nav-link')) {
-        const current = button.dataset.view === name;
+        const current = button.dataset.view === (name === 'cuento' ? 'lectura' : name);
         button.classList.toggle('active',current);
         if (current) button.setAttribute('aria-current','page'); else button.removeAttribute('aria-current');
       }
@@ -359,5 +359,5 @@
     if(!$('chatPanel').hidden)openChat(false);else if(!$('prefs').hidden)togglePrefs(false);
   }});
   const hash=location.hash.slice(1);if(['escribir','lectura','tramites','acerca'].includes(hash))showView(hash);
-  window.ClariaUI={announce,showView,getPrefs:()=>({...prefs})};
+  window.ClariaUI={announce,showView,getPrefs:()=>({...prefs}),getText:()=>currentText};
 })();
