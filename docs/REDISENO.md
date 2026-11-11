@@ -25,3 +25,13 @@ Una pregunta por pantalla, botones grandes con ícono y CLARIA acompañando. Se 
 
 ## Pruebas
 `node tests/e2e-guia.mjs` (15) · `node tests/e2e.mjs` (16) · `node tests/e2e-pictos.mjs` (17) · `node tests/e2e-cuento.mjs` (13) · `node --test tests/pictos.test.mjs` (12) · `cd worker && node --test test/*.test.mjs` (13).
+
+## CLARIA protagonista: modo guía hablada
+
+- **Es opcional y nunca arranca sola**: los navegadores bloquean el audio automático y, además, es una regla del proyecto. Con un toque en «🔊 Que CLARIA me hable», CLARIA saluda, resalta los 4 botones a medida que los nombra y guía cada pantalla con su pregunta (la primera vez, explicación completa; después, versión corta).
+- **Reacciona** al convertir una frase, al descargar y en cada paso de un trámite. «🔇 Silenciar a CLARIA» corta todo al instante.
+- **Subtítulos** siempre visibles mientras habla (también para quien no puede oír).
+- **Órdenes por voz** (solo en la bienvenida, con permiso de micrófono): «quiero leer un documento», «hacer un trámite»… Si no entiende, lo dice y no navega.
+- **Honestidad técnica**: la voz es la del navegador (su calidad depende del dispositivo). El movimiento de CLARIA al hablar es un pulso al ritmo de las palabras; **no hay sincronización labial real**. La preferencia de voz no se guarda entre visitas.
+- Sin voz o sin micrófono en el navegador: los botones se desactivan con una explicación y todo el recorrido sigue funcionando.
+- Mejora futura (requiere decisión): audios grabados con voz humana realista (p. ej. ElevenLabs) para las frases fijas.

@@ -43,6 +43,7 @@
     $('pcResultado').hidden = false; dibujar();
     const n = fichas.filter((f) => f.rol !== 'func').length;
     UI().announce(`Listo: ${n} palabra${n === 1 ? '' : 's'} para revisar. ${$('pcResumen').textContent}`);
+    window.ClariaGuia?.reaccion('convertido');
     $('pcResultado').scrollIntoView({ block: 'start', behavior: document.body.classList.contains('no-motion') ? 'auto' : 'smooth' });
   }
   function dibujarOriginal(cont) {
@@ -163,7 +164,7 @@
     try {
       const paginas = await ClariaExport.dibujarPaginas({ texto, mayus, tamano: PX[pref.tam], fichas: fichas.map((f) => ({ orig: f.orig, estado: f.estado, pic: ['sin', 'texto', 'func'].includes(f.estado) ? null : f.pic })) });
       const blob = tipo === 'png' ? await ClariaExport.aPNG(paginas) : ClariaExport.aPDF(paginas);
-      ClariaExport.descargar(blob, `claria-pictogramas.${tipo}`); UI().announce(`Descarga lista: claria-pictogramas.${tipo}`);
+      ClariaExport.descargar(blob, `claria-pictogramas.${tipo}`); window.ClariaGuia?.reaccion('descargado'); UI().announce(`Descarga lista: claria-pictogramas.${tipo}`);
     } catch (e) { UI().announce('No se pudo preparar el archivo. Probá de nuevo o usá Imprimir.'); }
     finally { b.disabled = false; }
   }

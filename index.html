@@ -54,6 +54,8 @@
         <span class="claria-bars" aria-hidden="true"><i></i><i></i><i></i></span>
       </button>
       <p class="claria-estado" id="claria-estado" role="status"><span class="claria-punto" aria-hidden="true"></span><span id="claria-estado-txt">Esperando</span></p>
+      <button type="button" id="claria-voz" class="claria-voz" aria-pressed="false">🔊 Que CLARIA me hable</button>
+      <button type="button" id="claria-oir" class="claria-voz claria-oir" aria-pressed="false">🎤 Decime qué querés hacer</button>
       <div id="claria-menu" class="claria-menu" role="group" aria-label="Ayuda de CLARIA" hidden>
         <button type="button" data-ayuda="explicame">💡 Explicame</button>
         <button type="button" data-ayuda="repetir">↻ Repetir</button>
@@ -304,6 +306,7 @@
       <div class="button-line"><button type="submit" value="accept" class="btn btn-primary" id="micAccept">Sí, dictar</button><button type="submit" value="decline" class="btn btn-soft" id="micDecline">Ahora no</button></div>
     </form>
   </dialog>
+  <div id="claria-subtitulo" class="claria-subtitulo" aria-hidden="true" hidden></div>
   <div class="sr-only" id="liveAnnounce" role="status" aria-live="polite"></div>
 </body>
 </html>

@@ -14,10 +14,10 @@ async function abrir({ ancho = 1280, alto = 860, voz = true, mic = true } = {}) 
   await page.addInitScript(({ voz, mic }) => {
     window.__spoken = [];
     if (voz) { window.SpeechSynthesisUtterance = function (t) { this.text = t; };
-      Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: { getVoices: () => [], cancel() { window.__vivo = false; }, pause() {}, resume() {}, speak(u) { window.__spoken.push(u.text); const id = (window.__vivo = Math.random()); setTimeout(() => { if (window.__vivo !== id) return; u.onstart && u.onstart(); setTimeout(() => { if (window.__vivo === id && !window.__noEnd) u.onend && u.onend(); }, 700); }, 10); } } });
+      Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: { getVoices: () => [], cancel() { window.__vivo = false; }, pause() {}, resume() {}, speak(u) { window.__spoken.push(u.text); const id = (window.__vivo = Math.random()); setTimeout(() => { if (window.__vivo !== id) return; u.onstart && u.onstart(); if (u.onboundary) { let i = 0; for (const w of u.text.split(' ')) { const ci = i; setTimeout(() => window.__vivo === id && u.onboundary({ name: 'word', charIndex: ci }), 30 + ci); i += w.length + 1; } } setTimeout(() => { if (window.__vivo === id && !window.__noEnd) u.onend && u.onend(); }, 700); }, 10); } } });
     } else { delete window.speechSynthesis; if ('speechSynthesis' in window) throw new Error('no se pudo quitar speechSynthesis'); }
     window.__micIniciado = 0;
-    if (mic) { window.SpeechRecognition = function () { this.start = () => { window.__micIniciado++; setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: 'quiero agua' }]] }); setTimeout(() => this.onend && this.onend(), 50); }, 400); }; this.stop = () => this.onend && this.onend(); }; }
+    if (mic) { window.SpeechRecognition = function () { this.start = () => { window.__micIniciado++; setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: window.__dictado || 'quiero agua' }]] }); setTimeout(() => this.onend && this.onend(), 50); }, 400); }; this.stop = () => this.onend && this.onend(); }; }
     else { window.SpeechRecognition = undefined; window.webkitSpeechRecognition = undefined; }
   }, { voz, mic });
   await page.goto(BASE); await page.waitForSelector('#claria'); return { ctx, page, ext, errs };
@@ -121,5 +121,46 @@ await test('teclado: Tab llega a los 4 botones y al personaje; Enter abre; foco 
 await test('ningún audio ni micrófono se activa solo al recorrer todas las pantallas', async () => {
   const { ctx, page } = await abrir(); for (const v of ['escribir', 'lectura', 'tramites', 'hablar']) { await page.click('.brand'); await page.click(`#view-inicio [data-view=${v}]`); }
   await page.click('#footerAbout'); assert.equal((await spoken(page)).length, 0); assert.equal(await page.evaluate(() => window.__micIniciado), 0); await ctx.close();
+});
+
+await test('CLARIA habla: no suena nada hasta tocar «Que CLARIA me hable»; luego saluda con subtítulo y resalta botones', async () => {
+  const { ctx, page } = await abrir(); await page.waitForTimeout(1200); assert.equal((await spoken(page)).length, 0, 'sin autoplay'); assert.equal(await vis(page, '#claria-voz'), true);
+  assert.equal(await page.getAttribute('#claria-voz', 'aria-pressed'), 'false'); await page.click('#claria-voz'); await page.waitForFunction(() => window.__spoken.length === 1);
+  const dicho = (await spoken(page))[0]; assert.match(dicho, /¡Hola! Soy CLARIA/); assert.match(dicho, /leer un documento/);
+  await page.waitForFunction(() => !document.getElementById('claria-subtitulo').hidden); assert.match(await page.textContent('#claria-subtitulo'), /Soy CLARIA/);
+  await page.waitForFunction(() => document.querySelectorAll('.big-btn.resalta').length === 1, null, { timeout: 4000 }); await page.screenshot({ path: `${OUT}/40-habla-pc.png` });
+  await page.waitForFunction(() => document.getElementById('claria').dataset.estado === 'esperando'); assert.equal(await page.$$eval('.big-btn.resalta', (n) => n.length), 0, 'el resaltado termina con la frase');
+  assert.equal(await page.$eval('#claria-voz', (b) => b.textContent.includes('Silenciar')), true); await ctx.close();
+});
+await test('CLARIA guía: cada pantalla dice su pregunta; al volver usa la versión corta; silenciar corta y oculta subtítulo', async () => {
+  const { ctx, page } = await abrir(); await page.click('#claria-voz'); await page.waitForFunction(() => window.__spoken.length === 1);
+  await page.click('#view-inicio [data-view=escribir]'); await page.waitForFunction(() => window.__spoken.length === 2); assert.match((await spoken(page))[1], /¿Qué querés decir\?.*convertir/);
+  await page.click('.brand'); await page.waitForFunction(() => window.__spoken.length === 3); assert.equal((await spoken(page))[2], '¿Qué querés hacer hoy?', 'versión corta en la segunda visita');
+  await page.click('#view-inicio [data-view=tramites]'); await page.waitForFunction(() => window.__spoken.length === 4); assert.match((await spoken(page))[3], /¿Qué trámite necesitás\?/);
+  await page.click('#claria-voz'); const n = (await spoken(page)).length; assert.equal(await vis(page, '#claria-subtitulo'), false); assert.equal(await estado(page), 'esperando');
+  await page.click('.brand'); await page.click('#view-inicio [data-view=hablar]'); await page.waitForTimeout(900); assert.equal((await spoken(page)).length, n, 'en silencio no habla'); await ctx.close();
+});
+await test('CLARIA reacciona: convertir y pasos de trámite se narran solo con la voz activada', async () => {
+  const { ctx, page } = await abrir(); await page.click('#view-inicio [data-view=escribir]'); await page.fill('#pcTexto', 'QUIERO AGUA'); await page.click('#pcConvertir'); await page.waitForSelector('#pcResultado:not([hidden])');
+  await page.waitForTimeout(700); assert.equal((await spoken(page)).length, 0, 'sin voz activada no reacciona'); await page.click('.brand'); await page.click('#claria-voz'); await page.waitForFunction(() => window.__spoken.length >= 1);
+  await page.click('#view-inicio [data-view=escribir]'); await page.waitForFunction(() => window.__spoken.length >= 2); await page.fill('#pcTexto', 'HOLA'); await page.click('#pcConvertir');
+  await page.waitForFunction(() => window.__spoken.some((t) => /cada palabra tiene su pictograma/.test(t)), null, { timeout: 5000 });
+  await page.click('.brand'); await page.click('#view-inicio [data-view=tramites]'); await page.click('[data-proc=dni]'); await page.click('#procedureNext'); await page.waitForFunction(() => window.__spoken.some((t) => /^Paso \d+ de \d+/.test(t)), null, { timeout: 5000 }); await ctx.close();
+});
+await test('órdenes por voz: «quiero leer un documento» abre Leer; frase desconocida avisa y no navega', async () => {
+  const { ctx, page } = await abrir(); assert.equal(await vis(page, '#claria-oir'), true); await page.evaluate(() => { window.__dictado = 'quiero leer un documento'; });
+  await page.click('#claria-oir'); await page.click('#micAccept, #micDialog [value=accept]'); await page.waitForFunction(() => document.getElementById('view-lectura') && !document.getElementById('view-lectura').hidden, null, { timeout: 4000 });
+  assert.equal(await vis(page, '#claria-oir'), false, 'el botón de voz solo está en la bienvenida');
+  await page.click('.brand'); await page.evaluate(() => { window.__dictado = 'bla bla xyz'; }); await page.click('#claria-oir'); await page.waitForFunction(() => /No te entendí/.test(document.getElementById('claria-subtitulo').textContent), null, { timeout: 4000 });
+  assert.equal(await vis(page, '#view-inicio'), true); await ctx.close();
+});
+await test('sin voz ni micrófono: los botones de CLARIA se desactivan y explican', async () => {
+  const { ctx, page } = await abrir({ voz: false, mic: false }); assert.equal(await page.isDisabled('#claria-voz'), true); assert.match(await page.textContent('#claria-voz'), /no disponible/i);
+  assert.equal(await page.isDisabled('#claria-oir'), true); await page.click('#view-inicio [data-view=escribir]'); assert.equal(await vis(page, '#view-escribir'), true); await ctx.close();
+});
+await test('celular 390 px con voz activa: subtítulo visible sin desborde ni tapar los botones principales', async () => {
+  const { ctx, page } = await abrir({ ancho: 390, alto: 800 }); await page.click('#claria-voz'); await page.waitForFunction(() => !document.getElementById('claria-subtitulo').hidden);
+  assert.ok((await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 1); const s = await caja(page, '#claria-subtitulo'); assert.ok(s.x >= 0 && s.x + s.w <= 391, JSON.stringify(s));
+  await page.screenshot({ path: `${OUT}/41-habla-movil.png` }); await ctx.close();
 });
 await browser.close(); srv.close(); const ok = results.filter(Boolean).length; console.log(`\n${ok}/${results.length} pruebas OK`); process.exit(ok === results.length ? 0 : 1);

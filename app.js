@@ -299,7 +299,7 @@
       <h4>Requisitos</h4><ul>${p.requisitos.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
       <p><b>Costo:</b> ${esc(p.costo)}</p><p><b>Tiempo:</b> ${esc(p.tiempo)}</p>
       ${p.enlaces.length ? `<h4>Otros enlaces oficiales</h4><ul>${p.enlaces.map((e) => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.titulo)} ↗</a></li>`).join('')}</ul>` : ''}`;
-    announce(`Paso ${stepIndex + 1} de ${p.pasos.length}`);
+    announce(`Paso ${stepIndex + 1} de ${p.pasos.length}`); G()?.reaccion('paso', `Paso ${stepIndex + 1} de ${p.pasos.length}. ${p.pasos[stepIndex]}`);
   }
   async function loadProcedures() {
     try {

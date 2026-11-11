@@ -52,7 +52,7 @@ main#principal{outline:0;max-width:1180px;margin:0 auto;padding:0 clamp(14px,3vw
 .claria-bubble:focus{outline:none}.claria-bubble p{margin:0 0 8px}.claria-bubble ul{margin:0 0 10px;padding-left:20px}.claria-bubble li{margin:4px 0}
 .claria-bubble-btns{display:flex;flex-wrap:wrap;gap:8px}
 /* en bienvenida: grande */
-.welcome-slot .claria-img{width:clamp(190px,32vw,300px)}.welcome-slot .claria-halo{inset:-10px}
+.welcome-slot .claria-img{width:clamp(150px,min(32vw,30vh),300px)}.welcome-slot .claria-halo{inset:-10px}
 .welcome-slot .claria-menu,.welcome-slot .claria-bubble{position:static}
 /* acompañando: al costado (pantalla ancha) o barra superior (celular) */
 .companion-dock{display:none}
@@ -112,3 +112,23 @@ body.high-contrast{background:#050507}body.high-contrast .page-view{background:n
 .proc-pictos{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0}
 .proc-pictos .pc-card{width:calc(var(--pc-size) + 26px);padding:6px 6px 8px}
 .proc-pictos .pc-label{font-size:1rem}
+/* CLARIA habla: subtítulos, botón de voz, movimiento al ritmo de las palabras (aproximado) */
+.claria-voz{min-height:48px;padding:8px 16px;border-radius:999px;border:3px solid #7a62dc;background:#fff;color:#3f2a94;font:inherit;font-weight:850;font-size:1.05rem;cursor:pointer}
+.claria-voz[aria-pressed=true]{background:#3f2a94;color:#fff}.claria-voz:focus-visible{outline:4px solid #ffbf2f;outline-offset:3px}
+.claria-voz:disabled{opacity:.6;cursor:not-allowed}
+.welcome-slot .claria-voz{font-size:1.2rem;min-height:54px}
+@keyframes cl-pulsa-voz{0%,100%{box-shadow:0 0 0 0 #7a62dc66}50%{box-shadow:0 0 0 12px #7a62dc00}}
+.claria-voz[aria-pressed=false]:not(:disabled){animation:cl-pulsa-voz 2.2s ease-in-out infinite}
+body:not([data-vista=inicio]) .claria-oir{display:none}
+.companion-dock .claria-voz{font-size:.95rem;min-height:44px;padding:6px 12px;max-width:200px}
+@media(max-width:900px){.companion-dock .claria-voz{font-size:.85rem;padding:4px 10px;max-width:150px}}
+@keyframes cl-habla{0%{transform:translateY(0) rotate(0)}40%{transform:translateY(-4px) rotate(-1.2deg) scale(1.025)}100%{transform:translateY(0) rotate(0)}}
+.claria[data-estado=hablando] .claria-img.pulso{animation:cl-habla .24s ease-out}
+.claria-subtitulo{position:fixed;left:12px;right:12px;bottom:12px;margin:0 auto;width:fit-content;z-index:40;max-width:min(860px,calc(100vw - 24px));padding:14px 22px;border-radius:20px;background:#16123af2;color:#fff;font-size:clamp(1rem,2.2vw,1.3rem);line-height:1.35;text-align:center;box-shadow:0 14px 40px #0006;pointer-events:none}
+.claria-subtitulo[hidden]{display:none}
+.big-btn.resalta{transform:translateY(-6px) scale(1.03);border-color:#ffbf2f;box-shadow:0 0 0 6px #ffbf2f66,var(--shadow)}
+body.high-contrast .claria-voz{background:#272744;color:#fff;border-color:#fff}body.high-contrast .claria-voz[aria-pressed=true]{background:#fff;color:#000}
+@media(prefers-reduced-motion:reduce){.claria-voz{animation:none!important}}
+
+body:has(.claria-subtitulo:not([hidden])){padding-bottom:150px}
+.welcome-slot .claria-voz{font-size:1.05rem;min-height:48px;margin:2px 0}
