@@ -1,0 +1,24 @@
+name = "claria-api"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+# Binding de Workers AI (solo se usa si AI_PROVIDER = "workers-ai"). No requiere clave.
+[ai]
+binding = "AI"
+
+[vars]
+# Proveedor: "workers-ai" (sin clave, cuota gratuita diaria), "anthropic" o "gemini" (requieren secreto, ver docs/PUBLICACION.md)
+AI_PROVIDER = "workers-ai"
+# Modelo. Para workers-ai elegí uno disponible en el plan gratuito (lista en el panel de Cloudflare) y verificalo con `npm run smoke`.
+AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+# Orígenes que pueden llamar a la API (separados por coma). Cambiá TU-USUARIO.
+ALLOWED_ORIGINS = "https://TU-USUARIO.github.io,http://localhost:8000,http://127.0.0.1:8000"
+# Límites (por persona, anónimos por huella de IP; y total diario)
+RATE_PER_MIN = "6"
+RATE_PER_DAY = "40"
+DAILY_CAP = "300"
+
+# Opcional (recomendado) para que los límites diarios sean exactos entre servidores de Cloudflare:
+# [[kv_namespaces]]
+# binding = "RATE_KV"
+# id = "PEGAR_ID_DEL_KV"

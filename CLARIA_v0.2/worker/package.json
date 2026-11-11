@@ -1,0 +1,15 @@
+{
+  "name": "claria-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "deploy": "wrangler deploy",
+    "smoke": "node smoke.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

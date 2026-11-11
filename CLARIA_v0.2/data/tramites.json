@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "consultado": "2026-11-10",
+  "aviso": "Resumen de lo que dicen las páginas oficiales en la fecha de consulta. Puede haber cambiado: verificá siempre en el sitio oficial. CLARIA no es una página oficial ni gestiona trámites.",
+  "tramites": [
+    {
+      "id": "dni",
+      "icono": "🪪",
+      "titulo": "Nuevo ejemplar de DNI",
+      "resumen": "Cuándo y cómo pedir un nuevo ejemplar del DNI (cambio de domicilio, pérdida, vencimiento, canje, robo o deterioro).",
+      "organismo": "Argentina.gob.ar / RENAPER",
+      "fuente": {
+        "titulo": "Tramitar un nuevo ejemplar de DNI",
+        "url": "https://www.argentina.gob.ar/node/41622",
+        "consultado": "2026-11-10",
+        "actualizada": "2026-03-06"
+      },
+      "enlaces": [
+        { "titulo": "Pedir turno en un Centro de Documentación RENAPER", "url": "https://mi.argentina.gob.ar/turnos/seleccion-turno/1070" },
+        { "titulo": "Seguimiento online del trámite", "url": "https://mitramite.renaper.gob.ar/" }
+      ],
+      "requisitos": [
+        "Mayores de 14 años: llevar el DNI si lo tienen. Si lo extraviaron o se lo robaron, pueden presentar la denuncia. Ninguno de los dos es excluyente.",
+        "Menores de 14 años: deben ir acompañados por madre, padre o tutor con su DNI.",
+        "Si quien acompaña es representante legal, la página pide documentación judicial o de la autoridad competente (oficio o testimonio con sello y firma)."
+      ],
+      "costo": "Según la página, $10000.00 (verificá el monto vigente).",
+      "tiempo": "Según la página, 15 minutos con turno.",
+      "pasos": [
+        "Elegí el Registro Civil más cercano en la jurisdicción de tu domicilio, o pedí turno en un Centro de Documentación RENAPER desde la app Mi Argentina.",
+        "Presentate en la oficina. Si vas a un Centro RENAPER, llevá la constancia de turno.",
+        "Guardá la constancia de la solicitud: con el ID podés hacer el seguimiento online.",
+        "Cuando llegue el correo al domicilio, debe recibirlo la persona titular o un mayor de 18 años con la constancia. Si se retira en una oficina, hay que presentar la constancia."
+      ]
+    },
+    {
+      "id": "cud",
+      "icono": "🧩",
+      "titulo": "Certificado Único de Discapacidad (CUD)",
+      "resumen": "Cómo obtener el CUD: documento público que certifica una discapacidad y permite acceder a derechos y prestaciones.",
+      "organismo": "Ministerio de Salud / Secretaría Nacional de Discapacidad",
+      "fuente": {
+        "titulo": "Cómo obtener el Certificado Único de Discapacidad (CUD)",
+        "url": "https://www.argentina.gob.ar/servicio/como-obtener-el-certificado-unico-de-discapacidad-cud",
+        "consultado": "2026-11-10",
+        "actualizada": "2026-06-16"
+      },
+      "enlaces": [
+        { "titulo": "Consulta de requisitos: a dónde ir y qué llevar", "url": "https://www.argentina.gob.ar/cud/consulta-requisitos" }
+      ],
+      "requisitos": [
+        "Responder la consulta personalizada del sitio oficial, que indica qué documentación llevar y dónde pedir turno.",
+        "Reunir con el equipo de salud tratante los certificados médicos, informes, planillas y estudios complementarios."
+      ],
+      "costo": "Según la página, el trámite es gratuito y voluntario.",
+      "tiempo": "La página no indica un plazo fijo.",
+      "pasos": [
+        "Reuní la documentación con el equipo de salud que te atiende.",
+        "Hacé la consulta de requisitos en el sitio oficial: te indica a dónde ir y cómo pedir turno para la Junta Evaluadora.",
+        "Anotá la fecha y asistí a la evaluación de la Junta Evaluadora de Discapacidad (es presencial).",
+        "Retirá el CUD, o la denegatoria, en el lugar de evaluación y en la fecha indicada, con el documento original. Puede retirarlo cualquier persona mayor de 18 años."
+      ]
+    },
+    {
+      "id": "miargentina",
+      "icono": "📱",
+      "titulo": "Mi Argentina: acceso y validación de identidad",
+      "resumen": "Perfil digital ciudadano para gestionar trámites, sacar turnos y acceder a credenciales con una única sesión.",
+      "organismo": "Argentina.gob.ar",
+      "fuente": {
+        "titulo": "Mi Argentina",
+        "url": "https://www.argentina.gob.ar/miargentina",
+        "consultado": "2026-11-10",
+        "actualizada": "2026-07-13"
+      },
+      "enlaces": [
+        { "titulo": "Validá tu identidad digital", "url": "https://www.argentina.gob.ar/miargentina/validar-identidad" },
+        { "titulo": "Ingreso a Mi Argentina", "url": "https://mi.argentina.gob.ar/" }
+      ],
+      "requisitos": [
+        "Para validar la identidad: tener cuenta y la app de Mi Argentina instalada, y datos móviles o conexión a Internet.",
+        "La página principal no detalla otros requisitos."
+      ],
+      "costo": "La página no menciona costo.",
+      "tiempo": "La página no indica un plazo.",
+      "pasos": [
+        "Entrá desde el sitio web (mi.argentina.gob.ar) o descargá la app de Mi Argentina y registrate.",
+        "Validá tu identidad desde la app: la página «Validá tu identidad digital» explica el paso a paso (cámara, buena luz natural, instrucciones de audio).",
+        "Si la validación en la app no funciona, la página indica que podés acudir a un Punto Digital cercano a tu domicilio para validarte de forma presencial.",
+        "Nunca compartas contraseñas ni códigos de verificación con otras personas."
+      ]
+    }
+  ]
+}
