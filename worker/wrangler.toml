@@ -12,7 +12,7 @@ AI_PROVIDER = "workers-ai"
 # Modelo. Para workers-ai elegí uno disponible en el plan gratuito (lista en el panel de Cloudflare) y verificalo con `npm run smoke`.
 AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
 # Orígenes que pueden llamar a la API (separados por coma). Cambiá TU-USUARIO.
-ALLOWED_ORIGINS = "https://TU-USUARIO.github.io,http://localhost:8000,http://127.0.0.1:8000"
+ALLOWED_ORIGINS = "https://beludellamea-cmyk.github.io,http://localhost:8000,http://127.0.0.1:8000"
 # Límites (por persona, anónimos por huella de IP; y total diario)
 RATE_PER_MIN = "6"
 RATE_PER_DAY = "40"
