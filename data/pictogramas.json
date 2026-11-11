@@ -1,0 +1,2962 @@
+{
+ "version": 1,
+ "fuente": "ARASAAC (https://arasaac.org) · API consultada el 2026-11-11",
+ "licencia": "CC BY-NC-SA 4.0",
+ "autor": "Sergio Palao",
+ "origen": "ARASAAC, Gobierno de Aragón",
+ "entradas": [
+  {
+   "lema": "hola",
+   "tipo": "x",
+   "id": 6009,
+   "palabras": [
+    "hola"
+   ],
+   "formas": [
+    "buenas"
+   ],
+   "significado": "interj. Se emplea como saludo familiar."
+  },
+  {
+   "lema": "chau",
+   "tipo": "x",
+   "id": 5896,
+   "palabras": [
+    "adiós",
+    "hasta luego",
+    "hasta la vista"
+   ],
+   "formas": [
+    "adiós",
+    "adios"
+   ],
+   "significado": "interj. que se emplea para despedirse."
+  },
+  {
+   "lema": "gracias",
+   "tipo": "x",
+   "id": 8128,
+   "palabras": [
+    "gracias"
+   ],
+   "significado": "pl. Fórmula de agradecimiento"
+  },
+  {
+   "lema": "por favor",
+   "tipo": "x",
+   "id": 8194,
+   "palabras": [
+    "por favor",
+    "rogar"
+   ],
+   "significado": "Expresión de cortesía que se añade a una petición:acércame la sal, por favor."
+  },
+  {
+   "lema": "sí",
+   "tipo": "x",
+   "id": 5584,
+   "palabras": [
+    "sí"
+   ],
+   "significado": "adv. afirm. Se emplea para responder a una pregunta afirmativamente: me contestó que sí.",
+   "soloAcento": true
+  },
+  {
+   "lema": "no",
+   "tipo": "x",
+   "id": 5526,
+   "palabras": [
+    "no"
+   ],
+   "significado": "adv. neg. Se utiliza como respuesta negativa a una pregunta, como expresión de rechazo o no conformidad, para indicar la no realización de una acción, etc."
+  },
+  {
+   "lema": "buenos días",
+   "tipo": "x",
+   "id": 6944,
+   "palabras": [
+    "buenos días"
+   ],
+   "formas": [
+    "buen día",
+    "buen dia",
+    "buenos dias"
+   ],
+   "significado": "Saludo. Expresión de cortesía utilizada en el encuentro entre personas por la mañana."
+  },
+  {
+   "lema": "buenas tardes",
+   "tipo": "x",
+   "id": 6943,
+   "palabras": [
+    "buenas tardes"
+   ],
+   "significado": "Expresión de cortesía utilizada en la tarde."
+  },
+  {
+   "lema": "buenas noches",
+   "tipo": "x",
+   "id": 6942,
+   "palabras": [
+    "buenas noches"
+   ],
+   "significado": "Expresión de cortesía utilizada en la despedida entre personas por la noche."
+  },
+  {
+   "lema": "perdón",
+   "tipo": "x",
+   "id": 38360,
+   "palabras": [
+    "lo siento",
+    "perdonar",
+    "pedir perdón",
+    "¡lo siento!",
+    "¡perdón!",
+    "perdón"
+   ],
+   "formas": [
+    "disculpa",
+    "disculpe"
+   ]
+  },
+  {
+   "lema": "yo",
+   "tipo": "p",
+   "id": 2617,
+   "palabras": [
+    "yo",
+    "me",
+    "mí",
+    "yo me"
+   ],
+   "significado": "pron. Forma del pron. pers. com. de primera persona singular, que en la oración desempeña la función de sujeto."
+  },
+  {
+   "lema": "vos",
+   "tipo": "p",
+   "id": 2608,
+   "palabras": [
+    "tú",
+    "usted",
+    "tú te"
+   ],
+   "formas": [
+    "tú",
+    "usted"
+   ],
+   "significado": "pron. pers. Designa a la persona a quien se habla cuando no se le da otro *tratamiento de más respeto."
+  },
+  {
+   "lema": "tu",
+   "tipo": "p",
+   "id": 2608,
+   "palabras": [
+    "tú",
+    "usted",
+    "tú te"
+   ],
+   "formas": [
+    "tuyo",
+    "tus"
+   ],
+   "significado": "pron. pers. Designa a la persona a quien se habla cuando no se le da otro *tratamiento de más respeto."
+  },
+  {
+   "lema": "él",
+   "tipo": "p",
+   "id": 6480,
+   "palabras": [
+    "él",
+    "él se"
+   ],
+   "significado": "pron. pers. Forma de tercera persona del singular, masculino, que funciona como sujeto y como término en complementos con preposición.",
+   "soloAcento": true
+  },
+  {
+   "lema": "ella",
+   "tipo": "p",
+   "id": 7028,
+   "palabras": [
+    "ella",
+    "ella se"
+   ],
+   "significado": "pron. Forma del pron. pers. f. de tercera persona singular, que en la oración desempeña la función de sujeto."
+  },
+  {
+   "lema": "nosotros",
+   "tipo": "p",
+   "id": 7185,
+   "palabras": [
+    "nosotros",
+    "nosotros nos"
+   ],
+   "formas": [
+    "nosotras"
+   ],
+   "significado": "pron. Forma del pron. pers. m. y f. de primera persona plural, que en la oración desempeña la función de sujeto o de complemento con preposición."
+  },
+  {
+   "lema": "ellos",
+   "tipo": "p",
+   "id": 7032,
+   "palabras": [
+    "ellos",
+    "ellos se"
+   ],
+   "formas": [
+    "ellas"
+   ],
+   "significado": "pron. Forma del pron. pers. m. de tercera persona plural, que en la oración desempeña la función de sujeto."
+  },
+  {
+   "lema": "mi",
+   "tipo": "p",
+   "id": 12264,
+   "palabras": [
+    "mío",
+    "mi",
+    "mía"
+   ],
+   "formas": [
+    "mío",
+    "mía",
+    "mis"
+   ],
+   "significado": "adj. pos. com. sing. y pl. Apóc. de mío, a/míos, as, que siempre antecede a sustantivos: mi mujer; mis libros."
+  },
+  {
+   "lema": "su",
+   "tipo": "p",
+   "id": 12272,
+   "palabras": [
+    "su",
+    "suyo",
+    "suya"
+   ],
+   "formas": [
+    "sus"
+   ],
+   "significado": "adj. pos. com. sing. y pl. Apócope de suyo, a/suyos, as, que siempre antecede a sustantivos: su coche, sus libros."
+  },
+  {
+   "lema": "quién",
+   "tipo": "p",
+   "id": 13358,
+   "palabras": [
+    "quién",
+    "quiénes",
+    "¿quiénes son?",
+    "¿quién?"
+   ],
+   "significado": "Pron. interrog. y excl. Introduce oraciones interrogativas y exclamativas, preguntando o ponderando la identidad de una persona: dime con quién andas y te diré quién eres; ¡quién fuera tú!",
+   "interrogativo": true
+  },
+  {
+   "lema": "qué",
+   "tipo": "p",
+   "id": 11351,
+   "palabras": [
+    "que"
+   ],
+   "significado": "pron. relat. Con esta sola forma conviene a los géneros masculino, femenino y neutro y a los números singular y plural. Con el artículo forma el relativo compuesto: el que, la que, los que, las que, lo que, que a diferencia de la sola forma",
+   "interrogativo": true
+  },
+  {
+   "lema": "dónde",
+   "tipo": "p",
+   "id": 7764,
+   "palabras": [
+    "dónde",
+    "¿dónde?",
+    "donde"
+   ],
+   "significado": "adv. interrog. Equivale a preguntar por el lugar en el que se lleva a cabo una acción, o en el que está algo o alguien: ¿dónde dejaste la chaqueta?",
+   "interrogativo": true
+  },
+  {
+   "lema": "cuándo",
+   "tipo": "p",
+   "id": 24053,
+   "palabras": [
+    "cuando"
+   ],
+   "significado": "conj. t. En el tiempo, en el punto, en la ocasión en que. Me compadecerás cuando sepas mis desventuras. Ven a buscarme cuando sean las diez.",
+   "interrogativo": true
+  },
+  {
+   "lema": "cómo",
+   "tipo": "p",
+   "id": 22619,
+   "palabras": [
+    "cómo",
+    "¿cómo?"
+   ],
+   "significado": "adv. m. interrog. De qué modo, de qué manera.",
+   "interrogativo": true
+  },
+  {
+   "lema": "cuánto",
+   "tipo": "p",
+   "id": 24731,
+   "palabras": [
+    "¿cuántos hay?",
+    "cuántos hay",
+    "cantidad",
+    "¿cuántos?",
+    "cuánto",
+    "cuánta"
+   ],
+   "formas": [
+    "cuánta"
+   ],
+   "significado": "pron. interrog. U. en todos sus géneros y números, solo o agrupado con un sustantivo, para inquirir o ponderar el número, la cantidad, el precio, el tiempo, el grado, etc., de algo.",
+   "interrogativo": true
+  },
+  {
+   "lema": "por qué",
+   "tipo": "p",
+   "id": 24763,
+   "palabras": [
+    "por qué"
+   ],
+   "significado": "loc. adv. interr. Por qué razón, causa o motivo.",
+   "interrogativo": true
+  },
+  {
+   "lema": "todo",
+   "tipo": "p",
+   "id": 5596,
+   "palabras": [
+    "todo",
+    "todos",
+    "todas",
+    "toda"
+   ],
+   "formas": [
+    "todos",
+    "todas",
+    "toda"
+   ],
+   "significado": "adj. y pron. Se dice de lo que se toma o se considera por entero o en conjunto: todo el mundo está de acuerdo."
+  },
+  {
+   "lema": "nadie",
+   "tipo": "p",
+   "id": 11314,
+   "palabras": [
+    "ninguno",
+    "ninguna",
+    "nadie"
+   ],
+   "significado": "pron. indef. Ninguna persona."
+  },
+  {
+   "lema": "esto",
+   "tipo": "p",
+   "id": 7095,
+   "palabras": [
+    "este",
+    "esta",
+    "esto"
+   ],
+   "formas": [
+    "este",
+    "esta",
+    "eso"
+   ],
+   "significado": "pron. dem. Designa lo que está cerca de la persona que habla, o representa y señala lo que se acaba de mencionar. U. las formas m. y f. c. adj. y c. s."
+  },
+  {
+   "lema": "aquí",
+   "tipo": "r",
+   "id": 5382,
+   "palabras": [
+    "aquí",
+    "acá"
+   ],
+   "formas": [
+    "acá",
+    "aca",
+    "aqui"
+   ],
+   "significado": "Adv. l. Indica el lugar en que se encuentra el hablante o un lugar cercano a él. Con verbos de estado, significa en este lugar: aquí vivo. Con verbos de movimiento, significa a este lugar: ven aquí. Puede ir precedido de las preps. de, desd"
+  },
+  {
+   "lema": "allá",
+   "tipo": "r",
+   "id": 5375,
+   "palabras": [
+    "ahí",
+    "allí",
+    "allá"
+   ],
+   "formas": [
+    "allí",
+    "alla",
+    "alli",
+    "ahí"
+   ],
+   "significado": "adv. l. allí. Indica lugar menos circunscrito o determinado que el que se denota con esta última voz. Por eso allá admite ciertos grados de comparación que rechaza allí."
+  },
+  {
+   "lema": "ahora",
+   "tipo": "r",
+   "id": 13026,
+   "palabras": [
+    "ahora"
+   ],
+   "significado": "adv. t. A esta hora, en este momento, en el tiempo actual o presente."
+  },
+  {
+   "lema": "después",
+   "tipo": "r",
+   "id": 13080,
+   "palabras": [
+    "después",
+    "luego",
+    "después de",
+    "después del"
+   ],
+   "formas": [
+    "despues"
+   ],
+   "significado": "adv. t. Denota posterioridad de tiempo: saldré después de comer; la mañana después."
+  },
+  {
+   "lema": "antes",
+   "tipo": "r",
+   "id": 13028,
+   "palabras": [
+    "antes",
+    "antes de",
+    "antes del"
+   ],
+   "significado": "adv. t. y l. que denota prioridad de tiempo o lugar."
+  },
+  {
+   "lema": "siempre",
+   "tipo": "r",
+   "id": 17322,
+   "palabras": [
+    "siempre"
+   ],
+   "significado": "adv. t. En todo caso o cuando menos. Quizá no logre mi objeto, pero siempre me quedará la satisfacción de haber hecho lo que debía Siempre tendrá cinco mil duros de renta"
+  },
+  {
+   "lema": "nunca",
+   "tipo": "r",
+   "id": 5527,
+   "palabras": [
+    "nunca",
+    "jamás"
+   ],
+   "significado": "En ningún tiempo."
+  },
+  {
+   "lema": "mucho",
+   "tipo": "r",
+   "id": 5521,
+   "palabras": [
+    "mucho"
+   ],
+   "formas": [
+    "muy",
+    "muchos",
+    "muchas",
+    "mucha"
+   ],
+   "significado": "adj. Abundante, numeroso, intenso, que sobrepasa lo normal."
+  },
+  {
+   "lema": "poco",
+   "tipo": "r",
+   "id": 5546,
+   "palabras": [
+    "poco"
+   ],
+   "formas": [
+    "pocos",
+    "pocas",
+    "poca"
+   ],
+   "significado": "adj. Escaso en cantidad o calidad: he traído poca comida para toda la gente que ha venido."
+  },
+  {
+   "lema": "más",
+   "tipo": "r",
+   "id": 5508,
+   "palabras": [
+    "más"
+   ],
+   "significado": "Denota exceso indeterminado con relación a una cantidad expresa. En esta batalla murieron más de dos mil hombres. Son más de las diez.",
+   "soloAcento": true
+  },
+  {
+   "lema": "menos",
+   "tipo": "r",
+   "id": 5512,
+   "palabras": [
+    "menos"
+   ],
+   "significado": "adv. comp. Denota idea de falta, disminución, restricción o inferioridad en comparación expresa o sobreentendida."
+  },
+  {
+   "lema": "también",
+   "tipo": "r",
+   "id": 11591,
+   "palabras": [
+    "¡yo, también!",
+    "yo, también",
+    "también",
+    "además"
+   ],
+   "formas": [
+    "tambien"
+   ]
+  },
+  {
+   "lema": "hoy",
+   "tipo": "r",
+   "id": 7131,
+   "palabras": [
+    "hoy"
+   ],
+   "significado": "m. Momento actual: el ayer, el hoy y el mañana."
+  },
+  {
+   "lema": "mañana",
+   "tipo": "r",
+   "id": 7152,
+   "palabras": [
+    "mañana"
+   ],
+   "significado": "adv. t. En el día siguiente al de hoy.",
+   "aviso": "Puede ser «el día siguiente» o «la parte temprana del día»; este es «el día siguiente»."
+  },
+  {
+   "lema": "ayer",
+   "tipo": "r",
+   "id": 6926,
+   "palabras": [
+    "ayer"
+   ],
+   "significado": "adv. t. En el día inmediatamente anterior al de hoy."
+  },
+  {
+   "lema": "cerca",
+   "tipo": "r",
+   "id": 30383,
+   "palabras": [
+    "cerca",
+    "cercano",
+    "cercana",
+    "cerca de",
+    "cercano a",
+    "cercana a"
+   ],
+   "significado": "adv. l. y t. Próximo en el espacio o en el tiempo. Delante de pronombre o sustantivo, va seguido de la prep. de"
+  },
+  {
+   "lema": "lejos",
+   "tipo": "r",
+   "id": 30385,
+   "palabras": [
+    "lejos",
+    "lejano",
+    "lejana",
+    "lejos de",
+    "lejos del"
+   ],
+   "significado": "adv. l. y t. A gran distancia, en lugar o tiempo distante o remoto."
+  },
+  {
+   "lema": "querer",
+   "tipo": "v",
+   "id": 5441,
+   "palabras": [
+    "querer",
+    "desear",
+    "pedir",
+    "yo quiero"
+   ],
+   "significado": "tr. Desear, apetecer."
+  },
+  {
+   "lema": "necesitar",
+   "tipo": "v",
+   "id": 37160,
+   "palabras": [
+    "necesitar"
+   ]
+  },
+  {
+   "lema": "sacar",
+   "tipo": "v",
+   "id": 5568,
+   "palabras": [
+    "sacar"
+   ],
+   "significado": "tr. Poner algo fuera del lugar en el que estaba",
+   "aviso": "Tiene varios sentidos; este es «extraer, sacar algo de un lugar»."
+  },
+  {
+   "lema": "pedir",
+   "tipo": "v",
+   "id": 11251,
+   "palabras": [
+    "pedir",
+    "encargo",
+    "encargar",
+    "mandar"
+   ],
+   "significado": "tr. Rogar o demandar a alguien que dé o haga algo, de gracia o de justicia."
+  },
+  {
+   "lema": "ir",
+   "tipo": "v",
+   "id": 2432,
+   "palabras": [
+    "ir"
+   ],
+   "significado": "intr. Moverse de un lugar hacia otro."
+  },
+  {
+   "lema": "venir",
+   "tipo": "v",
+   "id": 11708,
+   "palabras": [
+    "venir",
+    "acudir",
+    "llegar"
+   ],
+   "significado": "intr. Trasladarse o llegar hasta donde está el que habla: vino a Cádiz ayer."
+  },
+  {
+   "lema": "tener",
+   "tipo": "v",
+   "id": 7271,
+   "palabras": [
+    "tener",
+    "poseer"
+   ],
+   "significado": "tr. Poseer una cosa o disfrutar de ella"
+  },
+  {
+   "lema": "ser",
+   "tipo": "v",
+   "id": 5581,
+   "palabras": [
+    "ser"
+   ],
+   "significado": "cop. Tener alguien o algo una determinada cualidad: él es mi hermano; es bueno, alto y de ciudad.",
+   "rol": "func"
+  },
+  {
+   "lema": "estar",
+   "tipo": "v",
+   "id": 5465,
+   "palabras": [
+    "estar"
+   ],
+   "significado": "cop. e intr. Existir, hallarse una persona o cosa en un lugar, situación, condición, etc.: estar en la ciudad; estar cansado; estar viudo.",
+   "rol": "func"
+  },
+  {
+   "lema": "hacer",
+   "tipo": "v",
+   "id": 11749,
+   "palabras": [
+    "hacer"
+   ],
+   "significado": "tr. Fabricar, componer: hizo varias comedias."
+  },
+  {
+   "lema": "dar",
+   "tipo": "v",
+   "id": 28431,
+   "palabras": [
+    "dar",
+    "ofrecer"
+   ],
+   "significado": "Verb. Ofrecer."
+  },
+  {
+   "lema": "ver",
+   "tipo": "v",
+   "id": 2474,
+   "palabras": [
+    "ver",
+    "mirar",
+    "observar"
+   ],
+   "significado": "tr. Percibir por los ojos los objetos mediante la acción de la luz."
+  },
+  {
+   "lema": "mirar",
+   "tipo": "v",
+   "id": 2474,
+   "palabras": [
+    "ver",
+    "mirar",
+    "observar"
+   ],
+   "significado": "tr. Fijar la vista en un objeto."
+  },
+  {
+   "lema": "escuchar",
+   "tipo": "v",
+   "id": 2381,
+   "palabras": [
+    "oír",
+    "escuchar"
+   ],
+   "significado": "intr. Aplicar el oído para oír."
+  },
+  {
+   "lema": "hablar",
+   "tipo": "v",
+   "id": 3345,
+   "palabras": [
+    "hablar",
+    "conversar",
+    "charlar",
+    "dialogar",
+    "comunicar"
+   ],
+   "significado": "intr. Articular, proferir palabras para darse a entender."
+  },
+  {
+   "lema": "decir",
+   "tipo": "v",
+   "id": 9692,
+   "palabras": [
+    "decir",
+    "expresar"
+   ],
+   "significado": "tr. Expresar verbalmente el pensamiento"
+  },
+  {
+   "lema": "leer",
+   "tipo": "v",
+   "id": 28643,
+   "palabras": [
+    "leer"
+   ],
+   "significado": "tr. Pasar la vista por lo escrito o impreso comprendiendo la significación de los caracteres empleados."
+  },
+  {
+   "lema": "escribir",
+   "tipo": "v",
+   "id": 2380,
+   "palabras": [
+    "escribir",
+    "escritura"
+   ],
+   "significado": "tr. e intr. Representar conceptos o ideas mediante letras o signos convencionales."
+  },
+  {
+   "lema": "comer",
+   "tipo": "v",
+   "id": 2349,
+   "palabras": [
+    "comer",
+    "tomar"
+   ],
+   "significado": "intr. Masticar y desmenuzar el alimento en la boca y pasarlo al estómago."
+  },
+  {
+   "lema": "beber",
+   "tipo": "v",
+   "id": 2276,
+   "palabras": [
+    "beber",
+    "tomar"
+   ],
+   "formas": [
+    "tomar"
+   ],
+   "significado": "intr. Ingerir un líquido."
+  },
+  {
+   "lema": "dormir",
+   "tipo": "v",
+   "id": 2369,
+   "palabras": [
+    "dormir"
+   ],
+   "significado": "intr. Estar en aquel reposo que consiste en la inacción o suspensión de los sentidos y de todo movimiento voluntario."
+  },
+  {
+   "lema": "jugar",
+   "tipo": "v",
+   "id": 2439,
+   "palabras": [
+    "jugar"
+   ],
+   "significado": "intr. Entretenerse, divertirse tomando parte en uno de los juegos sometidos a reglas, medie o no en él interés."
+  },
+  {
+   "lema": "aprender",
+   "tipo": "v",
+   "id": 8029,
+   "palabras": [
+    "aprender"
+   ],
+   "significado": "tr. Adquirir el conocimiento de alguna cosa."
+  },
+  {
+   "lema": "enseñar",
+   "tipo": "v",
+   "id": 11308,
+   "palabras": [
+    "mostrar",
+    "presentar",
+    "enseñar"
+   ],
+   "significado": "tr. Mostrar o exponer algo, para que sea visto y apreciado."
+  },
+  {
+   "lema": "estudiar",
+   "tipo": "v",
+   "id": 2387,
+   "palabras": [
+    "estudiar"
+   ],
+   "significado": "tr. Ejercitar el entendimiento para alcanzar o comprender algo."
+  },
+  {
+   "lema": "trabajar",
+   "tipo": "v",
+   "id": 2599,
+   "palabras": [
+    "trabajar"
+   ],
+   "significado": "intr. Realizar cualquier actividad, física o intelectual."
+  },
+  {
+   "lema": "ayudar",
+   "tipo": "v",
+   "id": 4570,
+   "palabras": [
+    "ayudar",
+    "apoyar",
+    "cooperar"
+   ],
+   "significado": "tr. Cooperar, colaborar."
+  },
+  {
+   "lema": "saber",
+   "tipo": "v",
+   "id": 9034,
+   "palabras": [
+    "saber",
+    "levantar la mano"
+   ],
+   "significado": "tr. Conocer, tener noticia de algo"
+  },
+  {
+   "lema": "poder",
+   "tipo": "v",
+   "id": 11750,
+   "palabras": [
+    "poder"
+   ],
+   "significado": "tr. Tener expedita la facultad o potencia de hacer algo."
+  },
+  {
+   "lema": "entender",
+   "tipo": "v",
+   "id": 11697,
+   "palabras": [
+    "entender",
+    "comprender",
+    "comprensible",
+    "entendible",
+    "inteligible"
+   ],
+   "formas": [
+    "comprender"
+   ],
+   "significado": "tr. Tener idea clara de las cosas"
+  },
+  {
+   "lema": "preguntar",
+   "tipo": "v",
+   "id": 9844,
+   "palabras": [
+    "preguntar"
+   ],
+   "significado": "Demandar e interrogar por cierta información: le preguntó dónde estaba la estación."
+  },
+  {
+   "lema": "responder",
+   "tipo": "v",
+   "id": 9030,
+   "palabras": [
+    "responder",
+    "contestar"
+   ],
+   "significado": "tr. e intr. Contestar a una carta, saludo, etc., que se ha recibido"
+  },
+  {
+   "lema": "llevar",
+   "tipo": "v",
+   "id": 6139,
+   "palabras": [
+    "llevar"
+   ],
+   "significado": "Conducir algo desde un lugar a otro alejado de aquel en que se habla o se sitúa mentalmente la persona que emplea este verbo."
+  },
+  {
+   "lema": "traer",
+   "tipo": "v",
+   "id": 7279,
+   "palabras": [
+    "traer",
+    "aportar"
+   ],
+   "significado": "tr. Transportar una cosa al sitio en que está el que habla."
+  },
+  {
+   "lema": "esperar",
+   "tipo": "v",
+   "id": 8109,
+   "palabras": [
+    "esperar"
+   ],
+   "significado": "tr. Permanecer en sitio adonde se cree que ha de ir alguien o en donde se presume que ha de ocurrir algo"
+  },
+  {
+   "lema": "comprar",
+   "tipo": "v",
+   "id": 6457,
+   "palabras": [
+    "comprar",
+    "pagar",
+    "adquirir"
+   ],
+   "significado": "tr. Obtener algo con dinero."
+  },
+  {
+   "lema": "pagar",
+   "tipo": "v",
+   "id": 9014,
+   "palabras": [
+    "pagar"
+   ],
+   "significado": "tr. Dar a alguien el dinero que se le debe o le corresponde"
+  },
+  {
+   "lema": "abrir",
+   "tipo": "v",
+   "id": 24825,
+   "palabras": [
+    "abrir"
+   ],
+   "significado": "tr. Separar del marco la hoja o las hojas de una puerta o ventana, haciéndolas girar sobre sus goznes, o quitar o separar cualquier otra cosa con que esté cerrada una abertura, para que deje de estarlo."
+  },
+  {
+   "lema": "cerrar",
+   "tipo": "v",
+   "id": 2697,
+   "palabras": [
+    "cerrar"
+   ],
+   "significado": "tr. Asegurar algo con una cerradura para que no se abra o para impedir que algo o alguien entre o salga de su interior."
+  },
+  {
+   "lema": "llamar",
+   "tipo": "v",
+   "id": 36305,
+   "palabras": [
+    "llamar"
+   ],
+   "significado": "intr. telefonear (&#8214; establecer una comunicación telefónica).",
+   "aviso": "Tiene varios sentidos; este es «llamar por teléfono»."
+  },
+  {
+   "lema": "firmar",
+   "tipo": "v",
+   "id": 12317,
+   "palabras": [
+    "firmar"
+   ],
+   "significado": "tr. Dicho de una persona: Poner su firma."
+  },
+  {
+   "lema": "cambiar",
+   "tipo": "v",
+   "id": 8053,
+   "palabras": [
+    "cambiar",
+    "intercambiar"
+   ],
+   "significado": "tr. Dar o recibir una cosa por otra que la sustituya."
+  },
+  {
+   "lema": "buscar",
+   "tipo": "v",
+   "id": 6946,
+   "palabras": [
+    "buscar"
+   ],
+   "significado": "tr. Hacer algo para hallar a alguien o algo."
+  },
+  {
+   "lema": "encontrar",
+   "tipo": "v",
+   "id": 5990,
+   "palabras": [
+    "encontrar",
+    "hallar",
+    "aparecer"
+   ],
+   "significado": "tr. Dar con la pelota que se había perdido"
+  },
+  {
+   "lema": "usar",
+   "tipo": "v",
+   "id": 15485,
+   "palabras": [
+    "utilizar",
+    "usar"
+   ],
+   "significado": "tr. Hacer servir una cosa para algo. U. t. c. intr.",
+   "aviso": "Pictograma abstracto."
+  },
+  {
+   "lema": "guardar",
+   "tipo": "v",
+   "id": 5514,
+   "palabras": [
+    "guardar",
+    "recoger",
+    "meter"
+   ],
+   "significado": "tr. Poner algo donde esté seguro o en el sitio donde le corresponde estar"
+  },
+  {
+   "lema": "sentir",
+   "tipo": "v",
+   "id": 30196,
+   "palabras": [
+    "sentidos",
+    "percibir",
+    "sentir"
+   ]
+  },
+  {
+   "lema": "vivir",
+   "tipo": "v",
+   "id": 7302,
+   "palabras": [
+    "vivir"
+   ],
+   "significado": "Habitar en un lugar: vivimos en el campo. También tr."
+  },
+  {
+   "lema": "caminar",
+   "tipo": "v",
+   "id": 3251,
+   "palabras": [
+    "caminar",
+    "andar"
+   ],
+   "significado": "intr. Ir andando de un lugar a otro."
+  },
+  {
+   "lema": "lavar",
+   "tipo": "v",
+   "id": 5496,
+   "palabras": [
+    "lavar la ropa",
+    "lavar"
+   ]
+  },
+  {
+   "lema": "cantar",
+   "tipo": "v",
+   "id": 2315,
+   "palabras": [
+    "cantar"
+   ],
+   "significado": "intr. Dicho de una persona: Producir con la voz sonidos melodiosos, formando palabras o sin formarlas."
+  },
+  {
+   "lema": "dibujar",
+   "tipo": "v",
+   "id": 8088,
+   "palabras": [
+    "dibujar"
+   ],
+   "significado": "tr. Trazar sobre una superficie una figura empleando un instrumento adecuado"
+  },
+  {
+   "lema": "pintar",
+   "tipo": "v",
+   "id": 5574,
+   "palabras": [
+    "pintar"
+   ],
+   "significado": "tr. Representar o figurar un objeto en una superficie, con las líneas y los colores convenientes."
+  },
+  {
+   "lema": "cuidar",
+   "tipo": "v",
+   "id": 11691,
+   "palabras": [
+    "cuidar"
+   ],
+   "significado": "Asistir a alguien que lo necesita: cuidar a un niño. También intr.: cuidar de un enfermo."
+  },
+  {
+   "lema": "gustar",
+   "tipo": "v",
+   "id": 37721,
+   "palabras": [
+    "gustar"
+   ]
+  },
+  {
+   "lema": "amar",
+   "tipo": "v",
+   "id": 6898,
+   "palabras": [
+    "amar"
+   ],
+   "significado": "tr. Tener amor, querer: ama muchísimo a sus hijos."
+  },
+  {
+   "lema": "entrar",
+   "tipo": "v",
+   "id": 2742,
+   "palabras": [
+    "entrar",
+    "acceder"
+   ],
+   "significado": "intr. Pasar de fuera adentro, o por una parte para introducirse en otra."
+  },
+  {
+   "lema": "salir",
+   "tipo": "v",
+   "id": 2806,
+   "palabras": [
+    "salir"
+   ],
+   "significado": "tr. Pasar de dentro afuera."
+  },
+  {
+   "lema": "volver",
+   "tipo": "v",
+   "id": 6248,
+   "palabras": [
+    "volver",
+    "vuelta"
+   ],
+   "significado": "Dirigir, encaminar algo a otra cosa, material o inmaterialmente."
+  },
+  {
+   "lema": "empezar",
+   "tipo": "v",
+   "id": 5431,
+   "palabras": [
+    "comenzar",
+    "empezar",
+    "iniciar",
+    "principio",
+    "inicio",
+    "comienzo"
+   ],
+   "formas": [
+    "comenzar"
+   ],
+   "significado": "tr. Comenzar, dar principio a algo."
+  },
+  {
+   "lema": "terminar",
+   "tipo": "v",
+   "id": 28429,
+   "palabras": [
+    "terminar",
+    "acabar",
+    "finalizar",
+    "¡se acabó!",
+    "se acabó",
+    "¡basta ya!"
+   ],
+   "significado": "tr. Poner término a una cosa, acabarla: por fin terminé el trabajo."
+  },
+  {
+   "lema": "elegir",
+   "tipo": "v",
+   "id": 6483,
+   "palabras": [
+    "escoger",
+    "elegir"
+   ],
+   "significado": "Escoger, preferir a alguien o algo para un fin."
+  },
+  {
+   "lema": "copiar",
+   "tipo": "v",
+   "id": 21559,
+   "palabras": [
+    "copiar"
+   ],
+   "significado": "Imitar un modelo y reproducirlo exactamente"
+  },
+  {
+   "lema": "enviar",
+   "tipo": "v",
+   "id": 21828,
+   "palabras": [
+    "enviar",
+    "mandar una carta",
+    "remitir"
+   ],
+   "formas": [
+    "mandar"
+   ],
+   "significado": "tr. Hacer que algo se dirija o sea llevado a alguna parte."
+  },
+  {
+   "lema": "recibir",
+   "tipo": "v",
+   "id": 17042,
+   "palabras": [
+    "coger",
+    "tomar",
+    "recibir",
+    "aceptar",
+    "admitir"
+   ],
+   "significado": "tr. Dicho de una persona: Tomar lo que le dan o le envían."
+  },
+  {
+   "lema": "completar",
+   "tipo": "v",
+   "id": 13078,
+   "palabras": [
+    "completar",
+    "rellenar"
+   ],
+   "significado": "tr. Dar término o conclusión a una cosa o a un proceso."
+  },
+  {
+   "lema": "regalar",
+   "tipo": "v",
+   "id": 16025,
+   "palabras": [
+    "regalar",
+    "dar un regalo"
+   ],
+   "significado": "tr. Dar algo como regalo"
+  },
+  {
+   "lema": "abrazar",
+   "tipo": "v",
+   "id": 6023,
+   "palabras": [
+    "abrazar"
+   ],
+   "significado": "tr. Estrechar entre los brazos en señal de cariño."
+  },
+  {
+   "lema": "cocinar",
+   "tipo": "v",
+   "id": 2342,
+   "palabras": [
+    "cocinar",
+    "guisar"
+   ],
+   "significado": "tr. e intr. Preparar o guisar los alimentos para poderlos comer: su madre cocina en un horno de leña."
+  },
+  {
+   "lema": "descansar",
+   "tipo": "v",
+   "id": 3299,
+   "palabras": [
+    "descansar",
+    "reposar"
+   ],
+   "significado": "intr. Cesar en el trabajo para reparar fuerzas: al séptimo día descansó."
+  },
+  {
+   "lema": "compartir",
+   "tipo": "v",
+   "id": 15361,
+   "palabras": [
+    "compartir"
+   ],
+   "significado": "tr. Repartir, dividir, distribuir algo en partes."
+  },
+  {
+   "lema": "respetar",
+   "tipo": "v",
+   "id": 11621,
+   "palabras": [
+    "respetar"
+   ],
+   "significado": "tr. Tener respeto, veneración, acatamiento."
+  },
+  {
+   "lema": "participar",
+   "tipo": "v",
+   "id": 11475,
+   "palabras": [
+    "participar"
+   ],
+   "significado": "intr. Dicho de una persona: Tomar parte en algo."
+  },
+  {
+   "lema": "contar",
+   "tipo": "v",
+   "id": 2714,
+   "palabras": [
+    "contar"
+   ],
+   "significado": "tr. Numerar o computar las cosas considerándolas como unidades homogéneas."
+  },
+  {
+   "lema": "sentarse",
+   "tipo": "v",
+   "id": 6611,
+   "palabras": [
+    "sentar"
+   ],
+   "significado": "tr. Poner o colocar a uno de manera que quede apoyado y descansando sobre las nalgas."
+  },
+  {
+   "lema": "pensar",
+   "tipo": "v",
+   "id": 8662,
+   "palabras": [
+    "pensar"
+   ],
+   "significado": "tr. Examinar algo en la mente antes de tomar una decisión o darle una solución: tengo que pensarme si acepto o no."
+  },
+  {
+   "lema": "conocer",
+   "tipo": "v",
+   "id": 6993,
+   "palabras": [
+    "conocer"
+   ],
+   "significado": "tr. Conocer lo que es o cómo es cierta cosa o cierta persona, por haberla visto, haber oído hablar de ella, etc."
+  },
+  {
+   "lema": "agua",
+   "tipo": "n",
+   "id": 2248,
+   "palabras": [
+    "agua"
+   ],
+   "significado": "f. Sustancia cuyas moléculas están formadas por la combinación de un átomo de oxígeno y dos de hidrógeno, líquida, inodora, insípida e incolora. Es el componente más abundante de la superficie terrestre."
+  },
+  {
+   "lema": "pan",
+   "tipo": "n",
+   "id": 10230,
+   "palabras": [
+    "pan"
+   ],
+   "significado": "m. Alimento hecho con harina, mezclada con agua y sal, que, después de amasada y fermentada por la acción de la levadura, se cuece al horno, con diversas formas y tamaños."
+  },
+  {
+   "lema": "comida",
+   "tipo": "n",
+   "id": 4611,
+   "palabras": [
+    "comida"
+   ],
+   "significado": "Alimento que se toma a mediodía o a primeras horas de la tarde."
+  },
+  {
+   "lema": "leche",
+   "tipo": "n",
+   "id": 2445,
+   "palabras": [
+    "leche"
+   ],
+   "significado": "f. Líquido blanco que segregan las mamas de las hembras de los mamíferos y que sirve de alimento para sus crías."
+  },
+  {
+   "lema": "manzana",
+   "tipo": "n",
+   "id": 2462,
+   "palabras": [
+    "manzana"
+   ],
+   "significado": "f. Fruto redondo, de piel fina, de carne blanca y con unas semillas pequeñas en el centro, que produce el manzano."
+  },
+  {
+   "lema": "hambre",
+   "tipo": "n",
+   "id": 35559,
+   "palabras": [
+    "hambre"
+   ],
+   "significado": "f. Sensación que indica la necesidad de alimentos."
+  },
+  {
+   "lema": "sed",
+   "tipo": "n",
+   "id": 7273,
+   "palabras": [
+    "sediento",
+    "tener sed",
+    "sed"
+   ],
+   "significado": "f. Gana y necesidad de beber."
+  },
+  {
+   "lema": "baño",
+   "tipo": "n",
+   "id": 15905,
+   "palabras": [
+    "baño",
+    "baño adaptado"
+   ],
+   "formas": [
+    "sanitario"
+   ],
+   "significado": "m. En una vivienda, pieza con lavabo, retrete, bañera y otros sanitarios."
+  },
+  {
+   "lema": "casa",
+   "tipo": "n",
+   "id": 2317,
+   "palabras": [
+    "casa"
+   ],
+   "significado": "f. Edificio o parte de él para vivir."
+  },
+  {
+   "lema": "escuela",
+   "tipo": "n",
+   "id": 3082,
+   "palabras": [
+    "colegio",
+    "escuela"
+   ],
+   "significado": "f. Establecimiento donde se imparte enseñanza, especialmente la obligatoria, colegio."
+  },
+  {
+   "lema": "aula",
+   "tipo": "n",
+   "id": 9814,
+   "palabras": [
+    "aula",
+    "clase"
+   ],
+   "formas": [
+    "salón"
+   ],
+   "significado": "f. En un centro docente, sala destinada a la enseñanza."
+  },
+  {
+   "lema": "libro",
+   "tipo": "n",
+   "id": 25191,
+   "palabras": [
+    "libro"
+   ],
+   "significado": "m. Conjunto de hojas de papel manuscritas o impresas que, cosidas o encuadernadas, forman un volumen."
+  },
+  {
+   "lema": "cuaderno",
+   "tipo": "n",
+   "id": 2359,
+   "palabras": [
+    "cuaderno"
+   ],
+   "significado": "Especie de libro formado por hojas de papel en el que se registra todo tipo de información relacionada con una determinada actividad."
+  },
+  {
+   "lema": "lápiz",
+   "tipo": "n",
+   "id": 2440,
+   "palabras": [
+    "lápiz",
+    "lapicero"
+   ],
+   "formas": [
+    "lapiz"
+   ],
+   "significado": "Barra de grafito encerrada en un cilindro o prisma de madera o metal que sirve para escribir o dibujar."
+  },
+  {
+   "lema": "mochila",
+   "tipo": "n",
+   "id": 2475,
+   "palabras": [
+    "mochila"
+   ],
+   "significado": "f. Saco o bolsa que se sujeta a la espalda por medio de correas y sirve para transportar diversos artículos personales"
+  },
+  {
+   "lema": "mesa",
+   "tipo": "n",
+   "id": 3129,
+   "palabras": [
+    "mesa"
+   ],
+   "significado": "f. Mueble, por lo común de madera, que se compone de una o de varias tablas lisas sostenidas por uno o varios pies, y que sirve para comer, escribir, jugar u otros usos."
+  },
+  {
+   "lema": "silla",
+   "tipo": "n",
+   "id": 3155,
+   "palabras": [
+    "silla"
+   ],
+   "significado": "f. Asiento con respaldo, por lo general con cuatro patas, y en el que solo cabe una persona."
+  },
+  {
+   "lema": "puerta",
+   "tipo": "n",
+   "id": 3244,
+   "palabras": [
+    "puerta"
+   ],
+   "significado": "f. Vano de forma regular abierto en pared, cerca o verja, desde el suelo hasta la altura conveniente, para entrar y salir: hay una pequeña puerta en la valla por la que se puede entrar en el solar."
+  },
+  {
+   "lema": "ventana",
+   "tipo": "n",
+   "id": 2611,
+   "palabras": [
+    "ventana",
+    "ventanal"
+   ],
+   "significado": "Armazón y cristales con que se cierra esa abertura: han colocado ventanas de aluminio."
+  },
+  {
+   "lema": "hospital",
+   "tipo": "n",
+   "id": 3116,
+   "palabras": [
+    "hospital"
+   ],
+   "significado": "m. Establecimiento en que se atienden y curan enfermos."
+  },
+  {
+   "lema": "salud",
+   "tipo": "n",
+   "id": 14664,
+   "palabras": [
+    "salud"
+   ],
+   "significado": "f. Estado en que el organismo ejerce normalmente todas sus funciones: la salud es su bien más preciado."
+  },
+  {
+   "lema": "farmacia",
+   "tipo": "n",
+   "id": 3313,
+   "palabras": [
+    "farmacia"
+   ],
+   "significado": "Laboratorio donde se preparan medicinas y tienda donde se venden."
+  },
+  {
+   "lema": "médico",
+   "tipo": "n",
+   "id": 2467,
+   "palabras": [
+    "médico",
+    "doctor"
+   ],
+   "formas": [
+    "doctor",
+    "doctora",
+    "médica",
+    "medico"
+   ],
+   "significado": "n. Persona que tiene título oficial para curar las enfermedades."
+  },
+  {
+   "lema": "medicina",
+   "tipo": "n",
+   "id": 8163,
+   "palabras": [
+    "medicinas",
+    "medicamentos",
+    "medicina",
+    "medicamento"
+   ],
+   "formas": [
+    "remedio"
+   ]
+  },
+  {
+   "lema": "turno",
+   "tipo": "n",
+   "id": 22190,
+   "palabras": [
+    "turno",
+    "coger turno",
+    "tomar turno"
+   ],
+   "significado": "m. Orden según el cual se suceden varias personas en el desempeño de cualquier actividad o función."
+  },
+  {
+   "lema": "cita",
+   "tipo": "n",
+   "id": 16165,
+   "palabras": [
+    "cita"
+   ],
+   "significado": "f. Día, hora y lugar para encontrarse dos o más personas: establecimos la cita para el lunes que viene."
+  },
+  {
+   "lema": "documento",
+   "tipo": "n",
+   "id": 21802,
+   "palabras": [
+    "documento"
+   ],
+   "formas": [
+    "documentos"
+   ],
+   "significado": "m. Escrito en que constan datos fidedignos o susceptibles de ser empleados como tales para probar algo."
+  },
+  {
+   "lema": "DNI",
+   "tipo": "n",
+   "id": 5987,
+   "palabras": [
+    "carnet",
+    "Documento Nacional de Identidad",
+    "DNI"
+   ],
+   "formas": [
+    "dni"
+   ],
+   "significado": "Documento Nacional de Identidad. Documento que sirve para acreditar la personalidad del titular.",
+   "aviso": "Imagen de ejemplo de ARASAAC (modelo español): el DNI argentino se ve distinto."
+  },
+  {
+   "lema": "certificado",
+   "tipo": "n",
+   "id": 27677,
+   "palabras": [
+    "certificado",
+    "certificación"
+   ],
+   "significado": "f. Documento en que se asegura la verdad de un hecho."
+  },
+  {
+   "lema": "discapacidad",
+   "tipo": "n",
+   "id": 24513,
+   "palabras": [
+    "personas con discapacidad",
+    "discapacidad"
+   ],
+   "significado": "Las personas con discapacidad incluyen a aquellas que tengan deficiencias físicas, mentales, intelectuales o sensoriales a largo plazo que, al interactuar con diversas barreras, puedan impedir su participación plena y efectiva en la socieda"
+  },
+  {
+   "lema": "trámite",
+   "tipo": "n",
+   "id": 24709,
+   "palabras": [
+    "trámite"
+   ],
+   "formas": [
+    "tramite",
+    "trámites",
+    "tramites"
+   ],
+   "significado": "m. Cada uno de los estados y diligencias que hay que recorrer en un negocio hasta su conclusión."
+  },
+  {
+   "lema": "oficina",
+   "tipo": "n",
+   "id": 36089,
+   "palabras": [
+    "oficina"
+   ],
+   "significado": "f. Lugar de trabajo, generalmente de carácter administrativo o burocrático, tanto estatal como privado."
+  },
+  {
+   "lema": "formulario",
+   "tipo": "n",
+   "id": 9173,
+   "palabras": [
+    "formulario"
+   ],
+   "significado": "m. Escrito donde figura una serie de requisitos, preguntas, etc., que se han de cumplimentar"
+  },
+  {
+   "lema": "foto",
+   "tipo": "n",
+   "id": 7107,
+   "palabras": [
+    "foto",
+    "fotografía"
+   ],
+   "formas": [
+    "fotografía"
+   ],
+   "significado": "f. Apóc. de \"fotografía\", usada sobre todo en lenguaje hablado."
+  },
+  {
+   "lema": "papel",
+   "tipo": "n",
+   "id": 8349,
+   "palabras": [
+    "papel",
+    "folio"
+   ],
+   "significado": "m. Material hecho con pasta vegetal molida y blanqueada que se dispone en finas láminas y se usa para escribir, dibujar, etc."
+  },
+  {
+   "lema": "teléfono",
+   "tipo": "n",
+   "id": 2791,
+   "palabras": [
+    "teléfono"
+   ],
+   "formas": [
+    "telefono",
+    "celular"
+   ],
+   "significado": "m. Medio de comunicación que, a través de un conjunto de aparatos y sistemas conductores, transmite a distancia el sonido como señal electromagnética."
+  },
+  {
+   "lema": "computadora",
+   "tipo": "n",
+   "id": 7190,
+   "palabras": [
+    "ordenador",
+    "computador",
+    "computadora"
+   ],
+   "formas": [
+    "compu",
+    "ordenador"
+   ],
+   "significado": "adj. Que computa (&#8214; calcula). U. t. c. s."
+  },
+  {
+   "lema": "internet",
+   "tipo": "n",
+   "id": 5492,
+   "palabras": [
+    "internet"
+   ],
+   "significado": "f. INFORM. Red informática de comunicación internacional que permite el intercambio de todo tipo de información entre sus usuarios."
+  },
+  {
+   "lema": "correo",
+   "tipo": "n",
+   "id": 3086,
+   "palabras": [
+    "correo",
+    "correos"
+   ],
+   "significado": "m. Servicio público que transporta la correspondencia. Más en pl.: trabajaba en correos."
+  },
+  {
+   "lema": "dinero",
+   "tipo": "n",
+   "id": 4630,
+   "palabras": [
+    "dinero"
+   ],
+   "formas": [
+    "plata"
+   ],
+   "significado": "Moneda corriente."
+  },
+  {
+   "lema": "tiempo",
+   "tipo": "n",
+   "id": 22631,
+   "palabras": [
+    "tiempo"
+   ],
+   "significado": "Periodo tal como se especifica; si no, se entiende que es largo: tardó poco tiempo.",
+   "aviso": "Puede ser el tiempo que pasa o el clima; este es el tiempo que pasa."
+  },
+  {
+   "lema": "hora",
+   "tipo": "n",
+   "id": 7129,
+   "palabras": [
+    "hora"
+   ],
+   "significado": "f. Cada una de las 24 partes en que se divide el día solar."
+  },
+  {
+   "lema": "día",
+   "tipo": "n",
+   "id": 37731,
+   "palabras": [
+    "día"
+   ],
+   "formas": [
+    "dia",
+    "días",
+    "dias"
+   ]
+  },
+  {
+   "lema": "fecha",
+   "tipo": "n",
+   "id": 34799,
+   "palabras": [
+    "fecha"
+   ],
+   "significado": "f. Tiempo, momento en que se hace o sucede algo."
+  },
+  {
+   "lema": "semana",
+   "tipo": "n",
+   "id": 7244,
+   "palabras": [
+    "semana"
+   ],
+   "significado": "f. Periodo de siete días."
+  },
+  {
+   "lema": "mes",
+   "tipo": "n",
+   "id": 7161,
+   "palabras": [
+    "mes"
+   ],
+   "significado": "m. Cada una de las 12 partes en que se divide el año"
+  },
+  {
+   "lema": "año",
+   "tipo": "n",
+   "id": 6903,
+   "palabras": [
+    "año"
+   ],
+   "formas": [
+    "ano",
+    "años"
+   ],
+   "significado": "m. Periodo de doce meses, a contar desde el día 1 de enero hasta el 31 de diciembre, ambos inclusive."
+  },
+  {
+   "lema": "lugar",
+   "tipo": "n",
+   "id": 9819,
+   "palabras": [
+    "lugar",
+    "sitio",
+    "emplazamiento"
+   ],
+   "significado": "Sitio, paraje",
+   "aviso": "Pictograma abstracto."
+  },
+  {
+   "lema": "dirección",
+   "tipo": "n",
+   "id": 38571,
+   "palabras": [
+    "dirección",
+    "¿dónde vives?",
+    "¿cuál es tu dirección?"
+   ],
+   "formas": [
+    "direccion",
+    "domicilio"
+   ]
+  },
+  {
+   "lema": "nombre",
+   "tipo": "n",
+   "id": 27357,
+   "palabras": [
+    "nombre",
+    "llamar"
+   ],
+   "significado": "El que se inscribe en el registro civil y precede a los apellidos."
+  },
+  {
+   "lema": "edad",
+   "tipo": "n",
+   "id": 7072,
+   "palabras": [
+    "edad",
+    "¿cuántos años tienes?"
+   ],
+   "significado": "f. Tiempo de existencia desde el nacimiento."
+  },
+  {
+   "lema": "calle",
+   "tipo": "n",
+   "id": 2299,
+   "palabras": [
+    "calle",
+    "avenida"
+   ],
+   "significado": "f. Vía pública en una población."
+  },
+  {
+   "lema": "ciudad",
+   "tipo": "n",
+   "id": 2704,
+   "palabras": [
+    "ciudad"
+   ],
+   "significado": "f. Población grande cuyos habitantes se dedican principalmente a actividades no agrícolas."
+  },
+  {
+   "lema": "pueblo",
+   "tipo": "n",
+   "id": 2823,
+   "palabras": [
+    "pueblo",
+    "población",
+    "municipio"
+   ],
+   "significado": "m. Población pequeña."
+  },
+  {
+   "lema": "río",
+   "tipo": "n",
+   "id": 2811,
+   "palabras": [
+    "río"
+   ],
+   "formas": [
+    "rio"
+   ],
+   "significado": "m. Corriente de agua continua y más o menos caudalosa que va a desembocar en otra, en un lago o en el mar."
+  },
+  {
+   "lema": "árbol",
+   "tipo": "n",
+   "id": 3057,
+   "palabras": [
+    "árbol"
+   ],
+   "formas": [
+    "arbol"
+   ],
+   "significado": "m. BOT. Planta perenne, de tronco leñoso y elevado, que se ramifica a cierta altura del suelo."
+  },
+  {
+   "lema": "sol",
+   "tipo": "n",
+   "id": 2798,
+   "palabras": [
+    "Sol"
+   ],
+   "significado": "m. Estrella luminosa, centro de nuestro sistema planetario.",
+   "aviso": "Puede ser el astro o el clima soleado."
+  },
+  {
+   "lema": "lluvia",
+   "tipo": "n",
+   "id": 3123,
+   "palabras": [
+    "lluvia"
+   ],
+   "significado": "f. Precipitación de agua de la atmósfera que cae de las nubes en forma de gotas."
+  },
+  {
+   "lema": "animal",
+   "tipo": "n",
+   "id": 6901,
+   "palabras": [
+    "animales",
+    "animal"
+   ],
+   "significado": "m. Ser orgánico que vive, siente y se mueve por propio impulso."
+  },
+  {
+   "lema": "perro",
+   "tipo": "n",
+   "id": 38967,
+   "palabras": [
+    "perro",
+    "perra"
+   ]
+  },
+  {
+   "lema": "gato",
+   "tipo": "n",
+   "id": 9881,
+   "palabras": [
+    "gato",
+    "gato negro",
+    "gata",
+    "gata negra"
+   ],
+   "significado": "m. y f. Mamífero carnívoro doméstico de cabeza redonda, lengua muy áspera, patas cortas armadas de uñas fuertes, agudas y retráctiles, pelaje espeso y suave, de diversos colores, y ojos cuya pupila se dilata para ver en la oscuridad."
+  },
+  {
+   "lema": "flor",
+   "tipo": "n",
+   "id": 3102,
+   "palabras": [
+    "flor"
+   ],
+   "significado": "f. Conjunto de los órganos de reproducción de las plantas."
+  },
+  {
+   "lema": "amor",
+   "tipo": "n",
+   "id": 11178,
+   "palabras": [
+    "amor",
+    "amado"
+   ],
+   "significado": "Persona amada, y p. ext., aquello que es especialmente querido: ella ha sido el gran amor de su vida; su amor es la moto."
+  },
+  {
+   "lema": "familia",
+   "tipo": "n",
+   "id": 2392,
+   "palabras": [
+    "familia"
+   ],
+   "significado": "f. Grupo de personas emparentadas entre sí que viven juntas o en lugares diferentes, y especialmente el formado por el matrimonio y los hijos."
+  },
+  {
+   "lema": "mamá",
+   "tipo": "n",
+   "id": 2458,
+   "palabras": [
+    "mamá"
+   ],
+   "formas": [
+    "mama",
+    "madre"
+   ],
+   "significado": "Madre, mama."
+  },
+  {
+   "lema": "papá",
+   "tipo": "n",
+   "id": 31146,
+   "palabras": [
+    "papá"
+   ],
+   "formas": [
+    "papa",
+    "padre"
+   ],
+   "significado": "m. Familiarmente, padre."
+  },
+  {
+   "lema": "hijo",
+   "tipo": "n",
+   "id": 9887,
+   "palabras": [
+    "hijo"
+   ],
+   "formas": [
+    "hija",
+    "hijos",
+    "hijas"
+   ],
+   "significado": "m. Persona o animal, respecto de su padre o de su madre."
+  },
+  {
+   "lema": "abuelo",
+   "tipo": "n",
+   "id": 23718,
+   "palabras": [
+    "abuelo",
+    "yayo"
+   ],
+   "significado": "m. Respecto de una persona, padre de su padre o de su madre."
+  },
+  {
+   "lema": "abuela",
+   "tipo": "n",
+   "id": 23710,
+   "palabras": [
+    "abuela",
+    "yaya"
+   ],
+   "significado": "f. Respecto de una persona, madre de su padre o de su madre."
+  },
+  {
+   "lema": "hermano",
+   "tipo": "n",
+   "id": 2423,
+   "palabras": [
+    "hermano"
+   ],
+   "formas": [
+    "hermana",
+    "hermanos",
+    "hermanas"
+   ],
+   "significado": "m. y f. Persona nacida de los mismos padres respecto a otra, o solamente el mismo padre o la misma madre."
+  },
+  {
+   "lema": "amigo",
+   "tipo": "n",
+   "id": 8487,
+   "palabras": [
+    "amigo"
+   ],
+   "formas": [
+    "amiga",
+    "amigos",
+    "amigas"
+   ],
+   "significado": "adj. Que tiene amistad. U. t. c. s. U. como tratamiento afectuoso, aunque no haya verdadera amistad."
+  },
+  {
+   "lema": "compañero",
+   "tipo": "n",
+   "id": 39421,
+   "palabras": [
+    "compañero"
+   ],
+   "formas": [
+    "compañera",
+    "compañeros",
+    "compañeras"
+   ]
+  },
+  {
+   "lema": "maestro",
+   "tipo": "n",
+   "id": 2457,
+   "palabras": [
+    "maestro",
+    "profesor"
+   ],
+   "formas": [
+    "maestra",
+    "docente",
+    "profe",
+    "profesor",
+    "profesora",
+    "seño"
+   ],
+   "significado": "m. y f. Persona que enseña un arte, una ciencia, o un oficio, especialmente la que imparte el primer ciclo de enseñanza, o tiene título para hacerlo."
+  },
+  {
+   "lema": "persona",
+   "tipo": "n",
+   "id": 34559,
+   "palabras": [
+    "persona"
+   ],
+   "formas": [
+    "personas",
+    "gente"
+   ],
+   "significado": "f. Individuo de la especie humana."
+  },
+  {
+   "lema": "niño",
+   "tipo": "n",
+   "id": 32842,
+   "palabras": [
+    "niño",
+    "chico",
+    "crío"
+   ],
+   "formas": [
+    "nino",
+    "niños",
+    "ninos",
+    "pibe"
+   ],
+   "significado": "Que se halla en la niñez."
+  },
+  {
+   "lema": "niña",
+   "tipo": "n",
+   "id": 27509,
+   "palabras": [
+    "niña",
+    "chica",
+    "cría"
+   ],
+   "formas": [
+    "nina",
+    "niñas",
+    "ninas",
+    "piba"
+   ],
+   "significado": "adj. y s. Que se halla en la niñez: todavía es muy niño para viajar solo."
+  },
+  {
+   "lema": "hombre",
+   "tipo": "n",
+   "id": 4665,
+   "palabras": [
+    "hombre"
+   ],
+   "formas": [
+    "hombres"
+   ],
+   "significado": "m. Persona de sexo masculino."
+  },
+  {
+   "lema": "mujer",
+   "tipo": "n",
+   "id": 24621,
+   "palabras": [
+    "mujer"
+   ],
+   "formas": [
+    "mujeres"
+   ],
+   "significado": "f. Persona del sexo femenino."
+  },
+  {
+   "lema": "bebé",
+   "tipo": "n",
+   "id": 6060,
+   "palabras": [
+    "bebé"
+   ],
+   "formas": [
+    "bebe"
+   ],
+   "significado": "m. Niño muy pequeño o recién nacido."
+  },
+  {
+   "lema": "información",
+   "tipo": "n",
+   "id": 9897,
+   "palabras": [
+    "información",
+    "oficina de turismo"
+   ],
+   "formas": [
+    "informacion"
+   ],
+   "significado": "Oficina donde se informa sobre algo"
+  },
+  {
+   "lema": "pregunta",
+   "tipo": "n",
+   "id": 7217,
+   "palabras": [
+    "pregunta"
+   ],
+   "significado": "f. Petición o demanda de información, interrogación: no tengo respuesta a tus preguntas."
+  },
+  {
+   "lema": "problema",
+   "tipo": "n",
+   "id": 5556,
+   "palabras": [
+    "problema"
+   ],
+   "significado": "MAT. Proposición dirigida a averiguar el modo de obtener un resultado cuando ciertos datos son conocidos: recuerda con nostalgia los problemas de polinomios."
+  },
+  {
+   "lema": "dolor",
+   "tipo": "n",
+   "id": 2367,
+   "palabras": [
+    "dolor"
+   ],
+   "significado": "m. Sensación aflictiva de una parte del cuerpo."
+  },
+  {
+   "lema": "juego",
+   "tipo": "n",
+   "id": 36405,
+   "palabras": [
+    "juegos didácticos",
+    "juego"
+   ],
+   "formas": [
+    "juegos"
+   ]
+  },
+  {
+   "lema": "música",
+   "tipo": "n",
+   "id": 11311,
+   "palabras": [
+    "música"
+   ],
+   "formas": [
+    "musica"
+   ],
+   "significado": "f. Persona que conoce el arte de la música o lo ejerce, especialmente como instrumentista o compositor."
+  },
+  {
+   "lema": "tarea",
+   "tipo": "n",
+   "id": 11228,
+   "palabras": [
+    "deberes",
+    "tarea"
+   ]
+  },
+  {
+   "lema": "examen",
+   "tipo": "n",
+   "id": 38462,
+   "palabras": [
+    "examen"
+   ]
+  },
+  {
+   "lema": "clase",
+   "tipo": "n",
+   "id": 9814,
+   "palabras": [
+    "aula",
+    "clase"
+   ],
+   "significado": "Aula, local en que se enseña.",
+   "aviso": "Puede ser un grupo de estudiantes, un aula o una lección."
+  },
+  {
+   "lema": "recreo",
+   "tipo": "n",
+   "id": 8681,
+   "palabras": [
+    "recreo"
+   ],
+   "significado": "Sitio o lugar apto para la diversión."
+  },
+  {
+   "lema": "cumpleaños",
+   "tipo": "n",
+   "id": 3087,
+   "palabras": [
+    "cumpleaños"
+   ],
+   "significado": "m. Aniversario del nacimiento de una persona."
+  },
+  {
+   "lema": "regalo",
+   "tipo": "n",
+   "id": 3149,
+   "palabras": [
+    "regalo"
+   ],
+   "significado": "m. Lo que se da a alguien sin esperar nada a cambio, como muestra de afecto o agradecimiento; obsequio"
+  },
+  {
+   "lema": "fiesta",
+   "tipo": "n",
+   "id": 7099,
+   "palabras": [
+    "fiesta",
+    "celebración"
+   ],
+   "significado": "f. Reunión de personas como diversión."
+  },
+  {
+   "lema": "color",
+   "tipo": "n",
+   "id": 5968,
+   "palabras": [
+    "colores",
+    "color"
+   ]
+  },
+  {
+   "lema": "número",
+   "tipo": "n",
+   "id": 2879,
+   "palabras": [
+    "números",
+    "número"
+   ],
+   "formas": [
+    "numero"
+   ],
+   "significado": "m. Concepto matemático que expresa cantidad."
+  },
+  {
+   "lema": "palabra",
+   "tipo": "n",
+   "id": 9837,
+   "palabras": [
+    "palabra"
+   ],
+   "significado": "f. Sonido o conjunto de sonidos articulados que expresan una idea: escribir cien palabras."
+  },
+  {
+   "lema": "cuento",
+   "tipo": "n",
+   "id": 2364,
+   "palabras": [
+    "cuento"
+   ],
+   "significado": "m. Narración breve de sucesos ficticios o de carácter fantástico, hecha con fines didácticos o recreativos."
+  },
+  {
+   "lema": "historia",
+   "tipo": "n",
+   "id": 32634,
+   "palabras": [
+    "historia"
+   ],
+   "significado": "Ciencia y estudio de este periodo."
+  },
+  {
+   "lema": "silencio",
+   "tipo": "n",
+   "id": 5936,
+   "palabras": [
+    "silencio",
+    "callar",
+    "silenciar",
+    "pedir silencio",
+    "guardar silencio",
+    "estar callado"
+   ],
+   "significado": "m. Abstención de hablar: guarda silencio."
+  },
+  {
+   "lema": "miedo",
+   "tipo": "n",
+   "id": 10261,
+   "palabras": [
+    "miedo",
+    "temor"
+   ],
+   "significado": "m. Sensación de alerta y angustia por la presencia de un peligro o mal, sea real o imaginario"
+  },
+  {
+   "lema": "alegría",
+   "tipo": "n",
+   "id": 8582,
+   "palabras": [
+    "felicidad",
+    "optimismo",
+    "alegría"
+   ],
+   "formas": [
+    "alegria"
+   ],
+   "significado": ". Sentimiento grato y vivo que suele manifestarse con signos exteriores."
+  },
+  {
+   "lema": "derechos",
+   "tipo": "n",
+   "id": 11247,
+   "palabras": [
+    "derechos"
+   ],
+   "formas": [
+    "derecho"
+   ],
+   "significado": "m. pl. Conjunto de facultades y garantías que cualquier persona debe tener para que sea protegida su integridad física y su dignidad moral."
+  },
+  {
+   "lema": "colectivo",
+   "tipo": "n",
+   "id": 38090,
+   "palabras": [
+    "autobús",
+    "colectivo"
+   ],
+   "formas": [
+    "autobús",
+    "bondi",
+    "micro"
+   ]
+  },
+  {
+   "lema": "auto",
+   "tipo": "n",
+   "id": 2339,
+   "palabras": [
+    "coche",
+    "automóvil",
+    "auto",
+    "carro"
+   ],
+   "formas": [
+    "coche",
+    "carro"
+   ],
+   "significado": "m. automóvil (? coche)."
+  },
+  {
+   "lema": "banco",
+   "tipo": "n",
+   "id": 3062,
+   "palabras": [
+    "banco"
+   ],
+   "significado": "Entidad financiera constituida en sociedad por acciones. Según sea su ejercicio mercantil, se le llama agrícola, de descuento, de emisión, de exportación, de fomento, hipotecario, industrial, etc.: tenemos que hacer este ingreso en el banco",
+   "aviso": "Puede ser la entidad financiera o un asiento; este es la entidad."
+  },
+  {
+   "lema": "policía",
+   "tipo": "n",
+   "id": 2824,
+   "palabras": [
+    "policía"
+   ],
+   "formas": [
+    "policia"
+   ],
+   "significado": "f. Cuerpo encargado de velar por el mantenimiento del orden público y la seguridad de los ciudadanos, a las órdenes de las autoridades políticas."
+  },
+  {
+   "lema": "pizarra",
+   "tipo": "n",
+   "id": 2526,
+   "palabras": [
+    "pizarra",
+    "pizarrón"
+   ],
+   "formas": [
+    "pizarrón"
+   ],
+   "significado": "Trozo de pizarra oscura y pulimentada en que se escribe o dibuja con tiza o yeso, encerado."
+  },
+  {
+   "lema": "feliz",
+   "tipo": "a",
+   "id": 32123,
+   "palabras": [
+    "contento",
+    "feliz"
+   ],
+   "formas": [
+    "contento",
+    "contenta",
+    "alegre"
+   ],
+   "significado": "adj. Que disfruta de felicidad o la ocasiona."
+  },
+  {
+   "lema": "triste",
+   "tipo": "a",
+   "id": 2606,
+   "palabras": [
+    "triste"
+   ],
+   "significado": "adj. Afligido, apesadumbrado."
+  },
+  {
+   "lema": "enojado",
+   "tipo": "a",
+   "id": 31884,
+   "palabras": [
+    "enfadado"
+   ],
+   "formas": [
+    "enojada",
+    "enfadado",
+    "enfadada"
+   ],
+   "significado": "adj. Estar disgustado, con ira."
+  },
+  {
+   "lema": "cansado",
+   "tipo": "a",
+   "id": 2314,
+   "palabras": [
+    "cansado"
+   ],
+   "formas": [
+    "cansada"
+   ],
+   "significado": "adj. Fatigado, falto de fuerzas"
+  },
+  {
+   "lema": "enfermo",
+   "tipo": "a",
+   "id": 28742,
+   "palabras": [
+    "enfermo"
+   ],
+   "formas": [
+    "enferma"
+   ],
+   "significado": "adj. Que padece enfermedad."
+  },
+  {
+   "lema": "bueno",
+   "tipo": "a",
+   "id": 4581,
+   "palabras": [
+    "bueno",
+    "buen"
+   ],
+   "formas": [
+    "buena"
+   ],
+   "significado": "adj. Que posee bondad moral."
+  },
+  {
+   "lema": "malo",
+   "tipo": "a",
+   "id": 32192,
+   "palabras": [
+    "malo",
+    "malvado",
+    "maligno"
+   ],
+   "formas": [
+    "mala"
+   ],
+   "significado": "adj. Que carece de bondad y de otras cualidades positivas."
+  },
+  {
+   "lema": "grande",
+   "tipo": "a",
+   "id": 6886,
+   "palabras": [
+    "adulto",
+    "grande"
+   ],
+   "formas": [
+    "grandes"
+   ]
+  },
+  {
+   "lema": "pequeño",
+   "tipo": "a",
+   "id": 4716,
+   "palabras": [
+    "pequeño",
+    "menor",
+    "pequeña"
+   ],
+   "formas": [
+    "pequeña",
+    "chico",
+    "chica"
+   ],
+   "significado": "adj. De poco tamaño o estatura con respecto a los de su clase o especie: coche pequeño; cabeza pequeña."
+  },
+  {
+   "lema": "nuevo",
+   "tipo": "a",
+   "id": 4705,
+   "palabras": [
+    "nuevo",
+    "nueva"
+   ],
+   "formas": [
+    "nueva"
+   ],
+   "significado": "adj. Recién creado o fabricado."
+  },
+  {
+   "lema": "viejo",
+   "tipo": "a",
+   "id": 4770,
+   "palabras": [
+    "viejo",
+    "desgastado",
+    "vieja",
+    "desgastada"
+   ],
+   "formas": [
+    "vieja"
+   ],
+   "significado": "Adj. Se dice de lo que tiene muchos años: un olmo viejo; una persona vieja. También s."
+  },
+  {
+   "lema": "fácil",
+   "tipo": "a",
+   "id": 32302,
+   "palabras": [
+    "sencillo",
+    "fácil"
+   ],
+   "formas": [
+    "facil"
+   ],
+   "significado": "adj. Que se puede hacer sin gran esfuerzo."
+  },
+  {
+   "lema": "difícil",
+   "tipo": "a",
+   "id": 31888,
+   "palabras": [
+    "difícil",
+    "complicado"
+   ],
+   "formas": [
+    "dificil"
+   ],
+   "significado": "adj. Que no se logra, ejecuta o entiende sin mucho trabajo."
+  },
+  {
+   "lema": "rápido",
+   "tipo": "a",
+   "id": 5306,
+   "palabras": [
+    "rápido",
+    "veloz",
+    "pronto",
+    "deprisa",
+    "rápida",
+    "ágil"
+   ],
+   "formas": [
+    "rapido",
+    "rápida"
+   ],
+   "significado": "adj. Veloz, que ocurre, se mueve o actúa muy deprisa."
+  },
+  {
+   "lema": "lento",
+   "tipo": "a",
+   "id": 4676,
+   "palabras": [
+    "lento",
+    "despacio",
+    "lenta"
+   ],
+   "formas": [
+    "lenta"
+   ],
+   "significado": "adj. Tardo y pausado."
+  },
+  {
+   "lema": "igual",
+   "tipo": "a",
+   "id": 3423,
+   "palabras": [
+    "igual",
+    "="
+   ],
+   "significado": "Signo de la igualdad, formado por dos rayas horizontales y paralelas"
+  },
+  {
+   "lema": "diferente",
+   "tipo": "a",
+   "id": 32394,
+   "palabras": [
+    "desigual",
+    "diferente",
+    "distinto",
+    "distinta"
+   ],
+   "formas": [
+    "distinto",
+    "distinta"
+   ],
+   "significado": "adj. Diverso, distinto."
+  },
+  {
+   "lema": "listo",
+   "tipo": "a",
+   "id": 17004,
+   "palabras": [
+    "listo",
+    "prepararse",
+    "preparado"
+   ],
+   "formas": [
+    "lista"
+   ],
+   "significado": "adj. Apercibido, preparado, dispuesto para hacer algo.",
+   "aviso": "Puede significar «preparado» o «inteligente»; este es «preparado»."
+  },
+  {
+   "lema": "importante",
+   "tipo": "a",
+   "id": 11471,
+   "palabras": [
+    "importante",
+    "resaltado",
+    "resaltada",
+    "destacado",
+    "destacada"
+   ],
+   "significado": "adj. Que es de importancia."
+  },
+  {
+   "lema": "gratis",
+   "tipo": "a",
+   "id": 11582,
+   "palabras": [
+    "gratis",
+    "gratuito",
+    "gratuita"
+   ],
+   "formas": [
+    "gratuito",
+    "gratuita"
+   ],
+   "significado": "adj. Gratuito"
+  },
+  {
+   "lema": "valiente",
+   "tipo": "a",
+   "id": 36163,
+   "palabras": [
+    "valiente",
+    "valeroso",
+    "valerosa",
+    "atrevido",
+    "atrevida"
+   ],
+   "significado": "adj. Dicho de una persona: Capaz de acometer una empresa arriesgada a pesar del peligro y el posible temor que suscita."
+  },
+  {
+   "lema": "lindo",
+   "tipo": "a",
+   "id": 11194,
+   "palabras": [
+    "bonito",
+    "bello",
+    "bonita",
+    "hermoso",
+    "bella",
+    "hermosa"
+   ],
+   "formas": [
+    "linda",
+    "bonito",
+    "bonita"
+   ],
+   "significado": "adj. Hermoso, bello, grato a la vista."
+  },
+  {
+   "lema": "frío",
+   "tipo": "a",
+   "id": 4652,
+   "palabras": [
+    "frío",
+    "fría"
+   ],
+   "formas": [
+    "frio",
+    "fría"
+   ],
+   "significado": "adj. Dicho de un cuerpo: Que tiene una temperatura muy inferior a la ordinaria del ambiente."
+  },
+  {
+   "lema": "caliente",
+   "tipo": "a",
+   "id": 4583,
+   "palabras": [
+    "caliente"
+   ],
+   "significado": "adj. Que tiene o produce calor."
+  },
+  {
+   "lema": "limpio",
+   "tipo": "a",
+   "id": 4680,
+   "palabras": [
+    "limpio",
+    "limpia"
+   ],
+   "formas": [
+    "limpia"
+   ],
+   "significado": "adj. Que no tiene mancha o suciedad."
+  },
+  {
+   "lema": "sucio",
+   "tipo": "a",
+   "id": 4750,
+   "palabras": [
+    "sucio",
+    "manchado",
+    "mugriento",
+    "sucia",
+    "manchada",
+    "mugrienta"
+   ],
+   "formas": [
+    "sucia"
+   ],
+   "significado": "adj. Que tiene manchas o impurezas."
+  },
+  {
+   "lema": "abierto",
+   "tipo": "a",
+   "id": 4549,
+   "palabras": [
+    "abierta",
+    "abierto"
+   ],
+   "formas": [
+    "abierta"
+   ],
+   "significado": "adj. No cerrado, no murado, no cercado"
+  },
+  {
+   "lema": "cerrado",
+   "tipo": "a",
+   "id": 4596,
+   "palabras": [
+    "cerrado",
+    "cerrada"
+   ],
+   "formas": [
+    "cerrada"
+   ],
+   "significado": "f. desus. Acción y efecto de cerrar"
+  },
+  {
+   "lema": "para",
+   "tipo": "r",
+   "id": 7194,
+   "palabras": [
+    "para"
+   ],
+   "significado": "prep. Indica finalidad o uso: te lo doy para que te calles; esos dulces son para merendar.",
+   "rol": "func"
+  },
+  {
+   "lema": "con",
+   "tipo": "r",
+   "id": 7064,
+   "palabras": [
+    "con"
+   ],
+   "significado": "prep. Introduce complementos que significan el medio, el modo o el instrumento que sirven para hacer alguna cosa: la abrió con una llave. Expresa las circunstancias con que se ejecuta o sucede algo. Come con ansia.",
+   "rol": "func"
+  },
+  {
+   "lema": "sin",
+   "tipo": "r",
+   "id": 7813,
+   "palabras": [
+    "sin"
+   ],
+   "significado": "prep. Denota carencia o falta de algo."
+  },
+  {
+   "lema": "en",
+   "tipo": "r",
+   "id": 7034,
+   "palabras": [
+    "en"
+   ],
+   "significado": "prep. que indica en qué lugar, tiempo o modo se determinan las acciones de los verbos a que se refiere: en casa; en dos minutos; en manga corta.",
+   "rol": "func"
+  }
+ ],
+ "expresiones": [
+  {
+   "lemas": [
+    [
+     "sacar",
+     "pedir"
+    ],
+    [
+     "turno"
+    ]
+   ],
+   "id": 22190,
+   "etiqueta": "sacar un turno",
+   "palabras": [
+    "turno",
+    "coger turno",
+    "tomar turno"
+   ],
+   "significado": "Expresión «sacar/pedir un turno»: se muestra el pictograma de «turno» (ticket de turno). Verificá que sea lo que querés decir.",
+   "aviso": "Expresión reconocida por CLARIA (sacar/pedir turno)."
+  }
+ ]
+}
