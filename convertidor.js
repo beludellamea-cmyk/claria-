@@ -26,8 +26,7 @@
 
   // ───────── Diccionario local ─────────
   const lista = $('pcEjemplosLista');
-  EJEMPLOS.forEach((t) => { const b = el('button', { type: 'button', text: t.length > 40 ? t.slice(0, 38) + '…' : t, title: t }); b.addEventListener('click', () => { $('pcTexto').value = t; lista.hidden = true; convertir(); }); lista.append(b); });
-  $('pcEjemplos').addEventListener('click', () => { lista.hidden = !lista.hidden; });
+  EJEMPLOS.forEach((t) => { const b = el('button', { type: 'button', text: t.length > 40 ? t.slice(0, 38) + '…' : t, title: t }); b.addEventListener('click', () => { $('pcTexto').value = t; convertir(); }); lista.append(b); });
   $('pcConvertir').disabled = true;
   fetch('data/pictogramas.json').then((r) => r.json()).then((d) => { motor = ClariaPictos.crearMotor(d); $('pcConvertir').disabled = false; })
     .catch(() => { $('pcResumen').textContent = 'No se pudo cargar el diccionario de pictogramas.'; $('pcResultado').hidden = false; });
@@ -126,7 +125,8 @@
   // ───────── Voz: escuchar, pausar, repetir, detener ─────────
   const tts = 'speechSynthesis' in window;
   function marcar(i) { vista.querySelectorAll('.hl').forEach((n) => n.classList.remove('hl')); if (i >= 0) vista.querySelectorAll(`[data-i="${i}"]`).forEach((n) => n.classList.add('hl')); }
-  function botonesVoz() { $('pcPausar').disabled = !hablando; $('pcRepetir').disabled = !tts || !texto; $('pcDetener').disabled = !hablando; $('pcPausar').setAttribute('aria-pressed', String(pausado)); $('pcPausar').textContent = pausado ? '▶ Seguir' : '⏸ Pausar'; }
+  function botonesVoz() { window.ClariaGuia?.estado(hablando && !pausado ? 'hablando' : 'esperando');
+    $('pcPausar').disabled = !hablando; $('pcRepetir').disabled = !tts || !texto; $('pcDetener').disabled = !hablando; $('pcPausar').setAttribute('aria-pressed', String(pausado)); $('pcPausar').textContent = pausado ? '▶ Seguir' : '⏸ Pausar'; }
   function crearVoz(t) { const u = new SpeechSynthesisUtterance(t); u.lang = 'es-AR'; u.rate = Number(pref.vel) || .9; const v = speechSynthesis.getVoices(); const es = v.find((x) => x.lang === 'es-AR') || v.find((x) => x.lang?.startsWith('es')); if (es) u.voice = es; return u; }
   function hablarTexto(t) { if (!tts) return; speechSynthesis.cancel(); const u = crearVoz(t); speechSynthesis.speak(u); }
   function escuchar() {

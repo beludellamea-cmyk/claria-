@@ -27,11 +27,12 @@ async function abrir({ speech = true, ancho = 1280 } = {}) {
   await page.goto(BASE + '#escribir'); await page.waitForSelector('#pcConvertir:not([disabled])'); return { ctx, page, ext, errs };
 }
 const convertir = async (page, t) => { await page.fill('#pcTexto', t); await page.click('#pcConvertir'); await page.waitForSelector('#pcTablero li'); await page.waitForFunction(() => [...document.querySelectorAll('#pcTablero img')].every((i) => i.complete)); };
+const mas = async (page) => { if (!(await page.evaluate(() => document.getElementById('pcMas').open))) await page.click('#pcMas summary'); };
 const lemas = (page) => page.$$eval('#pcTablero li', (ls) => ls.map((l) => ({ t: l.querySelector('.pc-label').textContent, e: l.dataset.estado, img: !!l.querySelector('img'), ok: l.querySelector('img') ? l.querySelector('img').naturalWidth > 0 : null })));
 
 await test('portada: 3 opciones y navegación a escribir', async () => {
-  const { ctx, page } = await abrir(); await page.goto(BASE); const n = await page.$$eval('.choice-card', (c) => c.length); assert.equal(n, 3);
-  await page.click('.choice-card[data-view=escribir]'); assert.equal(await page.isVisible('#view-escribir'), true); await page.screenshot({ path: `${OUT}/00-portada.png` }); await ctx.close();
+  const { ctx, page } = await abrir(); await page.goto(BASE); const n = await page.$$eval('#view-inicio .big-btn', (c) => c.length); assert.equal(n, 4);
+  await page.click('#view-inicio [data-view=escribir]'); assert.equal(await page.isVisible('#view-escribir'), true); await page.screenshot({ path: `${OUT}/00-portada.png` }); await ctx.close();
 });
 await test('HOLA y QUIERO AGUA: pictogramas reales cargados y texto original visible', async () => {
   const { ctx, page, ext, errs } = await abrir();
@@ -78,7 +79,7 @@ await test('voz: escuchar resalta palabra por palabra; pausar, repetir y detener
   const { ctx, page } = await abrir(); await convertir(page, 'QUIERO AGUA'); await page.evaluate(() => { window.__noEnd = true; }); await page.click('#pcEscuchar');
   await page.waitForFunction(() => document.querySelectorAll('#view-escribir .hl').length > 0); assert.deepEqual(await page.evaluate(() => window.__spoken), ['QUIERO AGUA']);
   await page.waitForFunction(() => document.querySelector('#pcTablero li.hl .pc-label')?.textContent === 'AGUA'); assert.equal(await page.textContent('#pcOriginal .hl'), 'AGUA');
-  await page.click('#pcPausar'); assert.equal(await page.getAttribute('#pcPausar', 'aria-pressed'), 'true'); await page.click('#pcPausar');
+  await mas(page); await page.click('#pcPausar'); assert.equal(await page.getAttribute('#pcPausar', 'aria-pressed'), 'true'); await page.click('#pcPausar');
   await page.click('#pcRepetir'); assert.equal((await page.evaluate(() => window.__spoken)).length, 2); await page.click('#pcDetener');
   assert.equal(await page.$$eval('.hl', (n) => n.length), 0); assert.deepEqual((await page.evaluate(() => window.__ctl)).filter((x) => x !== 'cancel'), ['pause', 'resume']); await ctx.close();
 });
@@ -87,7 +88,7 @@ await test('sin voz del navegador todo lo demás funciona y se explica', async (
   if (!tiene) { assert.equal(await page.isDisabled('#pcEscuchar'), true); assert.equal(await page.isVisible('#pcVozNota'), true); } assert.equal((await lemas(page)).length, 1); await ctx.close();
 });
 await test('letra MAYÚSCULA, tamaño, alto contraste y editar', async () => {
-  const { ctx, page } = await abrir(); await convertir(page, 'quiero agua'); await page.click('#pcLetra'); assert.equal(await page.$eval('#pcOriginal', (n) => getComputedStyle(n).textTransform), 'uppercase');
+  const { ctx, page } = await abrir(); await convertir(page, 'quiero agua'); await mas(page); await page.click('#pcLetra'); assert.equal(await page.$eval('#pcOriginal', (n) => getComputedStyle(n).textTransform), 'uppercase');
   assert.equal(await page.$eval('.pc-label', (n) => getComputedStyle(n).textTransform), 'uppercase'); await page.selectOption('#pcTamano', 'xl'); assert.ok((await page.$eval('.pc-img', (n) => n.getBoundingClientRect().width)) > 200);
   await page.click('#pcEditar'); assert.equal(await page.evaluate(() => document.activeElement.id), 'pcTexto'); await ctx.close();
 });
@@ -102,13 +103,13 @@ await test('descargar PDF válido con pictogramas', async () => {
   execFileSync('pdftoppm', ['-png', '-r', '60', f, `${OUT}/pdf`]); await ctx.close();
 });
 await test('imprimir: el área de impresión contiene original, pictogramas y créditos ARASAAC', async () => {
-  const { ctx, page } = await abrir(); await convertir(page, 'QUIERO AGUA'); await page.evaluate(() => { window.print = () => { window.__printed = document.getElementById('pcPrintArea').innerText; window.__imgs = document.querySelectorAll('#pcPrintArea img').length; }; });
+  const { ctx, page } = await abrir(); await convertir(page, 'QUIERO AGUA'); await mas(page); await page.evaluate(() => { window.print = () => { window.__printed = document.getElementById('pcPrintArea').innerText; window.__imgs = document.querySelectorAll('#pcPrintArea img').length; }; });
   await page.click('#pcImprimir'); const txt = await page.evaluate(() => window.__printed); assert.match(txt, /QUIERO AGUA/); assert.match(txt, /ARASAAC/); assert.match(txt, /CC BY-NC-SA 4\.0/); assert.equal(await page.evaluate(() => window.__imgs), 2);
   await page.evaluate(() => { document.getElementById('pcPrintArea')?.remove(); }); await ctx.close();
 });
 await test('créditos ARASAAC visibles en pie, resultados y Acerca de', async () => {
   const { ctx, page } = await abrir(); assert.match(await page.textContent('footer'), /ARASAAC/); await convertir(page, 'HOLA'); assert.match(await page.textContent('#pcCredito'), /Sergio Palao/);
-  await page.click('.nav-link[data-view=acerca]'); assert.match(await page.textContent('#creditosPanel'), /CC BY-NC-SA 4\.0/); await ctx.close();
+  await page.click('#footerAbout'); assert.match(await page.textContent('#creditosPanel'), /CC BY-NC-SA 4\.0/); await ctx.close();
 });
 await test('móvil 375 px: sin desborde horizontal', async () => {
   const { ctx, page } = await abrir({ ancho: 375 }); await convertir(page, 'NECESITO SACAR UN TURNO PARA MI DNI'); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));

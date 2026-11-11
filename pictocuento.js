@@ -62,7 +62,7 @@
   function ir(n, foco = true) { const nuevo = Math.max(0, Math.min(total() - 1, n)); if (nuevo === pag) return; if (!modoTodo) detener(true); pag = nuevo; render(); UI().announce(`Página ${pag + 1} de ${total()}`); if (foco) $('pqPagina').focus(); }
   $('pqAnterior').addEventListener('click', () => ir(pag - 1)); $('pqSiguiente').addEventListener('click', () => ir(pag + 1));
   vista.addEventListener('keydown', (e) => { if (dlg.open || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName) || e.ctrlKey || e.altKey || e.metaKey) return; if (e.key === 'ArrowRight') { e.preventDefault(); ir(pag + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(pag - 1); } });
-  $('pqVolver').addEventListener('click', () => { detener(true); UI().showView('lectura'); });
+  $('pqVolver').addEventListener('click', () => { detener(true); window.ClariaGuia?.volver(); });
   $('abrirCuento').addEventListener('click', abrir);
 
   // ───────── Tocar un pictograma: significado + audio + otras opciones locales ─────────
@@ -83,7 +83,8 @@
   // ───────── Voz por partes ─────────
   function crearVoz(t) { const u = new SpeechSynthesisUtterance(t); u.lang = 'es-AR'; u.rate = Number(pref.vel) || .9; const v = speechSynthesis.getVoices(); const es = v.find((x) => x.lang === 'es-AR') || v.find((x) => x.lang?.startsWith('es')); if (es) u.voice = es; return u; }
   function marcar(oi, fi) { vista.querySelectorAll('.hl').forEach((n) => n.classList.remove('hl')); if (oi >= 0) vista.querySelectorAll(`[data-o="${oi}"][data-i="${fi}"]`).forEach((n) => n.classList.add('hl')); }
-  function botonesVoz() {
+  function botonesVoz() { window.ClariaGuia?.estado(hablando && !pausado ? 'hablando' : 'esperando');
+   
     $('pqPausar').disabled = !hablando; $('pqDetener').disabled = !hablando && !modoTodo; $('pqRepetir').disabled = !tts || !oraciones.length;
     $('pqPausar').setAttribute('aria-pressed', String(pausado)); $('pqPausar').textContent = pausado ? '▶ Seguir' : '⏸ Pausar';
     $('pqTodo').setAttribute('aria-pressed', String(modoTodo)); $('pqTodo').textContent = modoTodo ? '▶▶ Leyendo todo…' : '▶▶ Leer todo';

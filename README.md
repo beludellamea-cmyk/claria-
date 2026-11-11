@@ -34,3 +34,6 @@ Ninguna clave en el navegador ni en GitHub · respuestas fijas nunca se presenta
 
 ## Novedad (rama `etapa-1-pictogramas`)
 Convertidor de texto a pictogramas ARASAAC con exportación PNG/PDF. Ver `docs/ETAPAS.md` (plan por etapas, límites y cómo probar). Pictogramas: ARASAAC (Gobierno de Aragón, autor Sergio Palao), CC BY-NC-SA 4.0.
+
+## Rediseño guiado (rama `rediseno-guia`)
+Bienvenida con 4 botones, una pregunta por pantalla y CLARIA acompañando con 4 estados. Ver `docs/REDISENO.md`.

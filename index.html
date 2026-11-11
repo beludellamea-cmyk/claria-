@@ -8,10 +8,12 @@
   <title>CLARIA · La información, más clara para todos</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="picto.css">
+  <link rel="stylesheet" href="guia.css">
   <script defer src="config.js"></script>
   <script defer src="privacy.js"></script>
   <script defer src="pictos.js"></script>
   <script defer src="exportar.js"></script>
+  <script defer src="guia.js"></script>
   <script defer src="app.js"></script>
   <script defer src="convertidor.js"></script>
   <script defer src="pictocuento.js"></script>
@@ -22,15 +24,8 @@
     <header class="site-header">
       <button class="brand" data-view="inicio" type="button" aria-label="CLARIA: ir al inicio">
         <img src="assets/claria-emblema.png" alt="" class="brand-icon">
-        <span class="brand-text"><strong>CLARIA</strong><small>La información, más clara para todos</small></span>
+        <span class="brand-text"><strong>CLARIA</strong></span>
       </button>
-      <nav class="main-nav" aria-label="Navegación principal">
-        <button type="button" class="nav-link active" data-view="inicio" aria-current="page">Inicio</button>
-        <button type="button" class="nav-link" data-view="escribir">Escribir con pictogramas</button>
-        <button type="button" class="nav-link" data-view="lectura">Leer y comprender</button>
-        <button type="button" class="nav-link" data-view="tramites">Trámites</button>
-        <button type="button" class="nav-link" data-view="acerca">Acerca de</button>
-      </nav>
       <button type="button" class="access-btn" id="openPrefs" aria-expanded="false" aria-controls="prefs">⚙ <span>Accesibilidad</span></button>
     </header>
 
@@ -45,76 +40,66 @@
       </div>
     </section>
 
-    <div id="modeBanner" class="mode-banner" role="status" data-mode="demo"><strong id="modeLabel">Modo demo</strong> <span id="modeText">Sin IA conectada: las respuestas del chat son textos preparados.</span> <button type="button" class="text-button" id="modeInfo">¿Qué significa?</button></div>
 
+    <div class="stage">
+    <div id="companionDock" class="companion-dock"></div>
     <main id="principal" tabindex="-1">
       <section id="view-inicio" class="view" aria-labelledby="inicioTitulo">
-        <div class="hero">
-          <div class="hero-copy">
-            <div class="pill"><span class="pulse-dot"></span> Tecnología accesible para la vida cotidiana</div>
-            <p class="eyebrow">TE DAMOS LA BIENVENIDA</p>
-            <h1 id="inicioTitulo">¡Hola! Soy <span>CLARIA.</span></h1>
-            <p class="hero-lead">Estoy acá para ayudarte a <b>comprender documentos</b>, escuchar información y encontrar una guía clara para tus <b>trámites</b>.</p>
-            <p class="hero-secondary">Podés leer, escribir o escuchar. Elegí la forma que te resulte más cómoda.</p>
-            <div class="hero-actions">
-              <button class="btn btn-primary" id="listenWelcome" type="button">▶ Escuchar bienvenida</button>
-              <button class="btn btn-ghost" id="openChatHome" type="button">✦ Conversar con CLARIA</button>
-            </div>
-            <div class="micro-note"><span aria-hidden="true">🔒</span> Sin registro. No compartas DNI, CUIL ni datos sensibles en el chat.</div>
+        <div class="welcome">
+          <div id="welcomeSlot" class="welcome-slot">
+            <aside id="claria" class="claria" data-estado="esperando" aria-label="CLARIA, tu guía">
+      <button type="button" id="claria-btn" class="claria-btn" aria-haspopup="true" aria-expanded="false" aria-controls="claria-menu" aria-label="CLARIA. Tocá para ver opciones de ayuda">
+        <span class="claria-halo" aria-hidden="true"></span>
+        <img src="assets/claria-avatar.png" class="claria-img" alt="CLARIA, personaje digital de cabello castaño con campera lavanda, saluda con una mano extendida.">
+        <span class="claria-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+      <p class="claria-estado" id="claria-estado" role="status"><span class="claria-punto" aria-hidden="true"></span><span id="claria-estado-txt">Esperando</span></p>
+      <div id="claria-menu" class="claria-menu" role="group" aria-label="Ayuda de CLARIA" hidden>
+        <button type="button" data-ayuda="explicame">💡 Explicame</button>
+        <button type="button" data-ayuda="repetir">↻ Repetir</button>
+        <button type="button" data-ayuda="volver">← Volver</button>
+        <button type="button" data-ayuda="ayuda">🆘 Necesito ayuda</button>
+      </div>
+      <div id="claria-bubble" class="claria-bubble" hidden tabindex="-1">
+        <p id="claria-bubble-text"></p><ul id="claria-bubble-list"></ul>
+        <div class="claria-bubble-btns"><button type="button" id="claria-bubble-listen">🔊 Escuchar</button><button type="button" id="claria-bubble-chat" hidden>💬 Hablar con CLARIA</button><button type="button" id="claria-bubble-close">Cerrar</button></div>
+      </div>
+    </aside>
           </div>
-          <div class="hero-portrait" aria-label="Ilustración de CLARIA, una asistente digital, saludando">
-            <div class="portrait-glow"></div><div class="portrait-ring ring-one"></div><div class="portrait-ring ring-two"></div>
-            <img src="assets/claria-avatar.png" class="avatar" alt="CLARIA, personaje digital de cabello castaño con campera lavanda, saluda con una mano extendida.">
-            <div class="portrait-tag">✦ Tu guía, a tu ritmo</div>
-            <div class="decor-dot dot-one" aria-hidden="true">✦</div><div class="decor-dot dot-two" aria-hidden="true">✧</div>
+          <h1 id="inicioTitulo">¡Hola! Soy <span>CLARIA.</span></h1>
+          <h2 class="welcome-q">¿Qué querés hacer hoy?</h2>
+          <div class="big-choices four">
+            <button type="button" class="big-btn bb-teal" data-view="escribir"><span class="big-ico" aria-hidden="true">✏️</span><span class="big-txt">Escribir una frase</span></button>
+            <button type="button" class="big-btn bb-blue" data-view="lectura"><span class="big-ico" aria-hidden="true">📖</span><span class="big-txt">Leer un documento</span></button>
+            <button type="button" class="big-btn bb-violet" data-view="tramites"><span class="big-ico" aria-hidden="true">🧭</span><span class="big-txt">Hacer un trámite</span></button>
+            <button type="button" class="big-btn bb-rose" data-view="hablar"><span class="big-ico" aria-hidden="true">💬</span><span class="big-txt">Hablar con CLARIA</span></button>
           </div>
         </div>
-        <div class="choice-intro"><p>¿Qué necesitás hacer hoy?</p><h2>Elegí por dónde empezar</h2></div>
-        <div class="choice-grid">
-          <button type="button" class="choice-card choice-teal" data-view="escribir">
-            <span class="choice-icon" aria-hidden="true">✏️</span>
-            <span class="choice-info"><strong>Quiero escribir una palabra o frase</strong><small>Escribí lo que necesitás decir y CLARIA lo muestra con pictogramas. Vos revisás y elegís cada imagen.</small><span class="choice-link">Escribir con pictogramas <span aria-hidden="true">→</span></span></span>
-          </button>
-          <button type="button" class="choice-card choice-blue" data-view="lectura">
-            <span class="choice-icon" aria-hidden="true">📖</span>
-            <span class="choice-info"><strong>Quiero comprender un documento</strong><small>Pegá un texto o cargá un archivo. Leelo por partes, escuchalo y ajustá la visualización.</small><span class="choice-link">Ir al lector <span aria-hidden="true">→</span></span></span>
-          </button>
-          <button type="button" class="choice-card choice-violet" data-view="tramites">
-            <span class="choice-icon" aria-hidden="true">🧭</span>
-            <span class="choice-info"><strong>Necesito hacer un trámite</strong><small>Explorá guías fáciles y encontrá enlaces a sitios oficiales para continuar.</small><span class="choice-link">Ver trámites <span aria-hidden="true">→</span></span></span>
-          </button>
-        </div>
-        <div class="home-bottom"><span>✺ Escuchar en voz alta</span><span>✺ Ajustar el tamaño</span><span>✺ Avanzar por pasos</span><span>✺ Usar el teclado</span></div>
       </section>
 
       <section id="view-escribir" class="view page-view pc-scope" aria-labelledby="escribirTitulo" hidden>
-        <div class="page-heading"><span class="eyebrow">COMUNICACIÓN CON PICTOGRAMAS</span><h1 id="escribirTitulo">Escribir con pictogramas</h1><p>Escribí una palabra, una frase o una oración. El texto original siempre queda visible y vos decidís qué pictograma usar en cada palabra.</p></div>
-        <div class="panel pc-input">
-          <label for="pcTexto"><strong>Tu texto</strong> <small id="pcAyuda">Hasta 120 palabras. No escribas datos personales: los pictogramas se buscan en un diccionario local.</small></label>
-          <textarea id="pcTexto" rows="3" maxlength="900" aria-describedby="pcAyuda" placeholder="Por ejemplo: Quiero agua"></textarea>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <h1 id="escribirTitulo" class="q">¿Qué querés decir?</h1>
+        <div class="pc-input">
+          <label for="pcTexto" class="sr-only">Escribí una palabra, una frase o una oración</label>
+          <textarea id="pcTexto" rows="3" maxlength="900" aria-describedby="pcAyuda" placeholder="Escribí acá…"></textarea>
+          <p id="pcAyuda" class="pc-note">Hasta 120 palabras. No escribas datos personales.</p>
           <div class="pc-actions">
+            <button type="button" id="pcDictar" class="dictar-btn">🎤 Dictar</button>
             <button type="button" class="primary" id="pcConvertir">Convertir a pictogramas</button>
-            <button type="button" id="pcEjemplos" aria-haspopup="true">Probar un ejemplo</button>
-            <span class="pc-ejemplos" id="pcEjemplosLista" hidden></span>
           </div>
+          <details class="mas"><summary>Ver ejemplos</summary><span class="pc-ejemplos" id="pcEjemplosLista"></span></details>
         </div>
         <div id="pcResultado" hidden>
-          <div class="panel pc-original" aria-labelledby="pcOrigTitulo"><h2 id="pcOrigTitulo">Texto original</h2><p id="pcOriginal" class="pc-original-text" lang="es"></p></div>
-          <div class="pc-toolbar" role="toolbar" aria-label="Controles de voz y formato">
+          <div class="panel pc-original" aria-labelledby="pcOrigTitulo"><h2 id="pcOrigTitulo" class="sr-only">Texto original</h2><p id="pcOriginal" class="pc-original-text" lang="es"></p></div>
+          <div class="pc-toolbar" role="toolbar" aria-label="Qué querés hacer ahora">
             <div class="pc-group" role="group" aria-label="Voz">
               <button type="button" id="pcEscuchar">▶ Escuchar</button>
               <button type="button" id="pcPausar" aria-pressed="false" disabled>⏸ Pausar</button>
-              <button type="button" id="pcRepetir" disabled>↻ Repetir</button>
               <button type="button" id="pcDetener" disabled>■ Detener</button>
-              <label class="pc-inline">Velocidad <select id="pcVelocidad"><option value="0.65">Lenta</option><option value="0.9" selected>Normal</option><option value="1.1">Rápida</option></select></label>
             </div>
-            <div class="pc-group" role="group" aria-label="Formato">
-              <button type="button" id="pcLetra" aria-pressed="false">Letra: habitual</button>
-              <label class="pc-inline">Tamaño <select id="pcTamano"><option value="s">Chico</option><option value="m" selected>Mediano</option><option value="l">Grande</option><option value="xl">Muy grande</option></select></label>
-              <button type="button" id="pcEditar">✎ Editar texto</button>
-            </div>
-            <div class="pc-group" role="group" aria-label="Guardar o imprimir">
-              <button type="button" id="pcImprimir">🖨 Imprimir</button>
+            <div class="pc-group" role="group" aria-label="Modificar y guardar">
+              <button type="button" id="pcEditar">✎ Modificar</button>
               <button type="button" id="pcPng">⬇ Descargar PNG</button>
               <button type="button" id="pcPdf">⬇ Descargar PDF</button>
             </div>
@@ -122,10 +107,20 @@
           <p id="pcVozNota" class="pc-note" hidden></p>
           <p id="pcResumen" class="pc-note" role="status"></p>
           <ol id="pcTablero" class="pc-board" aria-label="Pictogramas de tu texto"></ol>
-          <ul class="pc-leyenda" aria-label="Significado de las marcas"><li><span class="pc-badge b-verificado">Verificado</span> del diccionario de CLARIA</li><li><span class="pc-badge b-revisar">Revisar</span> la palabra tiene varios sentidos</li><li><span class="pc-badge b-elegido">Elegido por vos</span> buscado en ARASAAC</li><li><span class="pc-badge b-sin">Sin pictograma</span> queda la palabra escrita</li></ul>
+          <details class="mas" id="pcMas"><summary>Más opciones</summary>
+            <div class="pc-group" role="group" aria-label="Más opciones">
+              <button type="button" id="pcRepetir" disabled>↻ Repetir</button>
+              <label class="pc-inline">Velocidad <select id="pcVelocidad"><option value="0.65">Lenta</option><option value="0.9" selected>Normal</option><option value="1.1">Rápida</option></select></label>
+              <button type="button" id="pcLetra" aria-pressed="false">Letra: habitual</button>
+              <label class="pc-inline">Tamaño <select id="pcTamano"><option value="s">Chico</option><option value="m" selected>Mediano</option><option value="l">Grande</option><option value="xl">Muy grande</option></select></label>
+              <button type="button" id="pcImprimir">🖨 Imprimir</button>
+            </div>
+            <ul class="pc-leyenda" aria-label="Significado de las marcas"><li><span class="pc-badge b-verificado">Verificado</span> del diccionario de CLARIA</li><li><span class="pc-badge b-revisar">Revisar</span> la palabra tiene varios sentidos</li><li><span class="pc-badge b-elegido">Elegido por vos</span> buscado en ARASAAC</li><li><span class="pc-badge b-sin">Sin pictograma</span> queda la palabra escrita</li></ul>
+          </details>
           <p class="pc-credit" id="pcCredito">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Uso no comercial.</p>
         </div>
-        <dialog id="pcDialogo" class="pc-dialog" aria-labelledby="pcDialogoTitulo">
+        
+<dialog id="pcDialogo" class="pc-dialog" aria-labelledby="pcDialogoTitulo">
           <form method="dialog" class="pc-dialog-in">
             <h2 id="pcDialogoTitulo">Elegir pictograma</h2>
             <p id="pcDialogoInfo" class="pc-note"></p>
@@ -138,59 +133,69 @@
       </section>
 
       <section id="view-lectura" class="view page-view" aria-labelledby="lecturaTitulo" hidden>
-        <div class="page-heading"><span class="eyebrow">TE LO LEO · TE LO DIGO</span><h1 id="lecturaTitulo">Tu texto, en la forma que prefieras</h1><p>Pegá o subí un documento. Podés leerlo de a poco, escucharlo y, si la IA está conectada, pedir una explicación clara, lectura fácil o respuestas sobre tu texto.</p></div>
-        <div class="work-grid">
-          <div class="panel upload-panel">
-            <h2>1. Cargá tu material</h2>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <div id="leerPaso1" class="paso">
+          <h1 id="lecturaTitulo" class="q">¿Qué querés leer?</h1>
+          <div class="big-choices three">
+            <button type="button" class="big-btn bb-blue" id="optArchivo"><span class="big-ico" aria-hidden="true">📄</span><span class="big-txt">Subir archivo</span></button>
+            <button type="button" class="big-btn bb-teal" id="optFoto"><span class="big-ico" aria-hidden="true">📷</span><span class="big-txt">Sacar foto</span></button>
+            <button type="button" class="big-btn bb-violet" id="optTexto" aria-expanded="false" aria-controls="leerTextoBox"><span class="big-ico" aria-hidden="true">✏️</span><span class="big-txt">Escribir texto</span></button>
+          </div>
+          <input type="file" id="fileInput" accept=".txt,.pdf,image/png,image/jpeg,image/webp,text/plain,application/pdf" aria-label="Elegir archivo TXT, PDF o imagen" hidden>
+          <input type="file" id="photoInput" accept="image/*" capture="environment" aria-label="Sacar una foto del documento" hidden>
+          <p id="fileStatus" class="status-note" role="status" aria-live="polite"></p>
+          <div id="leerTextoBox" class="panel" hidden>
             <label for="inputText" class="field-label">Escribí o pegá el texto</label>
-            <textarea id="inputText" rows="8" placeholder="Pegá acá un texto que quieras comprender…"></textarea>
-            <div class="button-line"><button type="button" class="btn btn-primary" id="useText">Usar este texto</button><button type="button" class="btn btn-soft" id="loadExample">Probar un ejemplo</button></div>
-            <div class="upload-divider"><span>o cargá un archivo</span></div>
-            <label for="fileInput" class="file-drop"><span aria-hidden="true">📄</span> Elegir TXT, PDF o imagen <small>Los archivos se procesan en este navegador; la lectura de PDF y fotos necesita descargar bibliotecas.</small></label>
-            <input type="file" id="fileInput" accept=".txt,.pdf,image/png,image/jpeg,image/webp,text/plain,application/pdf" aria-describedby="fileStatus">
-            <p id="fileStatus" class="status-note" role="status" aria-live="polite">No se cargó ningún archivo.</p>
-            <p class="privacy-hint">⚠️ Revisá el texto extraído: una foto o PDF puede contener errores. Evitá cargar documentos con datos personales: CLARIA oculta lo que parece DNI, CUIL, correo o clave antes de enviar el texto a la IA, pero ese control no es perfecto.</p>
+            <textarea id="inputText" rows="7" placeholder="Pegá acá un texto…"></textarea>
+            <div class="button-line"><button type="button" class="btn btn-primary" id="useText">Continuar</button><button type="button" class="btn btn-soft" id="loadExample">Ver un ejemplo</button></div>
           </div>
-          <div class="panel results-panel">
-            <h2>2. Leé y escuchá</h2>
-            <div id="readerEmpty" class="empty-state"><div aria-hidden="true">✨</div><p>Tu texto aparecerá acá cuando lo cargues.</p></div>
-            <div id="readerReady" hidden>
-              <div class="reading-tools"><button type="button" class="btn btn-soft" id="speakPart">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="stopSpeaking">■ Detener</button><button type="button" class="btn btn-soft" id="copyReading">Copiar</button></div>
-              <div class="button-line"><button type="button" class="btn btn-primary" id="abrirCuento">🖼 Ver con pictogramas (pictocuento)</button></div>
-              <p class="status-note">El pictocuento se arma en tu navegador con el diccionario local: no se envía tu texto a ningún servicio.</p>
-              <div class="reading-progress"><span id="partCounter">Parte 1 de 1</span><span id="wordCount"></span></div>
-              <div class="progress-track"><div id="progressFill"></div></div>
-              <p class="origin-label origin-original">Texto original <small>(lo que cargaste, sin cambios)</small></p>
-              <article id="readingCard" class="reading-card" tabindex="0" aria-label="Texto original para leer"></article>
-              <div class="page-controls"><button type="button" class="btn btn-soft" id="prevPart">← Anterior</button><button type="button" class="btn btn-primary" id="nextPart">Siguiente →</button></div>
-              <details class="summary-details"><summary>Selección automática de frases (sin IA)</summary><div id="quickSummary"></div><p>Son las primeras frases del texto, elegidas por una regla simple. No es un resumen ni una explicación.</p></details>
-              <section id="aiPanel" class="ai-panel" aria-labelledby="aiTitle">
-                <h3 id="aiTitle">Pedile a CLARIA (IA)</h3>
-                <p id="aiAvailability" class="status-note">La IA no está conectada en este momento.</p>
-                <div class="button-line" role="group" aria-label="Qué querés que haga CLARIA con tu texto">
-                  <button type="button" class="btn btn-soft ai-action" data-task="plain">Explicar en lenguaje claro</button>
-                  <button type="button" class="btn btn-soft ai-action" data-task="easy">Lectura fácil</button>
-                  <button type="button" class="btn btn-soft ai-action" data-task="summary">Resumir</button>
-                </div>
-                <form id="askForm" class="ask-form"><label for="askInput" class="field-label">O preguntale algo sobre este texto</label>
-                  <div class="ask-row"><input id="askInput" maxlength="400" autocomplete="off" placeholder="Ej.: ¿Hasta cuándo tengo tiempo?"><button type="submit" class="btn btn-primary ai-action" id="askSubmit">Preguntar</button></div></form>
-                <div id="aiStatus" class="status-note" role="status" aria-live="polite"></div>
-                <div id="aiResult" class="ai-result" hidden aria-live="polite" tabindex="-1">
-                  <p class="origin-label origin-ai"><span id="aiResultKind">Explicación de IA</span> <small>Generado por IA: puede tener errores. Comprobalo con el texto original.</small></p>
-                  <div id="aiResultText" class="ai-text"></div>
-                  <ul id="aiKeyPoints" class="ai-points"></ul>
-                  <div id="aiNotices" class="ai-notices" hidden><strong>Avisos</strong><ul id="aiNoticeList"></ul></div>
-                  <div class="reading-tools"><button type="button" class="btn btn-soft" id="aiSpeak">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="aiStop">■ Detener</button><button type="button" class="btn btn-soft" id="aiCopy">Copiar</button></div>
-                </div>
-              </section>
+        </div>
+        <div id="leerPaso2" class="paso" hidden>
+          <h1 id="lecturaTitulo2" class="q">¿Cómo querés que te ayude?</h1>
+          <div class="big-choices three">
+            <button type="button" class="big-btn bb-blue" id="optEscuchar"><span class="big-ico" aria-hidden="true">🔊</span><span class="big-txt">Escuchar</span></button>
+            <button type="button" class="big-btn bb-violet" id="optExplicar"><span class="big-ico" aria-hidden="true">💡</span><span class="big-txt">Explicar fácil</span></button>
+            <button type="button" class="big-btn bb-teal" id="abrirCuento"><span class="big-ico" aria-hidden="true">🖼</span><span class="big-txt">Ver con pictogramas</span></button>
+          </div>
+          <p id="leerResumen" class="status-note" role="status"></p>
+        </div>
+        <div id="readerReady" class="paso" hidden data-modo="escuchar">
+          <h1 id="lecturaTitulo3" class="q" tabindex="-1">Tu texto</h1>
+          <details id="readingBlock" class="reading-block" open>
+            <summary>Texto original</summary>
+            <div class="reading-tools"><button type="button" class="btn btn-soft" id="speakPart">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="pauseSpeak" aria-pressed="false">⏸ Pausar</button><button type="button" class="btn btn-soft" id="stopSpeaking">■ Detener</button><button type="button" class="btn btn-soft" id="copyReading">Copiar</button></div>
+            <div class="reading-progress"><span id="partCounter">Parte 1 de 1</span><span id="wordCount"></span></div>
+            <div class="progress-track"><div id="progressFill"></div></div>
+            <article id="readingCard" class="reading-card" tabindex="0" aria-label="Texto original para leer"></article>
+            <div class="page-controls"><button type="button" class="btn btn-soft" id="prevPart">← Anterior</button><button type="button" class="btn btn-primary" id="nextPart">Siguiente →</button></div>
+            <details class="summary-details"><summary>Selección automática de frases (sin IA)</summary><div id="quickSummary"></div><p>Son las primeras frases del texto, elegidas por una regla simple. No es un resumen ni una explicación.</p></details>
+          </details>
+          <section id="aiPanel" class="ai-panel" aria-labelledby="aiTitle">
+            <h2 id="aiTitle">Explicar fácil con CLARIA (IA)</h2>
+            <p id="aiAvailability" class="status-note">La IA no está conectada en este momento.</p>
+            <div class="button-line" role="group" aria-label="Qué querés que haga CLARIA con tu texto">
+              <button type="button" class="btn btn-soft ai-action" data-task="easy">Lectura fácil</button>
+              <button type="button" class="btn btn-soft ai-action" data-task="plain">Explicar en lenguaje claro</button>
+              <button type="button" class="btn btn-soft ai-action" data-task="summary">Resumir</button>
             </div>
-          </div>
+            <form id="askForm" class="ask-form"><label for="askInput" class="field-label">O preguntale algo sobre este texto</label>
+              <div class="ask-row"><input id="askInput" maxlength="400" autocomplete="off" placeholder="Ej.: ¿Hasta cuándo tengo tiempo?"><button type="submit" class="btn btn-primary ai-action" id="askSubmit">Preguntar</button></div></form>
+            <div id="aiStatus" class="status-note" role="status" aria-live="polite"></div>
+            <div id="aiResult" class="ai-result" hidden aria-live="polite" tabindex="-1">
+              <p class="origin-label origin-ai"><span id="aiResultKind">Explicación de IA</span> <small>Generado por IA: puede tener errores. Comprobalo con el texto original.</small></p>
+              <div id="aiResultText" class="ai-text"></div>
+              <ul id="aiKeyPoints" class="ai-points"></ul>
+              <div id="aiNotices" class="ai-notices" hidden><strong>Avisos</strong><ul id="aiNoticeList"></ul></div>
+              <div class="reading-tools"><button type="button" class="btn btn-soft" id="aiSpeak">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="aiStop">■ Detener</button><button type="button" class="btn btn-soft" id="aiCopy">Copiar</button></div>
+            </div>
+          </section>
         </div>
       </section>
 
-      <section id="view-cuento" class="view page-view pc-scope" aria-labelledby="cuentoTitulo" hidden>
-        <div class="page-heading"><span class="eyebrow">LECTURA CON PICTOGRAMAS</span><h1 id="cuentoTitulo">Tu texto como pictocuento</h1><p>Cada oración se muestra completa y, debajo, sus conceptos con pictogramas. Tocá un pictograma para ver qué significa y escucharlo. Todo se hace en este navegador.</p></div>
-        <div class="button-line"><button type="button" id="pqVolver">← Volver al texto</button></div>
+      
+<section id="view-cuento" class="view page-view pc-scope" aria-labelledby="cuentoTitulo" hidden>
+        <button type="button" class="back-btn" id="pqVolver">← Volver</button>
+        <h1 id="cuentoTitulo" class="q">Tu texto con pictogramas</h1>
         <p id="pqEstado" class="pc-note" role="status"></p>
         <div id="pqContenido" hidden>
           <div class="pc-toolbar" role="toolbar" aria-label="Controles de lectura">
@@ -232,39 +237,50 @@
       </section>
 
       <section id="view-tramites" class="view page-view" aria-labelledby="tramitesTitulo" hidden>
-        <div class="page-heading"><span class="eyebrow">COMPAÑERO DE TRÁMITES</span><h1 id="tramitesTitulo">Los trámites, paso a paso</h1><p>Elegí una guía y avanzá a tu ritmo. CLARIA te ayuda a entender, pero el trámite real se realiza en el organismo correspondiente.</p></div>
-        <div class="procedure-picker" id="procedurePicker" aria-label="Elegí un trámite"></div>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <div id="tramPaso1" class="paso">
+          <h1 id="tramitesTitulo" class="q">¿Qué trámite necesitás?</h1>
+          <div class="procedure-picker" id="procedurePicker" aria-label="Elegí un trámite"></div>
+          <p class="procedure-warning">CLARIA no pide claves, fotos del DNI ni datos personales. No completa trámites ni reemplaza la orientación de los organismos públicos.</p>
+        </div>
         <section class="panel procedure-details" id="procedureDetails" hidden aria-labelledby="procedureTitle">
-          <div class="details-top"><div><span class="eyebrow">ORIENTACIÓN · NO ES EL TRÁMITE REAL</span><h2 id="procedureTitle"></h2><p id="procedureDesc"></p></div><button type="button" class="btn btn-soft" id="procedureSpeak">🔊 Escuchar paso</button></div>
-          <div class="reading-progress"><span id="procedureStepCounter"></span><span>Información general: revisá la fuente oficial</span></div>
+          <div class="details-top"><div><h2 id="procedureTitle"></h2><p id="procedureDesc"></p></div></div>
+          <div class="reading-progress"><span id="procedureStepCounter"></span><span>Orientación: no es el trámite real</span></div>
           <div class="progress-track"><div id="procedureProgressFill"></div></div>
           <div class="step-card"><span id="procedureStepNumber" class="step-number"></span><p id="procedureStepText"></p></div>
+          <ul id="procedurePictos" class="pc-board proc-pictos" aria-label="Pictogramas de este paso"></ul>
+          <div class="reading-tools"><button type="button" class="btn btn-soft" id="procedureSpeak">🔊 Escuchar paso</button><button type="button" class="btn btn-soft" id="procedurePause" aria-pressed="false">⏸ Pausar</button><button type="button" class="btn btn-soft" id="procedureStop">■ Detener</button></div>
           <div class="page-controls"><button type="button" class="btn btn-soft" id="procedurePrev">← Paso anterior</button><button type="button" class="btn btn-primary" id="procedureNext">Siguiente paso →</button></div>
+          <div class="official-box"><span>🔎 Comprobá requisitos actualizados en el sitio oficial.</span><a id="procedureOfficial" href="#" target="_blank" rel="noopener noreferrer">Abrir fuente oficial ↗</a></div>
           <div class="source-box" id="procedureSource"></div>
-          <div class="official-box"><span>🔎 Comprobá requisitos actualizados y continuá en el sitio oficial.</span><a id="procedureOfficial" href="#" target="_blank" rel="noopener noreferrer">Abrir fuente oficial ↗</a></div>
+          <p class="procedure-warning">CLARIA no pide claves, fotos del DNI ni datos personales. Pictogramas orientativos: ARASAAC.</p>
         </section>
-        <p class="procedure-warning">CLARIA no pide claves, fotos del DNI ni datos personales. No completa trámites ni reemplaza la orientación de los organismos públicos.</p>
+      </section>
+
+      
+<section id="view-hablar" class="view page-view" aria-labelledby="hablarTitulo" hidden>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <h1 id="hablarTitulo" class="q">¿En qué puedo ayudarte?</h1>
+    <section id="chatPanel" class="chat-panel chat-inline" aria-label="Conversación con CLARIA">
+    <header class="chat-header"><div class="chat-profile"><div><b>CLARIA</b><small id="chatMode">Modo demo · respuestas preparadas</small></div></div></header>
+    <div id="chatMessages" class="chat-messages" aria-live="polite" aria-relevant="additions text"></div>
+    <div class="chat-chips"><button type="button" data-chat-query="¿Cómo leo un documento?">Leer un documento</button><button type="button" data-chat-query="¿Cómo tramito el DNI?">Tramitar el DNI</button><button type="button" data-chat-query="¿Cómo uso la accesibilidad?">Accesibilidad</button></div>
+    <form id="chatForm" class="chat-form"><label class="sr-only" for="chatInput">Escribile a CLARIA</label><input id="chatInput" autocomplete="off" maxlength="400" placeholder="Escribí tu pregunta…"><button type="button" id="micButton" aria-label="Dictar pregunta con el micrófono" title="Dictar pregunta">🎙</button><button type="submit" aria-label="Enviar mensaje">➤</button></form>
+    <p class="chat-footnote" id="chatFootnote">No ingreses datos personales. El dictado depende del navegador y puede usar servicios externos.</p>
+    </section>
       </section>
 
       <section id="view-acerca" class="view page-view" aria-labelledby="aboutTitle" hidden>
+        <button type="button" class="back-btn" data-back>← Volver</button>
         <div class="page-heading"><span class="eyebrow">TECNOLOGÍA CON PROPÓSITO</span><h1 id="aboutTitle">¿Qué es CLARIA?</h1><p>Una propuesta de accesibilidad digital pensada para acercar la lectura y la orientación sobre trámites a más personas.</p></div>
         <div class="about-grid"><div class="panel"><h2>Distintas maneras de acceder</h2><p>Un mismo contenido puede leerse en pantalla, escucharse o recorrerse por partes. La plataforma incluye controles de contraste, tamaño de letra y movimiento.</p></div><div class="panel"><h2>Una guía, no un reemplazo</h2><p>La información administrativa se basa en enlaces oficiales. CLARIA no verifica identidad, gestiona turnos ni decide sobre prestaciones.</p></div><div class="panel"><h2>Estado de esta versión</h2><p>El avatar es una ilustración animada y la voz es la del navegador: no hay video ni sincronización labial. Con IA conectada (modo conectado), el chat y las explicaciones las genera un modelo de lenguaje; sin ella (modo demo), el chat usa textos preparados y lo dice. Las guías de trámites salen de una base curada con fecha de consulta.</p></div><div class="panel" id="creditosPanel"><h2>Créditos y licencias</h2><p>Los pictogramas pertenecen a <strong>ARASAAC</strong> (<a href="https://arasaac.org" target="_blank" rel="noopener">arasaac.org</a>), origen: Gobierno de Aragón, autor: Sergio Palao. Se usan bajo licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>: pueden usarse y compartirse con atribución, <strong>sin fines comerciales</strong> y con la misma licencia. CLARIA es un proyecto educativo independiente y no es una página oficial de ARASAAC ni de ningún organismo.</p></div><div class="panel" id="privacyPanel"><h2>Privacidad y datos</h2><p>Sin registro y sin cuentas. CLARIA no guarda tus textos ni tus chats: la conversación vive en esta pantalla y se borra al cerrarla. Para generar respuestas, tu consulta se envía a un servicio de IA externo, y solo después de que lo aceptes. Antes de enviarla se oculta lo que parece DNI, CUIL, correo o clave, aunque ningún filtro es perfecto: no cargues documentos personales. Los límites de uso por persona y por día protegen la demostración.</p></div></div>
       </section>
     </main>
+    </div>
 
-    <footer class="footer"><div><strong>CLARIA</strong> · La información, más clara para todos.</div><p>Prototipo educativo · Coloquio Final de IA · 2026 · Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (CC BY-NC-SA 4.0)</p><button type="button" id="footerAbout" class="footer-link">Información y privacidad</button></footer>
+    <footer class="footer foot-min"><div class="foot-row"><div id="modeBanner" class="mode-banner" role="status" data-mode="demo"><strong id="modeLabel">Modo demo</strong> <span id="modeText">Sin IA conectada: las respuestas del chat son textos preparados.</span> <button type="button" class="text-button" id="modeInfo">Privacidad</button></div><button type="button" id="footerAbout" class="footer-link">Privacidad y créditos</button></div><p>Prototipo educativo · Coloquio Final de IA · 2026 · Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (CC BY-NC-SA 4.0) · CLARIA no es una página oficial.</p></footer>
   </div>
 
-  <div class="assistant-area">
-    <button type="button" id="chatFab" class="chat-fab" aria-expanded="false" aria-controls="chatPanel" aria-label="Abrir el chat de CLARIA"><span>✦</span><small>Hablá con CLARIA</small></button>
-    <section id="chatPanel" class="chat-panel" aria-label="Conversación con CLARIA" hidden>
-      <header class="chat-header"><div class="chat-profile"><img src="assets/claria-avatar.png" alt=""><div><b>CLARIA</b><small id="chatMode">Modo demo · respuestas preparadas</small></div></div><button type="button" id="closeChat" aria-label="Cerrar chat">✕</button></header>
-      <div id="chatMessages" class="chat-messages" aria-live="polite" aria-relevant="additions text"></div>
-      <div class="chat-chips"><button type="button" data-chat-query="¿Cómo leo un documento?">Leer un documento</button><button type="button" data-chat-query="¿Cómo tramito el DNI?">Tramitar el DNI</button><button type="button" data-chat-query="¿Cómo uso la accesibilidad?">Accesibilidad</button></div>
-      <form id="chatForm" class="chat-form"><label class="sr-only" for="chatInput">Escribile a CLARIA</label><input id="chatInput" autocomplete="off" maxlength="400" placeholder="Escribí tu pregunta…"><button type="button" id="micButton" aria-label="Dictar pregunta con el micrófono" title="Dictar pregunta">🎙</button><button type="submit" aria-label="Enviar mensaje">➤</button></form>
-      <p class="chat-footnote" id="chatFootnote">No ingreses datos personales. El dictado depende del navegador y puede usar servicios externos.</p>
-    </section>
-  </div>
   <dialog id="consentDialog" class="consent" aria-labelledby="consentTitle" aria-describedby="consentBody">
     <form method="dialog" id="consentForm">
       <h2 id="consentTitle">Antes de usar la IA</h2>
@@ -278,6 +294,14 @@
         </ul>
       </div>
       <div class="button-line"><button type="submit" value="accept" class="btn btn-primary" id="consentAccept">Entiendo y acepto</button><button type="submit" value="decline" class="btn btn-soft" id="consentDecline">Ahora no</button></div>
+    </form>
+  </dialog>
+  <dialog id="micDialog" class="consent" aria-labelledby="micTitle">
+    <form method="dialog">
+      <h2 id="micTitle">¿Querés dictar?</h2>
+      <p>El dictado lo hace el reconocimiento de voz de tu navegador. Algunos navegadores envían el audio a un servicio externo para convertirlo en texto. CLARIA no guarda el audio.</p>
+      <p>Podés escribir en cualquier momento.</p>
+      <div class="button-line"><button type="submit" value="accept" class="btn btn-primary" id="micAccept">Sí, dictar</button><button type="submit" value="decline" class="btn btn-soft" id="micDecline">Ahora no</button></div>
     </form>
   </dialog>
   <div class="sr-only" id="liveAnnounce" role="status" aria-live="polite"></div>

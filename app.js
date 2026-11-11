@@ -7,24 +7,42 @@
   let procedures = [];
 
   // Navegación de una sola página
-  function showView(name) {
-    if (!['inicio','escribir','lectura','cuento','tramites','acerca'].includes(name)) return;
+  let leerPasoActual = 1, tramPasoActual = 1;
+  const G = () => window.ClariaGuia;
+  function showView(name, opts = {}) {
+    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca'].includes(name)) return;
+    if (name === 'lectura' && !opts.paso) leerPaso(1, true);
+    if (name === 'tramites' && !opts.paso) tramitePaso(1, true);
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
-    $$('button[data-view]').forEach((button) => {
-      if (button.classList.contains('nav-link')) {
-        const current = button.dataset.view === (name === 'cuento' ? 'lectura' : name);
-        button.classList.toggle('active',current);
-        if (current) button.setAttribute('aria-current','page'); else button.removeAttribute('aria-current');
-      }
-    });
     history.replaceState(null,'','#'+name);
-    const title = $('view-'+name).querySelector('h1');
+    G()?.onView(name);
+    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
+    G()?.setPantalla(key);
+    if (name === 'hablar') openChat(true);
+    const view = $('view-'+name); const title = Array.from(view.querySelectorAll('h1')).find((h) => h.offsetParent !== null);
     if (title) { title.setAttribute('tabindex','-1'); title.focus({preventScroll:true}); }
     window.scrollTo({top:0,behavior:document.body.classList.contains('no-motion')?'instant':'smooth'});
-    announce('Sección '+(title?.textContent || name));
+    announce((title?.textContent || name));
+  }
+  // Pasos guiados dentro de «Leer un documento»: 1 elegir origen · 2 elegir ayuda · 3 resultado
+  function leerPaso(n, silent) {
+    leerPasoActual = n; $('leerPaso1').hidden = n !== 1; $('leerPaso2').hidden = n !== 2; $('readerReady').hidden = n !== 3;
+    if (silent) return; G()?.setPantalla('leer' + n);
+    const t = n === 1 ? $('lecturaTitulo') : n === 2 ? $('lecturaTitulo2') : $('lecturaTitulo3'); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); announce(t.textContent); window.scrollTo({top:0});
+  }
+  function tramitePaso(n, silent) {
+    tramPasoActual = n; $('tramPaso1').hidden = n !== 1; $('procedureDetails').hidden = n !== 2; if (silent) return;
+    G()?.setPantalla('tramites' + n); const t = n === 1 ? $('tramitesTitulo') : $('procedureTitle'); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); window.scrollTo({top:0});
+  }
+  function irPantalla(k) {
+    if (k === 'inicio') return showView('inicio');
+    if (k === 'escribir' || k === 'hablar' || k === 'acerca' || k === 'cuento') return showView(k);
+    const m = /^(leer|tramites)(\d)$/.exec(k); if (!m) return;
+    if (m[1] === 'leer') { showView('lectura', { paso: 1 }); leerPaso(Number(m[2])); } else { showView('tramites', { paso: 1 }); tramitePaso(Number(m[2])); }
   }
   $$('button[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
   $('footerAbout').addEventListener('click',()=>showView('acerca'));
+  $$('.brand').forEach((b)=>b.addEventListener('click',()=>{ if(window.speechSynthesis)speechSynthesis.cancel(); }));
 
   // Preferencias: solo opciones de visualización persistidas localmente
   const defaults = {size:100,contrast:false,uppercase:false,motion:false};
@@ -62,13 +80,15 @@
     utterance.lang='es-AR'; utterance.rate=.92; utterance.pitch=1.02;
     const voices=window.speechSynthesis.getVoices();
     const es=voices.find(v=>v.lang==='es-AR')||voices.find(v=>v.lang?.startsWith('es')); if(es) utterance.voice=es;
-    utterance.onstart=()=>document.body.classList.add('speaking');
-    utterance.onend=utterance.onerror=()=>document.body.classList.remove('speaking');
+    utterance.onstart=()=>{document.body.classList.add('speaking');G()?.estado('hablando');};
+    utterance.onend=utterance.onerror=()=>{document.body.classList.remove('speaking');vozPausada=false;['pauseSpeak','procedurePause'].forEach((id)=>{const b=$(id);if(b){b.setAttribute('aria-pressed','false');b.textContent='⏸ Pausar';}});G()?.estado('esperando');};
     window.speechSynthesis.speak(utterance);return true;
   }
-  function stopSpeaking(){if('speechSynthesis' in window)window.speechSynthesis.cancel();document.body.classList.remove('speaking');announce('Lectura detenida');}
-  $('listenWelcome').addEventListener('click',()=>speak('¡Hola! Soy CLARIA. Puedo ayudarte a leer y comprender documentos o acompañarte con la orientación de un trámite. Elegí una de las dos opciones para comenzar.'));
+  function stopSpeaking(){if('speechSynthesis' in window)window.speechSynthesis.cancel();document.body.classList.remove('speaking');vozPausada=false;G()?.estado('esperando');announce('Lectura detenida');}
   $('stopSpeaking').addEventListener('click',stopSpeaking);
+  let vozPausada=false;
+  function pausarVoz(btns){ if(!('speechSynthesis' in window)||!document.body.classList.contains('speaking')&&!vozPausada)return; if(vozPausada){speechSynthesis.resume();}else{speechSynthesis.pause();} vozPausada=!vozPausada; btns.forEach((id)=>{$(id).setAttribute('aria-pressed',String(vozPausada));$(id).textContent=vozPausada?'▶ Seguir':'⏸ Pausar';}); G()?.estado(vozPausada?'esperando':'hablando'); }
+  $('pauseSpeak').addEventListener('click',()=>pausarVoz(['pauseSpeak']));
 
   // Lector por partes
   let readingParts=[],currentReading=0,currentText='',currentSource='typed',lastExtracted={text:'',source:'typed'};
@@ -83,34 +103,38 @@
   }
   function renderReading(){
     if(!readingParts.length) return;
-    $('readerEmpty').hidden=true;$('readerReady').hidden=false;
     $('readingCard').textContent=readingParts[currentReading];
     $('partCounter').textContent=`Parte ${currentReading+1} de ${readingParts.length}`;
     $('wordCount').textContent=`${currentText.trim().split(/\s+/).length} palabras en total`;
     $('progressFill').style.width=(100*(currentReading+1)/readingParts.length)+'%';
     $('prevPart').disabled=currentReading===0; $('nextPart').disabled=currentReading===readingParts.length-1;
     $('quickSummary').textContent=quickView(currentText);
-    announce('Parte '+(currentReading+1));
   }
   function loadReading(text,source='typed'){
     const clean=String(text||'').trim();if(clean.length<12){announce('Escribí al menos 12 caracteres para comenzar.');$('inputText').focus();return;}
     currentText=clean;currentSource=source;readingParts=chunkText(clean);currentReading=0;renderReading();
-    $('readingCard').focus();
+    $('leerResumen').textContent=`Texto listo: ${clean.split(/\s+/).length} palabras.`;leerPaso(2);
   }
   $('useText').addEventListener('click',()=>{const v=$('inputText').value;loadReading(v,v.trim()===lastExtracted.text.trim()&&lastExtracted.text?lastExtracted.source:'typed');});
   $('loadExample').addEventListener('click',()=>{$('inputText').value=exampleText;loadReading(exampleText);});
-  $('prevPart').addEventListener('click',()=>{if(currentReading>0){currentReading--;renderReading();$('readingCard').focus();}});
-  $('nextPart').addEventListener('click',()=>{if(currentReading<readingParts.length-1){currentReading++;renderReading();$('readingCard').focus();}});
+  $('prevPart').addEventListener('click',()=>{if(currentReading>0){currentReading--;renderReading();$('readingCard').focus();announce('Parte '+(currentReading+1));}});
+  $('nextPart').addEventListener('click',()=>{if(currentReading<readingParts.length-1){currentReading++;renderReading();$('readingCard').focus();announce('Parte '+(currentReading+1));}});
   $('speakPart').addEventListener('click',()=>speak(readingParts[currentReading]));
   $('copyReading').addEventListener('click',async()=>{
     try {await navigator.clipboard.writeText(currentText);announce('Texto copiado al portapapeles');}
     catch(_){announce('No se pudo copiar automáticamente; seleccioná el texto de la tarjeta.');}
   });
+  $('optArchivo').addEventListener('click',()=>$('fileInput').click());
+  $('optFoto').addEventListener('click',()=>$('photoInput').click());
+  $('optTexto').addEventListener('click',()=>{const box=$('leerTextoBox');box.hidden=!box.hidden;$('optTexto').setAttribute('aria-expanded',String(!box.hidden));if(!box.hidden)$('inputText').focus();});
+  function modoLectura(m){$('readerReady').dataset.modo=m;const rb=$('readingBlock');rb.open=m==='escuchar';leerPaso(3);}
+  $('optEscuchar').addEventListener('click',()=>{modoLectura('escuchar');speak(readingParts[currentReading]);});
+  $('optExplicar').addEventListener('click',()=>{modoLectura('explicar');if(mode==='connected')runExplain('easy');else $('aiStatus').textContent='Para explicar fácil necesito una IA conectada y ahora estás en modo demo. Podés escuchar el texto o verlo con pictogramas.';});
   function loadExternalScript(src){return new Promise((resolve,reject)=>{
     const el=document.createElement('script');el.src=src;el.async=true;el.onload=resolve;el.onerror=()=>reject(new Error('No se pudo descargar una biblioteca externa.'));document.head.append(el);
   });}
-  $('fileInput').addEventListener('change',async()=>{
-    const file=$('fileInput').files?.[0];if(!file)return;
+  async function procesarArchivo(input){
+    const file=input.files?.[0];if(!file)return;G()?.estado('procesando');
     if(file.size>15*1024*1024){$('fileStatus').textContent='El archivo supera 15 MB. Elegí uno más pequeño.';return;}
     $('fileStatus').textContent='Procesando '+file.name+'…';
     try{
@@ -136,7 +160,10 @@
       if(!text.trim())throw new Error('No se pudo extraer texto. Probá con una imagen más nítida.');
       $('inputText').value=text;lastExtracted={text,source};$('fileStatus').textContent='Archivo leído. Revisá y corregí el texto si hace falta.';loadReading(text,source);
     }catch(err){$('fileStatus').textContent='No se pudo leer: '+(err?.message||'Error desconocido')+'. Podés pegar el texto manualmente.';announce('Error al procesar el archivo');}
-  });
+    finally{G()?.estado('esperando');input.value='';}
+  }
+  $('fileInput').addEventListener('change',()=>procesarArchivo($('fileInput')));
+  $('photoInput').addEventListener('change',()=>procesarArchivo($('photoInput')));
 
   // ───────────────────────── Modo demo / conectado, consentimiento y cliente de API ─────────────────────────
   const CFG = window.CLARIA_CONFIG || {};
@@ -240,12 +267,12 @@
     if (t.count + q.count) notices.push(`Se ocultaron ${t.count + q.count} dato(s) que parecían personales (${[...new Set([...t.kinds, ...q.kinds])].join(', ')}) antes de enviar. Revisá que el resultado no dependa de ellos.`);
     if (currentSource === 'file_ocr') notices.push('El texto viene de una foto (OCR) y puede tener errores de lectura; la IA trabaja sobre ese texto tal como está.');
     if (currentSource === 'file_pdf') notices.push('El texto viene de un PDF y puede tener cortes o columnas mezcladas.');
-    aiBusy = true; $$('.ai-action').forEach((b) => { b.disabled = true; }); $('aiStatus').textContent = 'CLARIA está pensando…'; announce('CLARIA está pensando');
+    aiBusy = true; G()?.estado('procesando'); $$('.ai-action').forEach((b) => { b.disabled = true; }); $('aiStatus').textContent = 'CLARIA está pensando…'; announce('CLARIA está pensando');
     try {
       const d = await callApi('/api/explain', { task, text: t.text, question: q.text, source: currentSource });
       renderAi(task, d, notices); $('aiStatus').textContent = 'Listo. Abajo está la respuesta de la IA, separada del texto original.'; announce('Respuesta de la IA lista');
     } catch (err) { $('aiStatus').textContent = ERRORS[err.code] || err.message; announce('No se pudo obtener la respuesta de la IA'); }
-    finally { aiBusy = false; $$('.ai-action').forEach((b) => { b.disabled = mode !== 'connected'; }); }
+    finally { aiBusy = false; G()?.estado('esperando'); $$('.ai-action').forEach((b) => { b.disabled = mode !== 'connected'; }); }
   }
   $$('.ai-action[data-task]').forEach((b) => b.addEventListener('click', () => runExplain(b.dataset.task)));
   $('askForm').addEventListener('submit', (e) => { e.preventDefault(); runExplain('ask', $('askInput').value); });
@@ -256,15 +283,14 @@
   // ───────────────────────── Trámites: base curada con fuente y fecha de consulta ─────────────────────────
   let activeProcedure = null, stepIndex = 0, tramitesMeta = null;
   function setProcedure(id) {
-    activeProcedure = procedures.find((p) => p.id === id) || procedures[0]; stepIndex = 0; renderProcedure(); $('procedureDetails').hidden = false;
+    activeProcedure = procedures.find((p) => p.id === id) || procedures[0]; stepIndex = 0; renderProcedure(); tramitePaso(2);
     $$('.proc-item').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.proc === activeProcedure.id)));
-    $('procedureTitle').focus();
   }
   function renderProcedure() {
     const p = activeProcedure, f = p.fuente;
     $('procedureTitle').textContent = p.titulo; $('procedureTitle').setAttribute('tabindex', '-1');
     $('procedureDesc').textContent = p.resumen; $('procedureStepCounter').textContent = `Paso ${stepIndex + 1} de ${p.pasos.length}`;
-    $('procedureStepNumber').textContent = String(stepIndex + 1); $('procedureStepText').textContent = p.pasos[stepIndex];
+    $('procedureStepNumber').textContent = String(stepIndex + 1); $('procedureStepText').textContent = p.pasos[stepIndex]; G()?.pictosParaTexto(p.pasos[stepIndex], $('procedurePictos'));
     $('procedureProgressFill').style.width = (100 * (stepIndex + 1) / p.pasos.length) + '%';
     $('procedureOfficial').href = f.url; $('procedureOfficial').textContent = 'Abrir fuente oficial ↗';
     $('procedurePrev').disabled = stepIndex === 0; $('procedureNext').disabled = stepIndex === p.pasos.length - 1;
@@ -273,13 +299,13 @@
       <h4>Requisitos</h4><ul>${p.requisitos.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>
       <p><b>Costo:</b> ${esc(p.costo)}</p><p><b>Tiempo:</b> ${esc(p.tiempo)}</p>
       ${p.enlaces.length ? `<h4>Otros enlaces oficiales</h4><ul>${p.enlaces.map((e) => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.titulo)} ↗</a></li>`).join('')}</ul>` : ''}`;
-    announce(`Trámite: ${p.titulo}, paso ${stepIndex + 1} de ${p.pasos.length}`);
+    announce(`Paso ${stepIndex + 1} de ${p.pasos.length}`);
   }
   async function loadProcedures() {
     try {
       const res = await fetch('data/tramites.json', { cache: 'no-cache' }); if (!res.ok) throw new Error('http ' + res.status);
       const db = await res.json(); procedures = db.tramites; tramitesMeta = db;
-      $('procedurePicker').innerHTML = procedures.map((p) => `<button type="button" class="proc-item" data-proc="${esc(p.id)}" aria-pressed="false"><span aria-hidden="true">${p.icono}</span><strong>${esc(p.titulo)}</strong><small>${esc(p.resumen)}</small></button>`).join('');
+      $('procedurePicker').innerHTML = procedures.map((p) => `<button type="button" class="proc-item" data-proc="${esc(p.id)}" aria-pressed="false"><span aria-hidden="true">${p.icono}</span><strong>${esc(p.titulo)}</strong></button>`).join('');
       $$('.proc-item').forEach((b) => b.addEventListener('click', () => setProcedure(b.dataset.proc)));
       const w = document.querySelector('.procedure-warning'); if (w && db.aviso) w.textContent = db.aviso + ' CLARIA no pide claves, fotos del DNI ni datos personales.';
     } catch (_) {
@@ -289,6 +315,8 @@
   $('procedurePrev').addEventListener('click', () => { if (stepIndex > 0) { stepIndex--; renderProcedure(); } });
   $('procedureNext').addEventListener('click', () => { if (activeProcedure && stepIndex < activeProcedure.pasos.length - 1) { stepIndex++; renderProcedure(); } });
   $('procedureSpeak').addEventListener('click', () => { if (activeProcedure) speak(activeProcedure.pasos[stepIndex]); });
+  $('procedurePause').addEventListener('click',()=>pausarVoz(['procedurePause']));
+  $('procedureStop').addEventListener('click',stopSpeaking);
   loadProcedures();
 
   // ───────────────────────── Chat: IA conectada (con consentimiento) o respuestas preparadas (demo) ─────────────────────────
@@ -301,17 +329,12 @@
     $('chatMessages').append(el); $('chatMessages').scrollTop = $('chatMessages').scrollHeight; return el;
   }
   function openChat(open) {
-    $('chatPanel').hidden = !open; $('chatFab').setAttribute('aria-expanded', String(open));
-    if (open) {
-      if (!chatInitialized) { chatInitialized = true; healthPromise.then(() => addMessage('bot', mode === 'connected'
-        ? '¡Hola! Soy CLARIA, una asistente de inteligencia artificial. Puedo orientarte sobre lectura, accesibilidad y los trámites de la sección «Trámites». Puedo equivocarme: para trámites, confirmá siempre en el sitio oficial.'
-        : '¡Hola! Soy CLARIA. Ahora estoy en modo demo: no hay IA conectada, así que respondo con textos preparados sobre lectura, DNI, CUD, Mi Argentina y accesibilidad.', { tag: mode === 'connected' ? 'IA · puede tener errores' : 'Modo demo · texto preparado' })); }
-      $('chatInput').focus();
-    } else { $('chatFab').focus(); }
+    if (!open) return;
+    if (!chatInitialized) { chatInitialized = true; healthPromise.then(() => addMessage('bot', mode === 'connected'
+      ? '¡Hola! Soy CLARIA, una asistente de inteligencia artificial. Puedo orientarte sobre lectura, accesibilidad y los trámites disponibles. Puedo equivocarme: para trámites, confirmá siempre en el sitio oficial.'
+      : '¡Hola! Soy CLARIA. Ahora estoy en modo demo: no hay IA conectada, así que respondo con textos preparados sobre lectura, DNI, CUD, Mi Argentina y accesibilidad.', { tag: mode === 'connected' ? 'IA · puede tener errores' : 'Modo demo · texto preparado, no es IA' })); }
+    $('chatInput').focus({ preventScroll: true });
   }
-  $('chatFab').addEventListener('click', () => openChat($('chatPanel').hidden));
-  $('closeChat').addEventListener('click', () => openChat(false));
-  $('openChatHome').addEventListener('click', () => openChat(true));
   function answerQuestion(q) { // SOLO modo demo: reglas y textos preparados, nunca se presentan como IA
     const s = q.toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g, '');
     if (/dni|documento de identidad/.test(s)) return 'Para un nuevo ejemplar de DNI, abrí «Trámites» y elegí «Nuevo ejemplar de DNI»: ahí está el resumen de la fuente oficial y el enlace. No compartas acá tu número de documento.';
@@ -334,7 +357,7 @@
     if (!useAiQuota()) { addMessage('bot', ERRORS.session_limit, { kind: 'error' }); return; }
     addMessage('user', redacted.count ? redacted.text : clean);
     if (redacted.count) addMessage('bot', 'Oculté datos que parecían personales antes de enviar tu consulta. Evitá compartirlos.', { tag: 'Aviso de CLARIA' });
-    chatBusy = true; $('chatInput').disabled = true;
+    chatBusy = true; G()?.estado('procesando'); $('chatInput').disabled = true;
     const wait = addMessage('bot', 'CLARIA está pensando…', { kind: 'pending' });
     try {
       const d = await callApi('/api/chat', { message: redacted.text, history: chatHistory.slice(-6) });
@@ -343,21 +366,13 @@
       (d.avisos || []).forEach((a) => addMessage('bot', a, { tag: 'Aviso de CLARIA' }));
       chatHistory.push({ role: 'user', content: redacted.text }, { role: 'assistant', content: d.respuesta });
     } catch (err) { wait.remove(); addMessage('bot', ERRORS[err.code] || err.message, { kind: 'error', tag: 'No se pudo responder' }); }
-    finally { chatBusy = false; $('chatInput').disabled = false; $('chatInput').focus(); }
+    finally { chatBusy = false; G()?.estado('esperando'); $('chatInput').disabled = false; $('chatInput').focus(); }
   }
   $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); const q = $('chatInput').value; $('chatInput').value = ''; sendQuestion(q); });
   $$('[data-chat-query]').forEach((b) => b.addEventListener('click', () => sendQuestion(b.dataset.chatQuery)));
-  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SpeechRecognition){$('micButton').title='El dictado no está disponible en este navegador';$('micButton').disabled=true;}
-  else{$('micButton').addEventListener('click',()=>{
-    const r=new SpeechRecognition();r.lang='es-AR';r.interimResults=false;r.maxAlternatives=1;
-    r.onresult=e=>{$('chatInput').value=e.results[0][0].transcript;$('chatInput').focus();announce('Dictado listo para revisar y enviar');};
-    r.onerror=()=>announce('El dictado no se completó. Podés escribir tu pregunta.');
-    try{r.start();announce('Escuchando. Revisá el texto antes de enviarlo.');}catch(_){announce('No se pudo activar el micrófono.');}
-  });}
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if($('consentDialog').open||document.querySelector('dialog[open]'))return;
-    if(!$('chatPanel').hidden)openChat(false);else if(!$('prefs').hidden)togglePrefs(false);
+    if(!$('prefs').hidden)togglePrefs(false);
   }});
-  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','acerca'].includes(hash))showView(hash);
-  window.ClariaUI={announce,showView,getPrefs:()=>({...prefs}),getText:()=>currentText};
+  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca'].includes(hash))showView(hash);else G()?.onView('inicio');
+  window.ClariaUI={announce,showView,irPantalla,leerPaso,tramitePaso,getPrefs:()=>({...prefs}),getText:()=>currentText};
 })();

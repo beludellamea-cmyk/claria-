@@ -16,7 +16,7 @@ async function abrir({ ancho = 1280 } = {}) {
     window.SpeechSynthesisUtterance = function (t) { this.text = t; };
     Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: { getVoices: () => [], cancel() { window.__cancelado = (window.__cancelado || 0) + 1; window.__vivo = false; }, pause() {}, resume() {},
       speak(u) { window.__spoken.push(u.text); const id = (window.__vivo = Math.random()); setTimeout(() => { if (window.__vivo !== id) return; u.onstart && u.onstart(); const re = /\p{L}+/gu; let m; const idx = []; while ((m = re.exec(u.text))) idx.push(m.index); let k = 0; (function paso() { if (window.__vivo !== id) return; if (k < idx.length) { u.onboundary && u.onboundary({ name: 'word', charIndex: idx[k++] }); setTimeout(paso, 25); } else u.onend && u.onend(); })(); }, 10); } } }); });
-  await page.goto(BASE + '#lectura'); await page.fill('#inputText', ESCUELA); await page.click('#useText'); await page.click('#abrirCuento'); await page.waitForSelector('#pqContenido:not([hidden])');
+  await page.goto(BASE + '#lectura'); await page.click('#optTexto'); await page.fill('#inputText', ESCUELA); await page.click('#useText'); await page.click('#abrirCuento'); await page.waitForSelector('#pqContenido:not([hidden])');
   await page.waitForFunction(() => [...document.querySelectorAll('#pqPagina img')].every((i) => i.complete)); return { ctx, page, ext, errs };
 }
 const pagina = (page) => page.$$eval('#pqPagina .pq-oracion', (p) => p.map((x) => x.textContent));
@@ -64,7 +64,7 @@ await test('PDF de todo el documento', async () => {
   assert.equal(d.suggestedFilename(), 'claria-pictocuento.pdf'); assert.match(execFileSync('pdfinfo', [f]).toString(), /Pages:\s+[1-9]/); execFileSync('pdftoppm', ['-png', '-r', '60', f, `${OUT}/cuento-pdf`]); await ctx.close();
 });
 await test('documento largo (400 palabras): pagina sin trabarse y recorta a 150 oraciones', async () => {
-  const { ctx, page } = await abrir(); await page.click('#pqVolver'); const largo = Array.from({ length: 200 }, (_, i) => `La escuela es para todos ${i}.`).join(' ');
+  const { ctx, page } = await abrir(); await page.click('#pqVolver'); await page.click('#view-lectura [data-back]'); const largo = Array.from({ length: 200 }, (_, i) => `La escuela es para todos ${i}.`).join(' ');
   await page.fill('#inputText', largo); await page.click('#useText'); await page.click('#abrirCuento'); await page.waitForFunction(() => /150 oraciones|Se muestran las primeras 150/.test(document.getElementById('pqEstado').textContent)); assert.match(await page.textContent('#pqContador'), /de 150/); await ctx.close();
 });
 await test('sin texto cargado no abre y avisa; volver regresa al lector', async () => {
