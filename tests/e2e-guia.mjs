@@ -27,16 +27,16 @@ const spoken = (page) => page.evaluate(() => window.__spoken);
 const estado = (page) => page.getAttribute('#claria', 'data-estado');
 const caja = (page, sel) => page.$eval(sel, (n) => { const r = n.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
 
-await test('bienvenida: solo saludo, pregunta y 4 botones con ícono y texto; nada suena solo', async () => {
-  const { ctx, page, errs } = await abrir(); assert.equal((await page.textContent('#inicioTitulo')).trim(), '¡Hola! Soy CLARIA.'); assert.equal((await page.textContent('.welcome-q')).trim(), '¿Qué querés hacer hoy?');
-  const bts = await page.$$eval('#view-inicio .big-btn', (b) => b.map((x) => [x.querySelector('.big-ico').textContent.length > 0, x.querySelector('.big-txt').textContent.trim()]));
-  assert.deepEqual(bts.map((b) => b[1]), ['Escribir una frase', 'Leer un documento', 'Hacer un trámite', 'Hablar con CLARIA']); assert.ok(bts.every((b) => b[0]));
+await test('bienvenida: solo saludo, pregunta y 3 tarjetas + «O hablá conmigo» con ícono y texto; nada suena solo', async () => {
+  const { ctx, page, errs } = await abrir(); await page.waitForTimeout(1300); assert.equal((await page.textContent('#inicioTitulo')).trim(), '¡Hola! Soy CLARIA.'); assert.equal((await page.textContent('.welcome-q')).trim(), '¿Qué querés hacer hoy?');
+  const bts = await page.$$eval('#view-inicio .big-btn', (b) => b.map((x) => [Boolean(x.querySelector('.big-ico svg')), x.querySelector('.big-txt').textContent.trim()]));
+  assert.deepEqual(bts.map((b) => b[1]), ['Crear con pictogramas', 'Leer y entender', 'Hacer un trámite', 'O hablá conmigo']); assert.ok(bts.every((b) => b[0]));
   assert.equal(await page.$$eval('#view-inicio .big-btn small, #view-inicio p:not(.claria-estado)', (n) => n.filter((x) => x.offsetParent !== null).length), 0, 'sin descripciones ni párrafos');
   assert.equal((await caja(page, '#claria-btn')).w >= 190, true, 'personaje grande'); assert.equal((await spoken(page)).length, 0); assert.deepEqual(errs, []);
   await page.screenshot({ path: `${OUT}/20-bienvenida-pc.png` }); await ctx.close();
 });
 await test('el personaje pasa a un costado al elegir y sigue disponible', async () => {
-  const { ctx, page } = await abrir(); await page.click('#view-inicio [data-view=escribir]'); const c = await caja(page, '#claria-btn'), m = await caja(page, '#view-escribir h1');
+  const { ctx, page } = await abrir(); await page.click('#view-inicio [data-view=escribir]'); await page.waitForTimeout(900); const c = await caja(page, '#claria-btn'), m = await caja(page, '#view-escribir h1');
   assert.ok(c.w <= 160 && c.x < m.x, `costado izquierdo: ${JSON.stringify(c)} ${m.x}`); assert.equal(await vis(page, '#claria-btn'), true); await page.screenshot({ path: `${OUT}/21-escribir-pc.png` }); await ctx.close();
 });
 await test('estados visuales: esperando / escuchando / procesando / hablando con texto', async () => {
@@ -103,7 +103,7 @@ await test('SIN voz y SIN micrófono: todos los recorridos funcionan y se explic
 });
 await test('celular 390 px: bienvenida y recorridos sin desborde; personaje en barra superior', async () => {
   const { ctx, page } = await abrir({ ancho: 390, alto: 800 }); const over = () => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert.ok((await over()) <= 1); await page.screenshot({ path: `${OUT}/27-bienvenida-cel.png` });
-  for (const v of ['escribir', 'lectura', 'tramites', 'hablar']) { await page.evaluate(() => document.querySelector('.brand').click()); await page.click(`#view-inicio [data-view=${v}]`); assert.ok((await over()) <= 1, v);
+  for (const v of ['escribir', 'lectura', 'tramites', 'hablar']) { await page.evaluate(() => document.querySelector('.brand').click()); await page.click(`#view-inicio [data-view=${v}]`); await page.waitForTimeout(900); assert.ok((await over()) <= 1, v);
     const c = await caja(page, '#claria-btn'); assert.ok(c.y < 140 && c.w <= 70, `${v} ${JSON.stringify(c)}`); }
   await page.click('.brand'); await page.click('#view-inicio [data-view=escribir]'); await page.fill('#pcTexto', 'QUIERO AGUA'); await page.click('#pcConvertir'); await page.waitForSelector('#pcTablero img'); await page.screenshot({ path: `${OUT}/28-escribir-cel.png`, fullPage: true }); assert.ok((await over()) <= 1);
   await page.click('#claria-btn'); assert.equal(await vis(page, '#claria-menu'), true); await page.screenshot({ path: `${OUT}/29-menu-cel.png` }); await ctx.close();
@@ -113,9 +113,9 @@ await test('tablet 820 px y texto al 150 % con alto contraste: sin desborde', as
   for (const v of ['inicio', 'escribir', 'tramites']) { await page.click('.brand'); if (v !== 'inicio') await page.click(`#view-inicio [data-view=${v}]`); assert.ok((await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 1, v); }
   await page.click('.brand'); await page.screenshot({ path: `${OUT}/30-contraste.png` }); await ctx.close();
 });
-await test('teclado: Tab llega a los 4 botones y al personaje; Enter abre; foco en el título', async () => {
+await test('teclado: Tab llega a las 3 tarjetas, al botón de hablar y al personaje; Enter abre; foco en el título', async () => {
   const { ctx, page } = await abrir(); const orden = []; for (let i = 0; i < 12; i++) { await page.keyboard.press('Tab'); orden.push(await page.evaluate(() => document.activeElement.id || document.activeElement.textContent.trim().slice(0, 24))); }
-  for (const t of ['claria-btn', 'Escribir una frase', 'Leer un documento', 'Hacer un trámite', 'Hablar con CLARIA']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
+  for (const t of ['claria-btn', 'Crear con pictogramas', 'Leer y entender', 'Hacer un trámite', 'O hablá conmigo']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
   await page.focus('#view-inicio [data-view=hablar]'); await page.keyboard.press('Enter'); await page.waitForFunction(() => document.activeElement.id === 'hablarTitulo'); await ctx.close();
 });
 await test('ningún audio ni micrófono se activa solo al recorrer todas las pantallas', async () => {
@@ -126,7 +126,7 @@ await test('ningún audio ni micrófono se activa solo al recorrer todas las pan
 await test('CLARIA habla: no suena nada hasta tocar «Que CLARIA me hable»; luego saluda con subtítulo y resalta botones', async () => {
   const { ctx, page } = await abrir(); await page.waitForTimeout(1200); assert.equal((await spoken(page)).length, 0, 'sin autoplay'); assert.equal(await vis(page, '#claria-voz'), true);
   assert.equal(await page.getAttribute('#claria-voz', 'aria-pressed'), 'false'); await page.click('#claria-voz'); await page.waitForFunction(() => window.__spoken.length === 1);
-  const dicho = (await spoken(page))[0]; assert.match(dicho, /¡Hola! Soy CLARIA/); assert.match(dicho, /leer un documento/);
+  const dicho = (await spoken(page))[0]; assert.match(dicho, /¡Hola! Soy CLARIA/); assert.match(dicho, /leer y entender/);
   await page.waitForFunction(() => !document.getElementById('claria-subtitulo').hidden); assert.match(await page.textContent('#claria-subtitulo'), /Soy CLARIA/);
   await page.waitForFunction(() => document.querySelectorAll('.big-btn.resalta').length === 1, null, { timeout: 4000 }); await page.screenshot({ path: `${OUT}/40-habla-pc.png` });
   await page.waitForFunction(() => document.getElementById('claria').dataset.estado === 'esperando'); assert.equal(await page.$$eval('.big-btn.resalta', (n) => n.length), 0, 'el resaltado termina con la frase');

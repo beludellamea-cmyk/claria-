@@ -61,7 +61,7 @@
   // ───────── CLARIA habla y guía (solo si la persona lo activa; nunca arranca sola) ─────────
   // La voz es la del navegador. El movimiento de la cabeza sigue el ritmo de las palabras: es APROXIMADO, no hay sincronía labial real.
   const GUION = {
-    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés escribir una frase, leer un documento, hacer un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
+    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés crear con pictogramas, leer y entender, hacer un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
     escribir: ['¿Qué querés decir? Escribilo, o tocá el micrófono y dictámelo. Después tocá convertir, y te lo muestro con pictogramas.', '¿Qué querés decir?'],
     leer1: ['¿Qué querés leer? Podés subir un archivo, sacar una foto, o escribir el texto.', '¿Qué querés leer?'],
     leer2: ['Ya tengo tu texto. ¿Cómo querés que te ayude? Puedo leértelo, explicártelo fácil, o mostrártelo con pictogramas.', '¿Cómo querés que te ayude?'],
@@ -74,7 +74,7 @@
     convertido: 'Listo. Mirá: cada palabra tiene su pictograma. Si alguna no te convence, tocala y elegís otra. Después podés escucharla, modificarla o descargarla.',
     descargado: '¡Listo! Ya tenés tu archivo.'
   };
-  const BOTONES = [['escribir', /escribir una frase/], ['lectura', /leer un documento/], ['tramites', /hacer un tr[aá]mite/], ['hablar', /hablar conmigo/]];
+  const BOTONES = [['escribir', /crear con pictogramas/], ['lectura', /leer y entender/], ['tramites', /hacer un tr[aá]mite/], ['hablar', /hablar conmigo/]];
   let vozOn = false; const visitas = {}; let timerSub = null, t0 = null;
   const sub = $('claria-subtitulo');
   function utt(texto) { const u = new SpeechSynthesisUtterance(texto); u.lang = 'es-AR'; u.rate = .95; const v = speechSynthesis.getVoices(); const es = v.find((x) => x.lang === 'es-AR') || v.find((x) => x.lang?.startsWith('es')); if (es) u.voice = es; return u; }

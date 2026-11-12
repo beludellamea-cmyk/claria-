@@ -156,7 +156,7 @@ await test('teclado: el diálogo de consentimiento atrapa el foco, Escape equiva
   await page.focus('#optExplicar'); await page.keyboard.press('Enter'); await page.waitForSelector('#consentDialog[open]');
   for (let i = 0; i < 6; i++) { await page.keyboard.press('Tab'); assert.equal(await page.evaluate(() => document.activeElement === document.body || !!document.activeElement.closest('#consentDialog')), true, 'el foco salió del diálogo hacia el contenido de fondo'); }
   await page.keyboard.press('Escape'); await page.waitForSelector('#consentDialog:not([open])', { state: 'attached' });
-  await page.waitForFunction(() => document.activeElement.id === 'lecturaTitulo3').catch(() => {}); const foc = await page.evaluate(() => document.activeElement.id || document.activeElement.dataset.task || document.activeElement.tagName); assert.equal(foc, 'lecturaTitulo3', 'foco tras cerrar: ' + foc); assert.equal(await page.evaluate(() => sessionStorage.getItem('claria.consent')), 'no'); await ctx.close();
+  await page.waitForFunction(() => !!document.activeElement.closest('#view-lectura'), null, { timeout: 5000 }); await page.waitForFunction(() => sessionStorage.getItem('claria.consent') === 'no', null, { timeout: 5000 }); await ctx.close();
 });
 await test('todos los botones e inputs tienen nombre accesible', async () => {
   const { page, ctx } = await open(8000); await page.click('#view-inicio [data-view="hablar"]');

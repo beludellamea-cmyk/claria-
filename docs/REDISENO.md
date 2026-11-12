@@ -35,3 +35,14 @@ Una pregunta por pantalla, botones grandes con ícono y CLARIA acompañando. Se 
 - **Honestidad técnica**: la voz es la del navegador (su calidad depende del dispositivo). El movimiento de CLARIA al hablar es un pulso al ritmo de las palabras; **no hay sincronización labial real**. La preferencia de voz no se guarda entre visitas.
 - Sin voz o sin micrófono en el navegador: los botones se desactivan con una explicación y todo el recorrido sigue funcionando.
 - Mejora futura (requiere decisión): audios grabados con voz humana realista (p. ej. ElevenLabs) para las frases fijas.
+
+## Capa cinematográfica (rama `rediseno-cinematografico`)
+
+Solo presentación: `cine.css` + `cine.js` + una bienvenida nueva en `index.html`. No cambia datos ni funciones (lectura, pictogramas, trámites, IA, privacidad).
+
+- **Bienvenida**: fondo noche/violeta con luz turquesa, aurora en movimiento, suelo en perspectiva 3D y partículas (canvas, livianas y pausadas si la pestaña está oculta). Logo CLARIA con entrada animada, CLARIA grande con halo, y solo: «¡Hola! Soy CLARIA.» · «¿Qué querés hacer hoy?» · 3 tarjetas (Crear con pictogramas, Leer y entender, Hacer un trámite) · «O hablá conmigo».
+- **Tarjetas** de vidrio con inclinación 3D y brillo que sigue al puntero; CLARIA gira la cabeza hacia la tarjeta que se enfoca.
+- **Expresividad**: flotación, saludo inicial, asentimiento al elegir, inclinación al escuchar o pensar, salto al completar, halo distinto para escuchar / procesar / hablar. Movimientos de cabeza con la imagen del personaje: **no hay parpadeo real ni sincronía labial** (requeriría capas o cuadros del rostro).
+- **Transiciones** entre pantallas, CLARIA que «viaja» al costado, pictogramas que aparecen de a uno, chispas al convertir, descargar y avanzar un paso de trámite.
+- Las demás pantallas se muestran como lámina clara sobre la noche para mantener la legibilidad.
+- **Accesibilidad**: «Reducir animaciones» y `prefers-reduced-motion` apagan fondo animado, partículas y transiciones; alto contraste oculta el fondo; teclado y alternativas sin voz intactos.

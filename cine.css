@@ -1,0 +1,116 @@
+/* CLARIA · Capa cinematográfica: noche violeta, luz turquesa, profundidad 3D, partículas, transiciones. Solo presentación. */
+:root{--noche1:#0b0828;--noche2:#1a1160;--turq:#19e3d0;--viol:#8b5cff}
+body{background:var(--noche1);color:#fff}
+.shell{background:transparent;box-shadow:none}
+.site-header{background:#0b082899;backdrop-filter:blur(10px);border-bottom:1px solid #ffffff1a;position:relative;z-index:5}
+/* fondo */
+.cine-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#2a1a8c 0%,var(--noche2) 38%,var(--noche1) 80%);pointer-events:none}
+.cine-aurora{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;transform:translate3d(calc(var(--px,0)*30px),calc(var(--py,0)*20px),0);transition:transform .4s ease-out}
+.a1{width:60vmax;height:60vmax;left:-20vmax;top:-25vmax;background:radial-gradient(circle,#19e3d0aa,#19e3d000 65%);animation:cn-deriva 22s ease-in-out infinite alternate}
+.a2{width:55vmax;height:55vmax;right:-22vmax;top:5vmax;background:radial-gradient(circle,#8b5cffaa,#8b5cff00 65%);animation:cn-deriva 28s ease-in-out infinite alternate-reverse}
+.a3{width:40vmax;height:40vmax;left:25vw;bottom:-25vmax;background:radial-gradient(circle,#2d8cffaa,#2d8cff00 65%);animation:cn-deriva 25s ease-in-out infinite alternate}
+@keyframes cn-deriva{to{translate:4vmax 3vmax}}
+.cine-grid{position:absolute;left:-50%;right:-50%;bottom:-10%;height:55%;background-image:linear-gradient(#19e3d033 1px,transparent 1px),linear-gradient(90deg,#19e3d033 1px,transparent 1px);background-size:60px 60px;transform:perspective(500px) rotateX(62deg) translate3d(calc(var(--px,0)*40px),0,0);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(to top,#000 5%,transparent 80%);mask-image:linear-gradient(to top,#000 5%,transparent 80%);animation:cn-suelo 6s linear infinite}
+@keyframes cn-suelo{to{background-position:0 60px}}
+#cineParticulas{position:absolute;inset:0;width:100%;height:100%}
+.shell{position:relative;z-index:1}
+/* bienvenida */
+#view-inicio{background:none}
+.welcome{padding-top:clamp(0px,1vh,10px)}
+.cine-logo{display:flex;align-items:center;gap:12px;margin-bottom:2px;animation:cn-logo 1.1s cubic-bezier(.2,.9,.2,1) both}
+.cine-logo img{width:46px;height:46px;border-radius:12px;filter:drop-shadow(0 0 14px var(--turq));animation:cn-giro 1.2s cubic-bezier(.2,.9,.2,1) both}
+.cine-word{display:flex;gap:.18em;font-weight:900;font-size:1.5rem;letter-spacing:.14em;color:#fff}
+.cine-word b{display:inline-block;animation:cn-letra .6s cubic-bezier(.2,.9,.2,1) both}
+.cine-word b:nth-child(1){animation-delay:.35s}.cine-word b:nth-child(2){animation-delay:.42s}.cine-word b:nth-child(3){animation-delay:.49s}.cine-word b:nth-child(4){animation-delay:.56s}.cine-word b:nth-child(5){animation-delay:.63s}.cine-word b:nth-child(6){animation-delay:.7s}
+@keyframes cn-logo{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes cn-giro{from{transform:rotate(-200deg) scale(.2)}to{transform:none}}
+@keyframes cn-letra{from{opacity:0;transform:translateY(14px) rotateX(80deg);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+#view-inicio h1{color:#fff;text-shadow:0 4px 30px #19e3d044;animation:cn-sube .7s .5s cubic-bezier(.2,.9,.2,1) both}
+#view-inicio h1 span{background:linear-gradient(90deg,var(--turq),#a98bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.welcome-q{color:#d9d4ff;animation:cn-sube .7s .65s cubic-bezier(.2,.9,.2,1) both;margin-bottom:20px}
+@keyframes cn-sube{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.welcome-slot{perspective:900px;animation:cn-entra 1s .1s cubic-bezier(.2,.9,.2,1) both}
+@keyframes cn-entra{from{opacity:0;transform:translateY(30px) scale(.85)}to{opacity:1;transform:none}}
+.welcome-slot .claria-halo{border-color:#19e3d0;box-shadow:0 0 40px #19e3d066,inset 0 0 40px #8b5cff55;opacity:1}
+.welcome-slot .claria-img{filter:drop-shadow(0 18px 30px #000a) drop-shadow(0 0 26px #8b5cff66);transform:translate3d(calc(var(--mx,0)*10px),0,0) rotateY(calc(var(--mx,0)*9deg)) rotateZ(var(--inclina,0deg))}
+.claria-estado{background:#ffffff14;border-color:#ffffff33;color:#fff;backdrop-filter:blur(6px)}
+.claria-voz{background:#ffffff12;border-color:#19e3d0;color:#fff}.claria-voz[aria-pressed=true]{background:#19e3d0;color:#06142a}
+.cine-cards{perspective:1100px;max-width:1000px}
+#view-inicio .big-btn{position:relative;overflow:hidden;background:linear-gradient(160deg,#ffffff1f,#ffffff08);border:2px solid #ffffff2e;color:#fff;backdrop-filter:blur(14px);box-shadow:0 20px 50px #0007,inset 0 1px 0 #ffffff40;transform-style:preserve-3d;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);transition:transform .18s ease-out,box-shadow .25s,border-color .25s;animation:cn-tarjeta .8s cubic-bezier(.2,.9,.2,1) both}
+#view-inicio .cine-cards .big-btn:nth-child(1){animation-delay:.75s}.cine-cards .big-btn:nth-child(2){animation-delay:.87s}.cine-cards .big-btn:nth-child(3){animation-delay:.99s}
+@keyframes cn-tarjeta{from{opacity:0;transform:perspective(900px) translateY(50px) rotateX(35deg)}to{opacity:1}}
+#view-inicio .big-btn::before{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--lx,50%) var(--ly,0%),#ffffff33,transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
+#view-inicio .big-btn:hover::before,#view-inicio .big-btn:focus-visible::before{opacity:1}
+#view-inicio .big-btn:hover,#view-inicio .big-btn.resalta{border-color:var(--turq);box-shadow:0 26px 60px #0009,0 0 0 1px var(--turq),0 0 40px #19e3d055,inset 0 1px 0 #ffffff55;translate:0 -6px}
+#view-inicio .big-btn:active{scale:.97}
+#view-inicio .big-btn.resalta{translate:0 -8px;scale:1.04}
+#view-inicio .big-ico{display:grid;place-items:center;width:clamp(72px,9vw,92px);height:clamp(72px,9vw,92px);border-radius:26px;background:linear-gradient(145deg,#19e3d033,#8b5cff55);box-shadow:0 0 30px #19e3d044,inset 0 0 0 1px #ffffff40;transform:translateZ(40px)}
+#view-inicio .big-ico svg{width:56%;height:56%;fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px var(--turq))}
+#view-inicio .bb-teal .big-ico{background:linear-gradient(145deg,#19e3d066,#0b6fa655)}#view-inicio .bb-blue .big-ico{background:linear-gradient(145deg,#4aa3ff66,#3b3bd655)}#view-inicio .bb-violet .big-ico{background:linear-gradient(145deg,#a98bff66,#6a2fd655)}
+#view-inicio .big-txt{color:#fff;transform:translateZ(24px);text-shadow:0 2px 10px #0008}
+#view-inicio .cine-cta{flex-direction:row;min-height:0;margin:22px auto 6px;padding:14px 34px 14px 18px;gap:16px;border-radius:999px;border-color:#ff7ad9aa;background:linear-gradient(90deg,#ff4fb255,#8b5cff55);animation:cn-tarjeta .8s 1.15s cubic-bezier(.2,.9,.2,1) both,cn-latido 3s 2.2s ease-in-out infinite}
+#view-inicio .cine-cta .big-ico{width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#ff7ad9,#8b5cff)}
+#view-inicio .cine-cta .big-txt{font-size:clamp(1.3rem,3vw,1.7rem)}
+@keyframes cn-latido{0%,100%{box-shadow:0 20px 50px #0007,0 0 0 0 #ff7ad955}50%{box-shadow:0 20px 50px #0007,0 0 0 14px #ff7ad900}}
+/* personaje: gestos y expresiones (movimientos de cabeza; sin sincronía labial real) */
+.claria[data-gesto=saludo] .claria-img{animation:cn-saludo 1.6s ease-in-out 1}
+.claria[data-gesto=asiente] .claria-img{animation:cn-asiente .7s ease-in-out 1}
+.claria[data-gesto=celebra] .claria-img{animation:cn-celebra .9s cubic-bezier(.3,1.6,.5,1) 1}
+@keyframes cn-saludo{0%{transform:rotate(0)}20%{transform:rotate(-4deg) translateY(-6px)}45%{transform:rotate(3deg)}70%{transform:rotate(-2deg)}100%{transform:none}}
+@keyframes cn-asiente{0%,100%{transform:none}35%{transform:translateY(9px) rotate(1.5deg)}65%{transform:translateY(-3px)}}
+@keyframes cn-celebra{0%{transform:scale(1)}40%{transform:translateY(-22px) scale(1.08) rotate(-3deg)}100%{transform:none}}
+.claria[data-estado=procesando] .claria-img{animation:cn-piensa 2.4s ease-in-out infinite}
+@keyframes cn-piensa{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-3px)}}
+.claria[data-estado=escuchando] .claria-img{animation:cn-escucha 2s ease-in-out infinite}
+@keyframes cn-escucha{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(4.5deg) translateY(-2px)}}
+.claria[data-estado=escuchando] .claria-halo::before,.claria[data-estado=escuchando] .claria-halo::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid var(--turq);animation:cl-pulso 1.6s ease-out infinite}
+.claria[data-estado=escuchando] .claria-halo::after{animation-delay:.7s}
+.claria[data-estado=procesando] .claria-halo{border-color:#a98bff;border-top-color:var(--turq);border-style:solid;box-shadow:0 0 30px #8b5cff88}
+.claria[data-estado=hablando] .claria-halo{border-color:var(--turq);box-shadow:0 0 36px #19e3d099}
+.claria-viaja{animation:cn-viaja .7s cubic-bezier(.2,.9,.2,1) both}
+@keyframes cn-viaja{from{opacity:.2;transform:scale(1.7) translateY(30px)}to{opacity:1;transform:none}}
+/* otras pantallas: lámina clara flotando sobre la noche */
+body:not([data-vista=inicio]) main#principal{margin-left:0;margin-right:0;width:100%;background:#fffffff2;border-radius:30px;box-shadow:0 30px 80px #0008,0 0 0 1px #ffffff40;margin-top:10px;margin-bottom:30px;color:var(--ink)}
+body:not([data-vista=inicio]) .page-view{padding-top:14px}
+body.high-contrast .cine-bg{display:none}body.high-contrast main#principal{background:#0a0a0f!important}
+.dock-sombra{}
+.companion-dock .claria-estado{font-size:.9rem}
+.view:not([hidden]){animation:cn-vista .45s cubic-bezier(.2,.9,.2,1) both}
+@keyframes cn-vista{from{opacity:0;transform:translateY(22px) scale(.985);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.companion-dock{animation:cn-dock .6s cubic-bezier(.2,.9,.2,1) both}
+@keyframes cn-dock{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+/* tarjetas de trámite y pictogramas con profundidad */
+.proc-item{transition:transform .2s,box-shadow .2s,border-color .2s}.proc-item:hover,.proc-item:focus-visible{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 40px #3b1fa633;border-color:#19b7c8}
+.pc-card{animation:cn-pop .5s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes cn-pop{from{opacity:0;transform:scale(.4) translateY(16px)}to{opacity:1;transform:none}}
+.pc-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px #3b1fa633}
+/* chispas al completar */
+.cine-chispa{position:fixed;z-index:60;width:10px;height:10px;border-radius:50%;pointer-events:none;background:var(--c,#19e3d0);box-shadow:0 0 12px var(--c,#19e3d0);animation:cn-chispa .9s ease-out forwards}
+@keyframes cn-chispa{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+/* subtítulos y pie sobre fondo oscuro */
+.foot-min{background:#0b0828cc;backdrop-filter:blur(8px);color:#cfc9ff;position:relative;z-index:1}
+@media(max-width:700px){#view-inicio .cine-cards .big-btn{min-height:96px;flex-direction:row;justify-content:flex-start;padding:12px 18px;gap:16px}.cine-cards .big-ico{width:62px;height:62px;border-radius:20px}.cine-word{font-size:1.2rem}.cine-logo img{width:38px;height:38px}
+  #view-inicio .cine-cta{padding:10px 24px 10px 12px}.welcome-q{margin-bottom:14px}.cine-grid{height:40%}
+  body:not([data-vista=inicio]) main#principal{border-radius:22px;margin:6px 8px 20px}}
+@media(prefers-reduced-motion:reduce){.cine-bg *,.cine-logo *,.big-btn,.view,.welcome-slot,#view-inicio h1,.welcome-q,.pc-card,.companion-dock,.cine-word b{animation:none!important;transition:none!important}}
+body.no-motion .cine-bg *,body.no-motion .view,body.no-motion .pc-card,body.no-motion .big-btn,body.no-motion .welcome-slot,body.no-motion .cine-logo *,body.no-motion .companion-dock,body.no-motion #view-inicio h1,body.no-motion .welcome-q{animation:none!important;transition:none!important}
+@media print{.cine-bg,.cine-chispa{display:none}body{background:#fff;color:#000}.pc-card,.view{animation:none!important}body:not([data-vista=inicio]) main#principal{background:#fff;box-shadow:none}}
+
+/* tarjetas internas (claras) con profundidad al pasar */
+.view:not(#view-inicio) .big-btn{transition:transform .2s,box-shadow .2s,border-color .2s}.view:not(#view-inicio) .big-btn:hover,.view:not(#view-inicio) .big-btn:focus-visible{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 40px #3b1fa644;border-color:#19b7c8}
+.view:not(#view-inicio) .big-btn:active{scale:.97}
+
+/* bienvenida compacta: todo a la vista en una pantalla de notebook */
+.welcome-slot .claria-img{width:clamp(130px,min(28vw,23vh),250px)}
+.welcome-slot .claria{display:grid;grid-template-columns:auto auto;justify-content:center;column-gap:10px;row-gap:6px}
+.welcome-slot .claria-btn,.welcome-slot .claria-estado{grid-column:1/-1;justify-self:center}
+.welcome-slot .claria-menu,.welcome-slot .claria-bubble{grid-column:1/-1;justify-self:center}
+.welcome-slot .claria-voz{font-size:.95rem;min-height:42px;padding:4px 14px}
+#view-inicio h1{font-size:clamp(2rem,5vw,3.2rem);margin-top:4px}.welcome-q{font-size:clamp(1.3rem,3vw,2rem);margin-bottom:14px}
+.cine-logo{margin-bottom:0}
+#view-inicio .big-btn{min-height:150px}
+#view-inicio .cine-cta{margin-top:16px;min-height:0}
+.companion-dock .claria-voz{font-size:.85rem}
+@media(max-height:830px) and (min-width:701px){.welcome-slot .claria-img{width:clamp(110px,20vh,190px)}#view-inicio .big-btn{min-height:128px;gap:8px;padding:12px}#view-inicio .big-ico{width:62px;height:62px}}
+@media(max-width:900px){body:not([data-vista=inicio]) main#principal{width:auto;margin-left:8px;margin-right:8px}}
+html,body{overflow-x:clip}
