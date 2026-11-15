@@ -3,7 +3,7 @@ import http from 'node:http'; import fs from 'node:fs'; import path from 'node:p
 import { fileURLToPath } from 'node:url'; import { chromium } from 'playwright';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'); const OUT = process.env.OUT || '/tmp/claria-e2e'; fs.mkdirSync(OUT, { recursive: true });
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png' };
-const srv = http.createServer((req, res) => { const u = decodeURIComponent(req.url.split('?')[0]); const f = path.join(ROOT, u === '/' ? 'index.html' : u);
+const srv = http.createServer((req, res) => { const u = decodeURIComponent(req.url.split('?')[0]); if (u === '/config.js') { res.writeHead(200, { 'content-type': 'text/javascript' }); return res.end('window.CLARIA_CONFIG={apiBase:""};'); } const f = path.join(ROOT, u === '/' ? 'index.html' : u);
   if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); } res.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res); });
 await new Promise((r) => srv.listen(8011, r)); const BASE = 'http://localhost:8011/';
 const browser = await chromium.launch(); const results = [];

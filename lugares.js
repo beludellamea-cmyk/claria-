@@ -10,7 +10,7 @@
   const G = () => window.ClariaGuia;
   const el = (t, a = {}, k = []) => { const n = document.createElement(t); for (const [x, v] of Object.entries(a)) { if (x === 'text') n.textContent = v; else n.setAttribute(x, v); } [].concat(k).forEach((c) => c && n.append(c)); return n; };
   const tts = 'speechSynthesis' in window;
-  let catalogo = [], porId = new Map(), dic = new Map(), lugar = null, opcion = null, paso = 0, listo = null, stream = null, escaneando = false;
+  let instituciones = [], catalogo = [], porId = new Map(), dic = new Map(), lugar = null, opcion = null, paso = 0, listo = null, stream = null, escaneando = false;
   let ultimo = ''; const estado = (id, t) => { const n = $(id); n.textContent = t === ultimo ? t + '​' : t; ultimo = n.textContent; };
   const fecha = (iso) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
   const valido = (l) => l && /^[a-z0-9-]{1,60}$/.test(l.id) && l.nombre && l.responsable && /^\d{4}-\d{2}-\d{2}$/.test(l.actualizado) && Array.isArray(l.opciones) && l.opciones.length;
@@ -18,8 +18,9 @@
 
   function cargar() {
     if (listo) return listo;
-    listo = Promise.all([fetch('data/lugares.json').then((r) => r.json()), fetch('data/pictogramas.json').then((r) => r.json())]).then(([l, d]) => {
-      d.entradas.forEach((e) => dic.set(e.lema, e)); catalogo = (l.lugares || []).filter(valido); porId = new Map(catalogo.map((x) => [x.id, x])); pintarLista();
+    listo = Promise.all([fetch('data/lugares.json').then((r) => r.json()), fetch('data/pictogramas.json').then((r) => r.json()), window.ClariaCiudad.cargar().catch(() => null)]).then(([l, d, c]) => {
+      instituciones = (c && c.instituciones) || [];
+      d.entradas.forEach((e) => dic.set(e.lema, e)); catalogo = (l.lugares || []).filter(valido); porId = new Map(catalogo.map((x) => [x.id, x])); pintarInstituciones(); pintarLista();
     }).catch(() => { listo = null; estado('lgEstado', 'No se pudo cargar la lista de lugares. Revisá tu conexión.'); });
     return listo;
   }
@@ -32,15 +33,47 @@
     if (!silencioso) G()?.setPantalla(PASOS[n][2]);
     const t = $(PASOS[n][1]); t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); window.scrollTo({ top: 0 });
   }
-  function entrar(conservar) { detenerCamara(); $('lgScan').hidden = true; if (conservar) return; lugar = null; opcion = null; $('lgListaBox').hidden = true; estado('lgEstado', ''); cargar().then(() => ir('inicio', true)); G()?.setPantalla('lugares'); }
+  function entrar(conservar) { detenerCamara(); $('lgScan').hidden = true; if (conservar) return; lugar = null; opcion = null; $('lgListaBox').hidden = true; $('lgQR').open = false; estado('lgEstado', ''); cargar().then(() => ir('inicio', true)); G()?.setPantalla('lugares'); }
   function irA(n) { cargar().then(() => { if (n !== 'inicio' && !lugar) return ir('inicio'); if (n === 'menu') pintarMenu(); ir(n); }); }
   function salir() { detenerCamara(); if (tts) speechSynthesis.cancel(); }
 
   // ───────── elegir lugar ─────────
   function pintarLista() {
     const ul = $('lgListaLugares'); ul.replaceChildren();
-    catalogo.forEach((l) => { const b = el('button', { type: 'button', class: 'big-btn lg-lugar' }, [el('span', { class: 'big-txt', text: l.nombre }), l.demostracion ? el('span', { class: 'lg-chip', text: 'Ejemplo ficticio' }) : null]); b.addEventListener('click', () => elegir(l)); ul.append(el('li', {}, b)); });
-    if (!catalogo.length) ul.append(el('li', { class: 'pc-note', text: 'Todavía no hay lugares cargados.' }));
+    const vis = catalogo.filter((l) => !l.oculto); $('lgLista').hidden = !vis.length;
+    vis.forEach((l) => { const b = el('button', { type: 'button', class: 'big-btn lg-lugar' }, [el('span', { class: 'big-txt', text: l.nombre }), l.demostracion ? el('span', { class: 'lg-chip', text: 'Ejemplo ficticio' }) : null]); b.addEventListener('click', () => elegir(l)); ul.append(el('li', {}, b)); });
+    
+  }
+  // ───────── las seis instituciones (Paquete Maestro) ─────────
+  const CIUDAD = () => window.ClariaCiudad;
+  function pintarInstituciones() {
+    const ul = $('lgInstituciones'); ul.replaceChildren();
+    if (!instituciones.length) { ul.append(el('li', { class: 'pc-note', text: 'No se pudo cargar la lista de instituciones. Revisá tu conexión.' })); return; }
+    instituciones.forEach((i) => {
+      const ok = CIUDAD().confirmada(i);
+      const b = el('button', { type: 'button', class: 'big-btn lg-lugar', 'data-inst': i.id }, [el('span', { class: 'big-ico', 'aria-hidden': 'true', text: i.icono }), el('span', { class: 'big-txt', text: i.nombre }), ok ? null : el('span', { class: 'lg-chip', text: 'Datos por confirmar' })]);
+      b.addEventListener('click', () => elegirInstitucion(i)); ul.append(el('li', {}, b));
+    });
+  }
+  const PEND = 'Información por confirmar';
+  function opcionesInstitucion(i) {
+    const f = i.ficha || {}, ok = CIUDAD().confirmada(i);
+    const servicios = ok ? String(f.servicios_confirmados || '').split(/[|;]/).map((x) => x.trim()).filter(Boolean) : [];
+    const dir = ok ? String(f.direccion_confirmada || '').trim() : '';
+    const hor = ok ? String(f.horario_confirmado || '').trim() : '';
+    const tel = ok ? String(f.telefono_confirmado || '').trim() : '';
+    const llegar = dir || hor || tel ? [dir && `Dirección: ${dir}`, hor && `Horario: ${hor}`, tel && `Teléfono: ${tel}`].filter(Boolean).join('. ') : '';
+    return [
+      { tipo: 'info', titulo: 'Qué puedo consultar', texto: servicios.length ? `En ${i.nombre} podés consultar: ${servicios.join('; ')}.` : `${PEND}. Todavía no hay servicios confirmados por la institución.`, pendiente: !servicios.length, aclaracion: servicios.length ? '' : 'CLARIA no inventa servicios: se muestran solo los que la institución confirmó con fuente y fecha.' },
+      { tipo: 'tablero', titulo: 'Hablar con imágenes' },
+      { tipo: 'info', titulo: 'Cómo llegar', texto: llegar || `${PEND}. Todavía no hay dirección ni horario confirmados.`, pendiente: !llegar, mapa: dir, aclaracion: llegar ? '' : 'Consultá con la institución antes de ir.' },
+      { tipo: 'info', titulo: 'Guías accesibles', texto: `${PEND}. Todavía no hay guías paso a paso verificadas para ${i.nombre}.`, pendiente: true, aclaracion: 'Las guías se arman solo con fuentes oficiales verificadas. Podés preparar una en «Entender un trámite».' },
+    ];
+  }
+  function elegirInstitucion(i) { lugar = { id: i.id, nombre: i.nombre, institucion: i, opciones: opcionesInstitucion(i) }; pintarMenu(); ir('menu'); }
+  function abrirTablero() {
+    const i = lugar.institucion; window.ClariaUI.showView('tablero', { keep: true });
+    window.ClariaTablero.abrirContexto({ id: i.id, nombre: i.nombre, aviso: 'Ayuda para comunicarte: no es un procedimiento oficial.', frases: i.frases, palabras: [] });
   }
   function elegir(l) { lugar = l; pintarMenu(); ir('menu'); }
   function lugarDe(texto) {
@@ -82,15 +115,16 @@
   });
 
   // ───────── menú del lugar ─────────
-  function origen() { return `Información proporcionada por: ${lugar.responsable} · Actualizada: ${fecha(lugar.actualizado)}`; }
+  function origen() { if (lugar.institucion) return CIUDAD().confirmada(lugar.institucion) ? `Información confirmada · Fuente: ${lugar.institucion.ficha.fuente_oficial_url} · Verificada: ${fecha(lugar.institucion.ficha.fecha_verificacion)}` : 'Datos por confirmar: CLARIA todavía no tiene información verificada de esta institución.'; return `Información proporcionada por: ${lugar.responsable} · Actualizada: ${fecha(lugar.actualizado)}`; }
   function pintarMenu() {
-    $('lgNombre').textContent = lugar.nombre; $('lgDemo').hidden = !lugar.demostracion; $('lgOrigen').textContent = origen();
+    $('lgNombre').textContent = lugar.nombre; $('lgDemo').hidden = !lugar.demostracion; $('lgInstNota').hidden = !lugar.institucion; $('lgOrigen').textContent = origen();
     const ul = $('lgOpciones'); ul.replaceChildren();
-    lugar.opciones.slice(0, 4).forEach((o) => { const b = el('button', { type: 'button', class: 'big-btn bb-violet' }, el('span', { class: 'big-txt', text: o.titulo })); b.addEventListener('click', () => { opcion = o; paso = 0; pintarPaso(); ir('paso'); }); ul.append(el('li', {}, b)); });
+    lugar.opciones.slice(0, 4).forEach((o) => { const b = el('button', { type: 'button', class: 'big-btn bb-violet' }, el('span', { class: 'big-txt', text: o.titulo })); b.addEventListener('click', () => { if (o.tipo === 'tablero') return abrirTablero(); opcion = o; paso = 0; pintarPaso(); ir('paso'); }); ul.append(el('li', {}, b)); });
   }
 
   // ───────── guía de la opción ─────────
   function voz(t) {
+    if (!CIUDAD().audio.activo()) { estado('lgEstadoPaso', 'El sonido está desactivado. Podés leer la pantalla o mostrársela al personal.'); return false; }
     if (!tts) { estado('lgEstadoPaso', 'Este navegador no tiene voz. Podés leer la pantalla o mostrársela al personal.'); return false; }
     speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-AR'; u.rate = 0.9; const v = speechSynthesis.getVoices() || []; const es = v.find((x) => x.lang === 'es-AR') || v.find((x) => /^es/i.test(x.lang)); if (es) u.voice = es;
     G()?.estado('hablando'); u.onend = u.onerror = () => G()?.estado('esperando'); speechSynthesis.speak(u); return true;
@@ -105,7 +139,7 @@
       $('lgAnterior').disabled = paso === 0; $('lgSiguiente').textContent = paso === opcion.pasos.length - 1 ? 'Listo' : 'Siguiente paso →'; $('lgEscuchar').onclick = () => { if (voz(p.texto)) estado('lgEstadoPaso', 'Leyendo el paso.'); };
     } else if (opcion.tipo === 'info') {
       $('lgPasoNav').hidden = false; $('lgAnterior').hidden = true; $('lgSiguiente').textContent = 'Listo';
-      cont.append(el('div', { class: 'lg-paso' }, [img(opcion.picto), el('p', { class: 'lg-texto', text: opcion.texto })]), opcion.aclaracion ? el('p', { class: 'pc-note', text: opcion.aclaracion }) : null);
+      cont.append(el('div', { class: 'lg-paso' }, [img(opcion.picto), el('p', { class: 'lg-texto', text: opcion.texto })]), opcion.aclaracion ? el('p', { class: 'pc-note', text: opcion.aclaracion }) : null, opcion.mapa ? el('a', { class: 'btn btn-soft', href: 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(opcion.mapa), target: '_blank', rel: 'noopener', text: 'Ver en el mapa (se abre otra página)' }) : null);
       $('lgEscuchar').onclick = () => { if (voz(opcion.texto)) estado('lgEstadoPaso', 'Leyendo la información.'); };
     } else if (opcion.tipo === 'frases') {
       cont.append(el('p', { class: 'pc-note', text: 'Tocá «Mostrar» para enseñar la frase en pantalla grande, o «Decir» para que se escuche.' }));

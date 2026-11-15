@@ -20,6 +20,8 @@
     tramites2: { q: 'Paso a paso', explica: 'Cada paso tiene su texto, pictogramas y audio. Con «Siguiente paso» avanzás. La fuente oficial está abajo: confirmá ahí los requisitos actuales.', ayuda: ['Escuchar paso lee el paso actual.', 'Siguiente paso avanza.', 'Abrí la fuente oficial para confirmar.'] },
     hablar: { q: '¿En qué puedo ayudarte?', explica: 'Escribime tu pregunta o dictala. Si no hay IA conectada, respondo con textos preparados y te lo aviso. No escribas datos personales.', ayuda: ['Escribí tu pregunta.', 'O tocá el micrófono para dictar.', 'No compartas DNI, claves ni datos personales.'] },
     tablero: { q: '¿Qué necesitás decir?', explica: 'Elegí un tema: ayuda, salud, escuela, transporte, compras o necesidades básicas. Después armás tu frase con imágenes y CLARIA la dice en voz alta.', ayuda: ['Tocá un tema.', 'Con Mis frases ves las que guardaste.'] },
+    editor: { q: 'Panel del editor', explica: 'Para quienes revisan la información: elegí pictogramas para los conceptos pendientes y completá las fichas de cada institución. Nada se publica solo.', ayuda: ['Buscar pictograma: ARASAAC te muestra candidatos.', 'Lo que elegís queda sin aprobar hasta que se revise.', 'Las fichas se descargan; no se publican desde acá.'] },
+    ciudadtablero: { q: 'Hablar con imágenes', explica: 'Son frases para comunicarte en este lugar. Tocá una frase y después Decir en voz alta o Mostrar en pantalla grande. No son un procedimiento oficial.', ayuda: ['Frase rápida: ya viene armada.', 'Decir: se escucha solo si lo tocás.', 'Mostrar: la enseñás al personal.', 'Sonido: lo podés apagar.'] },
     tablerocat: { q: 'Armá tu frase', explica: 'Tocá una frase rápida o las palabras con imágenes. Abajo ves tu frase: podés mover, cambiar o quitar tarjetas. Tocá Decir en voz alta cuando quieras.', ayuda: ['Frase rápida: ya viene armada.', 'Palabras: tocalas para sumarlas.', 'Decir en voz alta: yo la leo completa.', 'Guardar o compartir imagen, si querés.'] },
     tablerofrases: { q: 'Mis frases', explica: 'Acá están las frases que guardaste en este dispositivo. Podés decirlas, usarlas de nuevo o borrarlas.', ayuda: ['Decir: la leo en voz alta.', 'Usar: la cargo para modificarla.', 'Borrar: la saco de este dispositivo.'] },
     lugares: { q: '¿Dónde estás?', explica: 'Podés escanear el código QR del lugar, subir una foto del QR o elegir el lugar de la lista. Solo aparecen lugares con información cargada y validada por su institución.', ayuda: ['Escanear QR: enciende la cámara solo si lo tocás.', 'Subir foto del QR: si ya tenés la imagen.', 'Elegir de la lista: sin cámara.'] },
@@ -29,7 +31,7 @@
     creador2: { q: 'Revisá cada paso', explica: 'Revisá que cada paso tenga una sola acción y que cada pictograma corresponda. Los dudosos quedan pendientes hasta que los confirmes. Sin pendientes y con la revisión marcada, podés descargar el PDF.', ayuda: ['Un paso, una acción.', 'Revisar o Cambiar: elegís el pictograma.', 'Con pendientes, solo se descarga un borrador.'] },
     acerca: { q: 'Privacidad y créditos', explica: 'Acá está cómo CLARIA cuida tus datos, el estado de la IA y los créditos de los pictogramas.', ayuda: ['Tocá Volver para seguir.'] }
   };
-  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leerfoto: 'leer1', leerrevisar: 'leerfoto', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', tablero: 'inicio', lugares: 'inicio', creador1: 'tramites1', creador2: 'creador1', lugarmenu: 'lugares', lugarpaso: 'lugarmenu', tablerocat: 'tablero', tablerofrases: 'tablero', acerca: 'inicio' };
+  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leerfoto: 'leer1', leerrevisar: 'leerfoto', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', tablero: 'inicio', lugares: 'inicio', editor: 'lugares', creador1: 'tramites1', creador2: 'creador1', lugarmenu: 'lugares', lugarpaso: 'lugarmenu', tablerocat: 'tablero', ciudadtablero: 'lugarmenu', tablerofrases: 'tablero', acerca: 'inicio' };
   const ESTADOS = { esperando: 'Esperando', escuchando: 'Escuchando…', procesando: 'Pensando…', hablando: 'Hablando' };
   let pantalla = 'inicio', ultimo = null, anterior = 'inicio', activa = null;
   const c = $('claria');
@@ -78,6 +80,8 @@
     leerrevisar: ['Revisá el texto. Compará con la imagen y corregí lo que haga falta.', 'Revisá el texto.'],
     leer2: ['Ya tengo tu texto. ¿Cómo querés que te ayude? Puedo leértelo, explicártelo fácil, decirte qué hacer, o mostrártelo con pictogramas.', '¿Cómo querés que te ayude?'],
     tablero: ['¿Qué necesitás decir? Elegí un tema y armamos tu frase con imágenes.', '¿Qué necesitás decir?'],
+    editor: ['Panel del editor. Elegí pictogramas pendientes y completá las fichas. Nada se publica solo.', 'Panel del editor.'],
+    ciudadtablero: ['Hablar con imágenes. Tocá una frase y después decir en voz alta, o mostrala en pantalla grande.', 'Hablar con imágenes.'],
     tablerocat: ['Armá tu frase. Tocá una frase rápida o las palabras, y después tocá decir en voz alta.', 'Armá tu frase.'],
     tablerofrases: ['Estas son las frases que guardaste en este dispositivo.', 'Mis frases.'],
     lugares: ['¿Dónde estás? Podés escanear el código QR del lugar, subir una foto del QR o elegir de la lista.', '¿Dónde estás?'],

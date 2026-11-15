@@ -119,3 +119,21 @@ Textos sugeridos: `HOLA` · `QUIERO AGUA` · `NECESITO SACAR UN TURNO PARA MI DN
 - Una persona puede confirmar un pictograma equivocado: CLARIA lo marca como revisado por esa persona, no lo valida. En las pruebas automáticas se eligió un pictograma al azar solo para probar el flujo; esos PDF no son modelo de contenido.
 - No se guardan borradores: si se recarga la página, se pierde el trabajo. El PDF es una imagen (no tiene texto seleccionable ni etiquetas de accesibilidad).
 - **Diseño del PDF sin contrastar con la guía oficial:** la guía pide el texto a la derecha o debajo de la imagen, siempre en la misma ubicación. Hoy el PDF pone la frase completa **arriba** de las tarjetas (cada pictograma lleva su palabra debajo). Es una diferencia a corregir antes de usarlo como guía institucional.
+
+## Etapa 5 · «Mi ciudad, más accesible»: seis instituciones (rama `mi-ciudad-accesible`)
+
+Se integra el **Paquete Maestro de pictogramas** (copia íntegra en `docs/paquete-maestro/`) dentro de las funciones que ya existían. No hay una página nueva.
+
+**Cómo se integra**
+- `scripts/importar-paquete.mjs` convierte el paquete en `data/ciudad.json` (118 pictogramas con su estado, 6 instituciones, 48 frases) y falla si un ID, lema o PNG no coincide con el diccionario verificado. `npm`-free: `node scripts/importar-paquete.mjs`.
+- La vista «Mi ciudad, más accesible» (antes «Estoy en un lugar público») muestra siempre las seis instituciones; el QR queda como acceso secundario («Tengo un código QR»). Cada institución tiene **Qué puedo consultar · Hablar con imágenes · Cómo llegar · Guías accesibles**.
+- «Hablar con imágenes» reutiliza el **tablero** de la Etapa 2 (`ClariaTablero.abrirContexto`): mismas tarjetas, voz (solo al tocar), guardar y compartir; se agregó **Mostrar en pantalla grande** y un botón de **sonido** que lo apaga por completo.
+- Pictogramas: solo los locales verificados (`assets/picto/<id>.png`). Los conceptos **PENDIENTE** se muestran como texto («por revisar»); los **genéricos** llevan la marca «imagen general». Nunca se inventa un ID.
+- Datos institucionales: la plantilla viene vacía, así que todo dice **«Información por confirmar»**. Una ficha solo se muestra si está en estado `publicado` **y** tiene aprobación, fuente https y fecha (`ClariaCiudad.confirmada`).
+- **Panel del editor** (`editor.js`): busca candidatos en ARASAAC para los conceptos pendientes (la persona elige; queda «sin aprobar» en su dispositivo y se descarga como `ciudad-revisiones.json` para revisarlo en el repositorio) y valida/descarga fichas. **No publica nada.**
+- `scripts/importar-fichas.mjs`: importa fichas completadas desde CSV; sin fuente, fecha y aprobación queda en borrador; `publicado` solo con `--publicar`.
+- `docs/PICTOGRAMAS_PENDIENTES.md` + `docs/pendientes/*.png`: lista de pendientes con candidatos de ARASAAC (ninguno elegido).
+
+**Pruebas**: `tests/e2e-ciudad.mjs` (15), `tests/ciudad.test.mjs` (6) y todas las suites anteriores. Las suites de pictos, cuento y guía ahora usan un `config.js` vacío para no depender del Worker en vivo.
+
+**Límites**: las frases son ayudas de comunicación, **no procedimientos oficiales**. No hay guías PDF nuevas: falta una fuente oficial verificada por institución. Voz y QR con cámara real no se probaron en teléfono.

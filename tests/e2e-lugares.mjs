@@ -1,4 +1,4 @@
-// E2E de «Estoy en un lugar público» (etapa 3). Sin red externa; la cámara es el dispositivo falso de Chromium. Uso: node tests/e2e-lugares.mjs
+// E2E de «Mi ciudad, más accesible» (etapa 3). Sin red externa; la cámara es el dispositivo falso de Chromium. Uso: node tests/e2e-lugares.mjs
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url'; import { chromium } from 'playwright';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'); const FX = (n) => path.join(ROOT, 'tests/fixtures', n);
@@ -22,18 +22,18 @@ async function abrir({ ancho = 1280, alto = 900, camara = 'real', lugaresJson } 
   await page.goto(BASE); await page.waitForSelector('#claria'); return { ctx, page, ext, errs };
 }
 const spoken = (p) => p.evaluate(() => window.__spoken);
-const aLugares = async (page) => { await page.click('#view-inicio [data-view="lugares"]'); await page.waitForSelector('#lgInicio:not([hidden])'); };
+const aLugares = async (page) => { await page.click('#view-inicio [data-view="lugares"]'); await page.waitForSelector('#lgInicio:not([hidden])'); await page.evaluate(() => { document.getElementById('lgQR').open = true; }); };
 const porQR = async (page, f) => { await page.setInputFiles('#lgArchivo', FX(f)); };
 const aMenu = async (page) => { await aLugares(page); await porQR(page, 'qr-biblioteca-demo.png'); await page.waitForSelector('#lgMenu:not([hidden])'); };
 
 console.log('\nEn un espacio público');
 await test('inicio: las 4 tarjetas del kit + acceso a hablar; «Crear con pictogramas» sigue accesible desde Hablar con imágenes', async () => {
-  const { page, errs, ctx } = await abrir(); assert.deepEqual(await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent)), ['Entender una foto', 'Hablar con imágenes', 'Estoy en un lugar público', 'Entender un trámite', 'O hablá conmigo']);
+  const { page, errs, ctx } = await abrir(); assert.deepEqual(await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent)), ['Entender una foto', 'Hablar con imágenes', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']);
   await page.click('#view-inicio [data-view="tablero"]'); await page.click('#tbCategorias [data-view="escribir"]'); assert.equal(await page.isVisible('#view-escribir'), true); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('¿Dónde estás?: tres formas de elegir; la cámara NO se enciende ni se pide la ubicación', async () => {
-  const { page, errs, ctx } = await abrir(); await aLugares(page); assert.match(await page.textContent('#lgTitulo'), /¿Dónde estás\?/);
-  assert.deepEqual(await page.$$eval('#lgInicio .big-choices.three .big-txt', (n) => n.map((x) => x.textContent)), ['Escanear QR', 'Subir foto del QR', 'Elegir de la lista']);
+  const { page, errs, ctx } = await abrir(); await aLugares(page); assert.match(await page.textContent('#lgTitulo'), /Mi ciudad, más accesible/);
+  assert.deepEqual(await page.$$eval('#lgInicio .big-choices.three .big-txt', (n) => n.map((x) => x.textContent)), ['Escanear QR', 'Subir foto del QR', 'Otros lugares']);
   await page.waitForTimeout(400); assert.equal(await page.evaluate(() => window.__gum || 0), 0); assert.equal(await page.evaluate(() => window.__geo), 0); assert.equal(await page.evaluate(() => document.activeElement.id), 'lgTitulo'); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('QR de la biblioteca de demostración → «¿Qué necesitás?» con Inscribirme / Consultar horario / Pedir ayuda, rotulado como ficticio con responsable y fecha', async () => {
@@ -51,7 +51,7 @@ await test('imagen sin QR: mensaje claro y sin romperse', async () => {
   const { page, errs, ctx } = await abrir(); await aLugares(page); await porQR(page, 'nota-escolar.png'); await page.waitForFunction(() => /No encontré un código QR/.test(document.getElementById('lgEstado').textContent)); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('elegir de la lista (sin cámara ni QR) lleva al mismo menú', async () => {
-  const { page, ctx } = await abrir(); await aLugares(page); await page.click('#lgLista'); await page.click('#lgListaLugares .lg-lugar'); await page.waitForSelector('#lgMenu:not([hidden])'); assert.match(await page.textContent('#lgNombre'), /Biblioteca de demostración/); await ctx.close();
+  const base = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/lugares.json'), 'utf8')); const { page, ctx } = await abrir({ lugaresJson: { lugares: base.lugares.map((l) => ({ ...l, oculto: false })) } }); await aLugares(page); await page.click('#lgLista'); await page.click('#lgListaLugares .lg-lugar'); await page.waitForSelector('#lgMenu:not([hidden])'); assert.match(await page.textContent('#lgNombre'), /Biblioteca de demostración/); await ctx.close();
 });
 await test('Inscribirme: un paso por pantalla, con pictograma y voz solo si la persona la pide; vuelve al menú', async () => {
   const { page, errs, ctx } = await abrir(); await aMenu(page); await page.click('#lgOpciones >> text=Inscribirme'); await page.waitForSelector('#lgPaso:not([hidden])');
@@ -89,13 +89,13 @@ await test('cámara negada: lo explica y deja subir foto o elegir de la lista', 
   assert.equal(await page.isVisible('#lgScan'), false); assert.equal(await page.isEnabled('#lgSubir'), true); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('un lugar sin responsable o sin fecha de actualización NO se muestra (no se inventan datos)', async () => {
-  const base = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/lugares.json'), 'utf8')); const ok = base.lugares[0];
+  const base = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/lugares.json'), 'utf8')); const ok = { ...base.lugares[0], oculto: false };
   const { page, ctx } = await abrir({ lugaresJson: { lugares: [ok, { ...ok, id: 'sin-resp', nombre: 'Sin responsable', responsable: '' }, { ...ok, id: 'sin-fecha', nombre: 'Sin fecha', actualizado: '' }] } });
   await aLugares(page); await page.click('#lgLista'); assert.deepEqual(await page.$$eval('#lgListaLugares .big-txt', (n) => n.map((x) => x.textContent)), ['Biblioteca de demostración']); await ctx.close();
 });
 await test('sin conexión: tras una primera visita se puede elegir el lugar y pedir ayuda', async () => {
   const { page, ctx } = await abrir(); await page.evaluate(() => navigator.serviceWorker.ready); await page.goto(BASE); await page.waitForFunction(() => navigator.serviceWorker.controller); await page.waitForTimeout(1500);
-  await ctx.setOffline(true); await page.goto(BASE); await page.waitForSelector('#claria'); await aLugares(page); await page.click('#lgLista'); await page.click('#lgListaLugares .lg-lugar'); await page.click('#lgOpciones >> text=Pedir ayuda'); await page.waitForSelector('#lgPaso:not([hidden])');
+  await ctx.setOffline(true); await page.goto(BASE); await page.waitForSelector('#claria'); await aLugares(page); await porQR(page, 'qr-biblioteca-demo.png'); await page.waitForSelector('#lgMenu:not([hidden])'); await page.click('#lgOpciones >> text=Pedir ayuda'); await page.waitForSelector('#lgPaso:not([hidden])');
   await page.waitForFunction(() => { const i = document.querySelector('#lgPasoContenido img'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 5000 }); await ctx.close();
 });
 await test('móvil 390 px: sin desbordamiento en ninguna pantalla', async () => {

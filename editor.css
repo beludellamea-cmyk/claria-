@@ -1,0 +1,4 @@
+.ed-scope input[type=text],.ed-scope select{width:100%;min-height:44px;font-size:1rem;box-sizing:border-box}
+.ed-lista{list-style:none;padding:0}.ed-item{padding:.6rem 0;border-bottom:1px solid rgba(0,0,0,.12);display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.ed-res{flex-basis:100%;display:flex;flex-wrap:wrap;gap:.5rem}.ed-campos{display:grid;gap:.3rem}.ed-check{display:flex;gap:.5rem;align-items:center;min-height:44px;margin:.5rem 0}
+.ed-problemas{color:#8a1c1c}

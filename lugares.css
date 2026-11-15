@@ -16,3 +16,7 @@
 .lg-mostrar-pictos{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.lg-mostrar-pictos img{width:clamp(88px,20vw,150px);height:clamp(88px,20vw,150px);object-fit:contain}
 .lg-mostrar-texto{font-size:clamp(1.8rem,6vw,3.2rem);font-weight:900;margin:16px 0}
 @media(max-width:700px){.lg-opciones{grid-template-columns:1fr}}
+
+/* Mi ciudad: instituciones */
+.lg-inst-lista .lg-lugar{width:100%;min-height:64px;display:flex;align-items:center;gap:.75rem;text-align:left}
+.lg-qr{margin:1.25rem 0}.lg-qr summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}

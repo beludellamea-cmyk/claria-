@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="cine.css">
   <link rel="stylesheet" href="foto.css">
   <link rel="stylesheet" href="tablero.css">
+  <link rel="stylesheet" href="editor.css">
   <link rel="stylesheet" href="lugares.css">
   <link rel="stylesheet" href="creador.css">
   <script defer src="config.js"></script>
@@ -22,7 +23,9 @@
   <script defer src="app.js"></script>
   <script defer src="convertidor.js"></script>
   <script defer src="pictocuento.js"></script>
+  <script defer src="ciudad.js"></script>
   <script defer src="tablero.js"></script>
+  <script defer src="editor.js"></script>
   <script defer src="lugares.js"></script>
   <script defer src="creador.js"></script>
   <script defer src="cine.js"></script>
@@ -84,7 +87,7 @@
           <div class="big-choices four cine-cards">
             <button type="button" class="big-btn bb-blue" data-view="lectura"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 12h30l10 10v30H12z"/><path d="M42 12v10h10M20 30h24M20 39h24M20 47h14"/></svg></span><span class="big-txt">Entender una foto</span></button>
             <button type="button" class="big-btn bb-amber" data-view="tablero"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="36" rx="6"/><path d="M20 24h8v8h-8zM36 24h8v8h-8z"/><path d="M22 54h20"/></svg></span><span class="big-txt">Hablar con imágenes</span></button>
-            <button type="button" class="big-btn bb-teal" data-view="lugares"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 54h48M12 54V26l20-14 20 14v28"/><path d="M26 54V38h12v16"/></svg></span><span class="big-txt">Estoy en un lugar público</span></button>
+            <button type="button" class="big-btn bb-teal" data-view="lugares"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 54h48M12 54V26l20-14 20 14v28"/><path d="M26 54V38h12v16"/></svg></span><span class="big-txt">Mi ciudad, más accesible</span></button>
             <button type="button" class="big-btn bb-violet" data-view="tramites"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="14" cy="16" r="5"/><circle cx="50" cy="48" r="5"/><path d="M19 16h18a9 9 0 0 1 0 18H27a9 9 0 0 0 0 18h18"/></svg></span><span class="big-txt">Entender un trámite</span></button>
           </div>
           <button type="button" class="big-btn bb-rose cine-cta" data-view="hablar"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M10 14h44v30H30l-12 10V44h-8z"/><path d="M22 26h20M22 34h12"/></svg></span><span class="big-txt">O hablá conmigo</span></button>
@@ -100,6 +103,7 @@
         </div>
         <div id="tbCategoria" class="paso" hidden>
           <h1 id="tbCatTitulo" class="q">Ayuda</h1>
+          <p id="tbAviso" class="pc-note tb-aviso" hidden></p>
           <h2 class="tb-sub">Frases rápidas</h2>
           <ul id="tbFrasesRapidas" class="tb-lista" aria-label="Frases rápidas"></ul>
           <h2 class="tb-sub">Palabras</h2>
@@ -120,7 +124,9 @@
           <p class="button-line"><button type="button" class="btn btn-soft" id="tbUsarTarjetas" hidden>Usar el texto de las tarjetas</button></p>
           <div class="tb-botones">
             <button type="button" class="primary" id="tbDecir" disabled>▶ Decir en voz alta</button>
+            <button type="button" id="tbMostrar" disabled>Mostrar en pantalla grande</button>
             <button type="button" id="tbGuardar" disabled>Guardar frase</button>
+            <button type="button" id="tbSonido" aria-pressed="true">🔊 Sonido activado</button>
             <button type="button" id="tbCompartir" disabled>Compartir imagen</button>
             <button type="button" id="tbVaciar" disabled>Vaciar</button>
           </div>
@@ -128,6 +134,14 @@
           <p id="tbEstado" class="pc-note" role="status" aria-live="polite"></p>
           <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia CC BY-NC-SA 4.0. Uso no comercial.</p>
         </div>
+        <dialog id="tbMostrarDlg" class="pc-dialog tb-mostrar" aria-labelledby="tbMostrarTitulo">
+          <div class="pc-dialog-in">
+            <h2 id="tbMostrarTitulo" class="tb-sr">Frase para mostrar</h2>
+            <ol id="tbMostrarTarjetas" class="tb-mostrar-tarjetas"></ol>
+            <p id="tbMostrarTexto" class="tb-mostrar-texto"></p>
+            <div class="tb-botones"><button type="button" class="primary" id="tbMostrarDecir">▶ Decir en voz alta</button><button type="button" id="tbMostrarCerrar">Volver</button></div>
+          </div>
+        </dialog>
         <dialog id="tbDialogo" class="pc-dialog" aria-labelledby="tbDialogoTitulo">
           <form method="dialog" class="pc-dialog-in">
             <h2 id="tbDialogoTitulo">Cambiar pictograma</h2>
@@ -143,21 +157,26 @@
       <section id="view-lugares" class="view page-view lg-scope" aria-labelledby="lgTitulo" hidden>
         <button type="button" class="back-btn" data-back>← Volver</button>
         <div id="lgInicio" class="paso">
-          <h1 id="lgTitulo" class="q">¿Dónde estás?</h1>
+          <h1 id="lgTitulo" class="q">Mi ciudad, más accesible</h1>
+          <h2 class="tb-sub">¿A qué lugar vas?</h2>
+          <ul id="lgInstituciones" class="tb-lista lg-inst-lista" aria-label="Instituciones"><li class="pc-note">Cargando…</li></ul>
+          <details id="lgQR" class="lg-qr"><summary>Tengo un código QR</summary>
           <div class="big-choices three">
             <button type="button" class="big-btn bb-teal" id="lgEscanear"><span class="big-ico" aria-hidden="true">📷</span><span class="big-txt">Escanear QR</span></button>
             <button type="button" class="big-btn bb-blue" id="lgSubir"><span class="big-ico" aria-hidden="true">🖼️</span><span class="big-txt">Subir foto del QR</span></button>
-            <button type="button" class="big-btn bb-violet" id="lgLista" aria-expanded="false" aria-controls="lgListaBox"><span class="big-ico" aria-hidden="true">📋</span><span class="big-txt">Elegir de la lista</span></button>
+            <button type="button" class="big-btn bb-violet" id="lgLista" aria-expanded="false" aria-controls="lgListaBox" hidden><span class="big-ico" aria-hidden="true">📋</span><span class="big-txt">Otros lugares</span></button>
           </div>
           <input id="lgArchivo" type="file" accept="image/*" hidden aria-label="Foto del código QR">
           <div id="lgScan" class="lg-scan" hidden><video id="lgVideo" playsinline muted aria-label="Cámara apuntando al código QR"></video><button type="button" class="btn btn-soft" id="lgCerrarCamara">Apagar cámara</button></div>
-          <div id="lgListaBox" hidden><ul id="lgListaLugares" class="tb-lista" aria-label="Lugares con guía"></ul></div>
+          <div id="lgListaBox" hidden><ul id="lgListaLugares" class="tb-lista" aria-label="Otros lugares con guía"></ul></div>
+          </details>
           <p id="lgEstado" class="pc-note" role="status" aria-live="polite"></p>
-          <p class="pc-note">Solo se muestran lugares con información cargada y validada por su institución. La cámara se enciende solo cuando la tocás y no se usa tu ubicación.</p>
+          <p class="button-line"><button type="button" class="btn btn-soft" data-view="editor">Panel del editor (para quienes revisan la información)</button></p>
+          <p class="pc-note">CLARIA no inventa datos: horarios, direcciones o servicios aparecen solo cuando la institución los confirma con fuente y fecha. Mientras tanto dice «Información por confirmar». La cámara se enciende solo cuando la tocás y no se usa tu ubicación.</p>
         </div>
         <div id="lgMenu" class="paso" hidden>
           <h1 id="lgMenuTitulo" class="q">¿Qué necesitás?</h1>
-          <div class="panel lg-inst"><h2 id="lgNombre"></h2><p id="lgDemo" class="lg-chip lg-chip-grande" hidden>EJEMPLO FICTICIO: no es una institución real</p><p id="lgOrigen" class="pc-note"></p><p class="pc-note">El contenido es responsabilidad de la institución. CLARIA es un proyecto educativo independiente.</p></div>
+          <div class="panel lg-inst"><h2 id="lgNombre"></h2><p id="lgDemo" class="lg-chip lg-chip-grande" hidden>EJEMPLO FICTICIO: no es una institución real</p><p id="lgOrigen" class="pc-note"></p><p id="lgInstNota" class="pc-note" hidden>Datos de la institución: solo se muestran los confirmados con fuente y fecha. Las frases de «Hablar con imágenes» son ayudas para comunicarte, no un procedimiento oficial.</p><p class="pc-note">El contenido es responsabilidad de la institución. CLARIA es un proyecto educativo independiente.</p></div>
           <ul id="lgOpciones" class="lg-opciones" aria-label="Opciones"></ul>
         </div>
         <div id="lgPaso" class="paso" hidden>
@@ -174,6 +193,32 @@
           <div class="pc-dialog-in"><div id="lgMostrarPictos" class="lg-mostrar-pictos"></div><p id="lgMostrarTexto" class="lg-mostrar-texto"></p>
             <div class="pc-dialog-btns"><button type="button" id="lgMostrarDecir">▶ Decir</button><button type="button" id="lgMostrarCerrar">Cerrar</button></div></div>
         </dialog>
+      </section>
+
+      <section id="view-editor" class="view page-view ed-scope" aria-labelledby="edTitulo" hidden>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <h1 id="edTitulo" class="q" tabindex="-1">Panel del editor</h1>
+        <p class="pc-note">Para quienes revisan la información. CLARIA no elige pictogramas ni publica datos por su cuenta: todo lo que hagas acá queda en este dispositivo o se descarga para revisarlo.</p>
+        <label for="edEditor" class="tb-label">Tu nombre (editor/a)</label>
+        <input id="edEditor" type="text" maxlength="80" autocomplete="off">
+        <h2 class="tb-sub">Pictogramas pendientes</h2>
+        <p id="edResumen" class="pc-note">Cargando…</p>
+        <ul id="edPendientes" class="ed-lista" aria-label="Conceptos por resolver"></ul>
+        <p class="button-line"><button type="button" class="btn btn-soft" id="edDescargarRev">Descargar revisiones (JSON)</button></p>
+        <h2 class="tb-sub">Fichas de las instituciones</h2>
+        <label for="edInst" class="tb-label">Institución</label><select id="edInst"></select>
+        <div id="edCampos" class="ed-campos"></div>
+        <label for="edResponsable" class="tb-label">Responsable de la revisión</label><input id="edResponsable" type="text" maxlength="120">
+        <label for="edFecha" class="tb-label">Fecha de revisión (AAAA-MM-DD)</label><input id="edFecha" type="text" maxlength="10" inputmode="numeric">
+        <label for="edFuente" class="tb-label">Fuente de la revisión</label><input id="edFuente" type="text" maxlength="300">
+        <label for="edUltima" class="tb-label">Última revisión (AAAA-MM-DD)</label><input id="edUltima" type="text" maxlength="10" inputmode="numeric">
+        <label class="ed-check"><input id="edAprobado" type="checkbox"> Una persona responsable revisó y aprobó estos datos</label>
+        <label for="edEstadoFicha" class="tb-label">Estado</label>
+        <select id="edEstadoFicha"><option value="borrador">Borrador</option><option value="revisado">Revisado</option><option value="publicado">Publicado</option></select>
+        <p id="edValidez" class="pc-note" role="status" aria-live="polite"></p><ul id="edProblemas" class="ed-problemas"></ul>
+        <p class="button-line"><button type="button" class="primary" id="edDescargarFicha">Descargar ficha (JSON)</button></p>
+        <p id="edEstado" class="pc-note" role="status" aria-live="polite"></p>
+        <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia CC BY-NC-SA 4.0. Uso no comercial.</p>
       </section>
 
       <section id="view-escribir" class="view page-view pc-scope" aria-labelledby="escribirTitulo" hidden>

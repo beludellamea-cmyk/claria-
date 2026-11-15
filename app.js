@@ -10,19 +10,20 @@
   let leerPasoActual = 1, tramPasoActual = 1;
   const G = () => window.ClariaGuia;
   function showView(name, opts = {}) {
-    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca','tablero','lugares','creador'].includes(name)) return;
+    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca','tablero','lugares','creador','editor'].includes(name)) return;
     if (name === 'lectura' && !opts.paso) leerPaso(1, true);
     if (name === 'tramites' && !opts.paso) tramitePaso(1, true);
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
     history.replaceState(null,'','#'+name);
     G()?.onView(name);
-    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', tablero:'tablero', lugares:'lugares', creador:'creador1', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
+    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', tablero:'tablero', lugares:'lugares', editor:'editor', creador:'creador1', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
     G()?.setPantalla(key);
     if (name === 'hablar') openChat(true);
     if (name !== 'lugares') window.ClariaLugares?.salir();
     if (name === 'creador') window.ClariaCreador?.entrar(Boolean(opts.keep));
-    if (name === 'tablero') window.ClariaTablero?.entrar();
+    if (name === 'tablero') window.ClariaTablero?.entrar(Boolean(opts.keep));
     if (name === 'lugares') window.ClariaLugares?.entrar(Boolean(opts.keep));
+    if (name === 'editor') window.ClariaEditor?.entrar();
     const view = $('view-'+name); const title = Array.from(view.querySelectorAll('h1')).find((h) => h.offsetParent !== null);
     if (title) { title.setAttribute('tabindex','-1'); title.focus({preventScroll:true}); }
     window.scrollTo({top:0,behavior:document.body.classList.contains('no-motion')?'instant':'smooth'});
@@ -45,6 +46,7 @@
     if (k === 'escribir' || k === 'hablar' || k === 'acerca' || k === 'cuento' || k === 'tablero' || k === 'lugares') return showView(k);
     if (k === 'creador1' || k === 'creador2') { showView('creador', { keep: true }); window.ClariaCreador?.irA(k === 'creador1' ? 1 : 2); return; }
     if (k === 'lugarmenu' || k === 'lugarpaso') { showView('lugares', { keep: true }); window.ClariaLugares?.irA(k === 'lugarmenu' ? 'menu' : 'inicio'); return; }
+    if (k === 'ciudadtablero') { showView('lugares', { keep: true }); window.ClariaLugares?.irA('menu'); return; }
     if (k === 'tablerocat' || k === 'tablerofrases') { showView('tablero'); window.ClariaTablero?.irA(k === 'tablerocat' ? 'lista' : 'guardadas'); return; }
     if (k === 'leerfoto' || k === 'leerrevisar') { showView('lectura', { paso: 1 }); leerPaso(k.slice(4)); return; }
     const m = /^(leer|tramites)(\d)$/.exec(k); if (!m) return;

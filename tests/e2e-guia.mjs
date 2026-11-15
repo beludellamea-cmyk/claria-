@@ -3,7 +3,7 @@ import http from 'node:http'; import fs from 'node:fs'; import path from 'node:p
 import { fileURLToPath } from 'node:url'; import { chromium } from 'playwright';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'); const OUT = process.env.OUT || '/tmp/claria-e2e'; fs.mkdirSync(OUT, { recursive: true });
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png' };
-const srv = http.createServer((req, res) => { const u = decodeURIComponent(req.url.split('?')[0]); const f = path.join(ROOT, u === '/' ? 'index.html' : u);
+const srv = http.createServer((req, res) => { const u = decodeURIComponent(req.url.split('?')[0]); if (u === '/config.js') { res.writeHead(200, { 'content-type': 'text/javascript' }); return res.end('window.CLARIA_CONFIG={apiBase:""};'); } const f = path.join(ROOT, u === '/' ? 'index.html' : u);
   if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); } res.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res); });
 await new Promise((r) => srv.listen(8015, r)); const BASE = 'http://localhost:8015/';
 const browser = await chromium.launch(); const results = [];
@@ -30,7 +30,7 @@ const caja = (page, sel) => page.$eval(sel, (n) => { const r = n.getBoundingClie
 await test('bienvenida: solo saludo, pregunta y 4 tarjetas + «O hablá conmigo» con ícono y texto; nada suena solo', async () => {
   const { ctx, page, errs } = await abrir(); await page.waitForTimeout(1300); assert.equal((await page.textContent('#inicioTitulo')).trim(), '¡Hola! Soy CLARIA.'); assert.equal((await page.textContent('.welcome-q')).trim(), '¿Qué querés hacer hoy?');
   const bts = await page.$$eval('#view-inicio .big-btn', (b) => b.map((x) => [Boolean(x.querySelector('.big-ico svg')), x.querySelector('.big-txt').textContent.trim()]));
-  assert.deepEqual(bts.map((b) => b[1]), ['Entender una foto', 'Hablar con imágenes', 'Estoy en un lugar público', 'Entender un trámite', 'O hablá conmigo']); assert.ok(bts.every((b) => b[0]));
+  assert.deepEqual(bts.map((b) => b[1]), ['Entender una foto', 'Hablar con imágenes', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']); assert.ok(bts.every((b) => b[0]));
   assert.equal(await page.$$eval('#view-inicio .big-btn small, #view-inicio p:not(.claria-estado)', (n) => n.filter((x) => x.offsetParent !== null).length), 0, 'sin descripciones ni párrafos');
   assert.equal((await caja(page, '#claria-btn')).w >= 190, true, 'personaje grande'); assert.equal((await spoken(page)).length, 0); assert.deepEqual(errs, []);
   await page.screenshot({ path: `${OUT}/20-bienvenida-pc.png` }); await ctx.close();
@@ -115,7 +115,7 @@ await test('tablet 820 px y texto al 150 % con alto contraste: sin desborde', as
 });
 await test('teclado: Tab llega a las 4 tarjetas, al botón de hablar y al personaje; Enter abre; foco en el título', async () => {
   const { ctx, page } = await abrir(); const orden = []; for (let i = 0; i < 16; i++) { await page.keyboard.press('Tab'); orden.push(await page.evaluate(() => document.activeElement.id || document.activeElement.textContent.trim().slice(0, 24))); }
-  for (const t of ['claria-btn', 'Entender una foto', 'Hablar con imágenes', 'Estoy en un lugar', 'Entender un trámite', 'O hablá conmigo']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
+  for (const t of ['claria-btn', 'Entender una foto', 'Hablar con imágenes', 'Mi ciudad', 'Entender un trámite', 'O hablá conmigo']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
   await page.focus('#view-inicio [data-view=hablar]'); await page.keyboard.press('Enter'); await page.waitForFunction(() => document.activeElement.id === 'hablarTitulo'); await ctx.close();
 });
 await test('ningún audio ni micrófono se activa solo al recorrer todas las pantallas', async () => {

@@ -1,0 +1,119 @@
+﻿institucion,grupo,concepto,lema_diccionario,id_arasaac,archivo_en_repositorio,imagen_oficial_en_linea,estado,uso_previsto,observaciones
+COMÚN,Comunicación,Hola,hola,6009,assets/picto/6009.png,https://static.arasaac.org/pictograms/6009/6009_300.png,VERIFICADO_DICCIONARIO_CLARIA,SALUDAR,
+COMÚN,Comunicación,Necesito,necesitar,37160,assets/picto/37160.png,https://static.arasaac.org/pictograms/37160/37160_300.png,VERIFICADO_DICCIONARIO_CLARIA,INICIAR UN MENSAJE,
+COMÚN,Comunicación,Quiero,querer,5441,assets/picto/5441.png,https://static.arasaac.org/pictograms/5441/5441_300.png,VERIFICADO_DICCIONARIO_CLARIA,EXPRESAR UNA PETICIÓN,
+COMÚN,Comunicación,Ayuda,ayudar,4570,assets/picto/4570.png,https://static.arasaac.org/pictograms/4570/4570_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,PEDIR AYUDA,"Acción AYUDAR, no equivale a un mensaje completo."
+COMÚN,Comunicación,No entiendo,entender,11697,assets/picto/11697.png,https://static.arasaac.org/pictograms/11697/11697_300.png,VERIFICADO_DICCIONARIO_CLARIA,EXPRESAR DIFICULTAD DE COMPRENSIÓN,Combinar con el pictograma NO.
+COMÚN,Comunicación,Sí,sí,5584,assets/picto/5584.png,https://static.arasaac.org/pictograms/5584/5584_300.png,VERIFICADO_DICCIONARIO_CLARIA,RESPONDER,
+COMÚN,Comunicación,No,no,5526,assets/picto/5526.png,https://static.arasaac.org/pictograms/5526/5526_300.png,VERIFICADO_DICCIONARIO_CLARIA,RESPONDER,
+COMÚN,Comunicación,Por favor,por favor,8194,assets/picto/8194.png,https://static.arasaac.org/pictograms/8194/8194_300.png,VERIFICADO_DICCIONARIO_CLARIA,PEDIR CON CORTESÍA,
+COMÚN,Comunicación,Gracias,gracias,8128,assets/picto/8128.png,https://static.arasaac.org/pictograms/8128/8128_300.png,VERIFICADO_DICCIONARIO_CLARIA,AGRADECER,
+COMÚN,Comunicación,Hablar,hablar,3345,assets/picto/3345.png,https://static.arasaac.org/pictograms/3345/3345_300.png,VERIFICADO_DICCIONARIO_CLARIA,COMUNICARSE,
+COMÚN,Comunicación,Escuchar,escuchar,2381,assets/picto/2381.png,https://static.arasaac.org/pictograms/2381/2381_300.png,VERIFICADO_DICCIONARIO_CLARIA,ESCUCHAR UNA EXPLICACIÓN,
+COMÚN,Comunicación,Preguntar,preguntar,9844,assets/picto/9844.png,https://static.arasaac.org/pictograms/9844/9844_300.png,VERIFICADO_DICCIONARIO_CLARIA,HACER UNA PREGUNTA,
+COMÚN,Comunicación,Entender,entender,11697,assets/picto/11697.png,https://static.arasaac.org/pictograms/11697/11697_300.png,VERIFICADO_DICCIONARIO_CLARIA,COMPRENSIÓN,
+COMÚN,Orientación,¿Dónde?,dónde,7764,assets/picto/7764.png,https://static.arasaac.org/pictograms/7764/7764_300.png,VERIFICADO_DICCIONARIO_CLARIA,PREGUNTAR UNA UBICACIÓN,
+COMÚN,Orientación,Ir,ir,2432,assets/picto/2432.png,https://static.arasaac.org/pictograms/2432/2432_300.png,VERIFICADO_DICCIONARIO_CLARIA,DESPLAZARSE,
+COMÚN,Orientación,Entrar,entrar,2742,assets/picto/2742.png,https://static.arasaac.org/pictograms/2742/2742_300.png,VERIFICADO_DICCIONARIO_CLARIA,INGRESAR,
+COMÚN,Orientación,Salir,salir,2806,assets/picto/2806.png,https://static.arasaac.org/pictograms/2806/2806_300.png,VERIFICADO_DICCIONARIO_CLARIA,SALIR,
+COMÚN,Orientación,Esperar,esperar,8109,assets/picto/8109.png,https://static.arasaac.org/pictograms/8109/8109_300.png,VERIFICADO_DICCIONARIO_CLARIA,ESPERAR SER ATENDIDO,
+COMÚN,Orientación,Turno,turno,22190,assets/picto/22190.png,https://static.arasaac.org/pictograms/22190/22190_300.png,VERIFICADO_DICCIONARIO_CLARIA,PREGUNTAR POR UN TURNO,
+COMÚN,Orientación,Oficina,oficina,36089,assets/picto/36089.png,https://static.arasaac.org/pictograms/36089/36089_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICACIÓN GENÉRICA,No equivale por sí solo a Municipalidad o Registro Civil.
+COMÚN,Orientación,Información,información,9897,assets/picto/9897.png,https://static.arasaac.org/pictograms/9897/9897_300.png,VERIFICADO_DICCIONARIO_CLARIA,PEDIR INFORMACIÓN,
+COMÚN,Orientación,Baño,baño,15905,assets/picto/15905.png,https://static.arasaac.org/pictograms/15905/15905_300.png,VERIFICADO_DICCIONARIO_CLARIA,LOCALIZAR UN SERVICIO,
+COMÚN,Orientación,Hora,hora,7129,assets/picto/7129.png,https://static.arasaac.org/pictograms/7129/7129_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR HORA,No equivale al horario oficial.
+COMÚN,Orientación,Horario de atención,,,,,PENDIENTE_SELECCION_MANUAL,MOSTRAR HORARIO PUBLICADO,No asignar pictograma por similitud sin revisión.
+COMÚN,Documentos,DNI,DNI,5987,assets/picto/5987.png,https://static.arasaac.org/pictograms/5987/5987_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTACIÓN,
+COMÚN,Documentos,Documento,documento,21802,assets/picto/21802.png,https://static.arasaac.org/pictograms/21802/21802_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTACIÓN,
+COMÚN,Documentos,Formulario,formulario,9173,assets/picto/9173.png,https://static.arasaac.org/pictograms/9173/9173_300.png,VERIFICADO_DICCIONARIO_CLARIA,PRESENTACIÓN DE FORMULARIOS,
+COMÚN,Documentos,Certificado,certificado,27677,assets/picto/27677.png,https://static.arasaac.org/pictograms/27677/27677_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTACIÓN,
+COMÚN,Documentos,Firmar,firmar,12317,assets/picto/12317.png,https://static.arasaac.org/pictograms/12317/12317_300.png,VERIFICADO_DICCIONARIO_CLARIA,ACCIÓN EN FORMULARIOS,
+COMÚN,Documentos,Papel,papel,8349,assets/picto/8349.png,https://static.arasaac.org/pictograms/8349/8349_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTOS IMPRESOS,
+COMÚN,Documentos,Foto,foto,7107,assets/picto/7107.png,https://static.arasaac.org/pictograms/7107/7107_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICACIÓN DE FOTO,
+COMÚN,Documentos,Fecha,fecha,34799,assets/picto/34799.png,https://static.arasaac.org/pictograms/34799/34799_300.png,VERIFICADO_DICCIONARIO_CLARIA,FECHA DE EVENTO,
+COMÚN,Documentos,Nombre,nombre,27357,assets/picto/27357.png,https://static.arasaac.org/pictograms/27357/27357_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICACIÓN PERSONAL,
+COMÚN,Acciones,Traer,traer,7279,assets/picto/7279.png,https://static.arasaac.org/pictograms/7279/7279_300.png,VERIFICADO_DICCIONARIO_CLARIA,ORIENTACIÓN DE TRÁMITES,
+COMÚN,Acciones,Llevar,llevar,6139,assets/picto/6139.png,https://static.arasaac.org/pictograms/6139/6139_300.png,VERIFICADO_DICCIONARIO_CLARIA,ORIENTACIÓN DE TRÁMITES,
+COMÚN,Acciones,Completar,completar,13078,assets/picto/13078.png,https://static.arasaac.org/pictograms/13078/13078_300.png,VERIFICADO_DICCIONARIO_CLARIA,FORMULARIOS,
+COMÚN,Acciones,Pedir,pedir,11251,assets/picto/11251.png,https://static.arasaac.org/pictograms/11251/11251_300.png,VERIFICADO_DICCIONARIO_CLARIA,SOLICITAR ALGO,
+COMÚN,Acciones,Pagar,pagar,9014,assets/picto/9014.png,https://static.arasaac.org/pictograms/9014/9014_300.png,VERIFICADO_DICCIONARIO_CLARIA,"PAGO, SOLO SI FUE VERIFICADO",No afirmar costo sin fuentes.
+COMÚN,Acciones,Leer,leer,28643,assets/picto/28643.png,https://static.arasaac.org/pictograms/28643/28643_300.png,VERIFICADO_DICCIONARIO_CLARIA,LEER UNA INDICACIÓN,
+COMÚN,Acciones,Escribir,escribir,2380,assets/picto/2380.png,https://static.arasaac.org/pictograms/2380/2380_300.png,VERIFICADO_DICCIONARIO_CLARIA,RELLENAR INFORMACIÓN,
+COMÚN,Acciones,Buscar,buscar,6946,assets/picto/6946.png,https://static.arasaac.org/pictograms/6946/6946_300.png,VERIFICADO_DICCIONARIO_CLARIA,BUSCAR UNA OFICINA,
+COMÚN,Acciones,Teléfono,teléfono,2791,assets/picto/2791.png,https://static.arasaac.org/pictograms/2791/2791_300.png,VERIFICADO_DICCIONARIO_CLARIA,DATOS DE CONTACTO,
+COMÚN,Acciones,Trámite,trámite,24709,assets/picto/24709.png,https://static.arasaac.org/pictograms/24709/24709_300.png,VERIFICADO_DICCIONARIO_CLARIA,PROCESO ADMINISTRATIVO,
+COMÚN,Acciones,Señal de espera,,,,,PENDIENTE_SELECCION_MANUAL,LOCALIZACIÓN DE SALA,Confirmar pictograma concreto en ARASAAC.
+Registro Civil,Institucional,Identificación de Registro Civil,oficina,36089,assets/picto/36089.png,https://static.arasaac.org/pictograms/36089/36089_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,TÍTULO DEL SERVICIO,"Oficina es genérico, usar además nombre real y foto autorizada."
+Registro Civil,Institucional,DNI,DNI,5987,assets/picto/5987.png,https://static.arasaac.org/pictograms/5987/5987_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR DNI,
+Registro Civil,Institucional,Documento,documento,21802,assets/picto/21802.png,https://static.arasaac.org/pictograms/21802/21802_300.png,VERIFICADO_DICCIONARIO_CLARIA,INFORMACIÓN DOCUMENTAL,
+Registro Civil,Institucional,Certificado,certificado,27677,assets/picto/27677.png,https://static.arasaac.org/pictograms/27677/27677_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR CERTIFICADO,
+Registro Civil,Institucional,Partida de nacimiento,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAR PARTIDA,Debe seleccionarse pictograma específico; no confundir con certificado.
+Registro Civil,Institucional,Nacimiento,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTA DE NACIMIENTO,Requiere revisión ARASAAC.
+Registro Civil,Institucional,Turno,turno,22190,assets/picto/22190.png,https://static.arasaac.org/pictograms/22190/22190_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR TURNOS,No afirmar obligatoriedad de turno.
+Registro Civil,Institucional,Formulario,formulario,9173,assets/picto/9173.png,https://static.arasaac.org/pictograms/9173/9173_300.png,VERIFICADO_DICCIONARIO_CLARIA,FORMULARIO,
+Registro Civil,Institucional,Firmar,firmar,12317,assets/picto/12317.png,https://static.arasaac.org/pictograms/12317/12317_300.png,VERIFICADO_DICCIONARIO_CLARIA,FIRMA,
+Registro Civil,Institucional,Información,información,9897,assets/picto/9897.png,https://static.arasaac.org/pictograms/9897/9897_300.png,VERIFICADO_DICCIONARIO_CLARIA,PREGUNTAR AL PERSONAL,
+Registro Civil,Institucional,Esperar,esperar,8109,assets/picto/8109.png,https://static.arasaac.org/pictograms/8109/8109_300.png,VERIFICADO_DICCIONARIO_CLARIA,INDICACIÓN SI CORRESPONDE,
+Hospital y centros de salud,Institucional,Hospital,hospital,3116,assets/picto/3116.png,https://static.arasaac.org/pictograms/3116/3116_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICAR ESTABLECIMIENTO,
+Hospital y centros de salud,Institucional,Salud,salud,14664,assets/picto/14664.png,https://static.arasaac.org/pictograms/14664/14664_300.png,VERIFICADO_DICCIONARIO_CLARIA,SALUD Y SERVICIOS,
+Hospital y centros de salud,Institucional,Médico,médico,2467,assets/picto/2467.png,https://static.arasaac.org/pictograms/2467/2467_300.png,VERIFICADO_DICCIONARIO_CLARIA,PROFESIONAL,
+Hospital y centros de salud,Institucional,Medicamento,medicina,8163,assets/picto/8163.png,https://static.arasaac.org/pictograms/8163/8163_300.png,VERIFICADO_DICCIONARIO_CLARIA,MEDICACIÓN,
+Hospital y centros de salud,Institucional,Farmacia,farmacia,3313,assets/picto/3313.png,https://static.arasaac.org/pictograms/3313/3313_300.png,VERIFICADO_DICCIONARIO_CLARIA,UBICAR FARMACIA,
+Hospital y centros de salud,Institucional,Turno,turno,22190,assets/picto/22190.png,https://static.arasaac.org/pictograms/22190/22190_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR TURNOS,
+Hospital y centros de salud,Institucional,Dolor,dolor,2367,assets/picto/2367.png,https://static.arasaac.org/pictograms/2367/2367_300.png,VERIFICADO_DICCIONARIO_CLARIA,EXPRESAR SÍNTOMAS,No usar para diagnosticar.
+Hospital y centros de salud,Institucional,Me siento mal,enfermo,28742,assets/picto/28742.png,https://static.arasaac.org/pictograms/28742/28742_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,EXPRESAR MALESTAR,Complementar con texto y voz.
+Hospital y centros de salud,Institucional,Ayuda,ayudar,4570,assets/picto/4570.png,https://static.arasaac.org/pictograms/4570/4570_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,PEDIR AYUDA,
+Hospital y centros de salud,Institucional,Baño,baño,15905,assets/picto/15905.png,https://static.arasaac.org/pictograms/15905/15905_300.png,VERIFICADO_DICCIONARIO_CLARIA,UBICACIÓN,
+Hospital y centros de salud,Institucional,Guardia / urgencias,,,,,PENDIENTE_SELECCION_MANUAL,ORIENTAR A URGENCIAS,Requiere señalización de emergencia oficial y revisada.
+Hospital y centros de salud,Institucional,Vacunación,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAR VACUNATORIO,Requiere selección ARASAAC.
+Hospital y centros de salud,Institucional,Receta médica,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTA DE RECETA,No confundir con medicamento.
+Hospital y centros de salud,Institucional,Consultorio,,,,,PENDIENTE_SELECCION_MANUAL,UBICACIÓN DE CONSULTORIO,Requiere selección específica.
+Municipalidad,Institucional,Municipalidad,oficina,36089,assets/picto/36089.png,https://static.arasaac.org/pictograms/36089/36089_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,IDENTIFICACIÓN DE EDIFICIO,Pictograma de oficina genérica; el nombre institucional debe ir escrito.
+Municipalidad,Institucional,Ciudad,ciudad,2704,assets/picto/2704.png,https://static.arasaac.org/pictograms/2704/2704_300.png,VERIFICADO_DICCIONARIO_CLARIA,SERVICIOS LOCALES,
+Municipalidad,Institucional,Trámite,trámite,24709,assets/picto/24709.png,https://static.arasaac.org/pictograms/24709/24709_300.png,VERIFICADO_DICCIONARIO_CLARIA,SERVICIO ADMINISTRATIVO,
+Municipalidad,Institucional,Información,información,9897,assets/picto/9897.png,https://static.arasaac.org/pictograms/9897/9897_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTA,
+Municipalidad,Institucional,Formulario,formulario,9173,assets/picto/9173.png,https://static.arasaac.org/pictograms/9173/9173_300.png,VERIFICADO_DICCIONARIO_CLARIA,PRESENTACIÓN,
+Municipalidad,Institucional,Pagar,pagar,9014,assets/picto/9014.png,https://static.arasaac.org/pictograms/9014/9014_300.png,VERIFICADO_DICCIONARIO_CLARIA,PAGOS SEGÚN SERVICIO,No asignar costos ni medios de pago sin validación.
+Municipalidad,Institucional,Documento,documento,21802,assets/picto/21802.png,https://static.arasaac.org/pictograms/21802/21802_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTACIÓN,
+Municipalidad,Institucional,Firmar,firmar,12317,assets/picto/12317.png,https://static.arasaac.org/pictograms/12317/12317_300.png,VERIFICADO_DICCIONARIO_CLARIA,FIRMA,
+Municipalidad,Institucional,Certificado,certificado,27677,assets/picto/27677.png,https://static.arasaac.org/pictograms/27677/27677_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSTANCIAS / CERTIFICADOS,
+Municipalidad,Institucional,Dirección,dirección,38571,assets/picto/38571.png,https://static.arasaac.org/pictograms/38571/38571_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOMICILIO,
+Municipalidad,Institucional,Reclamo,,,,,PENDIENTE_SELECCION_MANUAL,PRESENTAR RECLAMO,Requiere selección manual.
+Municipalidad,Institucional,Tasas municipales,,,,,PENDIENTE_SELECCION_MANUAL,TRÁMITES DE TASAS,No asignar servicio específico sin confirmación municipal.
+PAMI,Institucional,PAMI,salud,14664,assets/picto/14664.png,https://static.arasaac.org/pictograms/14664/14664_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,IDENTIFICACIÓN DE SERVICIO,Salud es genérico; conservar nombre PAMI.
+PAMI,Institucional,Médico,médico,2467,assets/picto/2467.png,https://static.arasaac.org/pictograms/2467/2467_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAS DE ATENCIÓN,
+PAMI,Institucional,Turno,turno,22190,assets/picto/22190.png,https://static.arasaac.org/pictograms/22190/22190_300.png,VERIFICADO_DICCIONARIO_CLARIA,TURNO,
+PAMI,Institucional,Farmacia,farmacia,3313,assets/picto/3313.png,https://static.arasaac.org/pictograms/3313/3313_300.png,VERIFICADO_DICCIONARIO_CLARIA,UBICACIÓN,
+PAMI,Institucional,Medicamento,medicina,8163,assets/picto/8163.png,https://static.arasaac.org/pictograms/8163/8163_300.png,VERIFICADO_DICCIONARIO_CLARIA,MEDICAMENTOS,
+PAMI,Institucional,Documento,documento,21802,assets/picto/21802.png,https://static.arasaac.org/pictograms/21802/21802_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTACIÓN,
+PAMI,Institucional,Información,información,9897,assets/picto/9897.png,https://static.arasaac.org/pictograms/9897/9897_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTA,
+PAMI,Institucional,Ayuda,ayudar,4570,assets/picto/4570.png,https://static.arasaac.org/pictograms/4570/4570_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,COMUNICACIÓN,
+PAMI,Institucional,Trámite,trámite,24709,assets/picto/24709.png,https://static.arasaac.org/pictograms/24709/24709_300.png,VERIFICADO_DICCIONARIO_CLARIA,GESTIÓN,
+PAMI,Institucional,Afiliación,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAS DE AFILIACIÓN,Seleccionar pictograma; no confundir con discapacidad.
+PAMI,Institucional,Autorización,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAS DE AUTORIZACIÓN,Seleccionar pictograma concreto.
+Correo Argentino,Institucional,Correo,correo,3086,assets/picto/3086.png,https://static.arasaac.org/pictograms/3086/3086_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,IDENTIFICACIÓN DE SERVICIO,Es un símbolo genérico; conservar nombre Correo Argentino.
+Correo Argentino,Institucional,Enviar,enviar,21828,assets/picto/21828.png,https://static.arasaac.org/pictograms/21828/21828_300.png,VERIFICADO_DICCIONARIO_CLARIA,ENVIAR UN OBJETO,
+Correo Argentino,Institucional,Recibir,recibir,17042,assets/picto/17042.png,https://static.arasaac.org/pictograms/17042/17042_300.png,VERIFICADO_DICCIONARIO_CLARIA,RECIBIR ALGO,
+Correo Argentino,Institucional,Dirección,dirección,38571,assets/picto/38571.png,https://static.arasaac.org/pictograms/38571/38571_300.png,VERIFICADO_DICCIONARIO_CLARIA,DATOS DE DESTINO,
+Correo Argentino,Institucional,Documento,documento,21802,assets/picto/21802.png,https://static.arasaac.org/pictograms/21802/21802_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICACIÓN,
+Correo Argentino,Institucional,Papel,papel,8349,assets/picto/8349.png,https://static.arasaac.org/pictograms/8349/8349_300.png,VERIFICADO_DICCIONARIO_CLARIA,DOCUMENTOS EN PAPEL,
+Correo Argentino,Institucional,Pagar,pagar,9014,assets/picto/9014.png,https://static.arasaac.org/pictograms/9014/9014_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR COSTOS,No afirmar precio.
+Correo Argentino,Institucional,Preguntar,preguntar,9844,assets/picto/9844.png,https://static.arasaac.org/pictograms/9844/9844_300.png,VERIFICADO_DICCIONARIO_CLARIA,PEDIR INFORMACIÓN,
+Correo Argentino,Institucional,Información,información,9897,assets/picto/9897.png,https://static.arasaac.org/pictograms/9897/9897_300.png,VERIFICADO_DICCIONARIO_CLARIA,ATENCIÓN AL PÚBLICO,
+Correo Argentino,Institucional,Paquete,,,,,PENDIENTE_SELECCION_MANUAL,ENVIAR O RETIRAR PAQUETE,Debe seleccionarse pictograma específico.
+Correo Argentino,Institucional,Encomienda,,,,,PENDIENTE_SELECCION_MANUAL,SERVICIOS DE ENCOMIENDAS,Revisar denominación disponible.
+Correo Argentino,Institucional,Retirar,,,,,PENDIENTE_SELECCION_MANUAL,RETIRO DE ENVÍO,Seleccionar pictograma para esta acción.
+Terminal de Ómnibus,Institucional,Colectivo,colectivo,38090,assets/picto/38090.png,https://static.arasaac.org/pictograms/38090/38090_300.png,VERIFICADO_DICCIONARIO_CLARIA,IDENTIFICAR TRANSPORTE,
+Terminal de Ómnibus,Institucional,Terminal,colectivo,38090,assets/picto/38090.png,https://static.arasaac.org/pictograms/38090/38090_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,IDENTIFICAR LUGAR,"Colectivo es genérico, no equivale a terminal."
+Terminal de Ómnibus,Institucional,Viajar,ir,2432,assets/picto/2432.png,https://static.arasaac.org/pictograms/2432/2432_300.png,VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE,PLANIFICAR UN VIAJE,Ir es genérico.
+Terminal de Ómnibus,Institucional,Salir,salir,2806,assets/picto/2806.png,https://static.arasaac.org/pictograms/2806/2806_300.png,VERIFICADO_DICCIONARIO_CLARIA,SALIDA,
+Terminal de Ómnibus,Institucional,Esperar,esperar,8109,assets/picto/8109.png,https://static.arasaac.org/pictograms/8109/8109_300.png,VERIFICADO_DICCIONARIO_CLARIA,SALA DE ESPERA,
+Terminal de Ómnibus,Institucional,Comprar,comprar,6457,assets/picto/6457.png,https://static.arasaac.org/pictograms/6457/6457_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR COMPRA DE PASAJES,
+Terminal de Ómnibus,Institucional,Pagar,pagar,9014,assets/picto/9014.png,https://static.arasaac.org/pictograms/9014/9014_300.png,VERIFICADO_DICCIONARIO_CLARIA,PAGO,No afirmar tarifa.
+Terminal de Ómnibus,Institucional,Hora,hora,7129,assets/picto/7129.png,https://static.arasaac.org/pictograms/7129/7129_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR HORARIO,
+Terminal de Ómnibus,Institucional,Dirección,dirección,38571,assets/picto/38571.png,https://static.arasaac.org/pictograms/38571/38571_300.png,VERIFICADO_DICCIONARIO_CLARIA,CONSULTAR DESTINO,No equivale a destino; usar texto complementario.
+Terminal de Ómnibus,Institucional,Baño,baño,15905,assets/picto/15905.png,https://static.arasaac.org/pictograms/15905/15905_300.png,VERIFICADO_DICCIONARIO_CLARIA,UBICACIÓN DE BAÑOS,
+Terminal de Ómnibus,Institucional,Pasaje,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAR PASAJE,Requiere revisión ARASAAC.
+Terminal de Ómnibus,Institucional,Andén,,,,,PENDIENTE_SELECCION_MANUAL,UBICAR ANDÉN,No inventar número de andén.
+Terminal de Ómnibus,Institucional,Equipaje,,,,,PENDIENTE_SELECCION_MANUAL,CONSULTAR EQUIPAJE,Requiere selección ARASAAC.
+Terminal de Ómnibus,Institucional,Boletería,,,,,PENDIENTE_SELECCION_MANUAL,UBICACIÓN DE BOLETERÍA,Requiere selección ARASAAC.

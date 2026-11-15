@@ -8,10 +8,20 @@
   const G = () => window.ClariaGuia;
   const KEY = 'claria.frases.v1', MAX_TARJ = 12, MAX_GUARDADAS = 30;
   const el = (t, a = {}, k = []) => { const n = document.createElement(t); for (const [x, v] of Object.entries(a)) { if (x === 'text') n.textContent = v; else n.setAttribute(x, v); } [].concat(k).forEach((c) => c && n.append(c)); return n; };
-  let datos = null, dic = null, porLema = new Map(), cat = null, frase = [], manual = false, cambiando = -1, listo = null;
+  let datos = null, dic = null, porLema = new Map(), cat = null, frase = [], manual = false, cambiando = -1, listo = null, ctx = null, desdeBtn = null;
+  const CC = () => window.ClariaCiudad;
   const tts = 'speechSynthesis' in window;
 
   const tarjeta = (lema) => { const e = porLema.get(lema); return e ? { lema, id: e.id, src: `assets/picto/${e.id}.png` } : null; };
+  // Tarjeta de una frase institucional: {lema,id,estado} del Paquete Maestro. Solo con ID presente en el diccionario local.
+  const tarjetaDe = (o) => { const e = typeof o === 'string' ? porLema.get(o) : porLema.get(o.lema); if (!e || (o.id && o.id !== e.id)) return null; return { lema: e.lema, id: e.id, src: `assets/picto/${e.id}.png`, generico: Boolean(o.estado && /GENERICO/.test(o.estado)) }; };
+  // Concepto PENDIENTE: solo texto (sin imagen), salvo que un editor haya elegido un pictograma.
+  function tarjetaPendiente(texto) {
+    const r = ctx && CC() ? CC().revision(ctx.id, texto) : null;
+    return r ? { lema: texto, id: r.id, src: CC().URL_IMG(r.id), remoto: true, elegido: r.aprobado ? 'elegido por un editor' : 'elegido en este dispositivo, sin aprobar' } : { lema: texto, id: null, src: null, pendiente: true };
+  }
+  // Imagen con respaldo: si no carga (sin red, archivo faltante), queda el texto, nunca un hueco.
+  function imagen(src, clase) { const i = el('img', { src, alt: '', class: clase || '' }); i.addEventListener('error', () => { const t = el('span', { class: 'tb-sin-img', 'aria-hidden': 'true', text: 'sin imagen' }); i.replaceWith(t); }, { once: true }); return i; }
   let ultimoEstado = ''; const estado = (t) => { $('tbEstado').textContent = t === ultimoEstado ? t + '\u200b' : t; ultimoEstado = $('tbEstado').textContent; };
   const capital = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const textoAuto = () => frase.length ? capital(frase.map((f) => f.lema).join(' ')) + '.' : '';
@@ -28,34 +38,43 @@
   const PASOS = { cat: ['tbCategorias', 'tbTitulo', 'tablero'], lista: ['tbCategoria', 'tbCatTitulo', 'tablerocat'], guardadas: ['tbGuardadas', 'tbGuardTitulo', 'tablerofrases'] };
   function paso(n, silencioso) {
     Object.entries(PASOS).forEach(([k, [id]]) => { $(id).hidden = k !== n; });
+    const clave = n === 'lista' && ctx ? 'ciudadtablero' : PASOS[n][2];
     $('tbCompo').hidden = !(n === 'lista' || (n === 'cat' && frase.length));
-    if (!silencioso) G()?.setPantalla(PASOS[n][2]);
+    if (!silencioso) G()?.setPantalla(clave);
     const t = $(PASOS[n][1]); t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); window.scrollTo({ top: 0 });
   }
-  function entrar() { cargar().then(() => paso('cat', true)); G()?.setPantalla('tablero'); }
-  function irA(n) { cargar().then(() => { if (n === 'lista' && !cat) cat = datos.categorias[0]; if (n === 'lista') pintarCategoria(); paso(n); }); }
+  function entrar(conservar) { if (conservar) return; ctx = null; cat = null; cargar().then(() => paso('cat', true)); G()?.setPantalla('tablero'); }
+  // Abre el tablero con el contexto de una institución: {id, nombre, aviso, frases, palabras}. La voz y las demás funciones son las mismas.
+  function abrirContexto(c) { ctx = c; cat = { id: c.id, nombre: c.nombre, contexto: true, aviso: c.aviso, frases: c.frases, palabras: (c.palabras || []).filter((l) => porLema.has(l)) }; frase = []; manual = false; $('tbTexto').value = ''; return cargar().then(() => { pintarCategoria(); pintarFrase(); paso('lista'); }); }
+  function irA(n) { cargar().then(() => { if (n !== 'lista') { ctx = null; } if (n === 'lista' && !cat) cat = datos.categorias[0]; if (n === 'lista') pintarCategoria(); paso(n); }); }
 
   // ───────── categorías, frases rápidas y palabras ─────────
-  function miniFila(lemas) { const f = el('span', { class: 'tb-mini', 'aria-hidden': 'true' }); lemas.forEach((l) => { const t = tarjeta(l); if (t) f.append(el('img', { src: t.src, alt: '', loading: 'lazy' })); }); return f; }
+  function miniFila(cards) { const f = el('span', { class: 'tb-mini', 'aria-hidden': 'true' }); cards.forEach((t) => { if (!t) return; f.append(t.src ? imagen(t.src) : el('span', { class: 'tb-pend', text: t.lema })); }); return f; }
   function pintarCategorias() {
     const lista = $('tbCategoriasLista'); lista.replaceChildren();
     datos.categorias.forEach((c) => {
       const b = el('button', { type: 'button', class: 'big-btn tb-cat', 'data-cat': c.id }, [el('span', { class: 'big-ico', 'aria-hidden': 'true', text: c.icono }), el('span', { class: 'big-txt', text: c.nombre })]);
-      b.addEventListener('click', () => { cat = c; pintarCategoria(); paso('lista'); }); lista.append(b);
+      b.addEventListener('click', () => { ctx = null; cat = c; pintarCategoria(); paso('lista'); }); lista.append(b);
     });
   }
+  function tarjetasDeFrase(f) {
+    const base = f.tarjetas.map((x) => (typeof x === 'string' ? tarjeta(x) : tarjetaDe(x))).filter(Boolean);
+    return base.concat((f.revisar || []).map(tarjetaPendiente));
+  }
   function pintarCategoria() {
-    $('tbCatTitulo').textContent = cat.nombre;
+    $('tbCatTitulo').textContent = cat.contexto ? `${cat.nombre}: hablar con imágenes` : cat.nombre;
+    $('tbAviso').hidden = !cat.contexto; $('tbAviso').textContent = cat.aviso || '';
     const fr = $('tbFrasesRapidas'); fr.replaceChildren();
     cat.frases.forEach((f) => {
-      const b = el('button', { type: 'button', class: 'tb-frase-rapida' }, [miniFila(f.tarjetas), el('span', { text: f.texto })]);
-      b.addEventListener('click', () => { frase = f.tarjetas.map(tarjeta).filter(Boolean); $('tbTexto').value = f.texto; manual = true; pintarFrase(); estado(`Frase lista: ${f.texto} Tocá «Decir en voz alta» cuando quieras.`); });
+      const cards = tarjetasDeFrase(f); const hablada = cat.contexto ? CC().hablado(f.texto) : f.texto;
+      const b = el('button', { type: 'button', class: 'tb-frase-rapida' }, [miniFila(cards), el('span', { text: f.texto })]);
+      b.addEventListener('click', () => { frase = cards.map((c) => ({ ...c })); $('tbTexto').value = hablada; manual = true; pintarFrase(); estado(`Frase lista: ${hablada} Tocá «Decir en voz alta» cuando quieras.`); });
       fr.append(el('li', {}, b));
     });
     const pal = $('tbPalabras'); pal.replaceChildren();
     cat.palabras.forEach((l) => {
       const t = tarjeta(l); if (!t) return;
-      const b = el('button', { type: 'button', class: 'tb-palabra', 'aria-label': `Agregar ${l}` }, [el('img', { src: t.src, alt: '' }), el('span', { text: l })]);
+      const b = el('button', { type: 'button', class: 'tb-palabra', 'aria-label': `Agregar ${l}` }, [imagen(t.src), el('span', { text: l })]);
       b.addEventListener('click', () => agregar(t)); pal.append(el('li', {}, b));
     });
   }
@@ -72,10 +91,12 @@
       const bs = el('span', { class: 'tb-acc' });
       const mk = (txt, lab, fn, dis) => { const b = el('button', { type: 'button', 'aria-label': `${lab} ${f.lema}`, text: txt }); if (dis) b.disabled = true; b.addEventListener('click', fn); return b; };
       bs.append(mk('◀', 'Mover antes', () => mover(i, -1), i === 0), mk('▶', 'Mover después', () => mover(i, 1), i === frase.length - 1), mk('Cambiar', 'Cambiar pictograma de', () => abrirCambiar(i)), mk('Quitar', 'Quitar', () => quitar(i)));
-      ol.append(el('li', { class: 'tb-tarjeta' }, [el('img', { src: f.src, alt: f.lema }), el('span', { class: 'tb-et', text: f.lema }), bs]));
+      const vis = f.src ? imagen(f.src) : el('span', { class: 'tb-pend tb-pend-grande', text: 'sin pictograma' }); if (f.src) vis.setAttribute('alt', f.lema);
+      const marca = f.generico ? el('span', { class: 'tb-chip', text: 'imagen general' }) : f.pendiente ? el('span', { class: 'tb-chip', text: 'por revisar' }) : f.elegido ? el('span', { class: 'tb-chip', text: f.elegido }) : null;
+      ol.append(el('li', { class: 'tb-tarjeta' + (f.pendiente ? ' tb-tarjeta-pend' : '') }, [vis, el('span', { class: 'tb-et', text: f.lema }), marca, bs]));
     });
     $('tbVacia').hidden = frase.length > 0;
-    ['tbDecir', 'tbGuardar', 'tbCompartir', 'tbVaciar'].forEach((id) => { $(id).disabled = !frase.length && !$('tbTexto').value.trim(); });
+    ['tbDecir', 'tbMostrar', 'tbGuardar', 'tbCompartir', 'tbVaciar'].forEach((id) => { $(id).disabled = !frase.length && !$('tbTexto').value.trim(); });
     $('tbUsarTarjetas').hidden = !manual || !frase.length || $('tbTexto').value === textoAuto();
     $('tbCompo').hidden = !(frase.length || !$('tbCategoria').hidden);
   }
@@ -101,12 +122,26 @@
 
   // ───────── voz (solo cuando la persona lo pide) ─────────
   function voz(t) {
+    if (!CC().audio.activo()) { estado('El sonido está desactivado. Podés leer la frase en pantalla o activar el sonido.'); return false; }
     if (!tts) { estado('Este navegador no tiene voz. Podés leer la frase en pantalla o mostrarla a otra persona.'); return false; }
     speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-AR'; u.rate = 0.9;
     const v = (speechSynthesis.getVoices() || []); const es = v.find((x) => x.lang === 'es-AR') || v.find((x) => /^es/i.test(x.lang)); if (es) u.voice = es;
     G()?.estado('hablando'); u.onend = u.onerror = () => G()?.estado('esperando'); speechSynthesis.speak(u); return true;
   }
   $('tbDecir').addEventListener('click', () => { const t = $('tbTexto').value.trim(); if (!t) return estado('Armá una frase primero.'); if (voz(t)) estado('Diciendo la frase en voz alta.'); });
+
+  // ───────── mostrar en pantalla grande / sonido ─────────
+  function pintarSonido() { const a = CC().audio.activo(), b = $('tbSonido'); b.textContent = a ? '🔊 Sonido activado' : '🔇 Sonido desactivado'; b.setAttribute('aria-pressed', String(a)); }
+  $('tbSonido').addEventListener('click', () => { const a = CC().audio.alternar(); pintarSonido(); estado(a ? 'Sonido activado.' : 'Sonido desactivado: no se dirá nada en voz alta.'); });
+  $('tbMostrar').addEventListener('click', () => {
+    const t = $('tbTexto').value.trim(); if (!t) return estado('Armá una frase primero.');
+    const ol = $('tbMostrarTarjetas'); ol.replaceChildren();
+    frase.forEach((f) => ol.append(el('li', {}, [f.src ? imagen(f.src) : el('span', { class: 'tb-pend tb-pend-grande', text: f.lema }), el('span', { class: 'tb-et', text: f.lema })])));
+    $('tbMostrarTexto').textContent = t; $('tbMostrarDecir').hidden = !CC().audio.activo(); $('tbMostrarDlg').showModal();
+  });
+  $('tbMostrarDecir').addEventListener('click', () => voz($('tbTexto').value.trim()));
+  $('tbMostrarCerrar').addEventListener('click', () => $('tbMostrarDlg').close());
+  pintarSonido();
 
   // ───────── guardar en el dispositivo ─────────
   function leer() { try { const a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a.filter((x) => x && typeof x.texto === 'string' && Array.isArray(x.tarjetas)) : []; } catch (_) { return []; } }
@@ -147,5 +182,5 @@
   });
 
   pintarFrase();
-  window.ClariaTablero = { entrar, irA, estado: () => ({ cat: cat && cat.id, tarjetas: frase.map((f) => f.lema), texto: $('tbTexto').value }) };
+  window.ClariaTablero = { entrar, irA, abrirContexto, estado: () => ({ cat: cat && cat.id, tarjetas: frase.map((f) => f.lema), texto: $('tbTexto').value }) };
 })();
