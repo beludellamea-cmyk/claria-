@@ -10,25 +10,31 @@
   let leerPasoActual = 1, tramPasoActual = 1;
   const G = () => window.ClariaGuia;
   function showView(name, opts = {}) {
-    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca'].includes(name)) return;
+    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca','tablero','lugares','creador'].includes(name)) return;
     if (name === 'lectura' && !opts.paso) leerPaso(1, true);
     if (name === 'tramites' && !opts.paso) tramitePaso(1, true);
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
     history.replaceState(null,'','#'+name);
     G()?.onView(name);
-    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
+    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', tablero:'tablero', lugares:'lugares', creador:'creador1', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
     G()?.setPantalla(key);
     if (name === 'hablar') openChat(true);
+    if (name !== 'lugares') window.ClariaLugares?.salir();
+    if (name === 'creador') window.ClariaCreador?.entrar(Boolean(opts.keep));
+    if (name === 'tablero') window.ClariaTablero?.entrar();
+    if (name === 'lugares') window.ClariaLugares?.entrar(Boolean(opts.keep));
     const view = $('view-'+name); const title = Array.from(view.querySelectorAll('h1')).find((h) => h.offsetParent !== null);
     if (title) { title.setAttribute('tabindex','-1'); title.focus({preventScroll:true}); }
     window.scrollTo({top:0,behavior:document.body.classList.contains('no-motion')?'instant':'smooth'});
     announce((title?.textContent || name));
   }
   // Pasos guiados dentro de «Leer un documento»: 1 elegir origen · 2 elegir ayuda · 3 resultado
+  // Pasos de «Entender una foto»: 'foto' (¿es la imagen correcta?) y 'revisar' (texto reconocido editable) van entre el 1 y el 2.
+  const PASOS_LEER = { 1: ['leerPaso1', 'lecturaTitulo'], foto: ['leerFoto', 'fotoTitulo'], revisar: ['leerRevisar', 'revisarTitulo'], 2: ['leerPaso2', 'lecturaTitulo2'], 3: ['readerReady', 'lecturaTitulo3'] };
   function leerPaso(n, silent) {
-    leerPasoActual = n; $('leerPaso1').hidden = n !== 1; $('leerPaso2').hidden = n !== 2; $('readerReady').hidden = n !== 3;
+    leerPasoActual = n; Object.entries(PASOS_LEER).forEach(([k, [id]]) => { $(id).hidden = String(k) !== String(n); });
     if (silent) return; G()?.setPantalla('leer' + n);
-    const t = n === 1 ? $('lecturaTitulo') : n === 2 ? $('lecturaTitulo2') : $('lecturaTitulo3'); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); announce(t.textContent); window.scrollTo({top:0});
+    const t = $(PASOS_LEER[n][1]); t.setAttribute('tabindex','-1'); t.focus({preventScroll:true}); announce(t.textContent); window.scrollTo({top:0});
   }
   function tramitePaso(n, silent) {
     tramPasoActual = n; $('tramPaso1').hidden = n !== 1; $('procedureDetails').hidden = n !== 2; if (silent) return;
@@ -36,7 +42,11 @@
   }
   function irPantalla(k) {
     if (k === 'inicio') return showView('inicio');
-    if (k === 'escribir' || k === 'hablar' || k === 'acerca' || k === 'cuento') return showView(k);
+    if (k === 'escribir' || k === 'hablar' || k === 'acerca' || k === 'cuento' || k === 'tablero' || k === 'lugares') return showView(k);
+    if (k === 'creador1' || k === 'creador2') { showView('creador', { keep: true }); window.ClariaCreador?.irA(k === 'creador1' ? 1 : 2); return; }
+    if (k === 'lugarmenu' || k === 'lugarpaso') { showView('lugares', { keep: true }); window.ClariaLugares?.irA(k === 'lugarmenu' ? 'menu' : 'inicio'); return; }
+    if (k === 'tablerocat' || k === 'tablerofrases') { showView('tablero'); window.ClariaTablero?.irA(k === 'tablerocat' ? 'lista' : 'guardadas'); return; }
+    if (k === 'leerfoto' || k === 'leerrevisar') { showView('lectura', { paso: 1 }); leerPaso(k.slice(4)); return; }
     const m = /^(leer|tramites)(\d)$/.exec(k); if (!m) return;
     if (m[1] === 'leer') { showView('lectura', { paso: 1 }); leerPaso(Number(m[2])); } else { showView('tramites', { paso: 1 }); tramitePaso(Number(m[2])); }
   }
@@ -130,12 +140,66 @@
   function modoLectura(m){$('readerReady').dataset.modo=m;const rb=$('readingBlock');rb.open=m==='escuchar';leerPaso(3);}
   $('optEscuchar').addEventListener('click',()=>{modoLectura('escuchar');speak(readingParts[currentReading]);});
   $('optExplicar').addEventListener('click',()=>{modoLectura('explicar');if(mode==='connected')runExplain('easy');else $('aiStatus').textContent='Para explicar fácil necesito una IA conectada y ahora estás en modo demo. Podés escuchar el texto o verlo con pictogramas.';});
+  $('optAcciones').addEventListener('click',()=>{modoLectura('explicar');if(mode==='connected')runExplain('actions');else $('aiStatus').textContent='Para decirte qué hacer necesito una IA conectada y ahora estás en modo demo. Podés escuchar el texto o verlo con pictogramas.';});
   function loadExternalScript(src){return new Promise((resolve,reject)=>{
     const el=document.createElement('script');el.src=src;el.async=true;el.onload=resolve;el.onerror=()=>reject(new Error('No se pudo descargar una biblioteca externa.'));document.head.append(el);
   });}
+
+  // ───────── Entender una foto: vista previa → lectura (OCR en el dispositivo) → texto editable → ayuda ─────────
+  // La imagen NUNCA se envía a un servidor. Tesseract.js se descarga desde un CDN (con su idioma) la primera vez: sin conexión no funciona.
+  const TESSERACT_SRC='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+  let foto={file:null,url:null,ocr:'',worker:null,cancel:false,busy:false};
+  function soltarFoto(){if(foto.url)URL.revokeObjectURL(foto.url);}
+  function abrirFoto(file){
+    soltarFoto();foto={file,url:URL.createObjectURL(file),ocr:'',worker:null,cancel:false,busy:false};
+    $('fotoPreviaImg').src=foto.url;$('revisarImg').src=foto.url;$('fotoPreviaNombre').textContent=file.name;
+    $('fotoEstado').textContent='';$('fileStatus').textContent='';$('revisarEstado').textContent='';
+    leerPaso('foto');
+  }
+  function fotoOcupada(ocupada){
+    foto.busy=ocupada;['fotoLeer','fotoOtra','fotoManual'].forEach((id)=>{$(id).disabled=ocupada;});$('fotoCancelar').hidden=!ocupada;
+    G()?.estado(ocupada?'procesando':'esperando');
+  }
+  async function leerFoto(){
+    if(foto.busy||!foto.file)return;
+    fotoOcupada(true);foto.cancel=false;let worker=null;
+    try{
+      $('fotoEstado').textContent='Preparando la lectura… la primera vez puede tardar porque descarga componentes.';
+      if(!window.Tesseract) await loadExternalScript(TESSERACT_SRC);
+      worker=await window.Tesseract.createWorker('spa',1,{logger:(m)=>{if(m&&m.status==='recognizing text'&&typeof m.progress==='number')$('fotoEstado').textContent='Leyendo el texto… '+Math.round(m.progress*100)+' %';}});
+      foto.worker=worker;
+      const result=await worker.recognize(foto.file);
+      if(foto.cancel)return;
+      foto.ocr=String((result&&result.data&&result.data.text)||'').trim();
+      $('revisarTexto').value=foto.ocr;
+      $('revisarEstado').textContent=foto.ocr?'Listo. Compará el texto con la imagen y corregí lo que haga falta.':'No se reconoció texto en la imagen. Probá con una foto más nítida y bien iluminada, o escribí el texto vos.';
+      leerPaso('revisar');$('revisarTexto').focus();
+    }catch(err){
+      if(foto.cancel)return;
+      $('fotoEstado').textContent='No se pudo leer la imagen'+(err&&err.message?': '+err.message:'.')+' Podés probar de nuevo, elegir otra imagen o escribir el texto.';announce('No se pudo leer la imagen');
+    }finally{
+      try{if(worker)await worker.terminate();}catch(_){}
+      foto.worker=null;fotoOcupada(false);
+    }
+  }
+  $('fotoLeer').addEventListener('click',leerFoto);
+  $('fotoOtra').addEventListener('click',()=>{soltarFoto();leerPaso(1);$('photoInput').click();});
+  $('fotoManual').addEventListener('click',()=>{foto.ocr='';$('revisarTexto').value='';$('revisarEstado').textContent='Escribí o pegá el texto que ves en la imagen.';leerPaso('revisar');$('revisarTexto').focus();});
+  $('fotoCancelar').addEventListener('click',()=>{foto.cancel=true;try{if(foto.worker)foto.worker.terminate();}catch(_){}$('fotoEstado').textContent='Lectura cancelada. No se guardó nada.';announce('Lectura cancelada');});
+  $('revisarReintentar').addEventListener('click',()=>{leerPaso('foto');leerFoto();});
+  $('revisarRestaurar').addEventListener('click',()=>{$('revisarTexto').value=foto.ocr;$('revisarEstado').textContent=foto.ocr?'Volvió el texto tal como lo reconoció CLARIA.':'No hay texto reconocido para restaurar.';$('revisarTexto').focus();});
+  $('revisarManual').addEventListener('click',()=>{$('revisarTexto').value='';$('revisarEstado').textContent='Escribí o pegá el texto que ves en la imagen.';$('revisarTexto').focus();});
+  $('revisarUsar').addEventListener('click',()=>{
+    const v=$('revisarTexto').value;
+    if(v.trim().length<12){$('revisarEstado').textContent='Escribí al menos 12 caracteres para seguir.';$('revisarTexto').focus();return;}
+    $('inputText').value=v;const source=foto.ocr?'file_ocr':'typed';lastExtracted={text:v,source};loadReading(v,source);
+  });
+
   async function procesarArchivo(input){
-    const file=input.files?.[0];if(!file)return;G()?.estado('procesando');
-    if(file.size>15*1024*1024){$('fileStatus').textContent='El archivo supera 15 MB. Elegí uno más pequeño.';return;}
+    const file=input.files?.[0];if(!file)return;
+    if(file.size>15*1024*1024){$('fileStatus').textContent='El archivo supera 15 MB. Elegí uno más pequeño.';input.value='';return;}
+    if(file.type.startsWith('image/')){input.value='';abrirFoto(file);return;}
+    G()?.estado('procesando');
     $('fileStatus').textContent='Procesando '+file.name+'…';
     try{
       let text='',source='file_txt'; const lower=file.name.toLowerCase();
@@ -152,11 +216,7 @@
         }
         text=pages.join('\n\n');if(!text.trim())throw new Error('Parece un PDF escaneado sin texto seleccionable. Convertí una página a imagen y usá la opción de foto.');
       }
-      else if(file.type.startsWith('image/')){source='file_ocr';
-        if(!window.Tesseract) await loadExternalScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');
-        const worker=await window.Tesseract.createWorker('spa');
-        try {const result=await worker.recognize(file);text=result.data.text||'';} finally {await worker.terminate();}
-      } else throw new Error('Formato no admitido. Elegí TXT, PDF, PNG, JPG o WEBP.');
+      else throw new Error('Formato no admitido. Elegí TXT, PDF, PNG, JPG o WEBP.');
       if(!text.trim())throw new Error('No se pudo extraer texto. Probá con una imagen más nítida.');
       $('inputText').value=text;lastExtracted={text,source};$('fileStatus').textContent='Archivo leído. Revisá y corregí el texto si hace falta.';loadReading(text,source);
     }catch(err){$('fileStatus').textContent='No se pudo leer: '+(err?.message||'Error desconocido')+'. Podés pegar el texto manualmente.';announce('Error al procesar el archivo');}
@@ -243,15 +303,19 @@
   }
 
   // ───────────────────────── Explicación con IA sobre el texto cargado ─────────────────────────
-  const KIND = { plain: 'Explicación en lenguaje claro (IA)', easy: 'Lectura fácil (IA)', summary: 'Resumen (IA)', ask: 'Respuesta de la IA a tu pregunta' };
+  const KIND = { plain: 'Explicación en lenguaje claro (IA)', easy: 'Lectura fácil (IA)', summary: 'Resumen (IA)', ask: 'Respuesta de la IA a tu pregunta', actions: 'Qué hacer ahora (IA)' };
   let lastAiText = '', aiBusy = false;
   function renderAi(kind, d, clientNotices) {
     $('aiResultKind').textContent = KIND[kind];
     $('aiResultText').textContent = d.resultado;
+    // «¿Qué hago ahora?»: lo que dice el documento va separado de lo que sugiere CLARIA.
+    const dice = kind === 'actions' ? (d.el_documento_dice || []) : [], sug = kind === 'actions' ? (d.sugerencias || []) : [];
+    $('aiDiceList').innerHTML = dice.map((p) => `<li>${esc(p)}</li>`).join(''); $('aiDice').hidden = dice.length === 0;
+    $('aiSugerenciasList').innerHTML = sug.map((p) => `<li>${esc(p)}</li>`).join(''); $('aiSugerencias').hidden = sug.length === 0;
     $('aiKeyPoints').innerHTML = (d.puntos_clave || []).map((p) => `<li>${esc(p)}</li>`).join('');
     const notes = [...clientNotices.map((n) => `<li><b>CLARIA:</b> ${esc(n)}</li>`), ...(d.avisos || []).map((n) => `<li><b>La IA señala:</b> ${esc(n)}</li>`)];
     $('aiNoticeList').innerHTML = notes.join(''); $('aiNotices').hidden = notes.length === 0;
-    $('aiResult').hidden = false; lastAiText = [d.resultado, ...(d.puntos_clave || [])].join('\n');
+    $('aiResult').hidden = false; lastAiText = [d.resultado, ...(dice.length ? ['El documento dice:', ...dice] : []), ...(sug.length ? ['Sugerencia de CLARIA, que no figura en el documento:', ...sug] : []), ...(d.puntos_clave || [])].join('\n');
     $('aiResult').focus();
   }
   async function runExplain(task, question) {
@@ -373,6 +437,10 @@
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if($('consentDialog').open||document.querySelector('dialog[open]'))return;
     if(!$('prefs').hidden)togglePrefs(false);
   }});
-  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca'].includes(hash))showView(hash);else G()?.onView('inicio');
+  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca','tablero','lugares'].includes(hash))showView(hash);else G()?.onView('inicio');
   window.ClariaUI={announce,showView,irPantalla,leerPaso,tramitePaso,getPrefs:()=>({...prefs}),getText:()=>currentText};
 })();
+// Modo sin conexión básico (tablero «Hablar con imágenes»): solo en https o localhost.
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}

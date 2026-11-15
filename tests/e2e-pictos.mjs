@@ -30,9 +30,9 @@ const convertir = async (page, t) => { await page.fill('#pcTexto', t); await pag
 const mas = async (page) => { if (!(await page.evaluate(() => document.getElementById('pcMas').open))) await page.click('#pcMas summary'); };
 const lemas = (page) => page.$$eval('#pcTablero li', (ls) => ls.map((l) => ({ t: l.querySelector('.pc-label').textContent, e: l.dataset.estado, img: !!l.querySelector('img'), ok: l.querySelector('img') ? l.querySelector('img').naturalWidth > 0 : null })));
 
-await test('portada: 3 opciones y navegación a escribir', async () => {
-  const { ctx, page } = await abrir(); await page.goto(BASE); const n = await page.$$eval('#view-inicio .big-btn', (c) => c.length); assert.equal(n, 4);
-  await page.click('#view-inicio [data-view=escribir]'); assert.equal(await page.isVisible('#view-escribir'), true); await page.screenshot({ path: `${OUT}/00-portada.png` }); await ctx.close();
+await test('portada: 4 opciones y el acceso a hablar y navegación a escribir', async () => {
+  const { ctx, page } = await abrir(); await page.goto(BASE); const n = await page.$$eval('#view-inicio .big-btn', (c) => c.length); assert.equal(n, 5);
+  await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); assert.equal(await page.isVisible('#view-escribir'), true); await page.screenshot({ path: `${OUT}/00-portada.png` }); await ctx.close();
 });
 await test('HOLA y QUIERO AGUA: pictogramas reales cargados y texto original visible', async () => {
   const { ctx, page, ext, errs } = await abrir();

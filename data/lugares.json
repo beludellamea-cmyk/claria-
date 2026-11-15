@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "nota": "Catálogo de lugares con guía. CLARIA NO inventa datos de lugares: cada lugar la carga y la valida su institución. Un lugar sin 'responsable' y 'actualizado' no se muestra. Formato del QR: CLARIA-LUGAR:<id>. Los lugares con demostracion:true son ficticios.",
+  "lugares": [
+    {
+      "id": "biblioteca-demo",
+      "nombre": "Biblioteca de demostración",
+      "demostracion": true,
+      "responsable": "Ejemplo ficticio de CLARIA (no es una institución real)",
+      "actualizado": "2026-11-14",
+      "opciones": [
+        { "id": "inscribirme", "titulo": "Inscribirme", "tipo": "pasos",
+          "pasos": [
+            { "texto": "Acercate al mostrador de atención.", "picto": "ir" },
+            { "texto": "Decí que querés inscribirte.", "picto": "decir" },
+            { "texto": "Completá el formulario con ayuda del personal.", "picto": "formulario" },
+            { "texto": "Esperá tu carnet.", "picto": "esperar" } ] },
+        { "id": "horario", "titulo": "Consultar horario", "tipo": "info",
+          "texto": "Lunes a viernes de 9:00 a 17:00.", "picto": "hora",
+          "aclaracion": "Dato de ejemplo de la biblioteca ficticia." },
+        { "id": "ayuda", "titulo": "Pedir ayuda", "tipo": "frases",
+          "frases": [
+            { "texto": "Necesito ayuda, por favor.", "tarjetas": ["necesitar", "ayudar", "por favor"] },
+            { "texto": "No entiendo. ¿Puede repetir más despacio, por favor?", "tarjetas": ["no", "entender", "más", "lento"] },
+            { "texto": "¿Dónde está el baño?", "tarjetas": ["dónde", "baño"] },
+            { "texto": "Necesito sentarme.", "tarjetas": ["necesitar", "sentarse"] } ] }
+      ]
+    }
+  ]
+}

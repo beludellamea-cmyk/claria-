@@ -1,0 +1,25 @@
+/* CLARIA · Hablar con imágenes (tablero). Solo presentación. */
+.bb-amber{--bb:#f59e0b}
+.big-btn.bb-amber{background:linear-gradient(160deg,#fff7e6,#ffe3a8);border-color:#f3c76b;color:#3b2a06}
+.tb-scope{max-width:1000px;margin:0 auto}
+.tb-cats{grid-template-columns:repeat(3,1fr)}
+.tb-cat{background:#fff;border:2px solid #cdbdff}
+.tb-sub{font-size:1.1rem;margin:18px 0 8px}
+.tb-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tb-frase-rapida{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;min-height:92px;padding:10px 12px;border-radius:16px;border:2px solid #cdbdff;background:#fff;font:inherit;font-weight:700;text-align:left;cursor:pointer}
+.tb-frase-rapida:focus-visible,.tb-palabra:focus-visible,.tb-acc button:focus-visible{outline:3px solid #8b5cff;outline-offset:2px}
+.tb-mini{display:flex;gap:4px;flex-wrap:wrap}.tb-mini img{width:44px;height:44px;object-fit:contain}
+.tb-grilla{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.tb-palabra{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:8px;border-radius:14px;border:2px solid #dedaf3;background:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tb-palabra img{width:72px;height:72px;object-fit:contain}
+.tb-compo{margin-top:22px;border:2px solid #8b5cff}
+.tb-tarjetas{list-style:none;margin:8px 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.tb-tarjeta{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;border:2px solid #8b5cff;border-radius:14px;background:#fff;max-width:150px}
+.tb-tarjeta img{width:84px;height:84px;object-fit:contain}.tb-et{font-weight:800}
+.tb-acc{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}.tb-acc button{min-height:44px;min-width:44px;border-radius:10px;border:1px solid #cfc8ee;background:#f8f7ff;font:inherit;cursor:pointer}
+.tb-acc button:disabled{opacity:.4;cursor:default}
+.tb-label{display:block;font-weight:700;margin:10px 0 4px}
+#tbTexto{width:100%;font:inherit;font-size:1.15rem;padding:10px;border-radius:12px;border:2px solid #cfc8ee}
+.tb-botones{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.tb-botones button{min-height:52px;padding:10px 18px;border-radius:14px;font:inherit;font-weight:750;cursor:pointer}
+.tb-guardada{display:flex;flex-direction:column;gap:6px;padding:10px;border:2px solid #dedaf3;border-radius:14px;background:#fff}.tb-guardada-texto{margin:0;font-weight:700}
+@media(max-width:700px){.tb-cats{grid-template-columns:1fr 1fr}.tb-lista{grid-template-columns:1fr}.tb-botones button{flex:1 1 45%}}

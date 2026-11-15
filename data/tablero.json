@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "nota": "Categorías, palabras y frases del tablero «Hablar con imágenes». Cada 'lema' debe existir en data/pictogramas.json (diccionario con IDs ARASAAC verificados); la frase hablada es texto completo y editable.",
+  "categorias": [
+    { "id": "ayuda", "nombre": "Ayuda", "icono": "🆘", "palabras": ["ayudar", "necesitar", "querer", "sí", "no", "por favor", "gracias", "perdón", "entender", "esperar", "llamar"],
+      "frases": [
+        { "texto": "Necesito ayuda, por favor.", "tarjetas": ["necesitar", "ayudar", "por favor"] },
+        { "texto": "No entiendo.", "tarjetas": ["no", "entender"] },
+        { "texto": "Más despacio, por favor.", "tarjetas": ["más", "lento", "por favor"] },
+        { "texto": "Quiero llamar a mi familia.", "tarjetas": ["querer", "llamar", "familia"] },
+        { "texto": "Gracias.", "tarjetas": ["gracias"] } ] },
+    { "id": "salud", "nombre": "Salud", "icono": "🩺", "palabras": ["dolor", "médico", "hospital", "farmacia", "medicina", "salud", "enfermo", "cansado", "sentir", "malo", "bueno", "sed", "hambre"],
+      "frases": [
+        { "texto": "Me duele.", "tarjetas": ["dolor"] },
+        { "texto": "Necesito un médico.", "tarjetas": ["necesitar", "médico"] },
+        { "texto": "Me siento mal.", "tarjetas": ["yo", "sentir", "malo"] },
+        { "texto": "Necesito mi medicina.", "tarjetas": ["necesitar", "mi", "medicina"] },
+        { "texto": "Quiero ir al hospital.", "tarjetas": ["querer", "ir", "hospital"] } ] },
+    { "id": "escuela", "nombre": "Escuela", "icono": "🏫", "palabras": ["escuela", "maestro", "compañero", "aula", "clase", "recreo", "tarea", "examen", "cuaderno", "lápiz", "libro", "mochila", "baño", "preguntar"],
+      "frases": [
+        { "texto": "Quiero ir al baño.", "tarjetas": ["querer", "ir", "baño"] },
+        { "texto": "No entiendo la tarea.", "tarjetas": ["no", "entender", "tarea"] },
+        { "texto": "Necesito un lápiz.", "tarjetas": ["necesitar", "lápiz"] },
+        { "texto": "Quiero preguntar.", "tarjetas": ["querer", "preguntar"] },
+        { "texto": "Quiero jugar en el recreo.", "tarjetas": ["querer", "jugar", "recreo"] } ] },
+    { "id": "transporte", "nombre": "Transporte", "icono": "🚌", "palabras": ["colectivo", "auto", "calle", "dirección", "ciudad", "casa", "ir", "volver", "dónde", "cerca", "lejos", "pagar"],
+      "frases": [
+        { "texto": "¿Dónde para el colectivo?", "tarjetas": ["dónde", "colectivo"] },
+        { "texto": "Quiero ir a mi casa.", "tarjetas": ["querer", "ir", "mi", "casa"] },
+        { "texto": "¿Está lejos?", "tarjetas": ["lejos"] },
+        { "texto": "¿Está cerca?", "tarjetas": ["cerca"] },
+        { "texto": "Quiero volver.", "tarjetas": ["querer", "volver"] } ] },
+    { "id": "compras", "nombre": "Compras", "icono": "🛒", "palabras": ["dinero", "comprar", "pagar", "cuánto", "pan", "leche", "manzana", "agua", "comida", "más", "menos", "gratis", "banco"],
+      "frases": [
+        { "texto": "¿Cuánto cuesta?", "tarjetas": ["cuánto", "dinero"] },
+        { "texto": "Quiero comprar pan.", "tarjetas": ["querer", "comprar", "pan"] },
+        { "texto": "Quiero pagar.", "tarjetas": ["querer", "pagar"] },
+        { "texto": "Quiero agua, por favor.", "tarjetas": ["querer", "agua", "por favor"] },
+        { "texto": "Quiero más.", "tarjetas": ["querer", "más"] } ] },
+    { "id": "basicas", "nombre": "Necesidades básicas", "icono": "💧", "palabras": ["agua", "comida", "hambre", "sed", "baño", "dormir", "descansar", "frío", "caliente", "cansado", "casa", "limpio"],
+      "frases": [
+        { "texto": "Tengo hambre.", "tarjetas": ["tener", "hambre"] },
+        { "texto": "Tengo sed.", "tarjetas": ["tener", "sed"] },
+        { "texto": "Necesito ir al baño.", "tarjetas": ["necesitar", "ir", "baño"] },
+        { "texto": "Quiero descansar.", "tarjetas": ["querer", "descansar"] },
+        { "texto": "Tengo frío.", "tarjetas": ["tener", "frío"] } ] }
+  ]
+}

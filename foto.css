@@ -1,0 +1,17 @@
+/* CLARIA · Entender una foto (vista previa, texto reconocido editable, ¿Qué hago ahora?). Solo presentación. */
+.foto-paso{max-width:920px;margin:0 auto}
+.foto-previa{margin:16px auto;text-align:center}
+.foto-previa img{max-width:100%;max-height:min(55vh,460px);border-radius:20px;border:2px solid #dedaf3;background:#fff;box-shadow:0 10px 30px #0b082833;object-fit:contain}
+.foto-previa figcaption{margin-top:8px;word-break:break-word}
+.foto-doble{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:18px;align-items:start;margin:14px 0}
+.foto-original{border:1px solid #dedaf3;border-radius:18px;padding:12px;background:#fff}
+.foto-original summary{font-weight:750;cursor:pointer;padding:4px 2px}
+.foto-original img{display:block;max-width:100%;max-height:420px;margin:10px auto 0;border-radius:12px;object-fit:contain}
+.foto-texto textarea{width:100%;min-height:260px;font:inherit;font-size:calc(1.05rem * var(--scale,1));line-height:1.6;padding:14px;border-radius:16px;border:2px solid #cfc8ee;background:#fff;color:#19183a;resize:vertical}
+.foto-texto textarea:focus-visible{outline:3px solid #8b5cff;outline-offset:2px}
+.ai-block{margin:14px 0;padding:14px 16px;border-radius:16px;border:1px solid #dedaf3}
+.ai-block h3{margin:0 0 8px;font-size:1.05rem}.ai-block h3 small{font-weight:500;opacity:.8}
+.ai-dice{background:#f2fffd;border-color:#9fe8de}
+.ai-sugerencias{background:#f5f1ff;border-color:#cdbdff;border-style:dashed}
+.big-choices.four .big-txt{font-size:clamp(1rem,1.6vw,1.2rem)}
+@media(max-width:700px){.foto-doble{grid-template-columns:1fr}.big-choices.four{grid-template-columns:1fr 1fr}.foto-texto textarea{min-height:200px}}

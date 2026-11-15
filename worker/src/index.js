@@ -4,7 +4,7 @@ import { PROVIDERS, ProviderError, providerName, PROVIDER_LABEL } from './provid
 import { checkLimits } from './ratelimit.js';
 
 const SOURCES = new Set(['typed', 'file_txt', 'file_pdf', 'file_ocr']);
-const TASK_IDS = new Set(['plain', 'easy', 'summary', 'ask']);
+const TASK_IDS = new Set(['plain', 'easy', 'summary', 'ask', 'actions']);
 
 function allowedOrigin(env, origin) {
   const list = String(env.ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
@@ -55,6 +55,16 @@ export function scrubUrls(text, allowed = allowedUrls()) {
     removed += 1; return '[enlace no verificado]' + tail;
   });
   return { text: out, removed };
+}
+
+// «¿Qué hago ahora?»: separa lo que dice el documento de lo que sugiere la IA. Sin respuesta válida no inventa nada.
+export function shapeActions(raw) {
+  const o = parseModelJson(raw);
+  if (!o) throw new ProviderError(502, 'bad_model_output');
+  const dice = strList(o.el_documento_dice, 8, 300), sugerencias = strList(o.sugerencias, 5, 300);
+  const resultado = typeof o.resultado === 'string' ? o.resultado.trim().slice(0, 400) : '';
+  if (!resultado && !dice.length && !sugerencias.length) throw new ProviderError(502, 'bad_model_output');
+  return { resultado: resultado || (dice.length ? 'Esto es lo que el documento te pide.' : 'El documento no indica acciones.'), el_documento_dice: dice, sugerencias, puntos_clave: [], avisos: strList(o.avisos, 6, 300) };
 }
 
 export function shapeExplain(raw) {
@@ -125,7 +135,7 @@ export default {
       const t = redact(text), q = redact(String(question || '').slice(0, LIMITS.question));
       redactions = t.count + q.count;
       prompt = buildExplain({ task, text: t.text.trim(), question: q.text.trim(), source: SOURCES.has(source) ? source : 'typed' });
-      maxTokens = 900; shape = shapeExplain;
+      maxTokens = 900; shape = task === 'actions' ? shapeActions : shapeExplain;
     } else {
       const { message, history } = body;
       if (typeof message !== 'string' || !message.trim() || message.length > LIMITS.chatMsg) return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), url.pathname);

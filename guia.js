@@ -8,18 +8,28 @@
   const tts = 'speechSynthesis' in window;
 
   const PANT = {
-    inicio: { q: '¿Qué querés hacer hoy?', explica: 'Tocá uno de los cuatro botones grandes: escribir una frase, leer un documento, hacer un trámite o hablar conmigo.', ayuda: ['Tocá el botón que quieras.', 'Podés volver acá cuando quieras tocando el logo de CLARIA.'] },
+    inicio: { q: '¿Qué querés hacer hoy?', explica: 'Tocá uno de los botones grandes: entender una foto, hablar con imágenes, estoy en un lugar público, entender un trámite o hablar conmigo.', ayuda: ['Tocá el botón que quieras.', 'Podés volver acá cuando quieras tocando el logo de CLARIA.'] },
     escribir: { q: '¿Qué querés decir?', explica: 'Escribí una palabra, una frase o una oración, o dictala con el micrófono. Después tocá «Convertir a pictogramas». Vas a poder escucharla, modificarla y descargarla.', ayuda: ['Escribí o dictá lo que querés decir.', 'Tocá «Convertir a pictogramas».', 'Tocá una imagen si querés cambiarla.', 'Usá Escuchar, Modificar o Descargar.'] },
     leer1: { q: '¿Qué querés leer?', explica: 'Podés subir un archivo, sacar una foto de un papel o escribir el texto. Elegí una de las tres opciones.', ayuda: ['Subir archivo: TXT, PDF o imagen.', 'Sacar foto: apuntá a un papel con letra clara.', 'Escribir texto: pegalo o escribilo.'] },
-    leer2: { q: '¿Cómo querés que te ayude?', explica: 'Escuchar lee el texto en voz alta por partes. Explicar fácil usa inteligencia artificial, solo si está conectada. Ver con pictogramas muestra cada oración con imágenes.', ayuda: ['Escuchar: te lo leo por partes.', 'Explicar fácil: necesita IA conectada.', 'Ver con pictogramas: funciona sin internet.'] },
+    leerfoto: { q: '¿Esta es la imagen correcta?', explica: 'Mirá la imagen que elegiste. Si es la correcta, tocá «Sí, leer el texto». CLARIA lee el texto en tu dispositivo y la imagen no se envía a ningún servidor.', ayuda: ['Sí, leer el texto: empieza la lectura.', 'Elegir otra imagen: probás con otra foto.', 'Escribir el texto yo: lo tipeás vos.'] },
+    leerrevisar: { q: 'Revisá el texto', explica: 'Este es el texto que CLARIA reconoció en la imagen. Puede tener errores, sobre todo en números, fechas y horas. Compará con la imagen, corregilo si hace falta y tocá «Usar este texto».', ayuda: ['Compará el texto con la imagen.', 'Corregí lo que esté mal.', 'Usar este texto: seguís al siguiente paso.', 'Si falló, leé la imagen de nuevo o escribilo vos.'] },
+    leer2: { q: '¿Cómo querés que te ayude?', explica: 'Escuchar lee el texto en voz alta por partes. Explicar fácil y ¿Qué hago ahora? usan inteligencia artificial, solo si está conectada. Ver con pictogramas muestra cada oración con imágenes.', ayuda: ['Escuchar: te lo leo por partes.', 'Explicar fácil: necesita IA conectada.', '¿Qué hago ahora?: necesita IA conectada.', 'Ver con pictogramas: funciona sin internet.'] },
     leer3: { q: 'Tu texto', explica: 'Acá podés leer el texto por partes y escucharlo. Con «Anterior» y «Siguiente» te movés. Si elegiste explicar, abajo vas a ver la respuesta de la IA, separada del texto original.', ayuda: ['Tocá Escuchar para oírlo.', 'Usá Pausar o Detener cuando quieras.', 'Anterior y Siguiente cambian de parte.'] },
     cuento: { q: 'Tu texto con pictogramas', explica: 'Cada oración aparece completa y debajo sus palabras con pictogramas. Tocá un pictograma para ver qué significa y escucharlo.', ayuda: ['Tocá un pictograma para ver su significado.', 'Escuchar lee la página.', 'Con las flechas del teclado cambiás de página.'] },
     tramites1: { q: '¿Qué trámite necesitás?', explica: 'Tocá la tarjeta del trámite que necesitás. Te muestro los pasos de a uno, con imágenes y la fuente oficial.', ayuda: ['Tocá una tarjeta.', 'Después avanzás paso a paso.', 'Siempre confirmá en el sitio oficial.'] },
     tramites2: { q: 'Paso a paso', explica: 'Cada paso tiene su texto, pictogramas y audio. Con «Siguiente paso» avanzás. La fuente oficial está abajo: confirmá ahí los requisitos actuales.', ayuda: ['Escuchar paso lee el paso actual.', 'Siguiente paso avanza.', 'Abrí la fuente oficial para confirmar.'] },
     hablar: { q: '¿En qué puedo ayudarte?', explica: 'Escribime tu pregunta o dictala. Si no hay IA conectada, respondo con textos preparados y te lo aviso. No escribas datos personales.', ayuda: ['Escribí tu pregunta.', 'O tocá el micrófono para dictar.', 'No compartas DNI, claves ni datos personales.'] },
+    tablero: { q: '¿Qué necesitás decir?', explica: 'Elegí un tema: ayuda, salud, escuela, transporte, compras o necesidades básicas. Después armás tu frase con imágenes y CLARIA la dice en voz alta.', ayuda: ['Tocá un tema.', 'Con Mis frases ves las que guardaste.'] },
+    tablerocat: { q: 'Armá tu frase', explica: 'Tocá una frase rápida o las palabras con imágenes. Abajo ves tu frase: podés mover, cambiar o quitar tarjetas. Tocá Decir en voz alta cuando quieras.', ayuda: ['Frase rápida: ya viene armada.', 'Palabras: tocalas para sumarlas.', 'Decir en voz alta: yo la leo completa.', 'Guardar o compartir imagen, si querés.'] },
+    tablerofrases: { q: 'Mis frases', explica: 'Acá están las frases que guardaste en este dispositivo. Podés decirlas, usarlas de nuevo o borrarlas.', ayuda: ['Decir: la leo en voz alta.', 'Usar: la cargo para modificarla.', 'Borrar: la saco de este dispositivo.'] },
+    lugares: { q: '¿Dónde estás?', explica: 'Podés escanear el código QR del lugar, subir una foto del QR o elegir el lugar de la lista. Solo aparecen lugares con información cargada y validada por su institución.', ayuda: ['Escanear QR: enciende la cámara solo si lo tocás.', 'Subir foto del QR: si ya tenés la imagen.', 'Elegir de la lista: sin cámara.'] },
+    lugarmenu: { q: '¿Qué necesitás?', explica: 'Elegí qué necesitás hacer en este lugar. La información la da la institución: fijate quién la proporciona y cuándo se actualizó.', ayuda: ['Tocá una opción.', 'Si es un ejemplo, lo avisa en pantalla.'] },
+    lugarpaso: { q: 'Guía del lugar', explica: 'Seguí un paso por vez. Tocá Escuchar para oírlo y Siguiente paso para avanzar. En Pedir ayuda podés mostrar una frase en pantalla grande o decirla en voz alta.', ayuda: ['Escuchar: lee el paso.', 'Siguiente paso: avanzás.', 'Mostrar: enseñás la frase al personal.'] },
+    creador1: { q: '¿Qué trámite querés explicar?', explica: 'Esta parte es para instituciones y docentes. Pegá el texto que te dio el organismo, completá la fuente y la fecha, y CLARIA arma los pasos. No pegues datos personales.', ayuda: ['Pegá el texto del organismo.', 'Completá fuente, fecha y responsable.', 'Armar los pasos: sigue la revisión.'] },
+    creador2: { q: 'Revisá cada paso', explica: 'Revisá que cada paso tenga una sola acción y que cada pictograma corresponda. Los dudosos quedan pendientes hasta que los confirmes. Sin pendientes y con la revisión marcada, podés descargar el PDF.', ayuda: ['Un paso, una acción.', 'Revisar o Cambiar: elegís el pictograma.', 'Con pendientes, solo se descarga un borrador.'] },
     acerca: { q: 'Privacidad y créditos', explica: 'Acá está cómo CLARIA cuida tus datos, el estado de la IA y los créditos de los pictogramas.', ayuda: ['Tocá Volver para seguir.'] }
   };
-  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', acerca: 'inicio' };
+  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leerfoto: 'leer1', leerrevisar: 'leerfoto', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', tablero: 'inicio', lugares: 'inicio', creador1: 'tramites1', creador2: 'creador1', lugarmenu: 'lugares', lugarpaso: 'lugarmenu', tablerocat: 'tablero', tablerofrases: 'tablero', acerca: 'inicio' };
   const ESTADOS = { esperando: 'Esperando', escuchando: 'Escuchando…', procesando: 'Pensando…', hablando: 'Hablando' };
   let pantalla = 'inicio', ultimo = null, anterior = 'inicio', activa = null;
   const c = $('claria');
@@ -61,10 +71,20 @@
   // ───────── CLARIA habla y guía (solo si la persona lo activa; nunca arranca sola) ─────────
   // La voz es la del navegador. El movimiento de la cabeza sigue el ritmo de las palabras: es APROXIMADO, no hay sincronía labial real.
   const GUION = {
-    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés crear con pictogramas, leer y entender, hacer un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
+    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés entender una foto, hablar con imágenes, ver ayuda si estás en un lugar público, entender un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
     escribir: ['¿Qué querés decir? Escribilo, o tocá el micrófono y dictámelo. Después tocá convertir, y te lo muestro con pictogramas.', '¿Qué querés decir?'],
     leer1: ['¿Qué querés leer? Podés subir un archivo, sacar una foto, o escribir el texto.', '¿Qué querés leer?'],
-    leer2: ['Ya tengo tu texto. ¿Cómo querés que te ayude? Puedo leértelo, explicártelo fácil, o mostrártelo con pictogramas.', '¿Cómo querés que te ayude?'],
+    leerfoto: ['¿Esta es la imagen correcta? Si lo es, tocá leer el texto.', '¿Esta es la imagen correcta?'],
+    leerrevisar: ['Revisá el texto. Compará con la imagen y corregí lo que haga falta.', 'Revisá el texto.'],
+    leer2: ['Ya tengo tu texto. ¿Cómo querés que te ayude? Puedo leértelo, explicártelo fácil, decirte qué hacer, o mostrártelo con pictogramas.', '¿Cómo querés que te ayude?'],
+    tablero: ['¿Qué necesitás decir? Elegí un tema y armamos tu frase con imágenes.', '¿Qué necesitás decir?'],
+    tablerocat: ['Armá tu frase. Tocá una frase rápida o las palabras, y después tocá decir en voz alta.', 'Armá tu frase.'],
+    tablerofrases: ['Estas son las frases que guardaste en este dispositivo.', 'Mis frases.'],
+    lugares: ['¿Dónde estás? Podés escanear el código QR del lugar, subir una foto del QR o elegir de la lista.', '¿Dónde estás?'],
+    lugarmenu: ['¿Qué necesitás? Elegí una opción. La información la da la institución.', '¿Qué necesitás?'],
+    lugarpaso: ['Seguí un paso por vez. Tocá escuchar si querés oírlo.', 'Seguí un paso por vez.'],
+    creador1: ['Esta parte es para instituciones. Pegá el texto del organismo y armamos los pasos.', 'Pegá el texto del organismo.'],
+    creador2: ['Revisá cada paso. Un paso, una acción, y un pictograma que corresponda.', 'Revisá cada paso.'],
     cuento: ['Este es tu texto con pictogramas. Tocá cualquier imagen y te cuento qué significa. Con siguiente, avanzás.', 'Tocá una imagen para ver qué significa.'],
     tramites1: ['¿Qué trámite necesitás? Tocá la tarjeta que corresponda.', '¿Qué trámite necesitás?'],
     hablar: ['Contame, ¿en qué puedo ayudarte? Podés escribirme o dictarme tu pregunta.', '¿En qué puedo ayudarte?'],

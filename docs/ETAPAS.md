@@ -38,3 +38,84 @@ Textos sugeridos: `HOLA` · `QUIERO AGUA` · `NECESITO SACAR UN TURNO PARA MI DN
 - Las oraciones se separan por punto, ?, ! y saltos de línea (abreviaturas como «Sr.» pueden cortar de más); las muy largas se parten cada ~25 palabras. Máximo 150 oraciones por documento.
 - Sin pictograma en el diccionario (261 conceptos) → la palabra queda escrita. No se consulta ARASAAC ni IA desde el pictocuento (llega en 2b).
 - Probar: cargar un texto en «Leer y comprender» → «Ver con pictogramas». `node tests/e2e-cuento.mjs` (13 pruebas de navegador).
+
+## Etapa 1 · Entender una foto (en revisión)
+
+**Flujo:** Leer un documento → Sacar foto / Subir archivo → «¿Esta es la imagen correcta?» → OCR en el dispositivo (Tesseract.js) → «Revisá el texto» (editable, con la imagen original al lado y botón para restaurar) → Escuchar / Explicar fácil / ¿Qué hago ahora? / Ver con pictogramas.
+
+**Funciona (probado con pruebas automáticas):**
+- Vista previa y confirmación antes de leer; no se descarga ni ejecuta OCR hasta confirmar.
+- Texto reconocido editable; la imagen original se conserva y nunca se envía a ningún servidor.
+- Escuchar y pictogramas funcionan sin IA; PDF y TXT siguen igual.
+- «¿Qué hago ahora?» usa el Worker (tarea `actions`) solo con IA conectada y consentimiento; separa «El documento dice» de «Sugerencia de CLARIA (no figura en el documento)». En modo demo se explica y no llama a la API.
+- Si el OCR falla o no reconoce texto: mensaje claro, reintentar o escribir a mano. Vista a 390 px sin desbordes.
+
+**Límites / no verificado:**
+- Las pruebas reemplazan Tesseract por un doble: la **calidad real del OCR** (letra a mano, fotos torcidas o con poca luz) debe probarse a mano con fotos reales.
+- Tesseract y su idioma se descargan de un CDN: se necesita internet la primera vez.
+- La respuesta real de la IA tampoco se probó (solo con un proveedor simulado); el prompt prohíbe inventar autorizaciones, pagos, fechas y lugares, pero hay que revisar con casos reales del kit.
+- Etapas 2 a 4 no empezadas.
+
+**Pruebas:** `npm test` (incluye `tests/e2e-foto.mjs`, 11 pruebas, y 2 pruebas nuevas del Worker).
+
+## Etapa 2 · Hablar con imágenes (en revisión)
+
+**Flujo:** Inicio → «Hablar con imágenes» → «¿Qué necesitás decir?» (Ayuda, Salud, Escuela, Transporte, Compras, Necesidades básicas) → frases rápidas y palabras con pictograma → tu frase (tarjetas visibles) → Decir en voz alta / Guardar frase / Compartir imagen. «Mis frases» lista lo guardado.
+
+**Funciona (probado automáticamente, `tests/e2e-tablero.mjs`, 12 pruebas):**
+- Solo pictogramas ARASAAC del diccionario verificado (`data/pictogramas.json`); una prueba comprueba que cada palabra y frase de `data/tablero.json` existe y tiene su imagen local. Para editar categorías, frases o palabras, cambiá `data/tablero.json` (usando solo palabras que estén en el diccionario).
+- «Decir en voz alta» pronuncia la **frase completa** (texto editable), no solo los conceptos, y nunca arranca sola. Si el texto se escribió o corrigió a mano, no se pisa al sumar tarjetas.
+- Mover, cambiar (solo entre pictogramas verificados) y quitar tarjetas. Guardar frases en el dispositivo (localStorage, máx. 30), usarlas de nuevo o borrarlas.
+- Compartir imagen: PNG generado en el dispositivo con las tarjetas y el crédito de ARASAAC; usa el menú de compartir del sistema si existe y si no, descarga el archivo.
+- Sin conexión básico: `sw.js` guarda los archivos propios y los pictogramas ya vistos; probado con el navegador sin red después de una primera visita.
+- Vista a 390 px sin desbordes; botones con nombre accesible.
+
+**Límites / no verificado:**
+- La voz depende del navegador (voces es-AR/es no siempre disponibles); en las pruebas la voz está simulada, no se escuchó audio real.
+- Sin conexión: hace falta una primera visita con internet; los pictogramas que nunca se vieron no estarán. Cuando se publique una versión nueva puede tardar una visita en actualizarse.
+- La lista de frases y palabras es una selección inicial; conviene revisarla con quienes van a usar el tablero. Las frases habladas están en español rioplatense neutral en género.
+- «Compartir imagen» no se probó con el menú de compartir real de un teléfono. No hay búsqueda en línea en ARASAAC dentro de este tablero (solo el diccionario verificado).
+- Etapas 3 y 4 no empezadas. El logo de ARASAAC no se agrega a las imágenes: si se imprimen como cartel en un espacio público hay que revisar sus condiciones de uso.
+
+## Etapa 3 · Estoy en un lugar público (en revisión)
+
+**Flujo:** Inicio → «Estoy en un lugar público» → «¿Dónde estás?» (Escanear QR / Subir foto del QR / Elegir de la lista) → «¿Qué necesitás?» (opciones que carga la institución) → guía de un paso por pantalla, con pictograma, Escuchar y «Siguiente paso». «Pedir ayuda» ofrece frases para el personal: Decir en voz alta o Mostrar en pantalla grande.
+
+**Inicio rediseñado según el kit:** 4 tarjetas (Entender una foto, Hablar con imágenes, Estoy en un lugar público, Entender un trámite) + «O hablá conmigo». «Hacer un trámite» pasó a llamarse «Entender un trámite» porque explica, no efectúa. «Crear con pictogramas» (texto → pictogramas) ya no está en el inicio: se llega desde «Hablar con imágenes» → «Escribir mi propia frase con pictogramas». Sigue funcionando igual.
+
+**Funciona (probado automáticamente, `tests/e2e-lugares.mjs`, 16 pruebas):**
+- Los datos de cada lugar los carga y valida la institución en `data/lugares.json`. Un lugar sin `responsable` o sin fecha `actualizado` **no se muestra**. Siempre se ve quién da la información, la fecha de actualización y que el contenido es responsabilidad de la institución. Los de demostración se rotulan «EJEMPLO FICTICIO».
+- Hay un solo lugar, ficticio: «Biblioteca de demostración» (Inscribirme, Consultar horario, Pedir ayuda). **El horario y los pasos son datos de ejemplo, no reales.** QR para probar: `assets/qr/biblioteca-demo.png` (contenido `CLARIA-LUGAR:biblioteca-demo`).
+- Un QR solo se acepta si su id existe en el catálogo. Un QR desconocido no se abre ni se sigue: se avisa y se ofrece la lista.
+- La cámara se enciende solo al tocar «Escanear QR» y se apaga al apagarla, al leer un QR o al salir. No se usa geolocalización. El QR se lee en el dispositivo (jsQR, Apache-2.0, en `vendor/`, cargado solo al escanear). Nada se envía a un servidor.
+- Sin conexión: el service worker ahora también guarda los pictogramas locales (≈3 MB en la primera visita) y los datos de lugares.
+
+**Cómo sumar un lugar real:** agregar una entrada a `data/lugares.json` (id en minúsculas, nombre, responsable, fecha, opciones de tipo `pasos`, `info` o `frases`), solo con información que la institución haya provisto y validado, y generar su QR con el texto `CLARIA-LUGAR:<id>`. Los pictogramas salen del diccionario verificado; si falta uno, se deja sin imagen.
+
+**Límites / no verificado:**
+- La cámara se probó con el dispositivo falso de Chromium (sin QR a la vista): el escaneo en vivo con un QR real frente a un celular no está probado. La lectura del QR sí se probó con imágenes reales (subir foto del QR).
+- La voz y el menú de compartir dependen del navegador; en las pruebas la voz está simulada.
+- No hay un panel para que una institución cargue sus datos: hoy se edita el JSON. Tampoco hay validación humana ni firma de los datos: la confianza depende de quién publique el catálogo en este repositorio.
+- No se agrega el logo de ARASAAC: si algo se imprime como cartel o señalética pública, hay que revisar sus condiciones de uso.
+- La Etapa 4 (trámites con pictogramas: generador editable con pasos y PDF) no está empezada; hoy sigue la vista «Entender un trámite» existente.
+
+## Etapa 4 · Trámites con pictogramas: creador de guías (en revisión)
+
+**Dónde está:** «Entender un trámite» → «Soy una institución: crear una guía con pictogramas». La vista ciudadana de trámites (guías de DNI, CUD y Mi Argentina con fuente y fecha) no cambió.
+
+**Flujo:** pegar el texto que dio el organismo + título, organismo, fuente oficial, fecha de verificación y responsable → «Armar los pasos» → revisar cada paso (editar, mover, quitar, agregar) y cada pictograma → casilla de revisión humana → PDF.
+
+**Funciona (probado automáticamente, `tests/e2e-creador.mjs`, 10 pruebas; PDF revisado a ojo):**
+- Parte de un texto **aportado por la institución**; la IA no escribe ni inventa pasos. Nada se envía a un servidor ni se guarda en el dispositivo.
+- Título y pasos en MAYÚSCULAS, pasos numerados, un paso por renglón u oración.
+- Avisos orientativos de la guía oficial: verbo en imperativo (voseo), una sola acción por paso, nombrar el objeto («IMPRIMÍ EL FORMULARIO» y no «IMPRIMILO»), pasos cortos. Son heurísticas simples: la decisión es de la persona.
+- Cada concepto lleva su pictograma del diccionario verificado. Un pictograma **dudoso**, **faltante** o dejado «solo texto» deja la pieza **PENDIENTE**: nunca se acepta solo. Hay que confirmarlo o elegir otro.
+- **PDF final** solo con: cero pendientes + organismo + fuente + fecha + responsable + casilla de que una persona revisó. Si no, solo se puede bajar un **BORRADOR** marcado «PENDIENTE DE REVISIÓN · NO USAR NI DIFUNDIR».
+- El PDF lleva la fuente, la fecha, quién revisó, el crédito de ARASAAC y el aviso de que CLARIA es independiente: **no emite «PDF conforme»** ni afirma cumplir la Resolución Conjunta 1/2023.
+
+**Límites / no verificado:**
+- **No cumple automáticamente la guía oficial.** Las palabras gramaticales (artículos, preposiciones: «AL», «UNA», «LA») y los números se muestran como texto sin pictograma; la guía oficial pide pictogramas para todos los textos. Hay que revisarlo a mano y, si hace falta, reformular el paso.
+- El diccionario verificado es chico (≈260 palabras). Muchos verbos de trámites («presentá», «acercate», etc.) quedarán pendientes hasta elegir un pictograma parecido, y la búsqueda solo ofrece los del diccionario. No hay búsqueda en línea en ARASAAC en este creador.
+- Una persona puede confirmar un pictograma equivocado: CLARIA lo marca como revisado por esa persona, no lo valida. En las pruebas automáticas se eligió un pictograma al azar solo para probar el flujo; esos PDF no son modelo de contenido.
+- No se guardan borradores: si se recarga la página, se pierde el trabajo. El PDF es una imagen (no tiene texto seleccionable ni etiquetas de accesibilidad).
+- **Diseño del PDF sin contrastar con la guía oficial:** la guía pide el texto a la derecha o debajo de la imagen, siempre en la misma ubicación. Hoy el PDF pone la frase completa **arriba** de las tarjetas (cada pictograma lleva su palabra debajo). Es una diferencia a corregir antes de usarlo como guía institucional.

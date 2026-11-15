@@ -123,3 +123,23 @@ test('utilidades: parseModelJson / scrubUrls / privacidad', () => {
   assert.equal(shapeChat('{"respuesta":"x","fuentes":["dni","cud"]}').fuentes.length, 2);
   assert.equal(Privacy.redact('Pagué $1.500.000').count, 0);
 });
+
+test('explain/actions: separa lo que dice el documento de las sugerencias y no inventa nada', async () => {
+  const env = baseEnv({ __fetch: anthropicReply('{"resultado":"Aviso de reunión escolar.","el_documento_dice":["Ir a la biblioteca el martes 24 a las 18:00","Llevar el cuaderno de comunicaciones"],"sugerencias":["Confirmar con la escuela si no podés ir"],"avisos":["La hora puede estar mal leída"]}') });
+  const r = await worker.fetch(post('/api/explain', { task: 'actions', source: 'file_ocr', text: 'Estimadas familias: el martes 24 de noviembre habrá una reunión a las 18:00 en la biblioteca escolar. Por favor, asistir con el cuaderno de comunicaciones.' }), env);
+  const j = await r.json();
+  assert.equal(r.status, 200); assert.equal(j.ok, true);
+  assert.deepEqual(j.el_documento_dice, ['Ir a la biblioteca el martes 24 a las 18:00', 'Llevar el cuaderno de comunicaciones']);
+  assert.deepEqual(j.sugerencias, ['Confirmar con la escuela si no podés ir']);
+  assert.deepEqual(j.avisos, ['La hora puede estar mal leída']);
+  const sys = anthropicReply.last.body.system;
+  assert.ok(/PROHIBIDO inventar autorizaciones, pagos, fechas/.test(sys), 'el prompt debe prohibir inventar autorizaciones, pagos y fechas');
+  assert.ok(/OCR/.test(sys) && /el_documento_dice/.test(sys));
+});
+
+test('explain/actions: respuesta del modelo sin formato válido → error, no se inventa una respuesta', async () => {
+  const env = baseEnv({ __fetch: anthropicReply('Tenés que ir mañana y pagar $500.') });
+  const r = await worker.fetch(post('/api/explain', { task: 'actions', source: 'typed', text: 'Texto cualquiera con más de doce caracteres para probar.' }), env);
+  const j = await r.json();
+  assert.equal(r.status, 502); assert.equal(j.ok, false); assert.equal(j.error, 'bad_model_output');
+});
