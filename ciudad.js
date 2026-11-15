@@ -18,9 +18,15 @@
     return promesa;
   }
   const URL_IMG = (id) => `https://static.arasaac.org/pictograms/${id}/${id}_300.png`;
-  // ¿La ficha institucional se puede mostrar? Solo si está publicada Y tiene aprobación, fuente oficial y fecha.
+  // Dos procedencias distintas: fuentes públicas revisadas documentalmente y datos aprobados por una institución.
+  // «fuente_publica» NUNCA implica que la institución haya revisado o avalado CLARIA.
   function confirmada(i) {
-    const f = (i && i.ficha) || {}; return Boolean(i && i.estado === 'publicado' && String(f.revisado_y_aprobado).toUpperCase() === 'SI' && /^https?:\/\//.test(f.fuente_oficial_url || '') && /^\d{4}-\d{2}-\d{2}$/.test(f.fecha_verificacion || ''));
+    const f = (i && i.ficha) || {};
+    const fuente = /^https:\/\//.test(f.fuente_oficial_url || '');
+    const fecha = /^\d{4}-\d{2}-\d{2}$/.test(f.fecha_verificacion || '');
+    if (!i || !fuente || !fecha) return false;
+    if (i.estado === 'fuente_publica') return f.procedencia === 'fuentes_publicas';
+    return i.estado === 'publicado' && String(f.revisado_y_aprobado).toUpperCase() === 'SI';
   }
   // Pictograma elegido por un editor para un concepto pendiente (aprobado en el repo o local sin aprobar).
   function revision(institucionId, concepto) {

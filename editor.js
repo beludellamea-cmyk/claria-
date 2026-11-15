@@ -58,10 +58,34 @@
   const FECHA = /^\d{4}-\d{2}-\d{2}$/;
   function leerFicha() { const ficha = { ...actual.ficha }; CAMPOS.forEach(([k]) => { ficha[k] = $(`ed_${k}`).value.trim(); }); ficha.revisado_y_aprobado = $('edAprobado').checked ? 'SI' : 'NO'; return { ...actual, estado: $('edEstadoFicha').value, ficha, revision: { responsable: $('edResponsable').value.trim(), fecha: $('edFecha').value.trim(), fuente: $('edFuente').value.trim(), ultima_revision: $('edUltima').value.trim() } }; }
   function problemas(i) {
-    const p = []; if (!i.revision.responsable) p.push('Falta el responsable de la revisión.'); if (!FECHA.test(i.revision.fecha)) p.push('Falta la fecha de revisión (AAAA-MM-DD).'); if (!/^https?:\/\//.test(i.ficha.fuente_oficial_url)) p.push('Falta la fuente oficial (enlace https://).'); if (!FECHA.test(i.ficha.fecha_verificacion)) p.push('Falta la fecha de verificación (AAAA-MM-DD).'); if (!FECHA.test(i.revision.ultima_revision)) p.push('Falta la fecha de la última revisión.'); if (i.ficha.revisado_y_aprobado !== 'SI') p.push('Falta la aprobación de una persona responsable.');
+    const p = [], f = i.ficha || {};
+    if (i.estado === 'fuente_publica') {
+      if (!/^https:\/\//.test(f.fuente_oficial_url || '')) p.push('Agregá un enlace a la fuente pública.');
+      if (!FECHA.test(f.fecha_verificacion || '')) p.push('Agregá la fecha de consulta (AAAA-MM-DD).');
+      if (f.procedencia !== 'fuentes_publicas') p.push('Indicá procedencia de fuentes públicas.');
+      if (!f.direccion_confirmada && !f.servicios_confirmados) p.push('Incluí al menos dirección o servicios.');
+      return p;
+    }
+    if (!i.revision.responsable) p.push('Falta el responsable de la revisión.');
+    if (!FECHA.test(i.revision.fecha)) p.push('Falta la fecha de revisión (AAAA-MM-DD).');
+    if (!/^https:\/\//.test(f.fuente_oficial_url || '')) p.push('Falta una fuente (enlace https://).');
+    if (!FECHA.test(f.fecha_verificacion || '')) p.push('Falta la fecha de verificación (AAAA-MM-DD).');
+    if (!FECHA.test(i.revision.ultima_revision)) p.push('Falta la fecha de la última revisión.');
+    if (f.revisado_y_aprobado !== 'SI') p.push('Falta la aprobación de una persona responsable de la institución.');
     return p;
   }
-  function validar() { const i = leerFicha(); const p = problemas(i); const quiere = i.estado !== 'borrador'; const ul = $('edProblemas'); ul.replaceChildren(); (quiere ? p : []).forEach((t) => ul.append(el('li', { text: t }))); $('edValidez').textContent = !quiere ? 'Estado: borrador. Se puede guardar incompleto; no se mostrará nada de esta ficha.' : p.length ? 'No se puede marcar como revisada o publicada hasta resolver lo siguiente:' : 'Ficha completa. Descargala y agregala al repositorio por revisión: CLARIA no publica sola.'; $('edDescargarFicha').disabled = quiere && p.length > 0; }
+  function validar() {
+    const i = leerFicha(), p = problemas(i), quiere = i.estado !== 'borrador', ul = $('edProblemas');
+    ul.replaceChildren();
+    (quiere ? p : []).forEach((t) => ul.append(el('li', { text: t })));
+    $('edValidez').textContent = !quiere
+      ? 'Estado: borrador. Se puede guardar incompleto; no se mostrará nada de esta ficha.'
+      : p.length ? 'Revisá estos datos antes de descargar la ficha:'
+      : i.estado === 'fuente_publica'
+        ? 'Ficha con fuentes públicas: no implica aprobación de la institución. Descargala para integrarla al repositorio.'
+        : 'Ficha revisada por la institución. Descargala y agregala al repositorio.';
+    $('edDescargarFicha').disabled = quiere && p.length > 0;
+  }
   ['edCampos', 'edResponsable', 'edFecha', 'edFuente', 'edUltima', 'edAprobado', 'edEstadoFicha'].forEach((id) => $(id).addEventListener('input', validar));
   $('edInst').addEventListener('change', formulario);
   $('edDescargarFicha').addEventListener('click', () => { const i = leerFicha(); if (i.estado !== 'borrador' && problemas(i).length) return; bajar(`ficha-${i.id}.json`, i); nota('Ficha descargada. No se publicó nada: falta que alguien la revise en el repositorio.'); });
