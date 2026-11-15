@@ -30,7 +30,7 @@ const caja = (page, sel) => page.$eval(sel, (n) => { const r = n.getBoundingClie
 await test('bienvenida: solo saludo, pregunta y 4 tarjetas + «O hablá conmigo» con ícono y texto; nada suena solo', async () => {
   const { ctx, page, errs } = await abrir(); await page.waitForTimeout(1300); assert.equal((await page.textContent('#inicioTitulo')).trim(), '¡Hola! Soy CLARIA.'); assert.equal((await page.textContent('.welcome-q')).trim(), '¿Qué querés hacer hoy?');
   const bts = await page.$$eval('#view-inicio .big-btn', (b) => b.map((x) => [Boolean(x.querySelector('.big-ico svg')), x.querySelector('.big-txt').textContent.trim()]));
-  assert.deepEqual(bts.map((b) => b[1]), ['Entender una foto', 'Hablar con imágenes', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']); assert.ok(bts.every((b) => b[0]));
+  assert.deepEqual(bts.map((b) => b[1]), ['Entender', 'Hablar con imágenes', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']); assert.ok(bts.every((b) => b[0]));
   assert.equal(await page.$$eval('#view-inicio .big-btn small, #view-inicio p:not(.claria-estado)', (n) => n.filter((x) => x.offsetParent !== null).length), 0, 'sin descripciones ni párrafos');
   assert.equal((await caja(page, '#claria-btn')).w >= 190, true, 'personaje grande'); assert.equal((await spoken(page)).length, 0); assert.deepEqual(errs, []);
   await page.screenshot({ path: `${OUT}/20-bienvenida-pc.png` }); await ctx.close();
@@ -70,7 +70,7 @@ await test('Escribir una frase: dictado con permiso → pictogramas → escucha 
   const [d2] = await Promise.all([page.waitForEvent('download'), page.click('#pcPdf')]); await d2.saveAs(`${OUT}/g.pdf`); assert.match(execFileSync('pdfinfo', [`${OUT}/g.pdf`]).toString(), /Pages:\s+1/); assert.deepEqual(ext, []); await ctx.close();
 });
 await test('Leer un documento: ¿Qué querés leer? → ¿Cómo querés que te ayude? → Escuchar / Explicar / Pictogramas', async () => {
-  const { ctx, page } = await abrir(); await page.click('#view-inicio [data-view=lectura]'); assert.deepEqual(await page.$$eval('#leerPaso1 .big-btn .big-txt', (n) => n.map((x) => x.textContent)), ['Subir archivo', 'Sacar foto', 'Escribir texto']);
+  const { ctx, page } = await abrir(); await page.evaluate(() => window.ClariaUI.showView('lectura')); assert.deepEqual(await page.$$eval('#leerPaso1 .big-btn .big-txt', (n) => n.map((x) => x.textContent)), ['Subir archivo', 'Sacar foto', 'Escribir texto']);
   assert.equal(await page.getAttribute('#photoInput', 'capture'), 'environment'); await page.screenshot({ path: `${OUT}/23-leer1.png` });
   await page.click('#optTexto'); await page.fill('#inputText', 'Estimadas familias: el lunes hay reunión en la escuela. Deben traer el DNI del alumno.'); await page.click('#useText');
   assert.match(await page.textContent('#lecturaTitulo2'), /¿Cómo querés que te ayude\?/); assert.deepEqual(await page.$$eval('#leerPaso2 .big-btn .big-txt', (n) => n.map((x) => x.textContent)), ['Escuchar', 'Explicar fácil', '¿Qué hago ahora?', 'Ver con pictogramas']);
@@ -79,7 +79,7 @@ await test('Leer un documento: ¿Qué querés leer? → ¿Cómo querés que te a
   await page.click('#view-lectura [data-back]'); await page.click('#abrirCuento'); await page.waitForSelector('#pqPagina img'); assert.equal(await vis(page, '#view-cuento'), true); await page.click('#pqVolver'); assert.equal(await vis(page, '#leerPaso2'), true); await ctx.close();
 });
 await test('Leer: subir archivo TXT lleva directo a «¿Cómo querés que te ayude?»', async () => {
-  const { ctx, page } = await abrir(); await page.click('#view-inicio [data-view=lectura]'); fs.writeFileSync(`${OUT}/nota.txt`, 'Aviso importante. La escuela cierra el viernes por la tarde.');
+  const { ctx, page } = await abrir(); await page.evaluate(() => window.ClariaUI.showView('lectura')); fs.writeFileSync(`${OUT}/nota.txt`, 'Aviso importante. La escuela cierra el viernes por la tarde.');
   await page.setInputFiles('#fileInput', `${OUT}/nota.txt`); await page.waitForSelector('#leerPaso2:not([hidden])'); assert.match(await page.textContent('#leerResumen'), /Texto listo/); await ctx.close();
 });
 await test('Entender un trámite: tarjetas → pasos con pictogramas, narración, fuente oficial → volver', async () => {
@@ -97,29 +97,29 @@ await test('Hablar con CLARIA: «¿En qué puedo ayudarte?», chat con texto y m
 await test('SIN voz y SIN micrófono: todos los recorridos funcionan y se explican', async () => {
   const { ctx, page, errs } = await abrir({ voz: false, mic: false }); assert.equal(await page.isDisabled('#micButton').catch(() => true), true);
   await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); assert.equal(await page.isDisabled('#pcDictar'), true); await page.fill('#pcTexto', 'HOLA'); await page.click('#pcConvertir'); await page.waitForSelector('#pcTablero img'); assert.equal(await page.isDisabled('#pcEscuchar'), true); assert.equal(await vis(page, '#pcVozNota'), true);
-  await page.click('.brand'); await page.click('#view-inicio [data-view=lectura]'); await page.click('#optTexto'); await page.click('#loadExample'); await page.click('#abrirCuento'); await page.waitForSelector('#pqPagina img'); assert.equal(await vis(page, '#pqVozNota'), true); await page.click('#pqSiguiente');
+  await page.click('.brand'); await page.evaluate(() => window.ClariaUI.showView('lectura')); await page.click('#optTexto'); await page.click('#loadExample'); await page.click('#abrirCuento'); await page.waitForSelector('#pqPagina img'); assert.equal(await vis(page, '#pqVozNota'), true); await page.click('#pqSiguiente');
   await page.click('.brand'); await page.click('#view-inicio [data-view=tramites]'); await page.click('[data-proc=dni]'); await page.click('#procedureSpeak'); await page.click('#procedureNext');
   await page.click('#claria-btn'); await page.click('[data-ayuda=explicame]'); assert.equal(await vis(page, '#claria-bubble-listen'), false); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('celular 390 px: bienvenida y recorridos sin desborde; personaje en barra superior', async () => {
   const { ctx, page } = await abrir({ ancho: 390, alto: 800 }); const over = () => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert.ok((await over()) <= 1); await page.screenshot({ path: `${OUT}/27-bienvenida-cel.png` });
-  for (const v of ['escribir', 'lectura', 'tramites', 'hablar']) { await page.evaluate(() => document.querySelector('.brand').click()); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else await page.click(`#view-inicio [data-view=${v}]`); await page.waitForTimeout(900); assert.ok((await over()) <= 1, v);
+  for (const v of ['escribir', 'lectura', 'tramites', 'hablar']) { await page.evaluate(() => document.querySelector('.brand').click()); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else await page.evaluate((x) => window.ClariaUI.showView(x), v); await page.waitForTimeout(900); assert.ok((await over()) <= 1, v);
     const c = await caja(page, '#claria-btn'); assert.ok(c.y < 140 && c.w <= 70, `${v} ${JSON.stringify(c)}`); }
   await page.click('.brand'); await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); await page.fill('#pcTexto', 'QUIERO AGUA'); await page.click('#pcConvertir'); await page.waitForSelector('#pcTablero img'); await page.screenshot({ path: `${OUT}/28-escribir-cel.png`, fullPage: true }); assert.ok((await over()) <= 1);
   await page.click('#claria-btn'); assert.equal(await vis(page, '#claria-menu'), true); await page.screenshot({ path: `${OUT}/29-menu-cel.png` }); await ctx.close();
 });
 await test('tablet 820 px y texto al 150 % con alto contraste: sin desborde', async () => {
   const { ctx, page } = await abrir({ ancho: 820, alto: 1000 }); await page.click('#openPrefs'); await page.click('#contrastToggle'); for (let i = 0; i < 5; i++) await page.click('#largerText'); await page.click('#closePrefs');
-  for (const v of ['inicio', 'escribir', 'tramites']) { await page.click('.brand'); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else if (v !== 'inicio') await page.click(`#view-inicio [data-view=${v}]`); assert.ok((await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 1, v); }
+  for (const v of ['inicio', 'escribir', 'tramites']) { await page.click('.brand'); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else if (v !== 'inicio') await page.evaluate((x) => window.ClariaUI.showView(x), v); assert.ok((await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 1, v); }
   await page.click('.brand'); await page.screenshot({ path: `${OUT}/30-contraste.png` }); await ctx.close();
 });
 await test('teclado: Tab llega a las 4 tarjetas, al botón de hablar y al personaje; Enter abre; foco en el título', async () => {
   const { ctx, page } = await abrir(); const orden = []; for (let i = 0; i < 16; i++) { await page.keyboard.press('Tab'); orden.push(await page.evaluate(() => document.activeElement.id || document.activeElement.textContent.trim().slice(0, 24))); }
-  for (const t of ['claria-btn', 'Entender una foto', 'Hablar con imágenes', 'Mi ciudad', 'Entender un trámite', 'O hablá conmigo']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
+  for (const t of ['claria-btn', 'Entender', 'Hablar con imágenes', 'Mi ciudad', 'Entender un trámite', 'O hablá conmigo']) assert.ok(orden.some((o) => o.includes(t)), 'falta ' + t + ' en ' + orden.join('|'));
   await page.focus('#view-inicio [data-view=hablar]'); await page.keyboard.press('Enter'); await page.waitForFunction(() => document.activeElement.id === 'hablarTitulo'); await ctx.close();
 });
 await test('ningún audio ni micrófono se activa solo al recorrer todas las pantallas', async () => {
-  const { ctx, page } = await abrir(); for (const v of ['escribir', 'lectura', 'tablero', 'lugares', 'tramites', 'hablar']) { await page.click('.brand'); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else await page.click(`#view-inicio [data-view=${v}]`); }
+  const { ctx, page } = await abrir(); for (const v of ['escribir', 'lectura', 'tablero', 'lugares', 'tramites', 'hablar']) { await page.click('.brand'); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else await page.evaluate((x) => window.ClariaUI.showView(x), v); }
   await page.click('#footerAbout'); assert.equal((await spoken(page)).length, 0); assert.equal(await page.evaluate(() => window.__micIniciado), 0); await ctx.close();
 });
 

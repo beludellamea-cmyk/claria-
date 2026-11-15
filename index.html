@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="foto.css">
   <link rel="stylesheet" href="tablero.css">
   <link rel="stylesheet" href="editor.css">
+  <link rel="stylesheet" href="entender.css">
   <link rel="stylesheet" href="lugares.css">
   <link rel="stylesheet" href="creador.css">
   <script defer src="config.js"></script>
@@ -26,6 +27,8 @@
   <script defer src="ciudad.js"></script>
   <script defer src="tablero.js"></script>
   <script defer src="editor.js"></script>
+  <script defer src="entender-core.js"></script>
+  <script defer src="entender.js"></script>
   <script defer src="lugares.js"></script>
   <script defer src="creador.js"></script>
   <script defer src="cine.js"></script>
@@ -85,7 +88,7 @@
           <h1 id="inicioTitulo">¡Hola! Soy <span>CLARIA.</span></h1>
           <h2 class="welcome-q">¿Qué querés hacer hoy?</h2>
           <div class="big-choices four cine-cards">
-            <button type="button" class="big-btn bb-blue" data-view="lectura"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 12h30l10 10v30H12z"/><path d="M42 12v10h10M20 30h24M20 39h24M20 47h14"/></svg></span><span class="big-txt">Entender una foto</span></button>
+            <button type="button" class="big-btn bb-blue" data-view="entender"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 12h30l10 10v30H12z"/><path d="M42 12v10h10M20 30h24M20 39h24M20 47h14"/></svg></span><span class="big-txt">Entender</span></button>
             <button type="button" class="big-btn bb-amber" data-view="tablero"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="36" rx="6"/><path d="M20 24h8v8h-8zM36 24h8v8h-8z"/><path d="M22 54h20"/></svg></span><span class="big-txt">Hablar con imágenes</span></button>
             <button type="button" class="big-btn bb-teal" data-view="lugares"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 54h48M12 54V26l20-14 20 14v28"/><path d="M26 54V38h12v16"/></svg></span><span class="big-txt">Mi ciudad, más accesible</span></button>
             <button type="button" class="big-btn bb-violet" data-view="tramites"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="14" cy="16" r="5"/><circle cx="50" cy="48" r="5"/><path d="M19 16h18a9 9 0 0 1 0 18H27a9 9 0 0 0 0 18h18"/></svg></span><span class="big-txt">Entender un trámite</span></button>
@@ -192,6 +195,123 @@
         <dialog id="lgMostrarDlg" class="pc-dialog lg-mostrar" aria-label="Frase para mostrar">
           <div class="pc-dialog-in"><div id="lgMostrarPictos" class="lg-mostrar-pictos"></div><p id="lgMostrarTexto" class="lg-mostrar-texto"></p>
             <div class="pc-dialog-btns"><button type="button" id="lgMostrarDecir">▶ Decir</button><button type="button" id="lgMostrarCerrar">Cerrar</button></div></div>
+        </dialog>
+      </section>
+
+      <section id="view-entender" class="view page-view en-scope" aria-labelledby="enTitulo" hidden>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+
+        <div id="enInicio" class="paso">
+          <h1 id="enTitulo" class="q" tabindex="-1">¿Qué querés que te explique?</h1>
+          <p class="en-lead">Mostrame un papel, una captura o un documento y te cuento qué dice y qué tenés que hacer.</p>
+          <div class="big-choices three">
+            <button type="button" class="big-btn bb-teal" id="enFoto"><span class="big-ico" aria-hidden="true">📷</span><span class="big-txt">Sacar foto</span></button>
+            <button type="button" class="big-btn bb-blue" id="enImagen"><span class="big-ico" aria-hidden="true">🖼️</span><span class="big-txt">Subir imagen</span></button>
+            <button type="button" class="big-btn bb-violet" id="enDoc"><span class="big-ico" aria-hidden="true">📄</span><span class="big-txt">Subir documento</span></button>
+          </div>
+          <input type="file" id="enInFoto" accept="image/*" capture="environment" aria-label="Sacar una foto del documento" hidden>
+          <input type="file" id="enInImagen" accept="image/png,image/jpeg,image/webp,image/*" aria-label="Elegir una imagen o captura de pantalla" hidden>
+          <input type="file" id="enInDoc" accept=".pdf,.txt,application/pdf,text/plain" aria-label="Elegir un documento PDF o de texto" hidden>
+          <p id="enEstadoInicio" class="status-note" role="status" aria-live="polite"></p>
+          <details class="en-texto"><summary>Prefiero escribir o pegar el texto</summary>
+            <label for="enTextoManual" class="field-label">Escribí o pegá el texto</label>
+            <textarea id="enTextoManual" rows="6" maxlength="8000"></textarea>
+            <p class="button-line"><button type="button" class="btn btn-primary" id="enUsarTexto">Entender este texto</button></p>
+          </details>
+          <div class="panel en-privacidad">
+            <h2>Tu privacidad</h2>
+            <ul>
+              <li>La foto o el documento <strong>se leen en tu dispositivo</strong>. La imagen o el archivo <strong>nunca se envían</strong> a ningún servidor.</li>
+              <li>Solo si pedís una explicación con IA, y <strong>después de tu permiso</strong>, se envía el <strong>texto leído</strong> (con datos personales ocultos).</li>
+              <li>CLARIA <strong>no guarda</strong> tus documentos: al salir se borran de la pantalla.</li>
+              <li>La primera vez se descargan componentes de lectura, por eso hace falta internet.</li>
+            </ul>
+          </div>
+          <p class="button-line"><button type="button" class="btn btn-soft" data-view="lectura">Lector por partes (para leer un texto con calma)</button></p>
+        </div>
+
+        <div id="enTrabajo" class="paso" hidden>
+          <h1 id="enTrabajoTitulo" class="q" tabindex="-1">Estoy leyendo tu documento</h1>
+          <figure class="en-previa"><img id="enPreviaImg" alt="Vista previa del documento que elegiste" hidden><figcaption id="enPreviaNombre" class="pc-note"></figcaption></figure>
+          <div class="progress-track" aria-hidden="true"><div id="enProgreso"></div></div>
+          <p id="enTrabajoEstado" class="status-note" role="status" aria-live="polite"></p>
+          <p class="button-line"><button type="button" class="btn btn-soft" id="enCancelar">Cancelar</button></p>
+        </div>
+
+        <div id="enResultado" class="paso" hidden>
+          <h1 id="enResTitulo" class="q" tabindex="-1">Esto es lo que encontré</h1>
+          <div id="enCalidad" class="en-calidad" role="status" data-nivel="buena"></div>
+          <p id="enReintentar" class="button-line" hidden>
+            <button type="button" class="btn btn-primary" id="enOtraFoto">📷 Sacar otra foto</button>
+            <button type="button" class="btn btn-soft" id="enOtraImagen">Subir otra imagen</button>
+            <button type="button" class="btn btn-soft" id="enCorregir">Escribir el texto a mano</button>
+          </p>
+
+          <section class="en-bloque en-original" aria-labelledby="enOrigTit">
+            <h2 id="enOrigTit"><span class="en-tag en-tag-orig">ORIGINAL</span> Tu documento, tal como lo subiste</h2>
+            <div id="enOriginal" class="en-original-cuerpo"></div>
+          </section>
+
+          <section id="enImportante" class="en-bloque en-importante" aria-labelledby="enImpTit">
+            <h2 id="enImpTit"><span class="en-tag en-tag-local">DEL TEXTO · SIN IA</span> Lo importante que aparece</h2>
+            <p class="pc-note">Son fragmentos copiados tal cual del documento. Comprobalos con el original.</p>
+            <div id="enImportanteLista"></div>
+            <p id="enImportanteVacio" class="pc-note" hidden>No encontré fechas, horarios, lugares ni pedidos claros en el texto.</p>
+            <div id="enImportanteIA"></div>
+            <p class="button-line"><button type="button" class="btn btn-soft en-ia" id="enRevisarIA">Pedir a la IA que lo revise</button></p>
+          </section>
+
+          <h2 class="en-q">¿Qué querés hacer?</h2>
+          <div class="en-botones" role="group" aria-label="Opciones">
+            <button type="button" class="big-btn bb-blue" id="enQueDice"><span class="big-ico" aria-hidden="true">📝</span><span class="big-txt">Qué dice exactamente</span></button>
+            <button type="button" class="big-btn bb-violet en-ia" id="enFacil"><span class="big-ico" aria-hidden="true">💡</span><span class="big-txt">Explicámelo fácil</span></button>
+            <button type="button" class="big-btn bb-rose en-ia" id="enQueHacer"><span class="big-ico" aria-hidden="true">✅</span><span class="big-txt">Qué tengo que hacer</span></button>
+            <button type="button" class="big-btn bb-teal" id="enEscuchar"><span class="big-ico" aria-hidden="true">🔊</span><span class="big-txt">Escuchar la explicación</span></button>
+            <button type="button" class="big-btn bb-amber" id="enPictos"><span class="big-ico" aria-hidden="true">🖼</span><span class="big-txt">Ver con pictogramas</span></button>
+            <button type="button" class="big-btn bb-blue en-ia" id="enPreguntar"><span class="big-ico" aria-hidden="true">❓</span><span class="big-txt">Hacer preguntas</span></button>
+            <button type="button" class="big-btn bb-violet" id="enResponder"><span class="big-ico" aria-hidden="true">💬</span><span class="big-txt">Responder con pictogramas</span></button>
+          </div>
+          <p id="enDisponibilidad" class="status-note"></p>
+          <p id="enEstado" class="status-note" role="status" aria-live="polite"></p>
+
+          <section id="enPanelTexto" class="en-bloque" hidden aria-labelledby="enTextoTit" tabindex="-1">
+            <h2 id="enTextoTit"><span class="en-tag en-tag-local">LECTURA DE CLARIA</span> Qué dice exactamente</h2>
+            <p class="pc-note">Es una transcripción automática: puede tener errores. Las palabras <mark class="en-dudosa">marcadas</mark> no se leyeron con seguridad.</p>
+            <div id="enTranscripcion" class="en-transcripcion" lang="es"></div>
+            <label for="enTextoEditar" class="field-label" id="enTextoEditarLabel" hidden>Corregí el texto</label>
+            <textarea id="enTextoEditar" rows="10" hidden></textarea>
+            <div class="button-line">
+              <button type="button" class="btn btn-soft" id="enEditar">Corregir el texto</button>
+              <button type="button" class="btn btn-primary" id="enGuardarEdicion" hidden>Usar este texto</button>
+              <button type="button" class="btn btn-soft" id="enLeerOriginal">🔊 Escuchar el texto</button>
+              <button type="button" class="btn btn-soft" id="enCopiar">Copiar</button>
+            </div>
+          </section>
+
+          <section id="enPanelIA" class="en-bloque en-ia-panel" hidden aria-labelledby="enIATit" tabindex="-1">
+            <h2 id="enIATit"><span class="en-tag en-tag-ia">GENERADO POR IA</span> <span id="enIAKind">Explicación</span></h2>
+            <p class="pc-note">La IA puede equivocarse. Comprobá con el documento original de arriba.</p>
+            <div id="enIATexto" class="ai-text"></div>
+            <div id="enIADice" class="ai-block ai-dice" hidden><h3>El documento dice</h3><ul id="enIADiceLista" class="ai-points"></ul></div>
+            <div id="enIASug" class="ai-block ai-sugerencias" hidden><h3>Sugerencia de CLARIA <small>(no figura en el documento)</small></h3><ul id="enIASugLista" class="ai-points"></ul></div>
+            <ul id="enIAPuntos" class="ai-points"></ul>
+            <div id="enIAAvisos" class="ai-notices" hidden><strong>Avisos</strong><ul id="enIAAvisosLista"></ul></div>
+            <div class="button-line"><button type="button" class="btn btn-soft" id="enIAEscuchar">🔊 Escuchar</button><button type="button" class="btn btn-soft" id="enIADetener">■ Detener</button><button type="button" class="btn btn-soft" id="enIACopiar">Copiar</button></div>
+          </section>
+
+          <section id="enPanelPregunta" class="en-bloque" hidden aria-labelledby="enPregTit" tabindex="-1">
+            <h2 id="enPregTit">Preguntale algo al documento</h2>
+            <p class="pc-note">La respuesta se basa solo en lo que dice el documento. Si no lo dice, CLARIA te lo avisa.</p>
+            <form id="enPregForm" class="ask-form"><label for="enPregInput" class="field-label">Tu pregunta</label>
+              <div class="ask-row"><input id="enPregInput" maxlength="400" autocomplete="off" placeholder="Ej.: ¿A qué hora es?"><button type="submit" class="btn btn-primary en-ia" id="enPregEnviar">Preguntar</button></div></form>
+          </section>
+
+          <p class="button-line"><button type="button" class="btn btn-soft" id="enBorrar">Borrar todo y empezar de nuevo</button></p>
+          <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia CC BY-NC-SA 4.0. Uso no comercial.</p>
+        </div>
+
+        <dialog id="enZoom" class="pc-dialog en-zoom" aria-label="Documento original ampliado">
+          <div class="pc-dialog-in"><img id="enZoomImg" alt="Documento original ampliado"><div class="pc-dialog-btns"><button type="button" id="enZoomCerrar">Cerrar</button></div></div>
         </dialog>
       </section>
 
@@ -495,7 +615,7 @@
       <div id="consentBody">
         <p>Para responderte, CLARIA envía <strong>solo lo que escribas o el texto que cargues</strong> a un servicio de inteligencia artificial externo (<span id="consentProvider">proveedor de IA</span>).</p>
         <ul>
-          <li>CLARIA <strong>no guarda</strong> tus textos ni tus chats.</li>
+          <li>CLARIA <strong>no guarda</strong> tus textos ni tus chats. Si cargás una foto o un documento, se lee en tu dispositivo y <strong>solo se envía el texto leído</strong>, nunca la imagen ni el archivo.</li>
           <li>Antes de enviarlo se oculta lo que parece DNI, CUIL, correo o clave. No es infalible: <strong>no cargues documentos personales ni de terceros</strong>.</li>
           <li>Las respuestas las genera una IA y <strong>pueden tener errores</strong>. Para trámites, confirmá siempre en el sitio oficial.</li>
           <li>Podés seguir usando el lector, la voz y las guías sin IA.</li>

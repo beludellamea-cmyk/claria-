@@ -40,7 +40,7 @@ async function open(port, { width = 1280, height = 900, ocr } = {}) {
   await page.goto(`http://localhost:${port}/`); await page.waitForFunction(() => document.getElementById('modeLabel').textContent.length > 0); await page.waitForTimeout(300);
   return { page, ctx, errors, reqs };
 }
-const aFoto = async (page) => { await page.click('#view-inicio [data-view="lectura"]'); await page.setInputFiles('#photoInput', FOTO); await page.waitForSelector('#leerFoto:not([hidden])'); };
+const aFoto = async (page) => { await page.evaluate(() => window.ClariaUI.showView('lectura')); await page.setInputFiles('#photoInput', FOTO); await page.waitForSelector('#leerFoto:not([hidden])'); };
 const visible = async (page, sel) => !(await page.$eval(sel, (e) => e.hidden));
 
 console.log('\nEntender una foto · modo demo');

@@ -26,8 +26,9 @@
     return out;
   }
 
-  async function abrir() {
-    const t = (UI().getText && UI().getText()) || '';
+  async function abrir(texto) {
+    const propio = typeof texto === 'string'; if (!propio) window.ClariaGuia?.desviar('cuento');
+    const t = propio ? texto : (UI().getText && UI().getText()) || '';
     if (!t.trim()) { UI().announce('Primero cargá un texto en el lector.'); return; }
     UI().showView('cuento'); $('pqContenido').hidden = true; $('pqEstado').textContent = 'Preparando el pictocuento…'; detener(true);
     try { await cargarMotor(); } catch (_) { $('pqEstado').textContent = 'No se pudo cargar el diccionario de pictogramas.'; return; }
@@ -63,7 +64,7 @@
   $('pqAnterior').addEventListener('click', () => ir(pag - 1)); $('pqSiguiente').addEventListener('click', () => ir(pag + 1));
   vista.addEventListener('keydown', (e) => { if (dlg.open || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName) || e.ctrlKey || e.altKey || e.metaKey) return; if (e.key === 'ArrowRight') { e.preventDefault(); ir(pag + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(pag - 1); } });
   $('pqVolver').addEventListener('click', () => { detener(true); window.ClariaGuia?.volver(); });
-  $('abrirCuento').addEventListener('click', abrir);
+  $('abrirCuento').addEventListener('click', () => abrir());
 
   // ───────── Tocar un pictograma: significado + audio + otras opciones locales ─────────
   function abrirPicto(oi, fi, boton) {
@@ -137,5 +138,5 @@
       ClariaExport.descargar(ClariaExport.aPDF(pags), 'claria-pictocuento.pdf'); UI().announce(`PDF listo: ${pags.length} página${pags.length === 1 ? '' : 's'}.`);
     } catch (_) { UI().announce('No se pudo preparar el PDF. Probá Imprimir.'); } finally { b.disabled = false; }
   });
-  window.ClariaCuento = { dividir };
+  window.ClariaCuento = { dividir, abrir };
 })();
