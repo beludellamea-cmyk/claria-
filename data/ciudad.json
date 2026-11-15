@@ -1,2711 +1,2873 @@
 {
- "version": 1,
- "generado": "2026-11-15",
- "origen": "CLARIA_Paquete_Maestro (docs/paquete-maestro)",
- "proyecto": "CLARIA · Mi ciudad, más accesible",
- "licencia_pictogramas": {
-  "licencia": "CC BY-NC-SA 4.0",
-  "autor": "Sergio Palao",
-  "titular": "Gobierno de Aragón",
-  "origen": "ARASAAC",
-  "credito": "Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo licencia Creative Commons BY-NC-SA."
- },
- "aviso": "Las frases son ayudas de comunicación, NO procedimientos oficiales. Ningún dato institucional está verificado: solo se muestra lo que una ficha aprobada (con fuente y fecha) y publicada confirme.",
- "estados_pictograma": {
-  "VERIFICADO_DICCIONARIO_CLARIA": "ID y significado verificados en data/pictogramas.json",
-  "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE": "Pictograma genérico: acompañar con texto específico; no asumir que la institución ofrece ese servicio",
-  "PENDIENTE_SELECCION_MANUAL": "Sin pictograma verificado: mostrar solo texto hasta que un editor elija uno"
- },
- "pictogramas": [
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Hola",
-   "lema_diccionario": "hola",
-   "id_arasaac": 6009,
-   "archivo_en_repositorio": "assets/picto/6009.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6009/6009_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SALUDAR",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Necesito",
-   "lema_diccionario": "necesitar",
-   "id_arasaac": 37160,
-   "archivo_en_repositorio": "assets/picto/37160.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/37160/37160_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "INICIAR UN MENSAJE",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Quiero",
-   "lema_diccionario": "querer",
-   "id_arasaac": 5441,
-   "archivo_en_repositorio": "assets/picto/5441.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5441/5441_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "EXPRESAR UNA PETICIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Ayuda",
-   "lema_diccionario": "ayudar",
-   "id_arasaac": 4570,
-   "archivo_en_repositorio": "assets/picto/4570.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "PEDIR AYUDA",
-   "observaciones": "Acción AYUDAR, no equivale a un mensaje completo."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "No entiendo",
-   "lema_diccionario": "entender",
-   "id_arasaac": 11697,
-   "archivo_en_repositorio": "assets/picto/11697.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11697/11697_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "EXPRESAR DIFICULTAD DE COMPRENSIÓN",
-   "observaciones": "Combinar con el pictograma NO."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Sí",
-   "lema_diccionario": "sí",
-   "id_arasaac": 5584,
-   "archivo_en_repositorio": "assets/picto/5584.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5584/5584_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "RESPONDER",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "No",
-   "lema_diccionario": "no",
-   "id_arasaac": 5526,
-   "archivo_en_repositorio": "assets/picto/5526.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5526/5526_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "RESPONDER",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Por favor",
-   "lema_diccionario": "por favor",
-   "id_arasaac": 8194,
-   "archivo_en_repositorio": "assets/picto/8194.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8194/8194_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PEDIR CON CORTESÍA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Gracias",
-   "lema_diccionario": "gracias",
-   "id_arasaac": 8128,
-   "archivo_en_repositorio": "assets/picto/8128.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8128/8128_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "AGRADECER",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Hablar",
-   "lema_diccionario": "hablar",
-   "id_arasaac": 3345,
-   "archivo_en_repositorio": "assets/picto/3345.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3345/3345_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "COMUNICARSE",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Escuchar",
-   "lema_diccionario": "escuchar",
-   "id_arasaac": 2381,
-   "archivo_en_repositorio": "assets/picto/2381.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2381/2381_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ESCUCHAR UNA EXPLICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Preguntar",
-   "lema_diccionario": "preguntar",
-   "id_arasaac": 9844,
-   "archivo_en_repositorio": "assets/picto/9844.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9844/9844_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "HACER UNA PREGUNTA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Comunicación",
-   "concepto": "Entender",
-   "lema_diccionario": "entender",
-   "id_arasaac": 11697,
-   "archivo_en_repositorio": "assets/picto/11697.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11697/11697_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "COMPRENSIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "¿Dónde?",
-   "lema_diccionario": "dónde",
-   "id_arasaac": 7764,
-   "archivo_en_repositorio": "assets/picto/7764.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7764/7764_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PREGUNTAR UNA UBICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Ir",
-   "lema_diccionario": "ir",
-   "id_arasaac": 2432,
-   "archivo_en_repositorio": "assets/picto/2432.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2432/2432_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DESPLAZARSE",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Entrar",
-   "lema_diccionario": "entrar",
-   "id_arasaac": 2742,
-   "archivo_en_repositorio": "assets/picto/2742.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2742/2742_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "INGRESAR",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Salir",
-   "lema_diccionario": "salir",
-   "id_arasaac": 2806,
-   "archivo_en_repositorio": "assets/picto/2806.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2806/2806_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SALIR",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Esperar",
-   "lema_diccionario": "esperar",
-   "id_arasaac": 8109,
-   "archivo_en_repositorio": "assets/picto/8109.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ESPERAR SER ATENDIDO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Turno",
-   "lema_diccionario": "turno",
-   "id_arasaac": 22190,
-   "archivo_en_repositorio": "assets/picto/22190.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PREGUNTAR POR UN TURNO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Oficina",
-   "lema_diccionario": "oficina",
-   "id_arasaac": 36089,
-   "archivo_en_repositorio": "assets/picto/36089.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICACIÓN GENÉRICA",
-   "observaciones": "No equivale por sí solo a Municipalidad o Registro Civil."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Información",
-   "lema_diccionario": "información",
-   "id_arasaac": 9897,
-   "archivo_en_repositorio": "assets/picto/9897.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PEDIR INFORMACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Baño",
-   "lema_diccionario": "baño",
-   "id_arasaac": 15905,
-   "archivo_en_repositorio": "assets/picto/15905.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "LOCALIZAR UN SERVICIO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Hora",
-   "lema_diccionario": "hora",
-   "id_arasaac": 7129,
-   "archivo_en_repositorio": "assets/picto/7129.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7129/7129_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR HORA",
-   "observaciones": "No equivale al horario oficial."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Orientación",
-   "concepto": "Horario de atención",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "MOSTRAR HORARIO PUBLICADO",
-   "observaciones": "No asignar pictograma por similitud sin revisión."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "DNI",
-   "lema_diccionario": "DNI",
-   "id_arasaac": 5987,
-   "archivo_en_repositorio": "assets/picto/5987.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5987/5987_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Documento",
-   "lema_diccionario": "documento",
-   "id_arasaac": 21802,
-   "archivo_en_repositorio": "assets/picto/21802.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Formulario",
-   "lema_diccionario": "formulario",
-   "id_arasaac": 9173,
-   "archivo_en_repositorio": "assets/picto/9173.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PRESENTACIÓN DE FORMULARIOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Certificado",
-   "lema_diccionario": "certificado",
-   "id_arasaac": 27677,
-   "archivo_en_repositorio": "assets/picto/27677.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Firmar",
-   "lema_diccionario": "firmar",
-   "id_arasaac": 12317,
-   "archivo_en_repositorio": "assets/picto/12317.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ACCIÓN EN FORMULARIOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Papel",
-   "lema_diccionario": "papel",
-   "id_arasaac": 8349,
-   "archivo_en_repositorio": "assets/picto/8349.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8349/8349_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTOS IMPRESOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Foto",
-   "lema_diccionario": "foto",
-   "id_arasaac": 7107,
-   "archivo_en_repositorio": "assets/picto/7107.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7107/7107_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICACIÓN DE FOTO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Fecha",
-   "lema_diccionario": "fecha",
-   "id_arasaac": 34799,
-   "archivo_en_repositorio": "assets/picto/34799.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/34799/34799_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "FECHA DE EVENTO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Documentos",
-   "concepto": "Nombre",
-   "lema_diccionario": "nombre",
-   "id_arasaac": 27357,
-   "archivo_en_repositorio": "assets/picto/27357.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27357/27357_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICACIÓN PERSONAL",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Traer",
-   "lema_diccionario": "traer",
-   "id_arasaac": 7279,
-   "archivo_en_repositorio": "assets/picto/7279.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7279/7279_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ORIENTACIÓN DE TRÁMITES",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Llevar",
-   "lema_diccionario": "llevar",
-   "id_arasaac": 6139,
-   "archivo_en_repositorio": "assets/picto/6139.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6139/6139_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ORIENTACIÓN DE TRÁMITES",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Completar",
-   "lema_diccionario": "completar",
-   "id_arasaac": 13078,
-   "archivo_en_repositorio": "assets/picto/13078.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/13078/13078_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "FORMULARIOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Pedir",
-   "lema_diccionario": "pedir",
-   "id_arasaac": 11251,
-   "archivo_en_repositorio": "assets/picto/11251.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11251/11251_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SOLICITAR ALGO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Pagar",
-   "lema_diccionario": "pagar",
-   "id_arasaac": 9014,
-   "archivo_en_repositorio": "assets/picto/9014.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PAGO, SOLO SI FUE VERIFICADO",
-   "observaciones": "No afirmar costo sin fuentes."
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Leer",
-   "lema_diccionario": "leer",
-   "id_arasaac": 28643,
-   "archivo_en_repositorio": "assets/picto/28643.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/28643/28643_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "LEER UNA INDICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Escribir",
-   "lema_diccionario": "escribir",
-   "id_arasaac": 2380,
-   "archivo_en_repositorio": "assets/picto/2380.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2380/2380_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "RELLENAR INFORMACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Buscar",
-   "lema_diccionario": "buscar",
-   "id_arasaac": 6946,
-   "archivo_en_repositorio": "assets/picto/6946.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6946/6946_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "BUSCAR UNA OFICINA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Teléfono",
-   "lema_diccionario": "teléfono",
-   "id_arasaac": 2791,
-   "archivo_en_repositorio": "assets/picto/2791.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2791/2791_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DATOS DE CONTACTO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Trámite",
-   "lema_diccionario": "trámite",
-   "id_arasaac": 24709,
-   "archivo_en_repositorio": "assets/picto/24709.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PROCESO ADMINISTRATIVO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "COMÚN",
-   "grupo": "Acciones",
-   "concepto": "Señal de espera",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "LOCALIZACIÓN DE SALA",
-   "observaciones": "Confirmar pictograma concreto en ARASAAC."
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Identificación de Registro Civil",
-   "lema_diccionario": "oficina",
-   "id_arasaac": 36089,
-   "archivo_en_repositorio": "assets/picto/36089.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "TÍTULO DEL SERVICIO",
-   "observaciones": "Oficina es genérico, usar además nombre real y foto autorizada."
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "DNI",
-   "lema_diccionario": "DNI",
-   "id_arasaac": 5987,
-   "archivo_en_repositorio": "assets/picto/5987.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5987/5987_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR DNI",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Documento",
-   "lema_diccionario": "documento",
-   "id_arasaac": 21802,
-   "archivo_en_repositorio": "assets/picto/21802.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "INFORMACIÓN DOCUMENTAL",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Certificado",
-   "lema_diccionario": "certificado",
-   "id_arasaac": 27677,
-   "archivo_en_repositorio": "assets/picto/27677.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR CERTIFICADO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Partida de nacimiento",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAR PARTIDA",
-   "observaciones": "Debe seleccionarse pictograma específico; no confundir con certificado."
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Nacimiento",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTA DE NACIMIENTO",
-   "observaciones": "Requiere revisión ARASAAC."
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Turno",
-   "lema_diccionario": "turno",
-   "id_arasaac": 22190,
-   "archivo_en_repositorio": "assets/picto/22190.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR TURNOS",
-   "observaciones": "No afirmar obligatoriedad de turno."
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Formulario",
-   "lema_diccionario": "formulario",
-   "id_arasaac": 9173,
-   "archivo_en_repositorio": "assets/picto/9173.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "FORMULARIO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Firmar",
-   "lema_diccionario": "firmar",
-   "id_arasaac": 12317,
-   "archivo_en_repositorio": "assets/picto/12317.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "FIRMA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Información",
-   "lema_diccionario": "información",
-   "id_arasaac": 9897,
-   "archivo_en_repositorio": "assets/picto/9897.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PREGUNTAR AL PERSONAL",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Registro Civil",
-   "grupo": "Institucional",
-   "concepto": "Esperar",
-   "lema_diccionario": "esperar",
-   "id_arasaac": 8109,
-   "archivo_en_repositorio": "assets/picto/8109.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "INDICACIÓN SI CORRESPONDE",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Hospital",
-   "lema_diccionario": "hospital",
-   "id_arasaac": 3116,
-   "archivo_en_repositorio": "assets/picto/3116.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3116/3116_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICAR ESTABLECIMIENTO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Salud",
-   "lema_diccionario": "salud",
-   "id_arasaac": 14664,
-   "archivo_en_repositorio": "assets/picto/14664.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/14664/14664_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SALUD Y SERVICIOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Médico",
-   "lema_diccionario": "médico",
-   "id_arasaac": 2467,
-   "archivo_en_repositorio": "assets/picto/2467.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2467/2467_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PROFESIONAL",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Medicamento",
-   "lema_diccionario": "medicina",
-   "id_arasaac": 8163,
-   "archivo_en_repositorio": "assets/picto/8163.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8163/8163_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "MEDICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Farmacia",
-   "lema_diccionario": "farmacia",
-   "id_arasaac": 3313,
-   "archivo_en_repositorio": "assets/picto/3313.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3313/3313_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "UBICAR FARMACIA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Turno",
-   "lema_diccionario": "turno",
-   "id_arasaac": 22190,
-   "archivo_en_repositorio": "assets/picto/22190.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR TURNOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Dolor",
-   "lema_diccionario": "dolor",
-   "id_arasaac": 2367,
-   "archivo_en_repositorio": "assets/picto/2367.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2367/2367_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "EXPRESAR SÍNTOMAS",
-   "observaciones": "No usar para diagnosticar."
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Me siento mal",
-   "lema_diccionario": "enfermo",
-   "id_arasaac": 28742,
-   "archivo_en_repositorio": "assets/picto/28742.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/28742/28742_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "EXPRESAR MALESTAR",
-   "observaciones": "Complementar con texto y voz."
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Ayuda",
-   "lema_diccionario": "ayudar",
-   "id_arasaac": 4570,
-   "archivo_en_repositorio": "assets/picto/4570.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "PEDIR AYUDA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Baño",
-   "lema_diccionario": "baño",
-   "id_arasaac": 15905,
-   "archivo_en_repositorio": "assets/picto/15905.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "UBICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Guardia / urgencias",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "ORIENTAR A URGENCIAS",
-   "observaciones": "Requiere señalización de emergencia oficial y revisada."
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Vacunación",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAR VACUNATORIO",
-   "observaciones": "Requiere selección ARASAAC."
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Receta médica",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTA DE RECETA",
-   "observaciones": "No confundir con medicamento."
-  },
-  {
-   "institucion": "Hospital y centros de salud",
-   "grupo": "Institucional",
-   "concepto": "Consultorio",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "UBICACIÓN DE CONSULTORIO",
-   "observaciones": "Requiere selección específica."
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Municipalidad",
-   "lema_diccionario": "oficina",
-   "id_arasaac": 36089,
-   "archivo_en_repositorio": "assets/picto/36089.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "IDENTIFICACIÓN DE EDIFICIO",
-   "observaciones": "Pictograma de oficina genérica; el nombre institucional debe ir escrito."
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Ciudad",
-   "lema_diccionario": "ciudad",
-   "id_arasaac": 2704,
-   "archivo_en_repositorio": "assets/picto/2704.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2704/2704_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SERVICIOS LOCALES",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Trámite",
-   "lema_diccionario": "trámite",
-   "id_arasaac": 24709,
-   "archivo_en_repositorio": "assets/picto/24709.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SERVICIO ADMINISTRATIVO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Información",
-   "lema_diccionario": "información",
-   "id_arasaac": 9897,
-   "archivo_en_repositorio": "assets/picto/9897.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Formulario",
-   "lema_diccionario": "formulario",
-   "id_arasaac": 9173,
-   "archivo_en_repositorio": "assets/picto/9173.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PRESENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Pagar",
-   "lema_diccionario": "pagar",
-   "id_arasaac": 9014,
-   "archivo_en_repositorio": "assets/picto/9014.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PAGOS SEGÚN SERVICIO",
-   "observaciones": "No asignar costos ni medios de pago sin validación."
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Documento",
-   "lema_diccionario": "documento",
-   "id_arasaac": 21802,
-   "archivo_en_repositorio": "assets/picto/21802.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Firmar",
-   "lema_diccionario": "firmar",
-   "id_arasaac": 12317,
-   "archivo_en_repositorio": "assets/picto/12317.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "FIRMA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Certificado",
-   "lema_diccionario": "certificado",
-   "id_arasaac": 27677,
-   "archivo_en_repositorio": "assets/picto/27677.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSTANCIAS / CERTIFICADOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Dirección",
-   "lema_diccionario": "dirección",
-   "id_arasaac": 38571,
-   "archivo_en_repositorio": "assets/picto/38571.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOMICILIO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Reclamo",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "PRESENTAR RECLAMO",
-   "observaciones": "Requiere selección manual."
-  },
-  {
-   "institucion": "Municipalidad",
-   "grupo": "Institucional",
-   "concepto": "Tasas municipales",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "TRÁMITES DE TASAS",
-   "observaciones": "No asignar servicio específico sin confirmación municipal."
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "PAMI",
-   "lema_diccionario": "salud",
-   "id_arasaac": 14664,
-   "archivo_en_repositorio": "assets/picto/14664.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/14664/14664_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "IDENTIFICACIÓN DE SERVICIO",
-   "observaciones": "Salud es genérico; conservar nombre PAMI."
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Médico",
-   "lema_diccionario": "médico",
-   "id_arasaac": 2467,
-   "archivo_en_repositorio": "assets/picto/2467.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2467/2467_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAS DE ATENCIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Turno",
-   "lema_diccionario": "turno",
-   "id_arasaac": 22190,
-   "archivo_en_repositorio": "assets/picto/22190.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "TURNO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Farmacia",
-   "lema_diccionario": "farmacia",
-   "id_arasaac": 3313,
-   "archivo_en_repositorio": "assets/picto/3313.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3313/3313_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "UBICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Medicamento",
-   "lema_diccionario": "medicina",
-   "id_arasaac": 8163,
-   "archivo_en_repositorio": "assets/picto/8163.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8163/8163_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "MEDICAMENTOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Documento",
-   "lema_diccionario": "documento",
-   "id_arasaac": 21802,
-   "archivo_en_repositorio": "assets/picto/21802.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Información",
-   "lema_diccionario": "información",
-   "id_arasaac": 9897,
-   "archivo_en_repositorio": "assets/picto/9897.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Ayuda",
-   "lema_diccionario": "ayudar",
-   "id_arasaac": 4570,
-   "archivo_en_repositorio": "assets/picto/4570.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "COMUNICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Trámite",
-   "lema_diccionario": "trámite",
-   "id_arasaac": 24709,
-   "archivo_en_repositorio": "assets/picto/24709.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "GESTIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Afiliación",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAS DE AFILIACIÓN",
-   "observaciones": "Seleccionar pictograma; no confundir con discapacidad."
-  },
-  {
-   "institucion": "PAMI",
-   "grupo": "Institucional",
-   "concepto": "Autorización",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAS DE AUTORIZACIÓN",
-   "observaciones": "Seleccionar pictograma concreto."
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Correo",
-   "lema_diccionario": "correo",
-   "id_arasaac": 3086,
-   "archivo_en_repositorio": "assets/picto/3086.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3086/3086_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "IDENTIFICACIÓN DE SERVICIO",
-   "observaciones": "Es un símbolo genérico; conservar nombre Correo Argentino."
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Enviar",
-   "lema_diccionario": "enviar",
-   "id_arasaac": 21828,
-   "archivo_en_repositorio": "assets/picto/21828.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21828/21828_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ENVIAR UN OBJETO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Recibir",
-   "lema_diccionario": "recibir",
-   "id_arasaac": 17042,
-   "archivo_en_repositorio": "assets/picto/17042.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/17042/17042_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "RECIBIR ALGO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Dirección",
-   "lema_diccionario": "dirección",
-   "id_arasaac": 38571,
-   "archivo_en_repositorio": "assets/picto/38571.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DATOS DE DESTINO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Documento",
-   "lema_diccionario": "documento",
-   "id_arasaac": 21802,
-   "archivo_en_repositorio": "assets/picto/21802.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Papel",
-   "lema_diccionario": "papel",
-   "id_arasaac": 8349,
-   "archivo_en_repositorio": "assets/picto/8349.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8349/8349_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "DOCUMENTOS EN PAPEL",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Pagar",
-   "lema_diccionario": "pagar",
-   "id_arasaac": 9014,
-   "archivo_en_repositorio": "assets/picto/9014.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR COSTOS",
-   "observaciones": "No afirmar precio."
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Preguntar",
-   "lema_diccionario": "preguntar",
-   "id_arasaac": 9844,
-   "archivo_en_repositorio": "assets/picto/9844.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9844/9844_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PEDIR INFORMACIÓN",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Información",
-   "lema_diccionario": "información",
-   "id_arasaac": 9897,
-   "archivo_en_repositorio": "assets/picto/9897.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "ATENCIÓN AL PÚBLICO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Paquete",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "ENVIAR O RETIRAR PAQUETE",
-   "observaciones": "Debe seleccionarse pictograma específico."
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Encomienda",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "SERVICIOS DE ENCOMIENDAS",
-   "observaciones": "Revisar denominación disponible."
-  },
-  {
-   "institucion": "Correo Argentino",
-   "grupo": "Institucional",
-   "concepto": "Retirar",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "RETIRO DE ENVÍO",
-   "observaciones": "Seleccionar pictograma para esta acción."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Colectivo",
-   "lema_diccionario": "colectivo",
-   "id_arasaac": 38090,
-   "archivo_en_repositorio": "assets/picto/38090.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38090/38090_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "IDENTIFICAR TRANSPORTE",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Terminal",
-   "lema_diccionario": "colectivo",
-   "id_arasaac": 38090,
-   "archivo_en_repositorio": "assets/picto/38090.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38090/38090_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "IDENTIFICAR LUGAR",
-   "observaciones": "Colectivo es genérico, no equivale a terminal."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Viajar",
-   "lema_diccionario": "ir",
-   "id_arasaac": 2432,
-   "archivo_en_repositorio": "assets/picto/2432.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2432/2432_300.png",
-   "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
-   "uso_previsto": "PLANIFICAR UN VIAJE",
-   "observaciones": "Ir es genérico."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Salir",
-   "lema_diccionario": "salir",
-   "id_arasaac": 2806,
-   "archivo_en_repositorio": "assets/picto/2806.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2806/2806_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SALIDA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Esperar",
-   "lema_diccionario": "esperar",
-   "id_arasaac": 8109,
-   "archivo_en_repositorio": "assets/picto/8109.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "SALA DE ESPERA",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Comprar",
-   "lema_diccionario": "comprar",
-   "id_arasaac": 6457,
-   "archivo_en_repositorio": "assets/picto/6457.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6457/6457_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR COMPRA DE PASAJES",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Pagar",
-   "lema_diccionario": "pagar",
-   "id_arasaac": 9014,
-   "archivo_en_repositorio": "assets/picto/9014.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "PAGO",
-   "observaciones": "No afirmar tarifa."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Hora",
-   "lema_diccionario": "hora",
-   "id_arasaac": 7129,
-   "archivo_en_repositorio": "assets/picto/7129.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7129/7129_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR HORARIO",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Dirección",
-   "lema_diccionario": "dirección",
-   "id_arasaac": 38571,
-   "archivo_en_repositorio": "assets/picto/38571.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "CONSULTAR DESTINO",
-   "observaciones": "No equivale a destino; usar texto complementario."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Baño",
-   "lema_diccionario": "baño",
-   "id_arasaac": 15905,
-   "archivo_en_repositorio": "assets/picto/15905.png",
-   "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
-   "estado": "VERIFICADO_DICCIONARIO_CLARIA",
-   "uso_previsto": "UBICACIÓN DE BAÑOS",
-   "observaciones": ""
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Pasaje",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAR PASAJE",
-   "observaciones": "Requiere revisión ARASAAC."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Andén",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "UBICAR ANDÉN",
-   "observaciones": "No inventar número de andén."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Equipaje",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "CONSULTAR EQUIPAJE",
-   "observaciones": "Requiere selección ARASAAC."
-  },
-  {
-   "institucion": "Terminal de Ómnibus",
-   "grupo": "Institucional",
-   "concepto": "Boletería",
-   "lema_diccionario": "",
-   "id_arasaac": "",
-   "archivo_en_repositorio": "",
-   "imagen_oficial_en_linea": "",
-   "estado": "PENDIENTE_SELECCION_MANUAL",
-   "uso_previsto": "UBICACIÓN DE BOLETERÍA",
-   "observaciones": "Requiere selección ARASAAC."
-  }
- ],
- "instituciones": [
-  {
-   "id": "registro-civil",
-   "nombre": "Registro Civil",
-   "icono": "📄",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
+  "version": 1,
+  "generado": "2026-11-15",
+  "origen": "CLARIA_Paquete_Maestro (docs/paquete-maestro)",
+  "proyecto": "CLARIA · Mi ciudad, más accesible",
+  "licencia_pictogramas": {
+    "licencia": "CC BY-NC-SA 4.0",
+    "autor": "Sergio Palao",
+    "titular": "Gobierno de Aragón",
+    "origen": "ARASAAC",
+    "credito": "Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo licencia Creative Commons BY-NC-SA."
+  },
+  "aviso": "Datos institucionales recopilados de fuentes públicas el 15/11/2026. No implican aprobación oficial de las instituciones. Los tableros son apoyos de comunicación y las orientaciones no reemplazan requisitos de trámites.",
+  "estados_pictograma": {
+    "VERIFICADO_DICCIONARIO_CLARIA": "ID y significado verificados en data/pictogramas.json",
+    "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE": "Pictograma genérico: acompañar con texto específico; no asumir que la institución ofrece ese servicio",
+    "PENDIENTE_SELECCION_MANUAL": "Sin pictograma verificado: mostrar solo texto hasta que un editor elija uno"
+  },
+  "pictogramas": [
     {
-     "orden": 1,
-     "texto": "NECESITO INFORMACIÓN SOBRE MI DNI.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "DNI",
-       "id": 5987,
-       "concepto": "DNI",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "Información general"
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Hola",
+      "lema_diccionario": "hola",
+      "id_arasaac": 6009,
+      "archivo_en_repositorio": "assets/picto/6009.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6009/6009_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SALUDAR",
+      "observaciones": ""
     },
     {
-     "orden": 2,
-     "texto": "QUIERO PEDIR UNA PARTIDA DE NACIMIENTO.",
-     "tarjetas": [
-      {
-       "lema": "querer",
-       "id": 5441,
-       "concepto": "Quiero",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "pedir",
-       "id": 11251,
-       "concepto": "Pedir",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "partida de nacimiento"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No asumir requisitos"
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Necesito",
+      "lema_diccionario": "necesitar",
+      "id_arasaac": 37160,
+      "archivo_en_repositorio": "assets/picto/37160.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/37160/37160_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "INICIAR UN MENSAJE",
+      "observaciones": ""
     },
     {
-     "orden": 3,
-     "texto": "TENGO UN TURNO.",
-     "tarjetas": [
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "turno",
-       "id": 22190,
-       "concepto": "Turno",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Quiero",
+      "lema_diccionario": "querer",
+      "id_arasaac": 5441,
+      "archivo_en_repositorio": "assets/picto/5441.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5441/5441_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "EXPRESAR UNA PETICIÓN",
+      "observaciones": ""
     },
     {
-     "orden": 4,
-     "texto": "¿DÓNDE TENGO QUE ESPERAR?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "esperar",
-       "id": 8109,
-       "concepto": "Esperar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Ayuda",
+      "lema_diccionario": "ayudar",
+      "id_arasaac": 4570,
+      "archivo_en_repositorio": "assets/picto/4570.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "PEDIR AYUDA",
+      "observaciones": "Acción AYUDAR, no equivale a un mensaje completo."
     },
     {
-     "orden": 5,
-     "texto": "¿QUÉ DOCUMENTOS NECESITO?",
-     "tarjetas": [
-      {
-       "lema": "qué",
-       "id": 11351,
-       "concepto": "qué",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "documento",
-       "id": 21802,
-       "concepto": "Documento",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "No entiendo",
+      "lema_diccionario": "entender",
+      "id_arasaac": 11697,
+      "archivo_en_repositorio": "assets/picto/11697.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11697/11697_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "EXPRESAR DIFICULTAD DE COMPRENSIÓN",
+      "observaciones": "Combinar con el pictograma NO."
     },
     {
-     "orden": 6,
-     "texto": "NO ENTIENDO LA INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Sí",
+      "lema_diccionario": "sí",
+      "id_arasaac": 5584,
+      "archivo_en_repositorio": "assets/picto/5584.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5584/5584_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "RESPONDER",
+      "observaciones": ""
     },
     {
-     "orden": 7,
-     "texto": "¿ME PUEDE EXPLICAR OTRA VEZ?",
-     "tarjetas": [
-      {
-       "lema": "poder",
-       "id": 11750,
-       "concepto": "poder",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "decir",
-       "id": 9692,
-       "concepto": "decir",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "explicar otra vez"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "No",
+      "lema_diccionario": "no",
+      "id_arasaac": 5526,
+      "archivo_en_repositorio": "assets/picto/5526.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5526/5526_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "RESPONDER",
+      "observaciones": ""
     },
     {
-     "orden": 8,
-     "texto": "GRACIAS POR AYUDARME.",
-     "tarjetas": [
-      {
-       "lema": "gracias",
-       "id": 8128,
-       "concepto": "Gracias",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ayudar",
-       "id": 4570,
-       "concepto": "Ayuda",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Por favor",
+      "lema_diccionario": "por favor",
+      "id_arasaac": 8194,
+      "archivo_en_repositorio": "assets/picto/8194.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8194/8194_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PEDIR CON CORTESÍA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Gracias",
+      "lema_diccionario": "gracias",
+      "id_arasaac": 8128,
+      "archivo_en_repositorio": "assets/picto/8128.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8128/8128_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "AGRADECER",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Hablar",
+      "lema_diccionario": "hablar",
+      "id_arasaac": 3345,
+      "archivo_en_repositorio": "assets/picto/3345.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3345/3345_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "COMUNICARSE",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Escuchar",
+      "lema_diccionario": "escuchar",
+      "id_arasaac": 2381,
+      "archivo_en_repositorio": "assets/picto/2381.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2381/2381_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ESCUCHAR UNA EXPLICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Preguntar",
+      "lema_diccionario": "preguntar",
+      "id_arasaac": 9844,
+      "archivo_en_repositorio": "assets/picto/9844.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9844/9844_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "HACER UNA PREGUNTA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Comunicación",
+      "concepto": "Entender",
+      "lema_diccionario": "entender",
+      "id_arasaac": 11697,
+      "archivo_en_repositorio": "assets/picto/11697.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11697/11697_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "COMPRENSIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "¿Dónde?",
+      "lema_diccionario": "dónde",
+      "id_arasaac": 7764,
+      "archivo_en_repositorio": "assets/picto/7764.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7764/7764_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PREGUNTAR UNA UBICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Ir",
+      "lema_diccionario": "ir",
+      "id_arasaac": 2432,
+      "archivo_en_repositorio": "assets/picto/2432.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2432/2432_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DESPLAZARSE",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Entrar",
+      "lema_diccionario": "entrar",
+      "id_arasaac": 2742,
+      "archivo_en_repositorio": "assets/picto/2742.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2742/2742_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "INGRESAR",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Salir",
+      "lema_diccionario": "salir",
+      "id_arasaac": 2806,
+      "archivo_en_repositorio": "assets/picto/2806.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2806/2806_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SALIR",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Esperar",
+      "lema_diccionario": "esperar",
+      "id_arasaac": 8109,
+      "archivo_en_repositorio": "assets/picto/8109.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ESPERAR SER ATENDIDO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Turno",
+      "lema_diccionario": "turno",
+      "id_arasaac": 22190,
+      "archivo_en_repositorio": "assets/picto/22190.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PREGUNTAR POR UN TURNO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Oficina",
+      "lema_diccionario": "oficina",
+      "id_arasaac": 36089,
+      "archivo_en_repositorio": "assets/picto/36089.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICACIÓN GENÉRICA",
+      "observaciones": "No equivale por sí solo a Municipalidad o Registro Civil."
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Información",
+      "lema_diccionario": "información",
+      "id_arasaac": 9897,
+      "archivo_en_repositorio": "assets/picto/9897.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PEDIR INFORMACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Baño",
+      "lema_diccionario": "baño",
+      "id_arasaac": 15905,
+      "archivo_en_repositorio": "assets/picto/15905.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "LOCALIZAR UN SERVICIO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Hora",
+      "lema_diccionario": "hora",
+      "id_arasaac": 7129,
+      "archivo_en_repositorio": "assets/picto/7129.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7129/7129_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR HORA",
+      "observaciones": "No equivale al horario oficial."
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Orientación",
+      "concepto": "Horario de atención",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "MOSTRAR HORARIO PUBLICADO",
+      "observaciones": "No asignar pictograma por similitud sin revisión."
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "DNI",
+      "lema_diccionario": "DNI",
+      "id_arasaac": 5987,
+      "archivo_en_repositorio": "assets/picto/5987.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5987/5987_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Documento",
+      "lema_diccionario": "documento",
+      "id_arasaac": 21802,
+      "archivo_en_repositorio": "assets/picto/21802.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Formulario",
+      "lema_diccionario": "formulario",
+      "id_arasaac": 9173,
+      "archivo_en_repositorio": "assets/picto/9173.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PRESENTACIÓN DE FORMULARIOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Certificado",
+      "lema_diccionario": "certificado",
+      "id_arasaac": 27677,
+      "archivo_en_repositorio": "assets/picto/27677.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Firmar",
+      "lema_diccionario": "firmar",
+      "id_arasaac": 12317,
+      "archivo_en_repositorio": "assets/picto/12317.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ACCIÓN EN FORMULARIOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Papel",
+      "lema_diccionario": "papel",
+      "id_arasaac": 8349,
+      "archivo_en_repositorio": "assets/picto/8349.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8349/8349_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTOS IMPRESOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Foto",
+      "lema_diccionario": "foto",
+      "id_arasaac": 7107,
+      "archivo_en_repositorio": "assets/picto/7107.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7107/7107_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICACIÓN DE FOTO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Fecha",
+      "lema_diccionario": "fecha",
+      "id_arasaac": 34799,
+      "archivo_en_repositorio": "assets/picto/34799.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/34799/34799_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "FECHA DE EVENTO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Documentos",
+      "concepto": "Nombre",
+      "lema_diccionario": "nombre",
+      "id_arasaac": 27357,
+      "archivo_en_repositorio": "assets/picto/27357.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27357/27357_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICACIÓN PERSONAL",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Traer",
+      "lema_diccionario": "traer",
+      "id_arasaac": 7279,
+      "archivo_en_repositorio": "assets/picto/7279.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7279/7279_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ORIENTACIÓN DE TRÁMITES",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Llevar",
+      "lema_diccionario": "llevar",
+      "id_arasaac": 6139,
+      "archivo_en_repositorio": "assets/picto/6139.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6139/6139_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ORIENTACIÓN DE TRÁMITES",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Completar",
+      "lema_diccionario": "completar",
+      "id_arasaac": 13078,
+      "archivo_en_repositorio": "assets/picto/13078.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/13078/13078_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "FORMULARIOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Pedir",
+      "lema_diccionario": "pedir",
+      "id_arasaac": 11251,
+      "archivo_en_repositorio": "assets/picto/11251.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/11251/11251_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SOLICITAR ALGO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Pagar",
+      "lema_diccionario": "pagar",
+      "id_arasaac": 9014,
+      "archivo_en_repositorio": "assets/picto/9014.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PAGO, SOLO SI FUE VERIFICADO",
+      "observaciones": "No afirmar costo sin fuentes."
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Leer",
+      "lema_diccionario": "leer",
+      "id_arasaac": 28643,
+      "archivo_en_repositorio": "assets/picto/28643.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/28643/28643_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "LEER UNA INDICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Escribir",
+      "lema_diccionario": "escribir",
+      "id_arasaac": 2380,
+      "archivo_en_repositorio": "assets/picto/2380.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2380/2380_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "RELLENAR INFORMACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Buscar",
+      "lema_diccionario": "buscar",
+      "id_arasaac": 6946,
+      "archivo_en_repositorio": "assets/picto/6946.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6946/6946_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "BUSCAR UNA OFICINA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Teléfono",
+      "lema_diccionario": "teléfono",
+      "id_arasaac": 2791,
+      "archivo_en_repositorio": "assets/picto/2791.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2791/2791_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DATOS DE CONTACTO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Trámite",
+      "lema_diccionario": "trámite",
+      "id_arasaac": 24709,
+      "archivo_en_repositorio": "assets/picto/24709.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PROCESO ADMINISTRATIVO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "COMÚN",
+      "grupo": "Acciones",
+      "concepto": "Señal de espera",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "LOCALIZACIÓN DE SALA",
+      "observaciones": "Confirmar pictograma concreto en ARASAAC."
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Identificación de Registro Civil",
+      "lema_diccionario": "oficina",
+      "id_arasaac": 36089,
+      "archivo_en_repositorio": "assets/picto/36089.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "TÍTULO DEL SERVICIO",
+      "observaciones": "Oficina es genérico, usar además nombre real y foto autorizada."
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "DNI",
+      "lema_diccionario": "DNI",
+      "id_arasaac": 5987,
+      "archivo_en_repositorio": "assets/picto/5987.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/5987/5987_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR DNI",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Documento",
+      "lema_diccionario": "documento",
+      "id_arasaac": 21802,
+      "archivo_en_repositorio": "assets/picto/21802.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "INFORMACIÓN DOCUMENTAL",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Certificado",
+      "lema_diccionario": "certificado",
+      "id_arasaac": 27677,
+      "archivo_en_repositorio": "assets/picto/27677.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR CERTIFICADO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Partida de nacimiento",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAR PARTIDA",
+      "observaciones": "Debe seleccionarse pictograma específico; no confundir con certificado."
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Nacimiento",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTA DE NACIMIENTO",
+      "observaciones": "Requiere revisión ARASAAC."
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Turno",
+      "lema_diccionario": "turno",
+      "id_arasaac": 22190,
+      "archivo_en_repositorio": "assets/picto/22190.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR TURNOS",
+      "observaciones": "No afirmar obligatoriedad de turno."
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Formulario",
+      "lema_diccionario": "formulario",
+      "id_arasaac": 9173,
+      "archivo_en_repositorio": "assets/picto/9173.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "FORMULARIO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Firmar",
+      "lema_diccionario": "firmar",
+      "id_arasaac": 12317,
+      "archivo_en_repositorio": "assets/picto/12317.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "FIRMA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Información",
+      "lema_diccionario": "información",
+      "id_arasaac": 9897,
+      "archivo_en_repositorio": "assets/picto/9897.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PREGUNTAR AL PERSONAL",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Registro Civil",
+      "grupo": "Institucional",
+      "concepto": "Esperar",
+      "lema_diccionario": "esperar",
+      "id_arasaac": 8109,
+      "archivo_en_repositorio": "assets/picto/8109.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "INDICACIÓN SI CORRESPONDE",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Hospital",
+      "lema_diccionario": "hospital",
+      "id_arasaac": 3116,
+      "archivo_en_repositorio": "assets/picto/3116.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3116/3116_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICAR ESTABLECIMIENTO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Salud",
+      "lema_diccionario": "salud",
+      "id_arasaac": 14664,
+      "archivo_en_repositorio": "assets/picto/14664.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/14664/14664_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SALUD Y SERVICIOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Médico",
+      "lema_diccionario": "médico",
+      "id_arasaac": 2467,
+      "archivo_en_repositorio": "assets/picto/2467.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2467/2467_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PROFESIONAL",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Medicamento",
+      "lema_diccionario": "medicina",
+      "id_arasaac": 8163,
+      "archivo_en_repositorio": "assets/picto/8163.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8163/8163_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "MEDICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Farmacia",
+      "lema_diccionario": "farmacia",
+      "id_arasaac": 3313,
+      "archivo_en_repositorio": "assets/picto/3313.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3313/3313_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "UBICAR FARMACIA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Turno",
+      "lema_diccionario": "turno",
+      "id_arasaac": 22190,
+      "archivo_en_repositorio": "assets/picto/22190.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR TURNOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Dolor",
+      "lema_diccionario": "dolor",
+      "id_arasaac": 2367,
+      "archivo_en_repositorio": "assets/picto/2367.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2367/2367_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "EXPRESAR SÍNTOMAS",
+      "observaciones": "No usar para diagnosticar."
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Me siento mal",
+      "lema_diccionario": "enfermo",
+      "id_arasaac": 28742,
+      "archivo_en_repositorio": "assets/picto/28742.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/28742/28742_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "EXPRESAR MALESTAR",
+      "observaciones": "Complementar con texto y voz."
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Ayuda",
+      "lema_diccionario": "ayudar",
+      "id_arasaac": 4570,
+      "archivo_en_repositorio": "assets/picto/4570.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "PEDIR AYUDA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Baño",
+      "lema_diccionario": "baño",
+      "id_arasaac": 15905,
+      "archivo_en_repositorio": "assets/picto/15905.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "UBICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Guardia / urgencias",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "ORIENTAR A URGENCIAS",
+      "observaciones": "Requiere señalización de emergencia oficial y revisada."
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Vacunación",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAR VACUNATORIO",
+      "observaciones": "Requiere selección ARASAAC."
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Receta médica",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTA DE RECETA",
+      "observaciones": "No confundir con medicamento."
+    },
+    {
+      "institucion": "Hospital y centros de salud",
+      "grupo": "Institucional",
+      "concepto": "Consultorio",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "UBICACIÓN DE CONSULTORIO",
+      "observaciones": "Requiere selección específica."
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Municipalidad",
+      "lema_diccionario": "oficina",
+      "id_arasaac": 36089,
+      "archivo_en_repositorio": "assets/picto/36089.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/36089/36089_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "IDENTIFICACIÓN DE EDIFICIO",
+      "observaciones": "Pictograma de oficina genérica; el nombre institucional debe ir escrito."
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Ciudad",
+      "lema_diccionario": "ciudad",
+      "id_arasaac": 2704,
+      "archivo_en_repositorio": "assets/picto/2704.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2704/2704_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SERVICIOS LOCALES",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Trámite",
+      "lema_diccionario": "trámite",
+      "id_arasaac": 24709,
+      "archivo_en_repositorio": "assets/picto/24709.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SERVICIO ADMINISTRATIVO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Información",
+      "lema_diccionario": "información",
+      "id_arasaac": 9897,
+      "archivo_en_repositorio": "assets/picto/9897.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Formulario",
+      "lema_diccionario": "formulario",
+      "id_arasaac": 9173,
+      "archivo_en_repositorio": "assets/picto/9173.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9173/9173_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PRESENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Pagar",
+      "lema_diccionario": "pagar",
+      "id_arasaac": 9014,
+      "archivo_en_repositorio": "assets/picto/9014.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PAGOS SEGÚN SERVICIO",
+      "observaciones": "No asignar costos ni medios de pago sin validación."
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Documento",
+      "lema_diccionario": "documento",
+      "id_arasaac": 21802,
+      "archivo_en_repositorio": "assets/picto/21802.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Firmar",
+      "lema_diccionario": "firmar",
+      "id_arasaac": 12317,
+      "archivo_en_repositorio": "assets/picto/12317.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/12317/12317_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "FIRMA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Certificado",
+      "lema_diccionario": "certificado",
+      "id_arasaac": 27677,
+      "archivo_en_repositorio": "assets/picto/27677.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/27677/27677_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSTANCIAS / CERTIFICADOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Dirección",
+      "lema_diccionario": "dirección",
+      "id_arasaac": 38571,
+      "archivo_en_repositorio": "assets/picto/38571.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOMICILIO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Reclamo",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "PRESENTAR RECLAMO",
+      "observaciones": "Requiere selección manual."
+    },
+    {
+      "institucion": "Municipalidad",
+      "grupo": "Institucional",
+      "concepto": "Tasas municipales",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "TRÁMITES DE TASAS",
+      "observaciones": "No asignar servicio específico sin confirmación municipal."
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "PAMI",
+      "lema_diccionario": "salud",
+      "id_arasaac": 14664,
+      "archivo_en_repositorio": "assets/picto/14664.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/14664/14664_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "IDENTIFICACIÓN DE SERVICIO",
+      "observaciones": "Salud es genérico; conservar nombre PAMI."
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Médico",
+      "lema_diccionario": "médico",
+      "id_arasaac": 2467,
+      "archivo_en_repositorio": "assets/picto/2467.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2467/2467_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAS DE ATENCIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Turno",
+      "lema_diccionario": "turno",
+      "id_arasaac": 22190,
+      "archivo_en_repositorio": "assets/picto/22190.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/22190/22190_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "TURNO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Farmacia",
+      "lema_diccionario": "farmacia",
+      "id_arasaac": 3313,
+      "archivo_en_repositorio": "assets/picto/3313.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3313/3313_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "UBICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Medicamento",
+      "lema_diccionario": "medicina",
+      "id_arasaac": 8163,
+      "archivo_en_repositorio": "assets/picto/8163.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8163/8163_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "MEDICAMENTOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Documento",
+      "lema_diccionario": "documento",
+      "id_arasaac": 21802,
+      "archivo_en_repositorio": "assets/picto/21802.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Información",
+      "lema_diccionario": "información",
+      "id_arasaac": 9897,
+      "archivo_en_repositorio": "assets/picto/9897.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Ayuda",
+      "lema_diccionario": "ayudar",
+      "id_arasaac": 4570,
+      "archivo_en_repositorio": "assets/picto/4570.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/4570/4570_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "COMUNICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Trámite",
+      "lema_diccionario": "trámite",
+      "id_arasaac": 24709,
+      "archivo_en_repositorio": "assets/picto/24709.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/24709/24709_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "GESTIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Afiliación",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAS DE AFILIACIÓN",
+      "observaciones": "Seleccionar pictograma; no confundir con discapacidad."
+    },
+    {
+      "institucion": "PAMI",
+      "grupo": "Institucional",
+      "concepto": "Autorización",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAS DE AUTORIZACIÓN",
+      "observaciones": "Seleccionar pictograma concreto."
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Correo",
+      "lema_diccionario": "correo",
+      "id_arasaac": 3086,
+      "archivo_en_repositorio": "assets/picto/3086.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/3086/3086_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "IDENTIFICACIÓN DE SERVICIO",
+      "observaciones": "Es un símbolo genérico; conservar nombre Correo Argentino."
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Enviar",
+      "lema_diccionario": "enviar",
+      "id_arasaac": 21828,
+      "archivo_en_repositorio": "assets/picto/21828.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21828/21828_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ENVIAR UN OBJETO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Recibir",
+      "lema_diccionario": "recibir",
+      "id_arasaac": 17042,
+      "archivo_en_repositorio": "assets/picto/17042.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/17042/17042_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "RECIBIR ALGO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Dirección",
+      "lema_diccionario": "dirección",
+      "id_arasaac": 38571,
+      "archivo_en_repositorio": "assets/picto/38571.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DATOS DE DESTINO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Documento",
+      "lema_diccionario": "documento",
+      "id_arasaac": 21802,
+      "archivo_en_repositorio": "assets/picto/21802.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/21802/21802_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Papel",
+      "lema_diccionario": "papel",
+      "id_arasaac": 8349,
+      "archivo_en_repositorio": "assets/picto/8349.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8349/8349_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "DOCUMENTOS EN PAPEL",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Pagar",
+      "lema_diccionario": "pagar",
+      "id_arasaac": 9014,
+      "archivo_en_repositorio": "assets/picto/9014.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR COSTOS",
+      "observaciones": "No afirmar precio."
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Preguntar",
+      "lema_diccionario": "preguntar",
+      "id_arasaac": 9844,
+      "archivo_en_repositorio": "assets/picto/9844.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9844/9844_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PEDIR INFORMACIÓN",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Información",
+      "lema_diccionario": "información",
+      "id_arasaac": 9897,
+      "archivo_en_repositorio": "assets/picto/9897.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9897/9897_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "ATENCIÓN AL PÚBLICO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Paquete",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "ENVIAR O RETIRAR PAQUETE",
+      "observaciones": "Debe seleccionarse pictograma específico."
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Encomienda",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "SERVICIOS DE ENCOMIENDAS",
+      "observaciones": "Revisar denominación disponible."
+    },
+    {
+      "institucion": "Correo Argentino",
+      "grupo": "Institucional",
+      "concepto": "Retirar",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "RETIRO DE ENVÍO",
+      "observaciones": "Seleccionar pictograma para esta acción."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Colectivo",
+      "lema_diccionario": "colectivo",
+      "id_arasaac": 38090,
+      "archivo_en_repositorio": "assets/picto/38090.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38090/38090_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "IDENTIFICAR TRANSPORTE",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Terminal",
+      "lema_diccionario": "colectivo",
+      "id_arasaac": 38090,
+      "archivo_en_repositorio": "assets/picto/38090.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38090/38090_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "IDENTIFICAR LUGAR",
+      "observaciones": "Colectivo es genérico, no equivale a terminal."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Viajar",
+      "lema_diccionario": "ir",
+      "id_arasaac": 2432,
+      "archivo_en_repositorio": "assets/picto/2432.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2432/2432_300.png",
+      "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE",
+      "uso_previsto": "PLANIFICAR UN VIAJE",
+      "observaciones": "Ir es genérico."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Salir",
+      "lema_diccionario": "salir",
+      "id_arasaac": 2806,
+      "archivo_en_repositorio": "assets/picto/2806.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/2806/2806_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SALIDA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Esperar",
+      "lema_diccionario": "esperar",
+      "id_arasaac": 8109,
+      "archivo_en_repositorio": "assets/picto/8109.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/8109/8109_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "SALA DE ESPERA",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Comprar",
+      "lema_diccionario": "comprar",
+      "id_arasaac": 6457,
+      "archivo_en_repositorio": "assets/picto/6457.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/6457/6457_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR COMPRA DE PASAJES",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Pagar",
+      "lema_diccionario": "pagar",
+      "id_arasaac": 9014,
+      "archivo_en_repositorio": "assets/picto/9014.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/9014/9014_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "PAGO",
+      "observaciones": "No afirmar tarifa."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Hora",
+      "lema_diccionario": "hora",
+      "id_arasaac": 7129,
+      "archivo_en_repositorio": "assets/picto/7129.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/7129/7129_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR HORARIO",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Dirección",
+      "lema_diccionario": "dirección",
+      "id_arasaac": 38571,
+      "archivo_en_repositorio": "assets/picto/38571.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/38571/38571_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "CONSULTAR DESTINO",
+      "observaciones": "No equivale a destino; usar texto complementario."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Baño",
+      "lema_diccionario": "baño",
+      "id_arasaac": 15905,
+      "archivo_en_repositorio": "assets/picto/15905.png",
+      "imagen_oficial_en_linea": "https://static.arasaac.org/pictograms/15905/15905_300.png",
+      "estado": "VERIFICADO_DICCIONARIO_CLARIA",
+      "uso_previsto": "UBICACIÓN DE BAÑOS",
+      "observaciones": ""
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Pasaje",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAR PASAJE",
+      "observaciones": "Requiere revisión ARASAAC."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Andén",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "UBICAR ANDÉN",
+      "observaciones": "No inventar número de andén."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Equipaje",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "CONSULTAR EQUIPAJE",
+      "observaciones": "Requiere selección ARASAAC."
+    },
+    {
+      "institucion": "Terminal de Ómnibus",
+      "grupo": "Institucional",
+      "concepto": "Boletería",
+      "lema_diccionario": "",
+      "id_arasaac": "",
+      "archivo_en_repositorio": "",
+      "imagen_oficial_en_linea": "",
+      "estado": "PENDIENTE_SELECCION_MANUAL",
+      "uso_previsto": "UBICACIÓN DE BOLETERÍA",
+      "observaciones": "Requiere selección ARASAAC."
     }
-   ]
-  },
-  {
-   "id": "hospital-y-centros-de-salud",
-   "nombre": "Hospital y centros de salud",
-   "icono": "🏥",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
+  ],
+  "instituciones": [
     {
-     "orden": 1,
-     "texto": "NECESITO AYUDA.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "id": "registro-civil",
+      "nombre": "Registro Civil · Seccional El Colorado 1490",
+      "icono": "📄",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "Registro Civil · Seccional El Colorado 1490",
+        "direccion_confirmada": "Santa Fe y San Juan, El Colorado, Formosa",
+        "horario_confirmado": "Lunes a viernes de 7:30 a 12:30 (horario publicado por el Gobierno de Formosa)",
+        "telefono_confirmado": "",
+        "servicios_confirmados": "Consultas sobre documentación personal|Consultas sobre trámites del Registro Civil|Orientación sobre DNI y partidas",
+        "fuente_oficial_url": "https://m.formosa.gob.ar/tramite/171/pasaporte",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://www.formosa.gob.ar/",
+        "correo_electronico": "",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "Gobierno de Formosa · Seccional 1490",
+            "url": "https://m.formosa.gob.ar/tramite/171/pasaporte"
+          },
+          {
+            "nombre": "Formosa Digital · organismos",
+            "url": "https://fd.formosa.gob.ar/puntosconectados"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Elegí qué querés consultar: DNI, partida u otro trámite.",
+            "picto": "elegir"
+          },
+          {
+            "texto": "Acercate a la seccional en el horario publicado.",
+            "picto": "ir"
+          },
+          {
+            "texto": "Preguntá al personal qué requisitos corresponden a tu consulta.",
+            "picto": "preguntar"
+          },
+          {
+            "texto": "Si necesitás comunicarte con imágenes, abrí el tablero de CLARIA.",
+            "picto": "hablar"
+          }
+        ]
       },
-      {
-       "lema": "ayudar",
-       "id": 4570,
-       "concepto": "Ayuda",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://m.formosa.gob.ar/tramite/171/pasaporte",
+        "ultima_revision": "2026-11-15"
+      },
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "NECESITO INFORMACIÓN SOBRE MI DNI.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "DNI",
+              "id": 5987,
+              "concepto": "DNI",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "Información general"
+        },
+        {
+          "orden": 2,
+          "texto": "QUIERO PEDIR UNA PARTIDA DE NACIMIENTO.",
+          "tarjetas": [
+            {
+              "lema": "querer",
+              "id": 5441,
+              "concepto": "Quiero",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "pedir",
+              "id": 11251,
+              "concepto": "Pedir",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "partida de nacimiento"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No asumir requisitos"
+        },
+        {
+          "orden": 3,
+          "texto": "TENGO UN TURNO.",
+          "tarjetas": [
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "turno",
+              "id": 22190,
+              "concepto": "Turno",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 4,
+          "texto": "¿DÓNDE TENGO QUE ESPERAR?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "esperar",
+              "id": 8109,
+              "concepto": "Esperar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "tarjetas": [
+            {
+              "lema": "qué",
+              "id": 11351,
+              "concepto": "qué",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "documento",
+              "id": 21802,
+              "concepto": "Documento",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 6,
+          "texto": "NO ENTIENDO LA INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 7,
+          "texto": "¿ME PUEDE EXPLICAR OTRA VEZ?",
+          "tarjetas": [
+            {
+              "lema": "poder",
+              "id": 11750,
+              "concepto": "poder",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "decir",
+              "id": 9692,
+              "concepto": "decir",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "explicar otra vez"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "GRACIAS POR AYUDARME.",
+          "tarjetas": [
+            {
+              "lema": "gracias",
+              "id": 8128,
+              "concepto": "Gracias",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ayudar",
+              "id": 4570,
+              "concepto": "Ayuda",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     },
     {
-     "orden": 2,
-     "texto": "ME SIENTO MAL.",
-     "tarjetas": [
-      {
-       "lema": "enfermo",
-       "id": 28742,
-       "concepto": "Me siento mal",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No constituye diagnóstico"
+      "id": "hospital-y-centros-de-salud",
+      "nombre": "Hospital de El Colorado",
+      "icono": "🏥",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "Hospital de El Colorado",
+        "direccion_confirmada": "Santa Fe 273, El Colorado, Formosa",
+        "horario_confirmado": "",
+        "telefono_confirmado": "",
+        "servicios_confirmados": "Atención de salud pública|Información sobre atención hospitalaria|Orientación para consultas de salud",
+        "fuente_oficial_url": "https://fd.formosa.gob.ar/puntosconectados",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://fd.formosa.gob.ar/mapa",
+        "correo_electronico": "",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "Formosa Digital · directorio provincial de hospitales",
+            "url": "https://fd.formosa.gob.ar/puntosconectados"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Contale al personal del hospital qué necesitás.",
+            "picto": "hablar"
+          },
+          {
+            "texto": "Pedí información sobre el sector de atención que corresponde.",
+            "picto": "preguntar"
+          },
+          {
+            "texto": "Si no entendiste una indicación, pedí que te la expliquen otra vez.",
+            "picto": "entender"
+          }
+        ]
+      },
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://fd.formosa.gob.ar/puntosconectados",
+        "ultima_revision": "2026-11-15"
+      },
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "NECESITO AYUDA.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ayudar",
+              "id": 4570,
+              "concepto": "Ayuda",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 2,
+          "texto": "ME SIENTO MAL.",
+          "tarjetas": [
+            {
+              "lema": "enfermo",
+              "id": 28742,
+              "concepto": "Me siento mal",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No constituye diagnóstico"
+        },
+        {
+          "orden": 3,
+          "texto": "TENGO DOLOR.",
+          "tarjetas": [
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "dolor",
+              "id": 2367,
+              "concepto": "Dolor",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No constituye diagnóstico"
+        },
+        {
+          "orden": 4,
+          "texto": "NECESITO UN MÉDICO.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "médico",
+              "id": 2467,
+              "concepto": "Médico",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "TENGO UN TURNO.",
+          "tarjetas": [
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "turno",
+              "id": 22190,
+              "concepto": "Turno",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 6,
+          "texto": "¿DÓNDE ESTÁ EL BAÑO?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "estar",
+              "id": 5465,
+              "concepto": "estar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "baño",
+              "id": 15905,
+              "concepto": "Baño",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 7,
+          "texto": "NO ENTIENDO LA INDICACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "indicación"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "¿PUEDE REPETIRLO MÁS DESPACIO?",
+          "tarjetas": [
+            {
+              "lema": "poder",
+              "id": 11750,
+              "concepto": "poder",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "decir",
+              "id": 9692,
+              "concepto": "decir",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "repetir",
+            "despacio"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     },
     {
-     "orden": 3,
-     "texto": "TENGO DOLOR.",
-     "tarjetas": [
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "id": "municipalidad",
+      "nombre": "Municipalidad de El Colorado",
+      "icono": "🏛️",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "Municipalidad de El Colorado",
+        "direccion_confirmada": "Av. 25 de Mayo 651, El Colorado, Formosa",
+        "horario_confirmado": "",
+        "telefono_confirmado": "",
+        "servicios_confirmados": "Información sobre servicios municipales|Atención de consultas y solicitudes vecinales|Orientación sobre gestiones municipales",
+        "fuente_oficial_url": "https://www.elcolorado.gob.ar/index.php",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://www.elcolorado.gob.ar/",
+        "correo_electronico": "portal@elcolorado.gob.ar",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "Municipalidad de El Colorado · portal oficial",
+            "url": "https://www.elcolorado.gob.ar/index.php"
+          },
+          {
+            "nombre": "Directorio OpenAlfa · domicilio municipal",
+            "url": "https://callejero-argentina.openalfa.com/formosa/servicios"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Elegí qué consulta municipal querés realizar.",
+            "picto": "elegir"
+          },
+          {
+            "texto": "Buscá la oficina que puede ayudarte o consultá el portal oficial.",
+            "picto": "buscar"
+          },
+          {
+            "texto": "Pedí información sobre los pasos y requisitos de tu gestión.",
+            "picto": "preguntar"
+          }
+        ]
       },
-      {
-       "lema": "dolor",
-       "id": 2367,
-       "concepto": "Dolor",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No constituye diagnóstico"
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://www.elcolorado.gob.ar/index.php",
+        "ultima_revision": "2026-11-15"
+      },
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "QUIERO HACER UNA CONSULTA.",
+          "tarjetas": [
+            {
+              "lema": "querer",
+              "id": 5441,
+              "concepto": "Quiero",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "hacer",
+              "id": 11749,
+              "concepto": "hacer",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "preguntar",
+              "id": 9844,
+              "concepto": "Preguntar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "consulta"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 2,
+          "texto": "NECESITO INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 3,
+          "texto": "¿DÓNDE PRESENTO ESTE FORMULARIO?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "formulario",
+              "id": 9173,
+              "concepto": "Formulario",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "presentar"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 4,
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "tarjetas": [
+            {
+              "lema": "qué",
+              "id": 11351,
+              "concepto": "qué",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "documento",
+              "id": 21802,
+              "concepto": "Documento",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "NECESITO AYUDA PARA COMPLETAR.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ayudar",
+              "id": 4570,
+              "concepto": "Ayuda",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            },
+            {
+              "lema": "completar",
+              "id": 13078,
+              "concepto": "Completar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 6,
+          "texto": "¿DÓNDE PUEDO ESPERAR?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "poder",
+              "id": 11750,
+              "concepto": "poder",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "esperar",
+              "id": 8109,
+              "concepto": "Esperar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 7,
+          "texto": "NO ENTENDÍ EL TRÁMITE.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "trámite",
+              "id": 24709,
+              "concepto": "Trámite",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "GRACIAS.",
+          "tarjetas": [
+            {
+              "lema": "gracias",
+              "id": 8128,
+              "concepto": "Gracias",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     },
     {
-     "orden": 4,
-     "texto": "NECESITO UN MÉDICO.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "id": "pami",
+      "nombre": "PAMI · Agencia El Colorado",
+      "icono": "💙",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "PAMI · Agencia El Colorado",
+        "direccion_confirmada": "Calle Santa Fe, El Colorado, Formosa",
+        "horario_confirmado": "",
+        "telefono_confirmado": "138 (PAMI Escucha y Responde, línea nacional gratuita las 24 horas)",
+        "servicios_confirmados": "Consultas de personas afiliadas|Información sobre prestaciones y trámites PAMI|Orientación sobre turnos y canales de atención",
+        "fuente_oficial_url": "https://www.pami.org.ar/contacto",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://www.pami.org.ar/",
+        "correo_electronico": "",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "PAMI · canales oficiales",
+            "url": "https://www.pami.org.ar/contacto"
+          },
+          {
+            "nombre": "PAMI · listado institucional de agencias (2021)",
+            "url": "https://institucional.pami.org.ar/files/boletines_inssjp/RESOL-2021-927-INSSJP-DE-INSSJP.pdf"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Elegí qué consulta de PAMI necesitás realizar.",
+            "picto": "elegir"
+          },
+          {
+            "texto": "Llamá al 138 para recibir orientación o consultá los canales oficiales.",
+            "picto": "teléfono"
+          },
+          {
+            "texto": "Preguntá qué documentación corresponde a tu trámite.",
+            "picto": "preguntar"
+          }
+        ]
       },
-      {
-       "lema": "médico",
-       "id": 2467,
-       "concepto": "Médico",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://www.pami.org.ar/contacto",
+        "ultima_revision": "2026-11-15"
+      },
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "SOY AFILIADO DE PAMI.",
+          "tarjetas": [],
+          "revisar": [
+            "afiliado",
+            "PAMI"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No atribuir pictograma ajeno"
+        },
+        {
+          "orden": 2,
+          "texto": "NECESITO INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 3,
+          "texto": "QUIERO CONSULTAR POR MEDICAMENTOS.",
+          "tarjetas": [
+            {
+              "lema": "querer",
+              "id": 5441,
+              "concepto": "Quiero",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "medicina",
+              "id": 8163,
+              "concepto": "Medicamento",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "consultar"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 4,
+          "texto": "TENGO UN TURNO.",
+          "tarjetas": [
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "turno",
+              "id": 22190,
+              "concepto": "Turno",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "¿QUÉ DOCUMENTOS NECESITO?",
+          "tarjetas": [
+            {
+              "lema": "qué",
+              "id": 11351,
+              "concepto": "qué",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "documento",
+              "id": 21802,
+              "concepto": "Documento",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 6,
+          "texto": "¿DÓNDE TENGO QUE IR?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ir",
+              "id": 2432,
+              "concepto": "Ir",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 7,
+          "texto": "NO ENTENDÍ LA INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "NECESITO AYUDA.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ayudar",
+              "id": 4570,
+              "concepto": "Ayuda",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     },
     {
-     "orden": 5,
-     "texto": "TENGO UN TURNO.",
-     "tarjetas": [
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "id": "correo-argentino",
+      "nombre": "Correo Argentino · Sucursal El Colorado",
+      "icono": "📮",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "Correo Argentino · Sucursal El Colorado",
+        "direccion_confirmada": "Corrientes 100, El Colorado, Formosa",
+        "horario_confirmado": "",
+        "telefono_confirmado": "0810-777-7787 (atención nacional de Correo Argentino; lunes a viernes de 8 a 20)",
+        "servicios_confirmados": "Envío de correspondencia y paquetes|Recepción o retiro de correspondencia y paquetes|Consultas de seguimiento de envíos",
+        "fuente_oficial_url": "https://www.correoargentino.com.ar/atencion-al-cliente/centros-de-atencion-al-cliente",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://www.correoargentino.com.ar/",
+        "correo_electronico": "",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "Correo Argentino · atención al cliente",
+            "url": "https://www.correoargentino.com.ar/atencion-al-cliente/centros-de-atencion-al-cliente"
+          },
+          {
+            "nombre": "Directorio local · sucursal Corrientes 100",
+            "url": "https://www.cylex.com.ar/el-colorado/correo-argentino---sucursal-el-colorado-11243740.html"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Elegí si querés enviar, retirar o consultar un envío.",
+            "picto": "elegir"
+          },
+          {
+            "texto": "Acercate a la sucursal o consultá los servicios en el sitio de Correo Argentino.",
+            "picto": "ir"
+          },
+          {
+            "texto": "Pedí información sobre los requisitos y costos antes de realizar la operación.",
+            "picto": "preguntar"
+          }
+        ]
       },
-      {
-       "lema": "turno",
-       "id": 22190,
-       "concepto": "Turno",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://www.correoargentino.com.ar/atencion-al-cliente/centros-de-atencion-al-cliente",
+        "ultima_revision": "2026-11-15"
+      },
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "QUIERO ENVIAR UN PAQUETE.",
+          "tarjetas": [
+            {
+              "lema": "querer",
+              "id": 5441,
+              "concepto": "Quiero",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "enviar",
+              "id": 21828,
+              "concepto": "Enviar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "paquete"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 2,
+          "texto": "VENGO A RETIRAR UN ENVÍO.",
+          "tarjetas": [
+            {
+              "lema": "venir",
+              "id": 11708,
+              "concepto": "venir",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "enviar",
+              "id": 21828,
+              "concepto": "Enviar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "retirar"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 3,
+          "texto": "NECESITO INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 4,
+          "texto": "¿QUÉ DOCUMENTO NECESITO?",
+          "tarjetas": [
+            {
+              "lema": "qué",
+              "id": 11351,
+              "concepto": "qué",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "documento",
+              "id": 21802,
+              "concepto": "Documento",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "¿CUÁNTO TENGO QUE PAGAR?",
+          "tarjetas": [
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "pagar",
+              "id": 9014,
+              "concepto": "Pagar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "cuánto"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No afirmar monto"
+        },
+        {
+          "orden": 6,
+          "texto": "¿DÓNDE TENGO QUE ESPERAR?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "tener",
+              "id": 7271,
+              "concepto": "tener",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "esperar",
+              "id": 8109,
+              "concepto": "Esperar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 7,
+          "texto": "NO ENTIENDO.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "GRACIAS.",
+          "tarjetas": [
+            {
+              "lema": "gracias",
+              "id": 8128,
+              "concepto": "Gracias",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     },
     {
-     "orden": 6,
-     "texto": "¿DÓNDE ESTÁ EL BAÑO?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "id": "terminal-de-omnibus",
+      "nombre": "Terminal de Ómnibus de El Colorado",
+      "icono": "🚌",
+      "estado": "fuente_publica",
+      "ficha": {
+        "nombre_oficial": "Terminal de Ómnibus de El Colorado",
+        "direccion_confirmada": "Av. Néstor Kirchner 1150, esquina Nicolás Barrios, El Colorado, Formosa",
+        "horario_confirmado": "",
+        "telefono_confirmado": "",
+        "servicios_confirmados": "Consulta y venta de pasajes a través de empresas de transporte|Información sobre destinos y salidas|Orientación para viajar desde El Colorado",
+        "fuente_oficial_url": "https://rutamar.com.ar/puntos-de-venta/",
+        "fecha_verificacion": "2026-11-15",
+        "contacto_responsable": "",
+        "revisado_y_aprobado": "NO",
+        "foto_autorizada": "",
+        "url_ficha_claria": "",
+        "sitio_web": "https://rutamar.com.ar/puntos-de-venta/",
+        "correo_electronico": "",
+        "procedencia": "fuentes_publicas",
+        "fuentes": [
+          {
+            "nombre": "Rutamar · punto de venta Terminal de Ómnibus El Colorado",
+            "url": "https://rutamar.com.ar/puntos-de-venta/"
+          },
+          {
+            "nombre": "Turismo Formosa Hermosa · transporte de El Colorado",
+            "url": "https://www.formosahermosa.gob.ar/transportes/"
+          }
+        ],
+        "orientacion_comunitaria": [
+          {
+            "texto": "Elegí el destino y el día en que querés viajar.",
+            "picto": "elegir"
+          },
+          {
+            "texto": "Preguntá a la empresa de transporte por recorridos y horarios disponibles.",
+            "picto": "preguntar"
+          },
+          {
+            "texto": "Confirmá el precio, el horario y el punto de salida antes de viajar.",
+            "picto": "hora"
+          }
+        ]
       },
-      {
-       "lema": "estar",
-       "id": 5465,
-       "concepto": "estar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+      "revision": {
+        "responsable": "Investigación documental de CLARIA (sin aprobación de la institución)",
+        "fecha": "2026-11-15",
+        "fuente": "https://rutamar.com.ar/puntos-de-venta/",
+        "ultima_revision": "2026-11-15"
       },
-      {
-       "lema": "baño",
-       "id": 15905,
-       "concepto": "Baño",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 7,
-     "texto": "NO ENTIENDO LA INDICACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "indicación"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 8,
-     "texto": "¿PUEDE REPETIRLO MÁS DESPACIO?",
-     "tarjetas": [
-      {
-       "lema": "poder",
-       "id": 11750,
-       "concepto": "poder",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "decir",
-       "id": 9692,
-       "concepto": "decir",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "repetir",
-      "despacio"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
+      "frases": [
+        {
+          "orden": 1,
+          "texto": "QUIERO VIAJAR.",
+          "tarjetas": [
+            {
+              "lema": "querer",
+              "id": 5441,
+              "concepto": "Quiero",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ir",
+              "id": 2432,
+              "concepto": "Ir",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [
+            "viajar"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 2,
+          "texto": "NECESITO UN PASAJE.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [
+            "pasaje"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 3,
+          "texto": "¿A QUÉ HORA SALE EL COLECTIVO?",
+          "tarjetas": [
+            {
+              "lema": "qué",
+              "id": 11351,
+              "concepto": "qué",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "hora",
+              "id": 7129,
+              "concepto": "Hora",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "salir",
+              "id": 2806,
+              "concepto": "Salir",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "colectivo",
+              "id": 38090,
+              "concepto": "Colectivo",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No mostrar horarios sin verificación"
+        },
+        {
+          "orden": 4,
+          "texto": "¿DÓNDE ESPERO?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "esperar",
+              "id": 8109,
+              "concepto": "Esperar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 5,
+          "texto": "¿DÓNDE ESTÁ EL BAÑO?",
+          "tarjetas": [
+            {
+              "lema": "dónde",
+              "id": 7764,
+              "concepto": "¿Dónde?",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "estar",
+              "id": 5465,
+              "concepto": "estar",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "baño",
+              "id": 15905,
+              "concepto": "Baño",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 6,
+          "texto": "¿CUÁNTO CUESTA EL PASAJE?",
+          "tarjetas": [],
+          "revisar": [
+            "cuánto",
+            "costar",
+            "pasaje"
+          ],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": "No mostrar tarifas sin fuente"
+        },
+        {
+          "orden": 7,
+          "texto": "NECESITO AYUDA PARA VIAJAR.",
+          "tarjetas": [
+            {
+              "lema": "necesitar",
+              "id": 37160,
+              "concepto": "Necesito",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "ayudar",
+              "id": 4570,
+              "concepto": "Ayuda",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            },
+            {
+              "lema": "ir",
+              "id": 2432,
+              "concepto": "Ir",
+              "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        },
+        {
+          "orden": 8,
+          "texto": "NO ENTIENDO LA INFORMACIÓN.",
+          "tarjetas": [
+            {
+              "lema": "no",
+              "id": 5526,
+              "concepto": "No",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "entender",
+              "id": 11697,
+              "concepto": "No entiendo",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            },
+            {
+              "lema": "información",
+              "id": 9897,
+              "concepto": "Información",
+              "estado": "VERIFICADO_DICCIONARIO_CLARIA"
+            }
+          ],
+          "revisar": [],
+          "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
+          "nota": ""
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "municipalidad",
-   "nombre": "Municipalidad",
-   "icono": "🏛️",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
-    {
-     "orden": 1,
-     "texto": "QUIERO HACER UNA CONSULTA.",
-     "tarjetas": [
-      {
-       "lema": "querer",
-       "id": 5441,
-       "concepto": "Quiero",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "hacer",
-       "id": 11749,
-       "concepto": "hacer",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "preguntar",
-       "id": 9844,
-       "concepto": "Preguntar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "consulta"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 2,
-     "texto": "NECESITO INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 3,
-     "texto": "¿DÓNDE PRESENTO ESTE FORMULARIO?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "formulario",
-       "id": 9173,
-       "concepto": "Formulario",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "presentar"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 4,
-     "texto": "¿QUÉ DOCUMENTOS NECESITO?",
-     "tarjetas": [
-      {
-       "lema": "qué",
-       "id": 11351,
-       "concepto": "qué",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "documento",
-       "id": 21802,
-       "concepto": "Documento",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 5,
-     "texto": "NECESITO AYUDA PARA COMPLETAR.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ayudar",
-       "id": 4570,
-       "concepto": "Ayuda",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      },
-      {
-       "lema": "completar",
-       "id": 13078,
-       "concepto": "Completar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 6,
-     "texto": "¿DÓNDE PUEDO ESPERAR?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "poder",
-       "id": 11750,
-       "concepto": "poder",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "esperar",
-       "id": 8109,
-       "concepto": "Esperar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 7,
-     "texto": "NO ENTENDÍ EL TRÁMITE.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "trámite",
-       "id": 24709,
-       "concepto": "Trámite",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 8,
-     "texto": "GRACIAS.",
-     "tarjetas": [
-      {
-       "lema": "gracias",
-       "id": 8128,
-       "concepto": "Gracias",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    }
-   ]
-  },
-  {
-   "id": "pami",
-   "nombre": "PAMI",
-   "icono": "💙",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
-    {
-     "orden": 1,
-     "texto": "SOY AFILIADO DE PAMI.",
-     "tarjetas": [],
-     "revisar": [
-      "afiliado",
-      "PAMI"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No atribuir pictograma ajeno"
-    },
-    {
-     "orden": 2,
-     "texto": "NECESITO INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 3,
-     "texto": "QUIERO CONSULTAR POR MEDICAMENTOS.",
-     "tarjetas": [
-      {
-       "lema": "querer",
-       "id": 5441,
-       "concepto": "Quiero",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "medicina",
-       "id": 8163,
-       "concepto": "Medicamento",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "consultar"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 4,
-     "texto": "TENGO UN TURNO.",
-     "tarjetas": [
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "turno",
-       "id": 22190,
-       "concepto": "Turno",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 5,
-     "texto": "¿QUÉ DOCUMENTOS NECESITO?",
-     "tarjetas": [
-      {
-       "lema": "qué",
-       "id": 11351,
-       "concepto": "qué",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "documento",
-       "id": 21802,
-       "concepto": "Documento",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 6,
-     "texto": "¿DÓNDE TENGO QUE IR?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ir",
-       "id": 2432,
-       "concepto": "Ir",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 7,
-     "texto": "NO ENTENDÍ LA INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 8,
-     "texto": "NECESITO AYUDA.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ayudar",
-       "id": 4570,
-       "concepto": "Ayuda",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    }
-   ]
-  },
-  {
-   "id": "correo-argentino",
-   "nombre": "Correo Argentino",
-   "icono": "📮",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
-    {
-     "orden": 1,
-     "texto": "QUIERO ENVIAR UN PAQUETE.",
-     "tarjetas": [
-      {
-       "lema": "querer",
-       "id": 5441,
-       "concepto": "Quiero",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "enviar",
-       "id": 21828,
-       "concepto": "Enviar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "paquete"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 2,
-     "texto": "VENGO A RETIRAR UN ENVÍO.",
-     "tarjetas": [
-      {
-       "lema": "venir",
-       "id": 11708,
-       "concepto": "venir",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "enviar",
-       "id": 21828,
-       "concepto": "Enviar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "retirar"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 3,
-     "texto": "NECESITO INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 4,
-     "texto": "¿QUÉ DOCUMENTO NECESITO?",
-     "tarjetas": [
-      {
-       "lema": "qué",
-       "id": 11351,
-       "concepto": "qué",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "documento",
-       "id": 21802,
-       "concepto": "Documento",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 5,
-     "texto": "¿CUÁNTO TENGO QUE PAGAR?",
-     "tarjetas": [
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "pagar",
-       "id": 9014,
-       "concepto": "Pagar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "cuánto"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No afirmar monto"
-    },
-    {
-     "orden": 6,
-     "texto": "¿DÓNDE TENGO QUE ESPERAR?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "tener",
-       "id": 7271,
-       "concepto": "tener",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "esperar",
-       "id": 8109,
-       "concepto": "Esperar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 7,
-     "texto": "NO ENTIENDO.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 8,
-     "texto": "GRACIAS.",
-     "tarjetas": [
-      {
-       "lema": "gracias",
-       "id": 8128,
-       "concepto": "Gracias",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    }
-   ]
-  },
-  {
-   "id": "terminal-de-omnibus",
-   "nombre": "Terminal de Ómnibus",
-   "icono": "🚌",
-   "estado": "borrador",
-   "ficha": {
-    "nombre_oficial": "",
-    "direccion_confirmada": "",
-    "horario_confirmado": "",
-    "telefono_confirmado": "",
-    "servicios_confirmados": "",
-    "fuente_oficial_url": "",
-    "fecha_verificacion": "",
-    "contacto_responsable": "",
-    "revisado_y_aprobado": "NO",
-    "foto_autorizada": "",
-    "url_ficha_claria": ""
-   },
-   "revision": {
-    "responsable": "",
-    "fecha": "",
-    "fuente": "",
-    "ultima_revision": ""
-   },
-   "frases": [
-    {
-     "orden": 1,
-     "texto": "QUIERO VIAJAR.",
-     "tarjetas": [
-      {
-       "lema": "querer",
-       "id": 5441,
-       "concepto": "Quiero",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ir",
-       "id": 2432,
-       "concepto": "Ir",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [
-      "viajar"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 2,
-     "texto": "NECESITO UN PASAJE.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [
-      "pasaje"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 3,
-     "texto": "¿A QUÉ HORA SALE EL COLECTIVO?",
-     "tarjetas": [
-      {
-       "lema": "qué",
-       "id": 11351,
-       "concepto": "qué",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "hora",
-       "id": 7129,
-       "concepto": "Hora",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "salir",
-       "id": 2806,
-       "concepto": "Salir",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "colectivo",
-       "id": 38090,
-       "concepto": "Colectivo",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No mostrar horarios sin verificación"
-    },
-    {
-     "orden": 4,
-     "texto": "¿DÓNDE ESPERO?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "esperar",
-       "id": 8109,
-       "concepto": "Esperar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 5,
-     "texto": "¿DÓNDE ESTÁ EL BAÑO?",
-     "tarjetas": [
-      {
-       "lema": "dónde",
-       "id": 7764,
-       "concepto": "¿Dónde?",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "estar",
-       "id": 5465,
-       "concepto": "estar",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "baño",
-       "id": 15905,
-       "concepto": "Baño",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 6,
-     "texto": "¿CUÁNTO CUESTA EL PASAJE?",
-     "tarjetas": [],
-     "revisar": [
-      "cuánto",
-      "costar",
-      "pasaje"
-     ],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": "No mostrar tarifas sin fuente"
-    },
-    {
-     "orden": 7,
-     "texto": "NECESITO AYUDA PARA VIAJAR.",
-     "tarjetas": [
-      {
-       "lema": "necesitar",
-       "id": 37160,
-       "concepto": "Necesito",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "ayudar",
-       "id": 4570,
-       "concepto": "Ayuda",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      },
-      {
-       "lema": "ir",
-       "id": 2432,
-       "concepto": "Ir",
-       "estado": "VERIFICADO_GENERICO_REVISAR_CONTEXTUALMENTE"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    },
-    {
-     "orden": 8,
-     "texto": "NO ENTIENDO LA INFORMACIÓN.",
-     "tarjetas": [
-      {
-       "lema": "no",
-       "id": 5526,
-       "concepto": "No",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "entender",
-       "id": 11697,
-       "concepto": "No entiendo",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      },
-      {
-       "lema": "información",
-       "id": 9897,
-       "concepto": "Información",
-       "estado": "VERIFICADO_DICCIONARIO_CLARIA"
-      }
-     ],
-     "revisar": [],
-     "nivel": "MODELO DE COMUNICACIÓN, NO PROCEDIMIENTO OFICIAL",
-     "nota": ""
-    }
-   ]
-  }
- ]
+  ]
 }
