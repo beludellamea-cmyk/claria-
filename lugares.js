@@ -55,19 +55,34 @@
       b.addEventListener('click', () => elegirInstitucion(i)); ul.append(el('li', {}, b));
     });
   }
-  const PEND = 'Información por confirmar';
   function opcionesInstitucion(i) {
-    const f = i.ficha || {}, ok = CIUDAD().confirmada(i);
-    const servicios = ok ? String(f.servicios_confirmados || '').split(/[|;]/).map((x) => x.trim()).filter(Boolean) : [];
-    const dir = ok ? String(f.direccion_confirmada || '').trim() : '';
-    const hor = ok ? String(f.horario_confirmado || '').trim() : '';
-    const tel = ok ? String(f.telefono_confirmado || '').trim() : '';
-    const llegar = dir || hor || tel ? [dir && `Dirección: ${dir}`, hor && `Horario: ${hor}`, tel && `Teléfono: ${tel}`].filter(Boolean).join('. ') : '';
+    const f = i.ficha || {};
+    const servicios = String(f.servicios_confirmados || '').split(/[|;]/).map((x) => x.trim()).filter(Boolean);
+    const dir = String(f.direccion_confirmada || '').trim();
+    const hor = String(f.horario_confirmado || '').trim();
+    const tel = String(f.telefono_confirmado || '').trim();
+    const correo = String(f.correo_electronico || '').trim();
+    const llegar = [
+      dir && `Dirección: ${dir}`,
+      hor && `Horario: ${hor}`,
+      tel && `Teléfono: ${tel}`,
+      correo && `Correo electrónico: ${correo}`,
+    ].filter(Boolean).join('. ');
+    const orientacion = Array.isArray(f.orientacion_comunitaria) ? f.orientacion_comunitaria : [];
     return [
-      { tipo: 'info', titulo: 'Qué puedo consultar', texto: servicios.length ? `En ${i.nombre} podés consultar: ${servicios.join('; ')}.` : `${PEND}. Todavía no hay servicios confirmados por la institución.`, pendiente: !servicios.length, aclaracion: servicios.length ? '' : 'CLARIA no inventa servicios: se muestran solo los que la institución confirmó con fuente y fecha.' },
+      { tipo: 'info', titulo: 'Qué puedo consultar',
+        picto: 'información',
+        texto: servicios.length ? `En ${i.nombre} podés consultar: ${servicios.join('; ')}.` : 'Podés pedir información directamente en la institución.',
+        enlace: f.fuente_oficial_url },
       { tipo: 'tablero', titulo: 'Hablar con imágenes' },
-      { tipo: 'info', titulo: 'Cómo llegar', texto: llegar || `${PEND}. Todavía no hay dirección ni horario confirmados.`, pendiente: !llegar, mapa: dir, aclaracion: llegar ? '' : 'Consultá con la institución antes de ir.' },
-      { tipo: 'info', titulo: 'Guías accesibles', texto: `${PEND}. Todavía no hay guías paso a paso verificadas para ${i.nombre}.`, pendiente: true, aclaracion: 'Las guías se arman solo con fuentes oficiales verificadas. Podés preparar una en «Entender un trámite».' },
+      { tipo: 'info', titulo: 'Cómo llegar y contactar',
+        picto: 'dirección',
+        texto: llegar || `Consultá la ubicación y las formas de contacto en la página de ${i.nombre}.`,
+        mapa: i.id === 'pami' ? 'PAMI El Colorado Formosa Argentina' : dir,
+        enlace: f.sitio_web || f.fuente_oficial_url },
+      { tipo: 'pasos', titulo: 'Orientación paso a paso',
+        pasos: orientacion.length ? orientacion : [{ texto: 'Preguntá al personal cómo hacer tu consulta.', picto: 'preguntar' }],
+        aclaracion: 'Estos pasos sirven para orientarte y comunicarte: no reemplazan los requisitos oficiales de un trámite.' },
     ];
   }
   function elegirInstitucion(i) { lugar = { id: i.id, nombre: i.nombre, institucion: i, opciones: opcionesInstitucion(i) }; pintarMenu(); ir('menu'); }
@@ -115,7 +130,7 @@
   });
 
   // ───────── menú del lugar ─────────
-  function origen() { if (lugar.institucion) return CIUDAD().confirmada(lugar.institucion) ? `Información confirmada · Fuente: ${lugar.institucion.ficha.fuente_oficial_url} · Verificada: ${fecha(lugar.institucion.ficha.fecha_verificacion)}` : 'Datos por confirmar: CLARIA todavía no tiene información verificada de esta institución.'; return `Información proporcionada por: ${lugar.responsable} · Actualizada: ${fecha(lugar.actualizado)}`; }
+  function origen() { if (lugar.institucion) { const i = lugar.institucion, f = i.ficha || {}; return i.estado === 'fuente_publica' ? `Datos recopilados de fuentes públicas · Consultadas: ${fecha(f.fecha_verificacion)} · CLARIA no representa a la institución.` : `Datos aportados por la institución · Fuente: ${f.fuente_oficial_url} · Actualizados: ${fecha(f.fecha_verificacion)}`; } return `Información proporcionada por: ${lugar.responsable} · Actualizada: ${fecha(lugar.actualizado)}`; }
   function pintarMenu() {
     $('lgNombre').textContent = lugar.nombre; $('lgDemo').hidden = !lugar.demostracion; $('lgInstNota').hidden = !lugar.institucion; $('lgOrigen').textContent = origen();
     const ul = $('lgOpciones'); ul.replaceChildren();
@@ -136,10 +151,11 @@
     if (opcion.tipo === 'pasos') {
       const p = opcion.pasos[paso]; $('lgPasoNav').hidden = false;
       cont.append(el('p', { class: 'lg-num', text: `Paso ${paso + 1} de ${opcion.pasos.length}` }), el('div', { class: 'lg-paso' }, [img(p.picto), el('p', { class: 'lg-texto', text: p.texto })]));
+      if (opcion.aclaracion) cont.append(el('p', { class: 'pc-note', text: opcion.aclaracion }));
       $('lgAnterior').disabled = paso === 0; $('lgSiguiente').textContent = paso === opcion.pasos.length - 1 ? 'Listo' : 'Siguiente paso →'; $('lgEscuchar').onclick = () => { if (voz(p.texto)) estado('lgEstadoPaso', 'Leyendo el paso.'); };
     } else if (opcion.tipo === 'info') {
       $('lgPasoNav').hidden = false; $('lgAnterior').hidden = true; $('lgSiguiente').textContent = 'Listo';
-      cont.append(el('div', { class: 'lg-paso' }, [img(opcion.picto), el('p', { class: 'lg-texto', text: opcion.texto })]), opcion.aclaracion ? el('p', { class: 'pc-note', text: opcion.aclaracion }) : null, opcion.mapa ? el('a', { class: 'btn btn-soft', href: 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(opcion.mapa), target: '_blank', rel: 'noopener', text: 'Ver en el mapa (se abre otra página)' }) : null);
+      cont.append(el('div', { class: 'lg-paso' }, [img(opcion.picto), el('p', { class: 'lg-texto', text: opcion.texto })]), opcion.aclaracion ? el('p', { class: 'pc-note', text: opcion.aclaracion }) : null, opcion.mapa ? el('a', { class: 'btn btn-soft', href: 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(opcion.mapa), target: '_blank', rel: 'noopener', text: 'Ver en el mapa (se abre otra página)' }) : null, /^https:\/\//.test(opcion.enlace || '') ? el('a', { class: 'btn btn-soft', href: opcion.enlace, target: '_blank', rel: 'noopener', text: 'Consultar información de la fuente' }) : null);
       $('lgEscuchar').onclick = () => { if (voz(opcion.texto)) estado('lgEstadoPaso', 'Leyendo la información.'); };
     } else if (opcion.tipo === 'frases') {
       cont.append(el('p', { class: 'pc-note', text: 'Tocá «Mostrar» para enseñar la frase en pantalla grande, o «Decir» para que se escuche.' }));
