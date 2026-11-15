@@ -176,7 +176,7 @@
         </div>
         <div id="lgMenu" class="paso" hidden>
           <h1 id="lgMenuTitulo" class="q">¿Qué necesitás?</h1>
-          <div class="panel lg-inst"><h2 id="lgNombre"></h2><p id="lgDemo" class="lg-chip lg-chip-grande" hidden>EJEMPLO FICTICIO: no es una institución real</p><p id="lgOrigen" class="pc-note"></p><p id="lgInstNota" class="pc-note" hidden>Datos de la institución: solo se muestran los confirmados con fuente y fecha. Las frases de «Hablar con imágenes» son ayudas para comunicarte, no un procedimiento oficial.</p><p class="pc-note">El contenido es responsabilidad de la institución. CLARIA es un proyecto educativo independiente.</p></div>
+          <div class="panel lg-inst"><h2 id="lgNombre"></h2><p id="lgDemo" class="lg-chip lg-chip-grande" hidden>EJEMPLO FICTICIO: no es una institución real</p><p id="lgOrigen" class="pc-note"></p><p id="lgInstNota" class="pc-note" hidden>La ficha reúne información de fuentes públicas y, cuando corresponda, datos aportados por instituciones. Las frases de «Hablar con imágenes» ayudan a comunicarte; no son un procedimiento oficial.</p><p class="pc-note">El contenido es responsabilidad de la institución. CLARIA es un proyecto educativo independiente.</p></div>
           <ul id="lgOpciones" class="lg-opciones" aria-label="Opciones"></ul>
         </div>
         <div id="lgPaso" class="paso" hidden>
@@ -214,7 +214,7 @@
         <label for="edUltima" class="tb-label">Última revisión (AAAA-MM-DD)</label><input id="edUltima" type="text" maxlength="10" inputmode="numeric">
         <label class="ed-check"><input id="edAprobado" type="checkbox"> Una persona responsable revisó y aprobó estos datos</label>
         <label for="edEstadoFicha" class="tb-label">Estado</label>
-        <select id="edEstadoFicha"><option value="borrador">Borrador</option><option value="revisado">Revisado</option><option value="publicado">Publicado</option></select>
+        <select id="edEstadoFicha"><option value="borrador">Borrador</option><option value="fuente_publica">Datos de fuentes públicas</option><option value="revisado">Revisado por institución</option><option value="publicado">Publicado por institución</option></select>
         <p id="edValidez" class="pc-note" role="status" aria-live="polite"></p><ul id="edProblemas" class="ed-problemas"></ul>
         <p class="button-line"><button type="button" class="primary" id="edDescargarFicha">Descargar ficha (JSON)</button></p>
         <p id="edEstado" class="pc-note" role="status" aria-live="polite"></p>
