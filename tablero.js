@@ -38,14 +38,14 @@
   const PASOS = { cat: ['tbCategorias', 'tbTitulo', 'tablero'], lista: ['tbCategoria', 'tbCatTitulo', 'tablerocat'], guardadas: ['tbGuardadas', 'tbGuardTitulo', 'tablerofrases'] };
   function paso(n, silencioso) {
     Object.entries(PASOS).forEach(([k, [id]]) => { $(id).hidden = k !== n; });
-    const clave = n === 'lista' && ctx ? 'ciudadtablero' : PASOS[n][2];
+    const clave = n === 'lista' && ctx ? (ctx.guia || 'ciudadtablero') : PASOS[n][2];
     $('tbCompo').hidden = !(n === 'lista' || (n === 'cat' && frase.length));
     if (!silencioso) G()?.setPantalla(clave);
     const t = $(PASOS[n][1]); t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); window.scrollTo({ top: 0 });
   }
   function entrar(conservar) { if (conservar) return; ctx = null; cat = null; cargar().then(() => paso('cat', true)); G()?.setPantalla('tablero'); }
   // Abre el tablero con el contexto de una institución: {id, nombre, aviso, frases, palabras}. La voz y las demás funciones son las mismas.
-  function abrirContexto(c) { ctx = c; cat = { id: c.id, nombre: c.nombre, contexto: true, aviso: c.aviso, frases: c.frases, palabras: (c.palabras || []).filter((l) => porLema.has(l)) }; frase = []; manual = false; $('tbTexto').value = ''; return cargar().then(() => { pintarCategoria(); pintarFrase(); paso('lista'); }); }
+  function abrirContexto(c) { ctx = c; cat = { id: c.id, nombre: c.nombre, titulo: c.titulo, contexto: true, aviso: c.aviso, frases: c.frases, palabras: (c.palabras || []).filter((l) => porLema.has(l)) }; frase = []; manual = false; $('tbTexto').value = ''; return cargar().then(() => { pintarCategoria(); pintarFrase(); paso('lista'); }); }
   function irA(n) { cargar().then(() => { if (n !== 'lista') { ctx = null; } if (n === 'lista' && !cat) cat = datos.categorias[0]; if (n === 'lista') pintarCategoria(); paso(n); }); }
 
   // ───────── categorías, frases rápidas y palabras ─────────
@@ -62,7 +62,7 @@
     return base.concat((f.revisar || []).map(tarjetaPendiente));
   }
   function pintarCategoria() {
-    $('tbCatTitulo').textContent = cat.contexto ? `${cat.nombre}: hablar con imágenes` : cat.nombre;
+    $('tbCatTitulo').textContent = cat.titulo || (cat.contexto ? `${cat.nombre}: hablar con imágenes` : cat.nombre);
     $('tbAviso').hidden = !cat.contexto; $('tbAviso').textContent = cat.aviso || '';
     const fr = $('tbFrasesRapidas'); fr.replaceChildren();
     cat.frases.forEach((f) => {

@@ -1,6 +1,6 @@
 /* CLARIA · Service worker (modo sin conexión básico).
    Archivos propios: primero la red y, si no hay, la copia guardada; pictogramas: primero la copia. Nunca guarda llamadas a /api ni a otros sitios. */
-const V = 'claria-v1', CORE = ['./', 'index.html', 'styles.css', 'guia.css', 'foto.css', 'tablero.css', 'lugares.css', 'creador.css', 'ciudad.js', 'editor.js', 'editor.css', 'data/ciudad.json', 'data/ciudad-revisiones.json', 'picto.css', 'cine.css', 'app.js', 'guia.js', 'pictos.js', 'exportar.js', 'convertidor.js', 'pictocuento.js', 'tablero.js', 'lugares.js', 'creador.js', 'vendor/jsQR.js', 'cine.js', 'privacy.js', 'config.js', 'data/pictogramas.json', 'data/tablero.json', 'data/lugares.json'];
+const V = 'claria-v1', CORE = ['./', 'index.html', 'styles.css', 'guia.css', 'foto.css', 'tablero.css', 'lugares.css', 'creador.css', 'ciudad.js', 'entender-core.js', 'entender.js', 'entender.css', 'editor.js', 'editor.css', 'data/ciudad.json', 'data/ciudad-revisiones.json', 'picto.css', 'cine.css', 'app.js', 'guia.js', 'pictos.js', 'exportar.js', 'convertidor.js', 'pictocuento.js', 'tablero.js', 'lugares.js', 'creador.js', 'vendor/jsQR.js', 'cine.js', 'privacy.js', 'config.js', 'data/pictogramas.json', 'data/tablero.json', 'data/lugares.json'];
 // Instalación: archivos propios y, además, los pictogramas locales del diccionario (para que los tableros y guías funcionen sin conexión).
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(V).then(async (c) => {
   await Promise.all(CORE.map((u) => c.add(u).catch(() => {})));

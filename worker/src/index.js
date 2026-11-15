@@ -2,9 +2,10 @@ import { redact } from './privacy.js';
 import { buildExplain, buildChat, LIMITS, TRAMITE_IDS, TRAMITES, allowedUrls } from './prompts.js';
 import { PROVIDERS, ProviderError, providerName, PROVIDER_LABEL } from './providers.js';
 import { checkLimits } from './ratelimit.js';
+import { citaEnTexto } from './entender-core.js';
 
 const SOURCES = new Set(['typed', 'file_txt', 'file_pdf', 'file_ocr']);
-const TASK_IDS = new Set(['plain', 'easy', 'summary', 'ask', 'actions']);
+const TASK_IDS = new Set(['plain', 'easy', 'summary', 'ask', 'actions', 'extract']);
 
 function allowedOrigin(env, origin) {
   const list = String(env.ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
@@ -67,6 +68,23 @@ export function shapeActions(raw) {
   return { resultado: resultado || (dice.length ? 'Esto es lo que el documento te pide.' : 'El documento no indica acciones.'), el_documento_dice: dice, sugerencias, puntos_clave: [], avisos: strList(o.avisos, 6, 300) };
 }
 
+// «Entender»: datos estructurados del documento. Cada ítem debe traer una cita que EXISTA en el texto; lo que no se pueda comprobar se descarta.
+export function shapeExtract(raw, ctx = {}) {
+  const o = parseModelJson(raw);
+  if (!o) throw new ProviderError(502, 'bad_model_output');
+  let descartados = 0; const referencia = String(ctx.texto || '');
+  const items = (v) => (Array.isArray(v) ? v : []).slice(0, 10).flatMap((x) => {
+    const cita = x && typeof x.cita === 'string' ? x.cita.trim().slice(0, 200) : '';
+    if (!cita || !citaEnTexto(cita, referencia)) { descartados += 1; return []; }
+    return [{ cita, detalle: typeof x.detalle === 'string' ? x.detalle.trim().slice(0, 300) : '' }];
+  });
+  const out = { tipo: typeof o.tipo === 'string' ? o.tipo.trim().slice(0, 60) : '', resultado: typeof o.resultado === 'string' ? o.resultado.trim().slice(0, 500) : '',
+    fechas: items(o.fechas), horarios: items(o.horarios), lugares: items(o.lugares), requisitos: items(o.requisitos), acciones: items(o.acciones), ilegible: strList(o.ilegible, 6, 200), puntos_clave: [] };
+  const avisos = strList(o.avisos, 6, 300); if (descartados) avisos.push(`CLARIA descartó ${descartados} dato(s) de la IA porque no aparecen escritos en el documento.`);
+  if (!out.resultado && !['fechas', 'horarios', 'lugares', 'requisitos', 'acciones'].some((k) => out[k].length)) throw new ProviderError(502, 'bad_model_output');
+  return { ...out, resultado: out.resultado || 'Estos son los datos que figuran en el documento.', descartados, avisos };
+}
+
 export function shapeExplain(raw) {
   const o = parseModelJson(raw);
   if (!o || typeof o.resultado !== 'string' || !o.resultado.trim()) {
@@ -126,7 +144,7 @@ export default {
     if (body === 'too_big') return done(fail(env, origin, 413, 'text_too_long', MESSAGES.text_too_long), url.pathname);
     if (!body || typeof body !== 'object') return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), url.pathname);
 
-    let prompt, maxTokens, shape, redactions = 0;
+    let prompt, maxTokens, shape, shapeCtx = {}, redactions = 0;
     if (url.pathname === '/api/explain') {
       const { task, text, question, source } = body;
       if (!TASK_IDS.has(task) || typeof text !== 'string' || text.trim().length < 12) return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), url.pathname);
@@ -135,7 +153,7 @@ export default {
       const t = redact(text), q = redact(String(question || '').slice(0, LIMITS.question));
       redactions = t.count + q.count;
       prompt = buildExplain({ task, text: t.text.trim(), question: q.text.trim(), source: SOURCES.has(source) ? source : 'typed' });
-      maxTokens = 900; shape = task === 'actions' ? shapeActions : shapeExplain;
+      maxTokens = task === 'extract' ? 1300 : 900; shapeCtx = { texto: t.text }; shape = task === 'actions' ? shapeActions : task === 'extract' ? shapeExtract : shapeExplain;
     } else {
       const { message, history } = body;
       if (typeof message !== 'string' || !message.trim() || message.length > LIMITS.chatMsg) return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), url.pathname);
@@ -152,7 +170,7 @@ export default {
 
     try {
       const { text } = await PROVIDERS[prov]({ ...prompt, env, maxTokens, fetchImpl: env.__fetch || fetch });
-      const data = shape(text);
+      const data = shape(text, shapeCtx);
       return done(json(env, origin, 200, { ok: true, ...data, redactions, generatedBy: 'ia', provider: PROVIDER_LABEL[prov] }), url.pathname);
     } catch (e) {
       const code = e instanceof ProviderError ? e.code : 'provider_error';

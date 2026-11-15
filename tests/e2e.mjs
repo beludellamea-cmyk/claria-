@@ -32,7 +32,7 @@ async function open(port, { width = 1280, height = 900 } = {}) {
   await page.waitForTimeout(400); return { page, ctx, errors, reqs };
 }
 const irHablar = async (page) => { await page.click('.brand'); await page.click('#view-inicio [data-view="hablar"]'); await page.waitForSelector('#chatInput'); };
-const leer = async (page, texto) => { await page.click('#view-inicio [data-view="lectura"]').catch(async () => { await page.click('.brand'); await page.click('#view-inicio [data-view="lectura"]'); }); await page.click('#optTexto'); if (texto) { await page.fill('#inputText', texto); await page.click('#useText'); } else await page.click('#loadExample'); await page.waitForSelector('#leerPaso2:not([hidden])'); };
+const leer = async (page, texto) => { await page.evaluate(() => window.ClariaUI.showView('lectura')); await page.click('#optTexto'); if (texto) { await page.fill('#inputText', texto); await page.click('#useText'); } else await page.click('#loadExample'); await page.waitForSelector('#leerPaso2:not([hidden])'); };
 const EX = 'El agua es indispensable para la vida. Cuando el sol calienta los ríos, una parte del agua se evapora y sube al aire. Luego forma nubes y cae como lluvia.';
 
 console.log('\nModo demo (sin API configurada)');
@@ -146,7 +146,7 @@ await test('API inalcanzable → "Sin conexión con la IA", chat en demo, nada s
 console.log('\nAccesibilidad básica y móvil');
 await test('móvil 390px: sin desbordamiento horizontal en ninguna vista', async () => {
   const { page, ctx } = await open(8000, { width: 390, height: 800 });
-  for (const v of ['inicio', 'escribir', 'lectura', 'tablero', 'lugares', 'tramites', 'hablar', 'acerca']) { await page.evaluate(() => document.querySelector('.brand').click()); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else if (v !== 'inicio' && v !== 'acerca') await page.click(`#view-inicio [data-view="${v}"]`, { timeout: 4000 }).catch((e) => { throw new Error('no se pudo abrir ' + v + ': ' + e.message.split('\n')[0]); }); if (v === 'acerca') await page.click('#footerAbout');
+  for (const v of ['inicio', 'escribir', 'lectura', 'entender', 'tablero', 'lugares', 'tramites', 'hablar', 'acerca']) { await page.evaluate(() => document.querySelector('.brand').click()); if (v === 'escribir') await page.evaluate(() => document.querySelector('#tbCategorias [data-view=escribir]').click()); else if (v === 'lectura') await page.evaluate(() => window.ClariaUI.showView('lectura')); else if (v !== 'inicio' && v !== 'acerca') await page.click(`#view-inicio [data-view="${v}"]`, { timeout: 4000 }).catch((e) => { throw new Error('no se pudo abrir ' + v + ': ' + e.message.split('\n')[0]); }); if (v === 'acerca') await page.click('#footerAbout');
     if (v === 'lectura') { await page.click('#optTexto'); await page.click('#loadExample'); await page.click('#optEscuchar'); } if (v === 'tramites') { await page.click('[data-proc="dni"]'); }
     const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert.ok(over <= 1, `${v} desborda ${over}px`); }
   await ctx.close();

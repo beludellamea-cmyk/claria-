@@ -137,3 +137,15 @@ Se integra el **Paquete Maestro de pictogramas** (copia íntegra en `docs/paquet
 **Pruebas**: `tests/e2e-ciudad.mjs` (15), `tests/ciudad.test.mjs` (6) y todas las suites anteriores. Las suites de pictos, cuento y guía ahora usan un `config.js` vacío para no depender del Worker en vivo.
 
 **Límites**: las frases son ayudas de comunicación, **no procedimientos oficiales**. No hay guías PDF nuevas: falta una fuente oficial verificada por institución. Voz y QR con cámara real no se probaron en teléfono.
+
+## Etapa 6 · «Entender»: foto, captura o documento → qué dice y qué hacer (rama `entender-documentos`)
+
+- **Entrada**: Sacar foto, Subir imagen o Subir documento (PDF, imagen o TXT, hasta 15 MB / 25 páginas), o pegar texto.
+- **Lectura en el dispositivo**: OCR real con Tesseract.js (español, con preparación de imagen) y pdf.js (texto directo; PDF escaneado → OCR). La imagen y el archivo **nunca salen del dispositivo**.
+- **Calidad**: se mide la confianza del OCR. Si es mala o no hay texto, CLARIA avisa, pide otra foto, deja corregir a mano y **no habilita la IA** sobre esa lectura. Las palabras dudosas se marcan.
+- **Lo importante (sin IA)**: fechas, horarios, lugares, dinero, requisitos y acciones se extraen como fragmentos **literales** del texto (`entender-core.js`).
+- **Con IA (opcional, con permiso)**: solo el texto leído y con datos personales ocultos. «Explicámelo fácil», «Qué tengo que hacer», preguntas y «revisar con IA» (tarea `extract`: cada dato debe traer una cita que exista en el texto; lo demás se descarta, también en el servidor).
+- **Conexiones**: escuchar (solo al tocar), pictogramas ARASAAC (pictocuento) y responder con el comunicador de pictogramas.
+- **Original siempre visible** y etiquetado, separado de lo generado por IA. No se guarda nada.
+- **Pruebas**: `tests/e2e-entender.mjs` (26, OCR y pdf.js reales sobre 8 documentos ficticios de `tests/fixtures/entender/`), `tests/entender-core.test.mjs`, Worker. Requiere `npm i --no-save tesseract.js@5.1.1 @tesseract.js-data/spa pdfjs-dist@3.11.174`.
+- **Pendiente de probar a mano**: IA real (el Worker nuevo se despliega desde `main`; hasta entonces `extract` responde error y la app lo explica), cámara y voz en celular, fotos reales del colegio.

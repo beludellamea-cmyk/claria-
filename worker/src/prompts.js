@@ -15,7 +15,7 @@ const SOURCE_NOTE = {
   typed: 'El texto fue escrito o pegado por la persona.',
   file_txt: 'El texto viene de un archivo TXT.',
   file_pdf: 'El texto fue extraído automáticamente de un PDF: puede tener cortes, columnas mezcladas o caracteres rotos.',
-  file_ocr: 'El texto fue obtenido por reconocimiento óptico (OCR) de una foto: puede tener errores de letras, números y palabras. Señalá en "avisos" las palabras o cifras dudosas en vez de corregirlas en silencio.'
+  file_ocr: 'El texto fue obtenido por reconocimiento óptico (OCR) de una foto o de un documento escaneado: puede tener errores de letras, números y palabras. Señalá en "avisos" las palabras o cifras dudosas en vez de corregirlas en silencio. Donde figure [ilegible] el texto NO se pudo leer: no lo completes, no lo adivines y decí en "avisos" que falta esa parte.'
 };
 
 const TASKS = {
@@ -23,6 +23,7 @@ const TASKS = {
   easy: 'Reescribí el contenido en LECTURA FÁCIL: oraciones cortas (máximo 15 palabras), una idea por oración, voz activa, palabras simples, sin siglas ni metáforas. Poné cada oración en una línea nueva dentro de "resultado" (separadas por \\n). No agregues información que el documento no contenga.',
   summary: 'Hacé un resumen fiel de máximo 100 palabras en "resultado" y de 3 a 5 ideas principales en "puntos_clave". Distinguí lo que dice el documento de cualquier interpretación tuya (que debe ir en "avisos").',
   actions: 'Identificá qué tiene que hacer la persona según el documento. En "el_documento_dice" listá cada acción tal como la pide el documento (fiel, con fecha, hora, lugar y objetos SOLO si el documento los menciona), una por ítem, en orden y en voz imperativa. En "sugerencias" poné, solo si son útiles, recomendaciones tuyas que el documento NO dice (por ejemplo confirmar con la institución); si no hay, lista vacía. Está PROHIBIDO inventar autorizaciones, pagos, fechas, horas, lugares o requisitos que el documento no contenga. Si una fecha, hora o cifra es dudosa (por ejemplo por OCR), decilo en "avisos". Si el documento no pide ninguna acción, decilo en "resultado" y dejá las dos listas vacías. En "resultado" va una frase breve (máximo 30 palabras) que resuma de qué trata el documento.',
+  extract: 'Leé el documento y extraé SOLO datos que estén escritos en él. Para cada fecha, horario, lugar, requisito o acción copiá en "cita" el fragmento EXACTO tal como aparece (máximo 160 caracteres, sin cambiar palabras) y en "detalle" explicalo en una frase simple SIN agregar ningún dato que no esté en la cita. Si algo no figura, dejá la lista vacía: nunca lo supongas. Si hay partes marcadas [ilegible], listalas en "ilegible" con su contexto. "tipo" es una etiqueta breve (nota escolar, captura de WhatsApp, cartel, formulario, comunicación institucional, otro).',
   ask: 'Respondé la pregunta de la persona usando SOLO lo que dice el documento. Si el documento no contiene la respuesta, decilo con claridad ("El texto no lo dice") y no completes con conocimiento propio. Máximo 150 palabras.'
 };
 
@@ -34,8 +35,12 @@ export const ACTIONS_SCHEMA = `Formato de salida (JSON):
 {"resultado": "frase breve sobre de qué trata el documento", "el_documento_dice": ["acción 1 que pide el documento", "acción 2"], "sugerencias": ["recomendación tuya que el documento no dice"], "avisos": ["datos dudosos, errores posibles de extracción, lo que el texto no aclara"]}
 Las tres listas pueden estar vacías.`;
 
+export const EXTRACT_SCHEMA = `Formato de salida (JSON):
+{"tipo": "etiqueta breve", "resultado": "de qué trata el documento en una o dos oraciones", "fechas": [{"cita": "texto exacto", "detalle": "qué significa"}], "horarios": [], "lugares": [], "requisitos": [], "acciones": [], "ilegible": ["contexto de cada parte que no se pudo leer"], "avisos": ["incertidumbres"]}
+Todas las listas pueden estar vacías.`;
+
 export function buildExplain({ task, text, question, source }) {
-  const system = [BASE, TASKS[task], SOURCE_NOTE[source] || SOURCE_NOTE.typed, task === 'actions' ? ACTIONS_SCHEMA : EXPLAIN_SCHEMA].join('\n\n');
+  const system = [BASE, TASKS[task], SOURCE_NOTE[source] || SOURCE_NOTE.typed, task === 'actions' ? ACTIONS_SCHEMA : task === 'extract' ? EXTRACT_SCHEMA : EXPLAIN_SCHEMA].join('\n\n');
   const user = `<documento>\n${text}\n</documento>` + (task === 'ask' ? `\n\nPregunta de la persona: ${question}` : '');
   return { system, messages: [{ role: 'user', content: user }] };
 }

@@ -143,3 +143,16 @@ test('explain/actions: respuesta del modelo sin formato válido → error, no se
   const j = await r.json();
   assert.equal(r.status, 502); assert.equal(j.ok, false); assert.equal(j.error, 'bad_model_output');
 });
+
+test('explain/extract: conserva solo datos con cita escrita en el documento y descarta lo inventado', async () => {
+  const texto = 'Estimadas familias: el viernes 21 de noviembre a las 9:30 hs hay reunión en el aula de 3° grado. Deben traer fotocopia del DNI.';
+  const modelo = JSON.stringify({ tipo: 'nota escolar', resultado: 'Aviso de una reunión.', fechas: [{ cita: 'el viernes 21 de noviembre', detalle: 'día de la reunión' }, { cita: 'el lunes 24 de noviembre', detalle: 'inventada' }], horarios: [{ cita: 'a las 9:30 hs', detalle: 'hora' }, { detalle: 'sin cita' }], lugares: [{ cita: 'el aula de 3° grado', detalle: 'lugar' }, { cita: 'la biblioteca', detalle: 'inventada' }], requisitos: [{ cita: 'fotocopia del DNI', detalle: 'hay que traerla' }], acciones: [], ilegible: [], avisos: [] });
+  const env = baseEnv({ __fetch: anthropicReply(modelo) });
+  const r = await worker.fetch(post('/api/explain', { task: 'extract', source: 'file_ocr', text: texto }), env); const j = await r.json();
+  assert.equal(r.status, 200); assert.deepEqual(j.fechas.map((x) => x.cita), ['el viernes 21 de noviembre']); assert.deepEqual(j.horarios.map((x) => x.cita), ['a las 9:30 hs']); assert.deepEqual(j.lugares.map((x) => x.cita), ['el aula de 3° grado']); assert.equal(j.requisitos.length, 1);
+  assert.equal(j.descartados, 3); assert.ok(j.avisos.some((a) => /descartó 3/.test(a))); assert.match(anthropicReply.last.body.system, /EXACTO/); assert.match(anthropicReply.last.body.system, /\[ilegible\]/);
+});
+test('explain/extract: sin JSON válido → error, no se inventa nada', async () => {
+  const env = baseEnv({ __fetch: anthropicReply('Claro, acá van los datos: fecha lunes.') });
+  const r = await worker.fetch(post('/api/explain', { task: 'extract', source: 'typed', text: 'Texto cualquiera con más de doce caracteres para probar.' }), env); assert.equal(r.status, 502); assert.equal((await r.json()).error, 'bad_model_output');
+});

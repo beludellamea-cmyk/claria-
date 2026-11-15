@@ -8,7 +8,7 @@
   const tts = 'speechSynthesis' in window;
 
   const PANT = {
-    inicio: { q: '¿Qué querés hacer hoy?', explica: 'Tocá uno de los botones grandes: entender una foto, hablar con imágenes, estoy en un lugar público, entender un trámite o hablar conmigo.', ayuda: ['Tocá el botón que quieras.', 'Podés volver acá cuando quieras tocando el logo de CLARIA.'] },
+    inicio: { q: '¿Qué querés hacer hoy?', explica: 'Tocá uno de los botones grandes: entender una foto, una captura o un documento, hablar con imágenes, estoy en un lugar público, entender un trámite o hablar conmigo.', ayuda: ['Tocá el botón que quieras.', 'Podés volver acá cuando quieras tocando el logo de CLARIA.'] },
     escribir: { q: '¿Qué querés decir?', explica: 'Escribí una palabra, una frase o una oración, o dictala con el micrófono. Después tocá «Convertir a pictogramas». Vas a poder escucharla, modificarla y descargarla.', ayuda: ['Escribí o dictá lo que querés decir.', 'Tocá «Convertir a pictogramas».', 'Tocá una imagen si querés cambiarla.', 'Usá Escuchar, Modificar o Descargar.'] },
     leer1: { q: '¿Qué querés leer?', explica: 'Podés subir un archivo, sacar una foto de un papel o escribir el texto. Elegí una de las tres opciones.', ayuda: ['Subir archivo: TXT, PDF o imagen.', 'Sacar foto: apuntá a un papel con letra clara.', 'Escribir texto: pegalo o escribilo.'] },
     leerfoto: { q: '¿Esta es la imagen correcta?', explica: 'Mirá la imagen que elegiste. Si es la correcta, tocá «Sí, leer el texto». CLARIA lee el texto en tu dispositivo y la imagen no se envía a ningún servidor.', ayuda: ['Sí, leer el texto: empieza la lectura.', 'Elegir otra imagen: probás con otra foto.', 'Escribir el texto yo: lo tipeás vos.'] },
@@ -21,6 +21,10 @@
     hablar: { q: '¿En qué puedo ayudarte?', explica: 'Escribime tu pregunta o dictala. Si no hay IA conectada, respondo con textos preparados y te lo aviso. No escribas datos personales.', ayuda: ['Escribí tu pregunta.', 'O tocá el micrófono para dictar.', 'No compartas DNI, claves ni datos personales.'] },
     tablero: { q: '¿Qué necesitás decir?', explica: 'Elegí un tema: ayuda, salud, escuela, transporte, compras o necesidades básicas. Después armás tu frase con imágenes y CLARIA la dice en voz alta.', ayuda: ['Tocá un tema.', 'Con Mis frases ves las que guardaste.'] },
     editor: { q: 'Panel del editor', explica: 'Para quienes revisan la información: elegí pictogramas para los conceptos pendientes y completá las fichas de cada institución. Nada se publica solo.', ayuda: ['Buscar pictograma: ARASAAC te muestra candidatos.', 'Lo que elegís queda sin aprobar hasta que se revise.', 'Las fichas se descargan; no se publican desde acá.'] },
+    entender1: { q: '¿Qué querés que te explique?', explica: 'Sacá una foto, subí una imagen o un documento (PDF o texto) y CLARIA te cuenta qué dice, qué fechas y lugares aparecen y qué tenés que hacer. La imagen se lee en tu dispositivo y no se envía.', ayuda: ['Sacar foto: de frente, con buena luz.', 'Subir imagen: una foto o captura que ya tengas.', 'Subir documento: un PDF o un archivo de texto.', 'Si no se lee bien, te aviso y no invento nada.'] },
+    entenderlee: { q: 'Estoy leyendo tu documento', explica: 'Estoy leyendo el texto en tu dispositivo. Puede tardar un poco la primera vez. Podés cancelar cuando quieras.', ayuda: ['Esperá un momento.', 'Cancelar: no se guarda nada.'] },
+    entenderres: { q: 'Esto es lo que encontré', explica: 'Arriba está tu documento original y abajo lo que CLARIA entendió, separado. Elegí una opción: qué dice exactamente, explicarlo fácil, qué tenés que hacer, escucharlo, verlo con pictogramas o hacer preguntas.', ayuda: ['Qué dice exactamente: el texto tal cual, con lo dudoso marcado.', 'Explicámelo fácil y Qué tengo que hacer usan IA, con tu permiso.', 'Escuchar: lee la explicación en voz alta.', 'Responder con pictogramas: armás tu respuesta.'] },
+    entendertablero: { q: 'Armá tu respuesta', explica: 'Elegí una frase con pictogramas para responder, y tocá Decir en voz alta o Mostrar en pantalla grande cuando quieras.', ayuda: ['Frase rápida: ya viene armada.', 'Decir: se escucha solo si lo tocás.', 'Mostrar: la enseñás a otra persona.'] },
     ciudadtablero: { q: 'Hablar con imágenes', explica: 'Son frases para comunicarte en este lugar. Tocá una frase y después Decir en voz alta o Mostrar en pantalla grande. No son un procedimiento oficial.', ayuda: ['Frase rápida: ya viene armada.', 'Decir: se escucha solo si lo tocás.', 'Mostrar: la enseñás al personal.', 'Sonido: lo podés apagar.'] },
     tablerocat: { q: 'Armá tu frase', explica: 'Tocá una frase rápida o las palabras con imágenes. Abajo ves tu frase: podés mover, cambiar o quitar tarjetas. Tocá Decir en voz alta cuando quieras.', ayuda: ['Frase rápida: ya viene armada.', 'Palabras: tocalas para sumarlas.', 'Decir en voz alta: yo la leo completa.', 'Guardar o compartir imagen, si querés.'] },
     tablerofrases: { q: 'Mis frases', explica: 'Acá están las frases que guardaste en este dispositivo. Podés decirlas, usarlas de nuevo o borrarlas.', ayuda: ['Decir: la leo en voz alta.', 'Usar: la cargo para modificarla.', 'Borrar: la saco de este dispositivo.'] },
@@ -31,7 +35,7 @@
     creador2: { q: 'Revisá cada paso', explica: 'Revisá que cada paso tenga una sola acción y que cada pictograma corresponda. Los dudosos quedan pendientes hasta que los confirmes. Sin pendientes y con la revisión marcada, podés descargar el PDF.', ayuda: ['Un paso, una acción.', 'Revisar o Cambiar: elegís el pictograma.', 'Con pendientes, solo se descarga un borrador.'] },
     acerca: { q: 'Privacidad y créditos', explica: 'Acá está cómo CLARIA cuida tus datos, el estado de la IA y los créditos de los pictogramas.', ayuda: ['Tocá Volver para seguir.'] }
   };
-  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leerfoto: 'leer1', leerrevisar: 'leerfoto', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', tablero: 'inicio', lugares: 'inicio', editor: 'lugares', creador1: 'tramites1', creador2: 'creador1', lugarmenu: 'lugares', lugarpaso: 'lugarmenu', tablerocat: 'tablero', ciudadtablero: 'lugarmenu', tablerofrases: 'tablero', acerca: 'inicio' };
+  const ATRAS = { escribir: 'inicio', leer1: 'inicio', leerfoto: 'leer1', leerrevisar: 'leerfoto', leer2: 'leer1', leer3: 'leer2', cuento: 'leer2', tramites1: 'inicio', tramites2: 'tramites1', hablar: 'inicio', tablero: 'inicio', lugares: 'inicio', editor: 'lugares', entender1: 'inicio', entenderlee: 'entender1', entenderres: 'entender1', entendertablero: 'entenderres', creador1: 'tramites1', creador2: 'creador1', lugarmenu: 'lugares', lugarpaso: 'lugarmenu', tablerocat: 'tablero', ciudadtablero: 'lugarmenu', tablerofrases: 'tablero', acerca: 'inicio' };
   const ESTADOS = { esperando: 'Esperando', escuchando: 'Escuchando…', procesando: 'Pensando…', hablando: 'Hablando' };
   let pantalla = 'inicio', ultimo = null, anterior = 'inicio', activa = null;
   const c = $('claria');
@@ -73,7 +77,7 @@
   // ───────── CLARIA habla y guía (solo si la persona lo activa; nunca arranca sola) ─────────
   // La voz es la del navegador. El movimiento de la cabeza sigue el ritmo de las palabras: es APROXIMADO, no hay sincronía labial real.
   const GUION = {
-    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés entender una foto, hablar con imágenes, ver ayuda si estás en un lugar público, entender un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
+    inicio: ['¡Hola! Soy CLARIA, y voy a acompañarte. ¿Qué querés hacer hoy? Podés entender una foto, una captura o un documento, hablar con imágenes, ver ayuda si estás en un lugar público, entender un trámite, o hablar conmigo.', '¿Qué querés hacer hoy?'],
     escribir: ['¿Qué querés decir? Escribilo, o tocá el micrófono y dictámelo. Después tocá convertir, y te lo muestro con pictogramas.', '¿Qué querés decir?'],
     leer1: ['¿Qué querés leer? Podés subir un archivo, sacar una foto, o escribir el texto.', '¿Qué querés leer?'],
     leerfoto: ['¿Esta es la imagen correcta? Si lo es, tocá leer el texto.', '¿Esta es la imagen correcta?'],
@@ -81,6 +85,10 @@
     leer2: ['Ya tengo tu texto. ¿Cómo querés que te ayude? Puedo leértelo, explicártelo fácil, decirte qué hacer, o mostrártelo con pictogramas.', '¿Cómo querés que te ayude?'],
     tablero: ['¿Qué necesitás decir? Elegí un tema y armamos tu frase con imágenes.', '¿Qué necesitás decir?'],
     editor: ['Panel del editor. Elegí pictogramas pendientes y completá las fichas. Nada se publica solo.', 'Panel del editor.'],
+    entender1: ['¿Qué querés que te explique? Podés sacar una foto, subir una imagen o subir un documento.', '¿Qué querés que te explique?'],
+    entenderlee: ['Estoy leyendo tu documento. Esperá un momento.', 'Estoy leyendo.'],
+    entenderres: ['Ya leí tu documento. Arriba está el original; abajo te cuento qué entendí. Elegí cómo seguir.', 'Ya lo leí. Elegí cómo seguir.'],
+    entendertablero: ['Armá tu respuesta. Tocá una frase y después decir en voz alta, o mostrala.', 'Armá tu respuesta.'],
     ciudadtablero: ['Hablar con imágenes. Tocá una frase y después decir en voz alta, o mostrala en pantalla grande.', 'Hablar con imágenes.'],
     tablerocat: ['Armá tu frase. Tocá una frase rápida o las palabras, y después tocá decir en voz alta.', 'Armá tu frase.'],
     tablerofrases: ['Estas son las frases que guardaste en este dispositivo.', 'Mis frases.'],
@@ -149,7 +157,8 @@
   function SR_OK() { return Boolean(window.SpeechRecognition || window.webkitSpeechRecognition); }
 
   // ───────── navegación ─────────
-  function volver() { const dest = pantalla === 'acerca' ? (anterior && anterior !== 'acerca' ? anterior : 'inicio') : (ATRAS[pantalla] || 'inicio'); if (tts) speechSynthesis.cancel(); estado('esperando'); UI().irPantalla(dest); }
+  const DESVIO = {}; function desviar(k, destino) { if (destino) DESVIO[k] = destino; else delete DESVIO[k]; }
+  function volver() { const dest = pantalla === 'acerca' ? (anterior && anterior !== 'acerca' ? anterior : 'inicio') : (DESVIO[pantalla] || ATRAS[pantalla] || 'inicio'); if (tts) speechSynthesis.cancel(); estado('esperando'); UI().irPantalla(dest); }
   document.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', volver));
   function onView(name) {
     document.body.dataset.vista = name; const destino = name === 'inicio' ? $('welcomeSlot') : $('companionDock'); if (c.parentElement !== destino) destino.append(c); cerrarTodo();
@@ -192,5 +201,5 @@
     } catch (_) {}
   }
 
-  window.ClariaGuia = { estado, setPantalla, onView, volver, pictosParaTexto, decir, reaccion, activarVoz, get vozOn() { return vozOn; }, get pantalla() { return pantalla; } };
+  window.ClariaGuia = { desviar, estado, setPantalla, onView, volver, pictosParaTexto, decir, reaccion, activarVoz, get vozOn() { return vozOn; }, get pantalla() { return pantalla; } };
 })();
