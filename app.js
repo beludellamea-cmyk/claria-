@@ -49,6 +49,7 @@
     if (k === 'creador1' || k === 'creador2') { showView('creador', { keep: true }); window.ClariaCreador?.irA(k === 'creador1' ? 1 : 2); return; }
     if (k === 'lugarmenu' || k === 'lugarpaso') { showView('lugares', { keep: true }); window.ClariaLugares?.irA(k === 'lugarmenu' ? 'menu' : 'inicio'); return; }
     if (k === 'entender1' || k === 'entenderlee') return showView('entender');
+    if (k === 'entendervision') { showView('entender', { keep: true }); window.ClariaEntender?.irA('vision'); return; }
     if (k === 'entenderres' || k === 'entendertablero') { showView('entender', { keep: true }); window.ClariaEntender?.irA('res'); return; }
     if (k === 'ciudadtablero') { showView('lugares', { keep: true }); window.ClariaLugares?.irA('menu'); return; }
     if (k === 'tablerocat' || k === 'tablerofrases') { showView('tablero'); window.ClariaTablero?.irA(k === 'tablerocat' ? 'lista' : 'guardadas'); return; }
@@ -268,7 +269,7 @@
     try {
       const res = await fetch(API_BASE + '/api/health', { signal: ctrl.signal });
       const j = await res.json();
-      if (j && j.ok && j.mode === 'connected') setMode('connected', { provider: j.provider, maxTextChars: Math.min(Number(j.maxTextChars) || 6000, 6000) });
+      if (j && j.ok && j.mode === 'connected') setMode('connected', { provider: j.provider, maxTextChars: Math.min(Number(j.maxTextChars) || 6000, 6000), vision: j.vision || null });
       else setMode('demo');
     } catch (_) { setMode('offline'); } finally { clearTimeout(timer); }
   })();
@@ -297,8 +298,8 @@
     if (n >= MAX_AI_PER_SESSION) return false;
     store.set('claria.aiCount', String(n + 1)); return true;
   }
-  async function callApi(path, payload) {
-    const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 35000);
+  async function callApi(path, payload, ms = 35000) {
+    const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), ms);
     let res, data = null;
     try {
       res = await fetch(API_BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload), signal: ctrl.signal });
@@ -444,7 +445,7 @@
     if(!$('prefs').hidden)togglePrefs(false);
   }});
   const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca','tablero','lugares','entender','decilo'].includes(hash))showView(hash);else G()?.onView('inicio');
-  window.ClariaUI={announce,showView,irPantalla,leerPaso,tramitePaso,speak,stopSpeaking,ia:{modo:()=>mode,consentimiento:()=>ensureConsent(),cuota:()=>useAiQuota(),llamar:(p,b)=>callApi(p,b),maxChars:()=>aiInfo.maxTextChars||6000,errores:ERRORS},getPrefs:()=>({...prefs}),getText:()=>currentText};
+  window.ClariaUI={announce,showView,irPantalla,leerPaso,tramitePaso,speak,stopSpeaking,ia:{modo:()=>mode,consentimiento:()=>ensureConsent(),cuota:()=>useAiQuota(),llamar:(p,b,ms)=>callApi(p,b,ms),vision:()=>aiInfo.vision||null,maxChars:()=>aiInfo.maxTextChars||6000,errores:ERRORS},getPrefs:()=>({...prefs}),getText:()=>currentText};
 })();
 // Modo sin conexión básico (tablero «Hablar con imágenes»): solo en https o localhost.
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {

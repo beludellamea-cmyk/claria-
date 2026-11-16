@@ -19,9 +19,11 @@ async function bump(env, store, key, ttlSec) {
   return n;
 }
 
-export async function checkLimits(env, ip, now = Date.now()) {
-  const perMin = Number(env.RATE_PER_MIN) || 6, perDay = Number(env.RATE_PER_DAY) || 40, cap = Number(env.DAILY_CAP) || 300;
-  const fp = await fingerprint(ip, env.IP_SALT);
+export async function checkLimits(env, ip, now = Date.now(), scope = '') {
+  // La visión tiene límites propios (más estrictos): la imagen es lo más caro y lo más sensible.
+  const v = scope === 'v';
+  const perMin = v ? Number(env.VISION_PER_MIN) || 4 : Number(env.RATE_PER_MIN) || 6, perDay = v ? Number(env.VISION_PER_DAY) || 15 : Number(env.RATE_PER_DAY) || 40, cap = v ? Number(env.VISION_DAILY_CAP) || 100 : Number(env.DAILY_CAP) || 300;
+  const fp = (v ? 'v' : '') + await fingerprint(ip, env.IP_SALT);
   const day = new Date(now).toISOString().slice(0, 10);
   const minute = Math.floor(now / 60000);
   // La ventana por minuto siempre es en memoria (barata); lo diario va a KV si existe.
@@ -29,7 +31,7 @@ export async function checkLimits(env, ip, now = Date.now()) {
   if (mem.min.size > 5000) mem.min.clear();
   if (nMin > perMin) return { ok: false, code: 'rate_minute', retryAfter: 60 };
   if (await bump(env, mem.day, `d:${day}:${fp}`, 90000) > perDay) return { ok: false, code: 'rate_day', retryAfter: 3600 };
-  if (await bump(env, mem.cap, `c:${day}`, 90000) > cap) return { ok: false, code: 'daily_cap', retryAfter: 3600 };
+  if (await bump(env, mem.cap, `c:${v ? 'v:' : ''}${day}`, 90000) > cap) return { ok: false, code: 'daily_cap', retryAfter: 3600 };
   return { ok: true };
 }
 export function _resetForTests() { mem.min.clear(); mem.day.clear(); mem.cap.clear(); }
