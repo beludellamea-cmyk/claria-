@@ -18,6 +18,17 @@ RATE_PER_MIN = "6"
 RATE_PER_DAY = "40"
 DAILY_CAP = "300"
 
+# Visión (analizar imágenes con IA: ruta /api/vision). Se activa solo si existe el secreto de la clave (wrangler secret put GEMINI_API_KEY).
+# Sin la clave, /api/health informa vision.enabled=false y la app oculta la opción. Ver docs/ETAPAS.md (Etapa 8).
+VISION_PROVIDER = "gemini"
+# Verificá el nombre del modelo vigente en Google AI Studio antes de publicar.
+VISION_MODEL = "gemini-3.5-flash"
+# "free" = clave gratuita (Google puede usar lo enviado para mejorar sus productos: la app lo avisa antes de enviar). Con facturación activada, cambialo a "paid".
+GEMINI_TIER = "free"
+VISION_PER_MIN = "4"
+VISION_PER_DAY = "15"
+VISION_DAILY_CAP = "100"
+
 # Opcional (recomendado) para que los límites diarios sean exactos entre servidores de Cloudflare:
 # [[kv_namespaces]]
 # binding = "RATE_KV"

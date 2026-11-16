@@ -156,3 +156,65 @@ test('explain/extract: sin JSON válido → error, no se inventa nada', async ()
   const env = baseEnv({ __fetch: anthropicReply('Claro, acá van los datos: fecha lunes.') });
   const r = await worker.fetch(post('/api/explain', { task: 'extract', source: 'typed', text: 'Texto cualquiera con más de doce caracteres para probar.' }), env); assert.equal(r.status, 502); assert.equal((await r.json()).error, 'bad_model_output');
 });
+
+// ───────── Visión (/api/vision) ─────────
+const jpg = (n = 200) => 'data:image/jpeg;base64,' + Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), Buffer.alloc(n, 7)]).toString('base64');
+const geminiEnv = (over = {}) => ({ AI_PROVIDER: 'workers-ai', VISION_PROVIDER: 'gemini', GEMINI_API_KEY: 'gk-test-SECRET', ALLOWED_ORIGINS: ORIGIN, VISION_PER_MIN: '100', VISION_PER_DAY: '1000', VISION_DAILY_CAP: '10000', ...over });
+const geminiReply = (obj) => async (url, init) => { geminiReply.last = { url, init, body: JSON.parse(init.body) }; return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: typeof obj === 'string' ? obj : JSON.stringify(obj) }] } }] }), { status: 200 }); };
+const DESCRIBE = { tipo: 'cartel', que_aparece: 'Un cartel de prohibido estacionar.', elementos: ['Letra P tachada'], texto_visible: ['PROHIBIDO ESTACIONAR'], dudas: ['Una parte borrosa'], legibilidad: 'parcial' };
+
+test('visión · health informa si está activa, el proveedor y qué hace con la imagen (gratuita vs de pago)', async () => {
+  const h = async (env) => (await (await worker.fetch(new Request('http://x/api/health', { headers: { origin: ORIGIN } }), env)).json()).vision;
+  let v = await h(geminiEnv()); assert.equal(v.enabled, true); assert.match(v.provider, /Gemini/); assert.match(v.note, /gratuita.*mejorar sus productos/); assert.ok(v.maxImageBytes > 100000);
+  v = await h(geminiEnv({ GEMINI_TIER: 'paid' })); assert.match(v.note, /no usa lo enviado/);
+  v = await h(geminiEnv({ GEMINI_API_KEY: '' })); assert.equal(v.enabled, false); assert.equal(v.note, '');
+  v = await h({ AI_PROVIDER: 'anthropic', ANTHROPIC_API_KEY: 'k', ALLOWED_ORIGINS: ORIGIN }); assert.equal(v.enabled, true); assert.match(v.provider, /Claude/);
+});
+test('visión · describe: manda la imagen en inlineData, la clave solo en el encabezado, y devuelve bloques separados sin repetir la imagen', async () => {
+  const env = geminiEnv({ __fetch: geminiReply(DESCRIBE) }); const img = jpg();
+  const r = await worker.fetch(post('/api/vision', { image: img, task: 'describe', ocrText: 'PROHIBIDO ESTACIONAR' }), env); assert.equal(r.status, 200); const j = await r.json();
+  assert.equal(j.ok, true); assert.equal(j.tipo, 'cartel'); assert.deepEqual(j.texto_visible, ['PROHIBIDO ESTACIONAR']); assert.deepEqual(j.dudas, ['Una parte borrosa']); assert.equal(j.legibilidad, 'parcial'); assert.match(j.provider, /Gemini/);
+  const sent = geminiReply.last; assert.equal(sent.body.contents[0].parts[0].inlineData.mimeType, 'image/jpeg'); assert.equal(sent.body.contents[0].parts[0].inlineData.data, img.split(',')[1]);
+  assert.equal(sent.init.headers['x-goog-api-key'], 'gk-test-SECRET'); assert.ok(!sent.url.includes('gk-test')); assert.ok(!JSON.stringify(sent.body).includes('gk-test')); assert.ok(!JSON.stringify(j).includes(img.slice(30, 80)), 'no devuelve la imagen');
+  assert.match(sent.body.systemInstruction.parts[0].text, /NO identifiques personas/); assert.match(sent.body.systemInstruction.parts[0].text, /NO hagas diagnósticos/); assert.match(sent.body.contents[0].parts[1].text, /<ocr>/);
+});
+test('visión · tareas easy / meaning / ask usan su propio formato; ask exige pregunta', async () => {
+  for (const [task, obj, campo] of [['easy', { resultado: 'Es un cartel.\nNo estaciones.', dudas: [] }, 'resultado'], ['meaning', { resultado: 'Prohíbe estacionar.', que_puede_hacer: ['Buscar otro lugar'], dudas: [] }, 'que_puede_hacer'], ['ask', { resultado: 'En la imagen no se ve la hora.', dudas: [] }, 'resultado']]) {
+    const r = await worker.fetch(post('/api/vision', { image: jpg(), task, question: '¿Hasta qué hora?' }), geminiEnv({ __fetch: geminiReply(obj) })); assert.equal(r.status, 200, task); const j = await r.json(); assert.ok(j[campo].length, task);
+  }
+  const r = await worker.fetch(post('/api/vision', { image: jpg(), task: 'ask' }), geminiEnv({ __fetch: geminiReply(DESCRIBE) })); assert.equal(r.status, 400);
+});
+test('visión · rechaza lo que no es una imagen válida o es demasiado grande, y no llama al proveedor', async () => {
+  let llamadas = 0; const env = geminiEnv({ __fetch: async () => { llamadas++; return new Response('{}'); } });
+  const casos = [['http://malo.example/a.jpg', 400], ['data:image/gif;base64,R0lGODlh', 400], ['data:image/jpeg;base64,' + Buffer.from('esto no es una imagen jpeg').toString('base64'), 400], ['data:image/png;base64,' + Buffer.concat([Buffer.from([0xff, 0xd8, 0xff]), Buffer.alloc(50)]).toString('base64'), 400], [jpg(1_200_000), 413]];
+  for (const [image, st] of casos) { const r = await worker.fetch(post('/api/vision', { image, task: 'describe' }), env); assert.equal(r.status, st, image.slice(0, 40)); }
+  assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'hackear' }), env)).status, 400); assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }, { origin: 'https://malo.example' }), env)).status, 403);
+  assert.equal(llamadas, 0);
+});
+test('visión · sin proveedor/clave de visión → 503 y no se envía nada', async () => {
+  const r = await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), geminiEnv({ GEMINI_API_KEY: '' })); assert.equal(r.status, 503);
+});
+test('visión · redacta datos personales de la pregunta y del OCR antes de enviarlos', async () => {
+  const env = geminiEnv({ __fetch: geminiReply({ resultado: 'ok', dudas: [] }) });
+  const r = await worker.fetch(post('/api/vision', { image: jpg(), task: 'ask', question: 'Mi DNI 12345678, ¿qué dice?', ocrText: 'Contacto ana@correo.com' }), env); const j = await r.json(); assert.ok(j.redactions >= 2);
+  const enviado = JSON.stringify(geminiReply.last.body); assert.ok(!/12345678|ana@correo/.test(enviado));
+});
+test('visión · límites propios y más estrictos que los del texto', async () => {
+  const env = geminiEnv({ __fetch: geminiReply(DESCRIBE), VISION_PER_MIN: '2', RATE_PER_MIN: '100' }); const st = [];
+  for (let i = 0; i < 3; i++) st.push((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), env)).status); assert.deepEqual(st, [200, 200, 429]);
+  assert.equal((await worker.fetch(post('/api/explain', { task: 'plain', text: 'Un texto de prueba para explicar.' }, {}), { ...env, AI_PROVIDER: 'gemini' })).status, 200, 'el texto no se ve afectado');
+});
+test('visión · respuesta del modelo: no se cuelan enlaces inventados; sin contenido útil no se inventa nada; el bloqueo de seguridad se informa', async () => {
+  let r = await worker.fetch(post('/api/vision', { image: jpg(), task: 'meaning' }), geminiEnv({ __fetch: geminiReply({ resultado: 'Mirá https://sitio-falso.example/x y https://escrito.example/ok', que_puede_hacer: [], dudas: [] }) }));
+  r = await r.json(); assert.ok(!r.resultado.includes('sitio-falso')); assert.match(r.resultado, /enlace no verificado/);
+  const ok = await (await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), geminiEnv({ __fetch: geminiReply({ ...DESCRIBE, texto_visible: ['Web: https://escrito.example/ok'], que_aparece: 'Un cartel con https://escrito.example/ok' }) }))).json(); assert.match(ok.que_aparece, /escrito\.example\/ok/);
+  assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), geminiEnv({ __fetch: geminiReply('esto no es json') }))).status, 502);
+  assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), geminiEnv({ __fetch: geminiReply({ tipo: 'x' }) }))).status, 502);
+  const bloq = await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), geminiEnv({ __fetch: async () => new Response(JSON.stringify({ candidates: [{ finishReason: 'SAFETY' }] }), { status: 200 }) })); assert.equal(bloq.status, 502); assert.equal((await bloq.json()).error, 'vision_blocked');
+});
+test('visión · adaptador Anthropic y Workers AI mandan la imagen en su formato', async () => {
+  let cuerpo; const env = { AI_PROVIDER: 'anthropic', ANTHROPIC_API_KEY: 'k', ALLOWED_ORIGINS: ORIGIN, __fetch: async (u, i) => { cuerpo = JSON.parse(i.body); return new Response(JSON.stringify({ content: [{ type: 'text', text: JSON.stringify(DESCRIBE) }] })); } };
+  assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), env)).status, 200); assert.equal(cuerpo.messages[0].content[0].type, 'image'); assert.equal(cuerpo.messages[0].content[0].source.media_type, 'image/jpeg');
+  let args; const ai = { run: async (m, a) => { args = [m, a]; return { response: JSON.stringify(DESCRIBE) }; } };
+  assert.equal((await worker.fetch(post('/api/vision', { image: jpg(), task: 'describe' }), { AI_PROVIDER: 'workers-ai', AI: ai, ALLOWED_ORIGINS: ORIGIN })).status, 200); assert.equal(args[0], '@cf/google/gemma-3-12b-it'); assert.match(args[1].messages[1].content[1].image_url.url, /^data:image\/jpeg;base64,/);
+});

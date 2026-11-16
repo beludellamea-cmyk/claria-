@@ -13,13 +13,13 @@
   const LIBS = { tesseract: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js', pdfjs: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js', pdfjsWorker: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js' };
   const lib = (k) => ((window.CLARIA_CONFIG && window.CLARIA_CONFIG.libs) || {})[k] || LIBS[k];
   const MAX_BYTES = 15 * 1024 * 1024, MAX_PDF_PAGES = 25, MAX_OCR_PAGES = 6, MAX_TEXTO = 20000;
-  const PASOS = { inicio: ['enInicio', 'enTitulo', 'entender1'], trabajo: ['enTrabajo', 'enTrabajoTitulo', 'entenderlee'], res: ['enResultado', 'enResTitulo', 'entenderres'] };
+  const PASOS = { inicio: ['enInicio', 'enTitulo', 'entender1'], trabajo: ['enTrabajo', 'enTrabajoTitulo', 'entenderlee'], res: ['enResultado', 'enResTitulo', 'entenderres'], vision: ['enVisionPaso', 'enVisionTitulo', 'entendervision'] };
   let S = null, trabajo = null, cargaLibs = {}, iaOcupada = false;
   const dec = (t) => UI() && UI().announce(t);
 
   // ───────── pasos ─────────
   function irA(n, silencioso) {
-    if (n === 'res' && !S) n = 'inicio';
+    if ((n === 'res' || n === 'vision') && !S) n = 'inicio';
     Object.entries(PASOS).forEach(([k, [id]]) => { $(id).hidden = k !== n; });
     if (!silencioso) G()?.setPantalla(PASOS[n][2]);
     const t = $(PASOS[n][1]); t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); window.scrollTo({ top: 0 });
@@ -28,7 +28,7 @@
   function salir() { cancelar(true); try { UI()?.stopSpeaking && speechSynthesis.cancel(); } catch (_) {} limpiar(); }
   function limpiar() {
     if (S) (S.urls || []).forEach((u) => URL.revokeObjectURL(u));
-    S = null; iaOcupada = false;
+    S = null; iaOcupada = false; if (window.ClariaVision) window.ClariaVision.limpiar();
     ['enOriginal', 'enImportanteLista', 'enImportanteIA', 'enTranscripcion', 'enIATexto', 'enIADiceLista', 'enIASugLista', 'enIAPuntos', 'enIAAvisosLista', 'enCalidad', 'enEstado', 'enEstadoInicio', 'enTrabajoEstado'].forEach((id) => { const n = $(id); if (n) n.textContent = ''; });
     ['enTextoManual', 'enTextoEditar', 'enPregInput'].forEach((id) => { $(id).value = ''; });
     ['enPanelTexto', 'enPanelIA', 'enPanelPregunta'].forEach((id) => { $(id).hidden = true; });
@@ -110,7 +110,7 @@
     const tipo = tipoDe(file);
     if (!tipo) { $('enEstadoInicio').textContent = /\.(docx?|odt|rtf)$/i.test(file.name) ? 'Los documentos de Word todavía no se pueden leer. Guardalo como PDF y subilo de nuevo.' : 'Ese tipo de archivo no se puede leer. Elegí una imagen (JPG, PNG, WEBP), un PDF o un archivo de texto.'; dec('Tipo de archivo no admitido'); return; }
     if (file.size > MAX_BYTES) { $('enEstadoInicio').textContent = 'El archivo supera los 15 MB. Elegí uno más liviano.'; return; }
-    limpiar(); const ctl = trabajo = { cancel: false, worker: null }; const urls = []; S = { urls };
+    limpiar(); const ctl = trabajo = { cancel: false, worker: null }; const urls = []; S = { urls, archivo: tipo === 'imagen' ? file : null };
     $('enPreviaNombre').textContent = file.name; $('enProgreso').style.width = '0%'; irA('trabajo');
     if (tipo === 'imagen') { const u = URL.createObjectURL(file); urls.push(u); $('enPreviaImg').src = u; $('enPreviaImg').hidden = false; } else $('enPreviaImg').hidden = true;
     G()?.estado('procesando'); progreso('Preparando la lectura… la primera vez puede tardar porque descarga componentes.', 0.02);
@@ -149,7 +149,7 @@
     if (r.notas && r.notas.length) calidad.mensaje += ' ' + r.notas.join(' ');
     S = { ...S, tipo: r.tipo, nombre, urls, urlsOriginales: r.urlsOriginales || [], texto, textoOriginal: r.textoOriginal || texto, lineas, ocr: r.ocr, calidad, editado: false, aiTexto: '', aiKind: '', datos: null, imagenOriginal: null };
     S.datos = (calidad.nivel === 'mala' || calidad.nivel === 'sin_texto') ? null : K().extraerDatos(texto);
-    $('enCalidad').textContent = calidad.mensaje; $('enCalidad').dataset.nivel = calidad.nivel;
+    $('enCalidad').textContent = calidad.mensaje; $('enCalidad').dataset.nivel = calidad.nivel; $('enVisionCta').hidden = r.tipo !== 'imagen';
     const mala = calidad.nivel === 'mala' || calidad.nivel === 'sin_texto'; $('enReintentar').hidden = !mala; $('enCorregir').hidden = false;
     pintarOriginal(); pintarImportante(); pintarTranscripcion(); disponibilidad();
     ['enPanelTexto', 'enPanelIA', 'enPanelPregunta'].forEach((id) => { $(id).hidden = true; }); $('enImportanteIA').textContent = ''; $('enEstado').textContent = '';
@@ -182,6 +182,8 @@
   function disponibilidad() {
     const modo = UI() ? UI().ia.modo() : 'demo'; const conectada = modo === 'connected'; const bloq = bloqueadoPorCalidad();
     document.querySelectorAll('#view-entender .en-ia').forEach((b) => { b.disabled = !conectada || bloq || iaOcupada; });
+    const vi = UI().ia.vision ? UI().ia.vision() : null, okV = conectada && Boolean(vi && vi.enabled); $('enVision').disabled = !okV;
+    $('enVisionNoDisp').textContent = okV ? '' : 'Mirar la imagen con IA no está disponible ahora (hace falta una IA conectada con visión). La lectura del texto y todo lo demás siguen funcionando.';
     $('enDisponibilidad').textContent = bloq ? 'La lectura no es confiable, así que no uso la IA sobre ella. Sacá otra foto o corregí el texto a mano.' : !conectada ? 'Las explicaciones con IA necesitan una IA conectada y ahora no la hay (modo demo o sin conexión). Igual podés ver el texto, lo importante, escucharlo, verlo con pictogramas y responder.' : '';
   }
   function mostrarPanel(id) { ['enPanelTexto', 'enPanelIA', 'enPanelPregunta'].forEach((p) => { $(p).hidden = p !== id; }); const n = $(id); n.hidden = false; n.focus({ preventScroll: false }); n.scrollIntoView({ block: 'start', behavior: 'auto' }); }
@@ -270,5 +272,5 @@
   $('enZoomCerrar').addEventListener('click', () => $('enZoom').close());
   document.addEventListener('visibilitychange', () => { if (document.hidden && trabajo === null) try { speechSynthesis.cancel(); } catch (_) {} });
 
-  window.ClariaEntender = { entrar, irA, salir, disponibilidad, estado: () => (S && S.calidad ? { tipo: S.tipo, nivel: S.calidad.nivel, texto: S.texto, editado: S.editado, datos: S.datos, ai: S.aiTexto } : null) };
+  window.ClariaEntender = { entrar, irA, salir, disponibilidad, imagen: () => (S && S.archivo ? { file: S.archivo, texto: S.texto, ocr: S.ocr, editado: S.editado, original: (S.urlsOriginales[0] || {}).url } : null), estado: () => (S && S.calidad ? { tipo: S.tipo, nivel: S.calidad.nivel, texto: S.texto, editado: S.editado, datos: S.datos, ai: S.aiTexto } : null) };
 })();

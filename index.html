@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="tablero.css">
   <link rel="stylesheet" href="editor.css">
   <link rel="stylesheet" href="entender.css">
+  <link rel="stylesheet" href="vision.css">
   <link rel="stylesheet" href="decilo.css">
   <link rel="stylesheet" href="lugares.css">
   <link rel="stylesheet" href="creador.css">
@@ -30,6 +31,7 @@
   <script defer src="editor.js"></script>
   <script defer src="entender-core.js"></script>
   <script defer src="entender.js"></script>
+  <script defer src="vision.js"></script>
   <script defer src="lugares.js"></script>
   <script defer src="creador.js"></script>
   <script defer src="cine.js"></script>
@@ -273,6 +275,13 @@
             <p class="button-line"><button type="button" class="btn btn-soft en-ia" id="enRevisarIA">Pedir a la IA que lo revise</button></p>
           </section>
 
+          <section id="enVisionCta" class="en-bloque en-vision-cta" hidden aria-labelledby="enVisionCtaTit">
+            <h2 id="enVisionCtaTit"><span class="en-tag en-tag-ia">CON IA · ENVÍA LA IMAGEN</span> Mirar la imagen</h2>
+            <p class="pc-note">La lectura del texto se hizo en tu dispositivo. Si querés que CLARIA también explique qué aparece (carteles, señales, símbolos, capturas, dibujos), tiene que enviar la imagen a una IA. Antes vas a poder recortarla y tapar lo privado, y te pedimos permiso.</p>
+            <p class="button-line"><button type="button" class="btn btn-primary" id="enVision">👁 Mirar la imagen con IA</button></p>
+            <p id="enVisionNoDisp" class="status-note"></p>
+          </section>
+
           <h2 class="en-q">¿Qué querés hacer?</h2>
           <div class="en-botones" role="group" aria-label="Opciones">
             <button type="button" class="big-btn bb-blue" id="enQueDice"><span class="big-ico" aria-hidden="true">📝</span><span class="big-txt">Qué dice exactamente</span></button>
@@ -320,6 +329,79 @@
 
           <p class="button-line"><button type="button" class="btn btn-soft" id="enBorrar">Borrar todo y empezar de nuevo</button></p>
           <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia CC BY-NC-SA 4.0. Uso no comercial.</p>
+        </div>
+
+        <div id="enVisionPaso" class="paso" hidden>
+          <h1 id="enVisionTitulo" class="q" tabindex="-1">Mirar la imagen con IA</h1>
+
+          <div id="viEditar">
+            <p class="pc-note">Esto es lo que se enviaría: una copia reducida y sin datos de ubicación ni de la cámara. Tu imagen original no cambia ni se guarda.</p>
+            <div class="vi-herr" role="group" aria-label="Qué parte enviar">
+              <button type="button" class="btn btn-soft" id="viTodo" aria-pressed="true">Toda la imagen</button>
+              <button type="button" class="btn btn-soft" id="viParte" aria-pressed="false">Elegir una parte</button>
+              <button type="button" class="btn btn-soft" id="viTapar" aria-pressed="false">Tapar con negro</button>
+              <button type="button" class="btn btn-soft" id="viDeshacer" disabled>Deshacer</button>
+            </div>
+            <div id="viMitades" class="vi-herr" role="group" aria-label="Elegir una mitad" hidden>
+              <button type="button" class="btn btn-soft" data-mitad="arriba">La mitad de arriba</button>
+              <button type="button" class="btn btn-soft" data-mitad="abajo">La mitad de abajo</button>
+              <button type="button" class="btn btn-soft" data-mitad="izquierda">La mitad izquierda</button>
+              <button type="button" class="btn btn-soft" data-mitad="derecha">La mitad derecha</button>
+            </div>
+            <p id="viAyuda" class="pc-note" role="status"></p>
+            <div class="vi-lienzo"><canvas id="viCanvas" role="img" aria-label="Vista previa de la imagen que se enviaría"></canvas></div>
+            <p id="viInfo" class="pc-note"></p>
+            <div class="en-calidad" data-nivel="dudosa" id="viAviso"><strong>Ojo:</strong> a diferencia de la lectura del texto (que se hace en tu dispositivo), este análisis <strong>envía la imagen</strong> a un servicio de IA externo. Tapá rostros, nombres, documentos, direcciones y todo lo privado antes de enviar. No envíes fotos de otras personas ni de menores sin permiso.</div>
+            <p class="button-line"><button type="button" class="btn btn-primary" id="viAnalizar">Enviar esta imagen y analizarla</button> <button type="button" class="btn btn-soft" id="viCancelar">Volver sin enviar</button></p>
+            <p id="viEstadoEd" class="status-note" role="status" aria-live="polite"></p>
+          </div>
+
+          <div id="viResultado" hidden>
+            <section class="en-bloque en-original" aria-labelledby="viOrigTit">
+              <h2 id="viOrigTit"><span class="en-tag en-tag-orig">ORIGINAL</span> Tu imagen, tal como la subiste</h2>
+              <div class="en-original-cuerpo"><img id="viOrigImg" alt="Imagen original que subiste"></div>
+              <p id="viEnviado" class="pc-note"></p>
+            </section>
+            <section id="viSecTexto" class="en-bloque" hidden aria-labelledby="viTextoTit">
+              <h2 id="viTextoTit"><span class="en-tag en-tag-local">TEXTO TRANSCRIPTO · EN TU DISPOSITIVO</span> Lo que dice la imagen</h2>
+              <div id="viTextoLocal" class="en-transcripcion" lang="es"></div>
+            </section>
+            <section id="viSecVisto" class="en-bloque en-ia-panel" hidden aria-labelledby="viVistoTit" tabindex="-1">
+              <h2 id="viVistoTit"><span class="en-tag en-tag-ia">OBSERVACIÓN VISUAL · IA</span> ¿Qué aparece en la imagen?</h2>
+              <p class="pc-note">Lo describió una IA mirando la imagen. Puede equivocarse: compará con tu imagen.</p>
+              <p id="viTipo" class="vi-tipo"></p>
+              <div id="viQueAparece" class="ai-text"></div>
+              <div id="viElementosBox" class="ai-block" hidden><h3>Elementos que se ven</h3><ul id="viElementos" class="ai-points"></ul></div>
+              <div id="viTextoIABox" class="ai-block" hidden><h3>Texto que la IA ve en la imagen</h3><ul id="viTextoIA" class="ai-points"></ul></div>
+              <div id="viDudasBox" class="ai-notices" hidden><strong>No estoy segura de</strong><ul id="viDudas"></ul></div>
+            </section>
+            <section id="viSecInterp" class="en-bloque en-ia-panel" hidden aria-labelledby="viInterpTit" tabindex="-1">
+              <h2 id="viInterpTit"><span class="en-tag en-tag-ia">INTERPRETACIÓN · IA</span> <span id="viInterpKind">Explicación</span></h2>
+              <p class="pc-note">Es una interpretación de la IA, no un dato de la imagen.</p>
+              <div id="viInterpTexto" class="ai-text"></div>
+              <div id="viSugBox" class="ai-block ai-sugerencias" hidden><h3>Sugerencia de CLARIA <small>(no figura en la imagen)</small></h3><ul id="viSug" class="ai-points"></ul></div>
+              <div id="viInterpDudasBox" class="ai-notices" hidden><strong>No estoy segura de</strong><ul id="viInterpDudas"></ul></div>
+            </section>
+
+            <h2 class="en-q">¿Qué querés hacer?</h2>
+            <div class="en-botones" role="group" aria-label="Opciones sobre la imagen">
+              <button type="button" class="big-btn bb-blue" id="viBtnQue"><span class="big-ico" aria-hidden="true">👁</span><span class="big-txt">¿Qué aparece en la imagen?</span></button>
+              <button type="button" class="big-btn bb-violet" id="viBtnFacil"><span class="big-ico" aria-hidden="true">💡</span><span class="big-txt">Explicámelo fácil</span></button>
+              <button type="button" class="big-btn bb-rose" id="viBtnSignifica"><span class="big-ico" aria-hidden="true">🧭</span><span class="big-txt">¿Qué significa esto?</span></button>
+              <button type="button" class="big-btn bb-teal" id="viBtnEscuchar"><span class="big-ico" aria-hidden="true">🔊</span><span class="big-txt">Escuchar</span></button>
+              <button type="button" class="big-btn bb-amber" id="viBtnPictos"><span class="big-ico" aria-hidden="true">🖼</span><span class="big-txt">Ver con pictogramas</span></button>
+              <button type="button" class="big-btn bb-blue" id="viBtnPreguntar"><span class="big-ico" aria-hidden="true">❓</span><span class="big-txt">Preguntar sobre la imagen</span></button>
+            </div>
+            <section id="viPanelPregunta" class="en-bloque" hidden aria-labelledby="viPregTit" tabindex="-1">
+              <h2 id="viPregTit">Preguntale algo a la imagen</h2>
+              <p class="pc-note">La respuesta se basa solo en lo que se ve. Si no se ve, CLARIA te lo dice. Para preguntar por una parte, tocá «Cambiar la parte que se analiza».</p>
+              <form id="viPregForm" class="ask-form"><label for="viPregInput" class="field-label">Tu pregunta</label>
+                <div class="ask-row"><input id="viPregInput" maxlength="400" autocomplete="off" placeholder="Ej.: ¿Qué dice el cartel rojo?"><button type="submit" class="btn btn-primary" id="viPregEnviar">Preguntar</button></div></form>
+            </section>
+            <p id="viEstado" class="status-note" role="status" aria-live="polite"></p>
+            <p class="button-line"><button type="button" class="btn btn-soft" id="viOtraParte">Cambiar la parte que se analiza</button> <button type="button" class="btn btn-soft" id="viBorrar">Borrar todo y empezar de nuevo</button></p>
+            <p class="pc-note">Los pictogramas son de <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón), autor Sergio Palao, licencia CC BY-NC-SA 4.0.</p>
+          </div>
         </div>
 
         <dialog id="enZoom" class="pc-dialog en-zoom" aria-label="Documento original ampliado">
@@ -653,6 +735,21 @@
         </ul>
       </div>
       <div class="button-line"><button type="submit" value="accept" class="btn btn-primary" id="consentAccept">Entiendo y acepto</button><button type="submit" value="decline" class="btn btn-soft" id="consentDecline">Ahora no</button></div>
+    </form>
+  </dialog>
+  <dialog id="visionDialog" class="consent" aria-labelledby="visionDialogTitulo">
+    <form method="dialog" id="visionDialogForm">
+      <h2 id="visionDialogTitulo">¿Enviar esta imagen a una IA?</h2>
+      <div>
+        <p><strong>A diferencia de la lectura del texto, que se hace en tu dispositivo, este análisis necesita enviar la imagen</strong> (reducida y sin datos de ubicación ni de la cámara) a <span id="visionDialogProv">un servicio de IA</span>.</p>
+        <ul>
+          <li id="visionDialogNota"></li>
+          <li>CLARIA <strong>no guarda</strong> la imagen. Lo que se envía es lo que viste en la vista previa, con lo que hayas tapado.</li>
+          <li>No envíes fotos de otras personas ni de menores sin permiso, ni documentos personales.</li>
+          <li>La IA <strong>puede equivocarse</strong>. Si algo no es seguro, CLARIA te lo va a decir.</li>
+        </ul>
+      </div>
+      <div class="button-line"><button type="submit" value="accept" class="btn btn-primary" id="visionDialogOk">Entiendo, enviar esta imagen</button><button type="submit" value="decline" class="btn btn-soft" id="visionDialogNo">No enviar</button></div>
     </form>
   </dialog>
   <dialog id="micDialog" class="consent" aria-labelledby="micTitle">

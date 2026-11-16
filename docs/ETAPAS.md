@@ -161,3 +161,31 @@ Se integra el **Paquete Maestro de pictogramas** (copia íntegra en `docs/paquet
 - `ClariaExport.compartirPNG` es ahora el único código de compartir (lo usan el convertidor y el tablero).
 - Pruebas: `tests/e2e-decilo.mjs` (12). Se actualizaron las pruebas viejas que entraban al tablero desde la tarjeta de inicio.
 - «Pantalla completa» = el mensaje ocupa toda la ventana (diálogo a 100 % del alto y ancho); no usa la API de pantalla completa del navegador (no funciona en iPhone).
+
+## Etapa 8 · «Mirar la imagen con IA»: visión multimodal (rama `vision-multimodal`)
+
+**Qué es.** Después de «Entender» una imagen (OCR local, que se conserva intacto), aparece **Mirar la imagen con IA**: una IA con visión describe qué aparece (carteles, señales, símbolos, escenas, capturas, dibujos y diagramas), qué significa y qué puede ayudar a hacer. Se puede preguntar sobre la imagen y analizar solo una parte.
+
+**Diferencia clave con el OCR.** El OCR corre en el dispositivo y no envía nada. La visión **sí envía la imagen** a un proveedor externo; por eso:
+- hay un paso previo con vista previa donde se puede **elegir una parte** (o una mitad) y **tapar con negro** lo privado; lo tapado se pinta sobre los píxeles antes de enviar;
+- la copia enviada se **reduce a 1280 px máx.** y se **recodifica como JPEG** (se pierden EXIF/GPS/cámara/fecha);
+- hay un **diálogo de permiso explícito** antes de cada envío (y de nuevo si cambia la parte o lo tapado), con el nombre del proveedor, el aviso de privacidad del nivel gratuito y «no se guarda»;
+- **no se guarda nada**: ni la imagen ni las respuestas (solo en memoria mientras la pantalla está abierta; «Borrar todo» y salir de la sección las eliminan);
+- el texto del OCR solo se manda como referencia si no se tapó ni recortó nada (así no se filtra lo tapado).
+
+**Resultados siempre separados:** ORIGINAL · TEXTO TRANSCRIPTO (en tu dispositivo) · OBSERVACIÓN VISUAL (IA) · INTERPRETACIÓN (IA). Las líneas que la IA dice leer se comparan con el OCR y se marca «solo lo vio la IA». Las dudas se muestran. La IA tiene prohibido identificar personas por el rostro, diagnosticar, completar texto ilegible o inventar; las URL que no estén en la imagen se eliminan; si no hay contenido usable, el Worker responde error en vez de inventar.
+
+**Botones:** ¿Qué aparece en la imagen? · Explicámelo fácil · ¿Qué significa esto? · Escuchar (solo al tocar) · Ver con pictogramas (ARASAAC, reutiliza el cuento) · Preguntar sobre la imagen.
+
+**Worker.** Nueva ruta `POST /api/vision` (`{image, task: describe|easy|meaning|ask, question?, ocrText?, parcial?}`), con validación de tipo y firma de la imagen, tope de tamaño, límites propios (`VISION_PER_MIN`, `VISION_PER_DAY`, `VISION_DAILY_CAP`), redacción de datos personales en pregunta y OCR, y sin registrar contenido. Proveedores: `gemini` (elegido), `anthropic`, `workers-ai`, con `VISION_PROVIDER` (si falta usa `AI_PROVIDER`). `/api/health` informa `vision.enabled`, el proveedor y la nota de privacidad.
+
+**Comparación de proveedores (resumen).** Gemini Flash: buen español, visión nativa y nivel gratuito para pruebas, pero en el nivel gratuito Google puede usar lo enviado para mejorar sus productos (por eso `GEMINI_TIER=free` hace que la app lo avise antes de enviar). Con facturación activada no se usa para mejorar productos. Claude (Haiku): muy buen español y mejor cautela, de pago desde el primer uso. Workers AI (Gemma): sin clave y dentro de Cloudflare, calidad menor en español y en texto dentro de imágenes. **Importante:** la suscripción «Gemini Plus» de consumo no incluye acceso a la API; la clave sale de Google AI Studio.
+
+**Para activarla en producción (solo desde `main`, con autorización):**
+1. Crear la clave en Google AI Studio y cargarla como secreto: `wrangler secret put GEMINI_API_KEY` (nunca en GitHub ni en `config.js`).
+2. Verificar el nombre del modelo vigente y ajustar `VISION_MODEL` en `worker/wrangler.toml`.
+3. Si se activa facturación, cambiar `GEMINI_TIER` a `paid`.
+4. Probar con `npm run smoke` y con celulares reales (sin fotos de personas con el nivel gratuito).
+Sin la clave, la opción aparece desactivada y explica por qué; el resto de CLARIA no cambia.
+
+**Pruebas.** `python3 tests/make-fixtures-vision.py && node tests/e2e-vision.mjs` (23 pruebas: permiso antes de enviar, reducción y EXIF, recorte, tapado en los bytes enviados, bloques separados, dudas, voz solo al tocar, pictogramas, borrado, errores, celular 390 px y teclado) y 9 pruebas nuevas del Worker. El proveedor está **simulado**: se prueba el flujo y las salvaguardas, **no la calidad real del modelo**; eso requiere la clave real y celulares reales.

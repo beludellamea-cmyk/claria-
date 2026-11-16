@@ -1,6 +1,6 @@
 import { redact } from './privacy.js';
-import { buildExplain, buildChat, LIMITS, TRAMITE_IDS, TRAMITES, allowedUrls } from './prompts.js';
-import { PROVIDERS, ProviderError, providerName, PROVIDER_LABEL } from './providers.js';
+import { buildExplain, buildChat, buildVision, VISION_TASKS, LIMITS, TRAMITE_IDS, TRAMITES, allowedUrls } from './prompts.js';
+import { PROVIDERS, VISION, ProviderError, providerName, PROVIDER_LABEL, visionProviderName, visionConfigured, visionPrivacyNote, DEFAULT_VISION_MODEL } from './providers.js';
 import { checkLimits } from './ratelimit.js';
 import { citaEnTexto } from './entender-core.js';
 
@@ -35,7 +35,10 @@ const MESSAGES = {
   provider_unreachable: 'No se pudo comunicar con el servicio de IA.',
   provider_error: 'El servicio de IA tuvo un problema. Probá de nuevo.',
   bad_model_output: 'La IA devolvió una respuesta que CLARIA no pudo interpretar. Probá de nuevo.',
-  forbidden_origin: 'Origen no autorizado.'
+  forbidden_origin: 'Origen no autorizado.',
+  bad_image: 'La imagen no tiene un formato válido (JPG, PNG o WEBP).',
+  image_too_big: 'La imagen es demasiado pesada. CLARIA la reduce antes de enviarla; probá con un recorte o con otra foto.',
+  vision_blocked: 'El servicio de IA no pudo analizar esta imagen. Probá con otra.'
 };
 
 // Extrae un objeto JSON de la salida del modelo (tolera ```json y texto alrededor). Devuelve null si no hay.
@@ -95,6 +98,23 @@ export function shapeExplain(raw) {
   return { resultado: o.resultado.trim().slice(0, 3000), puntos_clave: strList(o.puntos_clave, 6, 300), avisos: strList(o.avisos, 6, 300) };
 }
 
+// Visión: normaliza y limita la respuesta. Sin contenido útil no inventa nada.
+export function shapeVision(raw, ctx = {}) {
+  const o = parseModelJson(raw);
+  if (!o) throw new ProviderError(502, 'bad_model_output');
+  const task = ctx.task; const str = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
+  const visible = strList(o.texto_visible, 20, 300);
+  // Un enlace solo puede figurar en la interpretación si está escrito en la imagen.
+  const permitidas = new Set(visible.flatMap((t) => t.match(/https?:\/\/[^\s)\]»"'<>]+/gi) || []).map((u) => u.replace(/[.,;:!?]+$/, '')));
+  const limpio = (t) => scrubUrls(t, permitidas).text;
+  const out = { tipo: str(o.tipo, 60), que_aparece: limpio(str(o.que_aparece, 1200)), elementos: strList(o.elementos, 10, 250).map(limpio), texto_visible: visible,
+    resultado: limpio(str(o.resultado, 1800)), que_puede_hacer: strList(o.que_puede_hacer, 5, 250).map(limpio), dudas: strList(o.dudas, 6, 250),
+    legibilidad: ['buena', 'parcial', 'mala'].includes(o.legibilidad) ? o.legibilidad : '' };
+  const tiene = task === 'describe' ? out.que_aparece || out.elementos.length || out.texto_visible.length : out.resultado;
+  if (!tiene) throw new ProviderError(502, 'bad_model_output');
+  return out;
+}
+
 export function shapeChat(raw) {
   const o = parseModelJson(raw);
   let respuesta = o && typeof o.respuesta === 'string' ? o.respuesta : String(raw || '');
@@ -104,6 +124,22 @@ export function shapeChat(raw) {
   const ids = o && Array.isArray(o.fuentes) ? [...new Set(o.fuentes.filter((x) => TRAMITE_IDS.has(x)))] : [];
   const fuentes = ids.map((id) => { const t = TRAMITES.tramites.find((x) => x.id === id); return { id, titulo: t.fuente.titulo, url: t.fuente.url, consultado: t.fuente.consultado }; });
   return { respuesta: scrubbed.text, fuentes, avisos: scrubbed.removed ? ['Se quitó un enlace que CLARIA no pudo verificar.'] : [] };
+}
+
+function visionInfo(env) {
+  const n = visionProviderName(env); const enabled = Boolean(n && visionConfigured(env, n));
+  return { enabled, provider: enabled ? PROVIDER_LABEL[n] : null, note: enabled ? visionPrivacyNote(env, n) : '', maxImageBytes: IMG_MAX_B64 };
+}
+const IMG_MAX_B64 = 1_400_000; // ~1 MB de imagen: el navegador ya la redujo; esto es un tope de seguridad
+
+// Comprueba que sea realmente una imagen (tipo declarado + primeros bytes) y devuelve { mime, data }.
+export function parseImage(dataUrl, max = IMG_MAX_B64) {
+  const m = /^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/]+={0,2})$/.exec(String(dataUrl || ''));
+  if (!m) return { error: 'bad_image' };
+  if (m[2].length > max) return { error: 'image_too_big' };
+  let head; try { head = atob(m[2].slice(0, 24)); } catch { return { error: 'bad_image' }; }
+  const ok = m[1] === 'image/jpeg' ? head.startsWith('\xff\xd8\xff') : m[1] === 'image/png' ? head.startsWith('\x89PNG') : head.startsWith('RIFF') && head.slice(8, 12) === 'WEBP';
+  return ok ? { mime: m[1], data: m[2] } : { error: 'bad_image' };
 }
 
 async function readJson(request, max = 24000) {
@@ -130,8 +166,10 @@ export default {
       const prov = providerName(env);
       const configured = prov === 'workers-ai' ? Boolean(env.AI) : prov === 'anthropic' ? Boolean(env.ANTHROPIC_API_KEY) : prov === 'gemini' ? Boolean(env.GEMINI_API_KEY) : false;
       return done(json(env, origin, 200, { ok: configured, mode: configured ? 'connected' : 'demo', provider: configured ? PROVIDER_LABEL[prov] : null, storesChats: false,
-        limits: { perMinute: Number(env.RATE_PER_MIN) || 6, perDay: Number(env.RATE_PER_DAY) || 40 }, maxTextChars: LIMITS.text }), '/api/health');
+        limits: { perMinute: Number(env.RATE_PER_MIN) || 6, perDay: Number(env.RATE_PER_DAY) || 40 }, maxTextChars: LIMITS.text, vision: visionInfo(env) }), '/api/health');
     }
+
+    if (request.method === 'POST' && url.pathname === '/api/vision') return handleVision(request, env, origin, done);
 
     if (request.method !== 'POST' || !['/api/explain', '/api/chat'].includes(url.pathname)) {
       return done(fail(env, origin, 404, 'not_found', 'Ruta no encontrada.'), url.pathname);
@@ -179,3 +217,31 @@ export default {
     }
   }
 };
+
+// POST /api/vision  { image: "data:image/jpeg;base64,…", task: describe|easy|meaning|ask, question?, ocrText?, parcial? }
+// La imagen NO se guarda ni se registra: viaja en memoria hasta el proveedor y se descarta.
+async function handleVision(request, env, origin, done) {
+  const route = '/api/vision';
+  const prov = visionProviderName(env);
+  if (!prov || !visionConfigured(env, prov)) return done(fail(env, origin, 503, 'not_configured', MESSAGES.not_configured), route);
+  const body = await readJson(request, IMG_MAX_B64 + 6000);
+  if (body === 'too_big') return done(fail(env, origin, 413, 'image_too_big', MESSAGES.image_too_big), route);
+  if (!body || typeof body !== 'object') return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), route);
+  const { task, question, ocrText, parcial } = body;
+  if (!VISION_TASKS.has(task)) return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), route);
+  if (task === 'ask' && (typeof question !== 'string' || question.trim().length < 3)) return done(fail(env, origin, 400, 'bad_request', MESSAGES.bad_request), route);
+  const img = parseImage(body.image);
+  if (img.error) return done(fail(env, origin, img.error === 'image_too_big' ? 413 : 400, img.error, MESSAGES[img.error]), route);
+  const q = redact(String(question || '').slice(0, LIMITS.question)), o = redact(typeof ocrText === 'string' ? ocrText.slice(0, 3000) : '');
+  const lim = await checkLimits(env, request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '', Date.now(), 'v');
+  if (!lim.ok) return done(fail(env, origin, 429, lim.code, MESSAGES[lim.code], { 'retry-after': String(lim.retryAfter) }), route);
+  try {
+    const { system, text } = buildVision({ task, question: q.text.trim(), ocrText: o.text.trim(), parcial: parcial === true });
+    const { text: raw } = await VISION[prov]({ system, text, image: img, env, maxTokens: task === 'describe' ? 1500 : 900, fetchImpl: env.__fetch || fetch });
+    const data = shapeVision(raw, { task });
+    return done(json(env, origin, 200, { ok: true, task, ...data, redactions: q.count + o.count, generatedBy: 'ia', provider: PROVIDER_LABEL[prov], model: env.VISION_MODEL || DEFAULT_VISION_MODEL[prov] }), route);
+  } catch (e) {
+    const code = e instanceof ProviderError ? e.code : 'provider_error'; const status = e instanceof ProviderError ? e.status : 502;
+    return done(fail(env, origin, status, code, MESSAGES[code] || MESSAGES.provider_error), route);
+  }
+}

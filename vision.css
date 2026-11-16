@@ -1,0 +1,16 @@
+/* CLARIA · Mirar la imagen con IA */
+.vi-herr{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.vi-herr .btn[aria-pressed="true"]{outline:3px solid #5b2a86;background:#f1e6fb;font-weight:800}
+.vi-lienzo{margin:.6rem 0;text-align:center;background:#222;border-radius:12px;padding:.4rem}
+#viCanvas{max-width:100%;height:auto;max-height:60vh;display:block;margin:0 auto;border-radius:8px;cursor:crosshair}
+#viCanvas[data-modo="todo"]{cursor:default}
+.vi-tipo{font-weight:700;margin:.2rem 0 .5rem}
+.vi-ok{color:#16543a;font-weight:700}
+.vi-solo{color:#8a4b00;font-weight:800}
+.en-vision-cta{border-color:#5b2a86}
+.en-vision-cta .btn:disabled{opacity:.55}
+.high-contrast #viCanvas{outline:3px solid #fff}
+.high-contrast .vi-lienzo{background:#000}
+.high-contrast .vi-ok,.high-contrast .vi-solo{color:#fff}
+.high-contrast .vi-herr .btn[aria-pressed="true"]{background:#000;color:#fff;outline-color:#ffd400}
+@media (max-width:480px){.vi-herr .btn{flex:1 1 45%}}
