@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="tablero.css">
   <link rel="stylesheet" href="editor.css">
   <link rel="stylesheet" href="entender.css">
+  <link rel="stylesheet" href="decilo.css">
   <link rel="stylesheet" href="lugares.css">
   <link rel="stylesheet" href="creador.css">
   <script defer src="config.js"></script>
@@ -89,7 +90,7 @@
           <h2 class="welcome-q">¿Qué querés hacer hoy?</h2>
           <div class="big-choices four cine-cards">
             <button type="button" class="big-btn bb-blue" data-view="entender"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 12h30l10 10v30H12z"/><path d="M42 12v10h10M20 30h24M20 39h24M20 47h14"/></svg></span><span class="big-txt">Entender</span></button>
-            <button type="button" class="big-btn bb-amber" data-view="tablero"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="36" rx="6"/><path d="M20 24h8v8h-8zM36 24h8v8h-8z"/><path d="M22 54h20"/></svg></span><span class="big-txt">Hablar con imágenes</span></button>
+            <button type="button" class="big-btn bb-amber" data-view="decilo"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="36" rx="6"/><path d="M20 24h8v8h-8zM36 24h8v8h-8z"/><path d="M22 54h20"/></svg></span><span class="big-txt">Decilo con pictogramas</span></button>
             <button type="button" class="big-btn bb-teal" data-view="lugares"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M8 54h48M12 54V26l20-14 20 14v28"/><path d="M26 54V38h12v16"/></svg></span><span class="big-txt">Mi ciudad, más accesible</span></button>
             <button type="button" class="big-btn bb-violet" data-view="tramites"><span class="big-ico" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="14" cy="16" r="5"/><circle cx="50" cy="48" r="5"/><path d="M19 16h18a9 9 0 0 1 0 18H27a9 9 0 0 0 0 18h18"/></svg></span><span class="big-txt">Entender un trámite</span></button>
           </div>
@@ -97,12 +98,23 @@
         </div>
       </section>
 
+      <section id="view-decilo" class="view page-view dc-scope" aria-labelledby="dcTitulo" hidden>
+        <button type="button" class="back-btn" data-back>← Volver</button>
+        <h1 id="dcTitulo" class="q">Decilo con pictogramas</h1>
+        <p class="dc-sub">¿Cómo querés comunicarte?</p>
+        <div class="big-choices two dc-opciones">
+          <button type="button" class="big-btn bb-violet dc-op" id="dcEscribir" data-view="escribir"><span class="big-ico" aria-hidden="true">✏️</span><span class="big-txt">Escribir y mostrar</span><span class="dc-desc">Escribo una frase y CLARIA la muestra con pictogramas para que otra persona la vea.</span></button>
+          <button type="button" class="big-btn bb-amber dc-op" id="dcElegir" data-view="tablero"><span class="big-ico" aria-hidden="true">🗣️</span><span class="big-txt">Elegir imágenes para hablar</span><span class="dc-desc">Elijo pictogramas de un tablero para armar una frase y CLARIA la dice en voz alta.</span></button>
+        </div>
+        <p class="pc-credit">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia CC BY-NC-SA 4.0. Uso no comercial.</p>
+      </section>
+
       <section id="view-tablero" class="view page-view tb-scope" aria-labelledby="tbTitulo" hidden>
         <button type="button" class="back-btn" data-back>← Volver</button>
         <div id="tbCategorias" class="paso">
           <h1 id="tbTitulo" class="q">¿Qué necesitás decir?</h1>
           <div id="tbCategoriasLista" class="big-choices tb-cats" role="group" aria-label="Categorías"></div>
-          <p class="button-line"><button type="button" class="btn btn-soft" id="tbVerGuardadas">Mis frases (0)</button> <button type="button" class="btn btn-soft" data-view="escribir">Escribir mi propia frase con pictogramas</button></p>
+          <p class="button-line"><button type="button" class="btn btn-soft" id="tbVerGuardadas">Mis frases (0)</button> <button type="button" class="btn btn-soft" data-view="escribir">Escribir y mostrar una frase con pictogramas</button></p>
         </div>
         <div id="tbCategoria" class="paso" hidden>
           <h1 id="tbCatTitulo" class="q">Ayuda</h1>
@@ -355,6 +367,7 @@
           <details class="mas"><summary>Ver ejemplos</summary><span class="pc-ejemplos" id="pcEjemplosLista"></span></details>
         </div>
         <div id="pcResultado" hidden>
+          <p class="pc-mostrar-cta"><button type="button" class="primary pc-mostrar-btn" id="pcMostrar">📱 MOSTRAR A OTRA PERSONA</button></p>
           <div class="panel pc-original" aria-labelledby="pcOrigTitulo"><h2 id="pcOrigTitulo" class="sr-only">Texto original</h2><p id="pcOriginal" class="pc-original-text" lang="es"></p></div>
           <div class="pc-toolbar" role="toolbar" aria-label="Qué querés hacer ahora">
             <div class="pc-group" role="group" aria-label="Voz">
@@ -384,6 +397,24 @@
           <p class="pc-credit" id="pcCredito">Pictogramas: <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a> (Gobierno de Aragón) · Autor: Sergio Palao · Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Uso no comercial.</p>
         </div>
         
+<dialog id="pcMostrarDlg" class="pc-mostrar" aria-labelledby="pcMostrarTitulo">
+          <div class="pc-mostrar-in">
+            <h2 id="pcMostrarTitulo" class="sr-only">Mensaje con pictogramas para mostrar</h2>
+            <p id="pcMostrarAviso" class="pc-mostrar-aviso" role="status" hidden></p>
+            <ol id="pcMostrarBoard" class="pc-mostrar-board" aria-label="Mensaje con pictogramas"></ol>
+            <p id="pcMostrarTexto" class="pc-mostrar-texto" lang="es"></p>
+            <p class="pc-mostrar-credito">Pictogramas: ARASAAC (arasaac.org) · Autor: Sergio Palao · Gobierno de Aragón · CC BY-NC-SA 4.0</p>
+            <div class="pc-mostrar-barra" role="toolbar" aria-label="Acciones">
+              <button type="button" class="primary" id="pcMEscuchar">▶ Escuchar</button>
+              <button type="button" id="pcMEditar" aria-pressed="false">✎ Cambiar un pictograma</button>
+              <button type="button" id="pcMDescargar">⬇ Descargar</button>
+              <button type="button" id="pcMCompartir">↗ Compartir</button>
+              <button type="button" id="pcMCerrar">Volver</button>
+            </div>
+            <p id="pcMEstado" class="pc-note" role="status" aria-live="polite"></p>
+          </div>
+        </dialog>
+
 <dialog id="pcDialogo" class="pc-dialog" aria-labelledby="pcDialogoTitulo">
           <form method="dialog" class="pc-dialog-in">
             <h2 id="pcDialogoTitulo">Elegir pictograma</h2>

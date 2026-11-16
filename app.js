@@ -10,13 +10,13 @@
   let leerPasoActual = 1, tramPasoActual = 1;
   const G = () => window.ClariaGuia;
   function showView(name, opts = {}) {
-    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca','tablero','lugares','creador','editor','entender'].includes(name)) return;
+    if (!['inicio','escribir','lectura','cuento','tramites','hablar','acerca','tablero','lugares','creador','editor','entender','decilo'].includes(name)) return;
     if (name === 'lectura' && !opts.paso) leerPaso(1, true);
     if (name === 'tramites' && !opts.paso) tramitePaso(1, true);
     $$('main .view').forEach((v) => { v.hidden = v.id !== 'view-' + name; });
     history.replaceState(null,'','#'+name);
     G()?.onView(name);
-    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', tablero:'tablero', lugares:'lugares', editor:'editor', entender:'entender1', creador:'creador1', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
+    const key = { inicio:'inicio', escribir:'escribir', cuento:'cuento', hablar:'hablar', decilo:'decilo', tablero:'tablero', lugares:'lugares', editor:'editor', entender:'entender1', creador:'creador1', acerca:'acerca', lectura:'leer'+leerPasoActual, tramites:'tramites'+tramPasoActual }[name];
     G()?.setPantalla(key);
     if (name === 'hablar') openChat(true);
     if (name !== 'lugares') window.ClariaLugares?.salir();
@@ -45,7 +45,7 @@
   }
   function irPantalla(k) {
     if (k === 'inicio') return showView('inicio');
-    if (k === 'escribir' || k === 'hablar' || k === 'acerca' || k === 'cuento' || k === 'tablero' || k === 'lugares') return showView(k);
+    if (k === 'escribir' || k === 'decilo' || k === 'hablar' || k === 'acerca' || k === 'cuento' || k === 'tablero' || k === 'lugares') return showView(k);
     if (k === 'creador1' || k === 'creador2') { showView('creador', { keep: true }); window.ClariaCreador?.irA(k === 'creador1' ? 1 : 2); return; }
     if (k === 'lugarmenu' || k === 'lugarpaso') { showView('lugares', { keep: true }); window.ClariaLugares?.irA(k === 'lugarmenu' ? 'menu' : 'inicio'); return; }
     if (k === 'entender1' || k === 'entenderlee') return showView('entender');
@@ -443,7 +443,7 @@
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if($('consentDialog').open||document.querySelector('dialog[open]'))return;
     if(!$('prefs').hidden)togglePrefs(false);
   }});
-  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca','tablero','lugares','entender'].includes(hash))showView(hash);else G()?.onView('inicio');
+  const hash=location.hash.slice(1);if(['escribir','lectura','tramites','hablar','acerca','tablero','lugares','entender','decilo'].includes(hash))showView(hash);else G()?.onView('inicio');
   window.ClariaUI={announce,showView,irPantalla,leerPaso,tramitePaso,speak,stopSpeaking,ia:{modo:()=>mode,consentimiento:()=>ensureConsent(),cuota:()=>useAiQuota(),llamar:(p,b)=>callApi(p,b),maxChars:()=>aiInfo.maxTextChars||6000,errores:ERRORS},getPrefs:()=>({...prefs}),getText:()=>currentText};
 })();
 // Modo sin conexión básico (tablero «Hablar con imágenes»): solo en https o localhost.

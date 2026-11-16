@@ -16,12 +16,12 @@ async function abrir({ ancho = 1280, alto = 900, voz = true } = {}) {
   await page.goto(BASE); await page.waitForSelector('#claria'); return { ctx, page, ext, errs };
 }
 const spoken = (p) => p.evaluate(() => window.__spoken);
-const ir = async (page, cat) => { await page.click('#view-inicio [data-view="tablero"]'); await page.waitForSelector('#tbCategoriasLista .tb-cat'); if (cat) { await page.click(`[data-cat="${cat}"]`); await page.waitForSelector('#tbCategoria:not([hidden])'); } };
+const ir = async (page, cat) => { await page.click('#view-inicio [data-view="decilo"]'); await page.click('#dcElegir'); await page.waitForSelector('#tbCategoriasLista .tb-cat'); if (cat) { await page.click(`[data-cat="${cat}"]`); await page.waitForSelector('#tbCategoria:not([hidden])'); } };
 const tarj = (page) => page.$$eval('#tbTarjetas .tb-et', (n) => n.map((x) => x.textContent));
 
 console.log('\nHablar con imágenes');
-await test('inicio: tarjeta «Hablar con imágenes» y 6 categorías del kit, una pregunta por pantalla', async () => {
-  const { page, errs, ctx } = await abrir(); assert.ok((await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent))).includes('Hablar con imágenes'));
+await test('inicio: tarjeta «Decilo con pictogramas» y 6 categorías del kit, una pregunta por pantalla', async () => {
+  const { page, errs, ctx } = await abrir(); assert.ok((await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent))).includes('Decilo con pictogramas'));
   await ir(page); assert.match(await page.textContent('#tbTitulo'), /¿Qué necesitás decir\?/);
   assert.deepEqual(await page.$$eval('.tb-cat .big-txt', (n) => n.map((x) => x.textContent)), ['Ayuda', 'Salud', 'Escuela', 'Transporte', 'Compras', 'Necesidades básicas']);
   assert.equal(await page.evaluate(() => document.activeElement.id), 'tbTitulo'); assert.deepEqual(errs, []); await ctx.close();
@@ -51,7 +51,7 @@ await test('cambiar pictograma: solo ofrece pictogramas verificados y reemplaza 
 await test('guardar frase en el dispositivo → Mis frases (decir, usar, borrar); sobrevive a recargar; sin red', async () => {
   const { page, ext, ctx } = await abrir(); await ir(page, 'escuela'); await page.click('.tb-frase-rapida >> text=Quiero ir al baño.'); await page.click('#tbGuardar'); assert.match(await page.textContent('#tbEstado'), /guardada en este dispositivo/);
   await page.click('#tbGuardar'); assert.match(await page.textContent('#tbEstado'), /ya estaba guardada/);
-  await page.goto(BASE); await page.waitForSelector('#claria'); await page.click('#view-inicio [data-view="tablero"]'); await page.waitForFunction(() => /Mis frases \(1\)/.test(document.getElementById('tbVerGuardadas').textContent));
+  await page.goto(BASE); await page.waitForSelector('#claria'); await page.click('#view-inicio [data-view="decilo"]'); await page.click('#dcElegir'); await page.waitForFunction(() => /Mis frases \(1\)/.test(document.getElementById('tbVerGuardadas').textContent));
   await page.click('#tbVerGuardadas'); await page.waitForSelector('#tbGuardadas:not([hidden])'); assert.match(await page.textContent('#tbGuardadasLista'), /Quiero ir al baño\./);
   await page.click('button[aria-label^="Decir en voz alta: Quiero ir al baño"]'); assert.deepEqual(await spoken(page), ['Quiero ir al baño.']);
   await page.click('button[aria-label^="Usar esta frase"]'); await page.waitForSelector('#tbCategoria:not([hidden])'); assert.deepEqual(await tarj(page), ['querer', 'ir', 'baño']);
@@ -69,13 +69,13 @@ await test('sin voz en el navegador: lo dice claramente y no se rompe', async ()
 await test('navegación: volver paso a paso y la guía conoce cada pantalla; enfoque en el título', async () => {
   const { page, errs, ctx } = await abrir(); await ir(page, 'compras'); assert.equal(await page.evaluate(() => document.body.dataset.pantalla), 'tablerocat'); assert.equal(await page.evaluate(() => document.activeElement.id), 'tbCatTitulo');
   await page.click('#view-tablero .back-btn'); await page.waitForSelector('#tbCategorias:not([hidden])'); assert.equal(await page.evaluate(() => document.body.dataset.pantalla), 'tablero');
-  await page.click('#view-tablero .back-btn'); await page.waitForSelector('#view-inicio:not([hidden])'); assert.deepEqual(errs, []); await ctx.close();
+  await page.click('#view-tablero .back-btn'); await page.waitForSelector('#view-decilo:not([hidden])'); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('sin conexión: tras la primera visita el tablero funciona con el service worker', async () => {
   const { page, ctx } = await abrir(); await page.evaluate(() => navigator.serviceWorker.ready); await page.goto(BASE); await page.waitForSelector('#claria');
   await page.waitForFunction(() => navigator.serviceWorker.controller); await page.evaluate(async () => { const rs = [...document.querySelectorAll('img')]; await new Promise((r) => setTimeout(r, 300)); });
   await ir(page, 'basicas'); await page.click('.tb-frase-rapida >> text=Tengo hambre.'); await page.waitForTimeout(500);
-  await ctx.setOffline(true); await page.goto(BASE); await page.waitForSelector('#claria'); await page.click('#view-inicio [data-view="tablero"]'); await page.waitForSelector('#tbCategoriasLista .tb-cat');
+  await ctx.setOffline(true); await page.goto(BASE); await page.waitForSelector('#claria'); await page.click('#view-inicio [data-view="decilo"]'); await page.click('#dcElegir'); await page.waitForSelector('#tbCategoriasLista .tb-cat');
   await page.click('[data-cat="basicas"]'); await page.click('.tb-frase-rapida >> text=Tengo hambre.'); assert.deepEqual(await tarj(page), ['tener', 'hambre']);
   assert.ok(await page.$eval('#tbTarjetas img', (i) => i.complete && i.naturalWidth > 0), 'las imágenes se ven sin conexión'); await page.click('#tbDecir'); assert.deepEqual(await spoken(page), ['Tengo hambre.']); await ctx.close();
 });

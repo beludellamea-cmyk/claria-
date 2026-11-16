@@ -28,8 +28,8 @@ const aMenu = async (page) => { await aLugares(page); await porQR(page, 'qr-bibl
 
 console.log('\nEn un espacio público');
 await test('inicio: las 4 tarjetas del kit + acceso a hablar; «Crear con pictogramas» sigue accesible desde Hablar con imágenes', async () => {
-  const { page, errs, ctx } = await abrir(); assert.deepEqual(await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent)), ['Entender', 'Hablar con imágenes', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']);
-  await page.click('#view-inicio [data-view="tablero"]'); await page.click('#tbCategorias [data-view="escribir"]'); assert.equal(await page.isVisible('#view-escribir'), true); assert.deepEqual(errs, []); await ctx.close();
+  const { page, errs, ctx } = await abrir(); assert.deepEqual(await page.$$eval('#view-inicio .big-txt', (n) => n.map((x) => x.textContent)), ['Entender', 'Decilo con pictogramas', 'Mi ciudad, más accesible', 'Entender un trámite', 'O hablá conmigo']);
+  await page.click('#view-inicio [data-view="decilo"]'); await page.click('#dcElegir'); await page.click('#tbCategorias [data-view="escribir"]'); assert.equal(await page.isVisible('#view-escribir'), true); assert.deepEqual(errs, []); await ctx.close();
 });
 await test('¿Dónde estás?: tres formas de elegir; la cámara NO se enciende ni se pide la ubicación', async () => {
   const { page, errs, ctx } = await abrir(); await aLugares(page); assert.match(await page.textContent('#lgTitulo'), /Mi ciudad, más accesible/);
