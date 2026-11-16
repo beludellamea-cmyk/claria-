@@ -70,6 +70,7 @@
     const tab = $('pcTablero'); tab.textContent = ''; fichas.forEach((f, i) => tab.append(tarjeta(f, i)));
     const c = (e) => fichas.filter((f) => f.estado === e).length;
     $('pcResumen').textContent = `${fichas.filter((f) => f.estado !== 'func').length} palabras: ${c('verificado')} verificadas, ${c('revisar')} para revisar, ${c('elegido')} elegidas por vos, ${c('sin') + c('texto')} solo con texto.`;
+    if (mdlg.open) pintarMostrar();
   }
 
   // ───────── Elegir otro pictograma ─────────
@@ -93,7 +94,7 @@
     $('pcRestaurar').disabled = !f.original || (f.original.pic === f.pic && f.original.estado === f.estado);
     dlg.showModal(); $('pcDialogoTitulo').setAttribute('tabindex', '-1'); $('pcDialogoTitulo').focus();
   }
-  dlg.addEventListener('close', () => { const i = abierta; abierta = -1; const b = $('pcTablero').querySelector(`[data-i="${i}"] button`); (b || abridor)?.focus(); });
+  dlg.addEventListener('close', () => { const i = abierta; abierta = -1; const raiz = mdlg.open ? $('pcMostrarBoard') : $('pcTablero'); const b = raiz.querySelector(`[data-i="${i}"] button`); (b || (mdlg.open ? $('pcMEditar') : abridor))?.focus(); });
   $('pcCerrar').addEventListener('click', () => dlg.close());
   function asignar(i, pic, estado) {
     const f = fichas[i]; f.pic = pic; f.estado = estado; if (estado === 'texto') f.pic = null; dibujar(); dlg.close();
@@ -159,16 +160,44 @@
     document.body.append(area); window.print(); setTimeout(() => area.remove(), 500);
   }
   $('pcImprimir').addEventListener('click', imprimir);
+  const datosExport = () => ({ titulo: 'CLARIA · Mensaje con pictogramas', texto, mayus, tamano: PX[pref.tam], fichas: fichas.map((f) => ({ orig: f.orig, estado: f.estado, pic: ['sin', 'texto', 'func'].includes(f.estado) ? null : f.pic })) });
   async function exportar(tipo) {
     const b = $(tipo === 'png' ? 'pcPng' : 'pcPdf'); b.disabled = true; UI().announce('Preparando la descarga…');
     try {
-      const paginas = await ClariaExport.dibujarPaginas({ texto, mayus, tamano: PX[pref.tam], fichas: fichas.map((f) => ({ orig: f.orig, estado: f.estado, pic: ['sin', 'texto', 'func'].includes(f.estado) ? null : f.pic })) });
+      const paginas = await ClariaExport.dibujarPaginas(datosExport());
       const blob = tipo === 'png' ? await ClariaExport.aPNG(paginas) : ClariaExport.aPDF(paginas);
-      ClariaExport.descargar(blob, `claria-pictogramas.${tipo}`); window.ClariaGuia?.reaccion('descargado'); UI().announce(`Descarga lista: claria-pictogramas.${tipo}`);
-    } catch (e) { UI().announce('No se pudo preparar el archivo. Probá de nuevo o usá Imprimir.'); }
+      ClariaExport.descargar(blob, `claria-pictogramas.${tipo}`); window.ClariaGuia?.reaccion('descargado'); UI().announce(`Descarga lista: claria-pictogramas.${tipo}`); return true;
+    } catch (e) { UI().announce('No se pudo preparar el archivo. Probá de nuevo o usá Imprimir.'); return false; }
     finally { b.disabled = false; }
   }
   $('pcPng').addEventListener('click', () => exportar('png')); $('pcPdf').addEventListener('click', () => exportar('pdf'));
+
+  // ───────── Mostrar a otra persona: mensaje con pictogramas a pantalla completa ─────────
+  // Reutiliza las mismas fichas, el mismo diálogo para cambiar pictogramas, la misma voz y la misma exportación.
+  const mdlg = $('pcMostrarDlg'); let editando = false;
+  function pintarMostrar() {
+    mdlg.dataset.editando = String(editando); mdlg.dataset.mayus = String(mayus);
+    const b = $('pcMostrarBoard'); b.textContent = ''; fichas.forEach((f, i) => b.append(tarjeta(f, i, !editando)));
+    $('pcMostrarTexto').textContent = texto;
+    const dudas = fichas.filter((f) => f.estado === 'revisar' || f.estado === 'sin').length; const av = $('pcMostrarAviso');
+    av.hidden = !editando && !dudas;
+    av.textContent = editando ? 'Tocá el pictograma que querés cambiar. Cuando termines, tocá «Listo».' : `${dudas} palabra${dudas === 1 ? '' : 's'} para revisar antes de mostrar. Tocá «Cambiar un pictograma».`;
+    $('pcMEditar').setAttribute('aria-pressed', String(editando)); $('pcMEditar').textContent = editando ? '✓ Listo' : '✎ Cambiar un pictograma';
+  }
+  function mostrar() { if (!fichas.length || !motor) return; detener(true); editando = false; $('pcMEstado').textContent = ''; pintarMostrar(); mdlg.showModal(); $('pcMEscuchar').focus(); window.ClariaGuia?.reaccion('mostrar'); }
+  $('pcMostrar').addEventListener('click', mostrar);
+  $('pcMEscuchar').addEventListener('click', () => { if (!tts) { $('pcMEstado').textContent = 'Este navegador no puede leer en voz alta.'; return; } escuchar(); $('pcMEstado').textContent = 'Leyendo el mensaje.'; });
+  $('pcMEditar').addEventListener('click', () => { editando = !editando; pintarMostrar(); $('pcMEstado').textContent = ''; });
+  $('pcMDescargar').addEventListener('click', async () => { $('pcMDescargar').disabled = true; $('pcMEstado').textContent = 'Preparando la imagen…'; const ok = await exportar('png'); $('pcMEstado').textContent = ok ? 'Listo: se descargó claria-pictogramas.png.' : 'No se pudo preparar la imagen. Probá de nuevo.'; $('pcMDescargar').disabled = false; });
+  $('pcMCompartir').addEventListener('click', async () => {
+    const b = $('pcMCompartir'); b.disabled = true; $('pcMEstado').textContent = 'Preparando la imagen…';
+    try {
+      const blob = await ClariaExport.aPNG(await ClariaExport.dibujarPaginas(datosExport())); const r = await ClariaExport.compartirPNG(blob, 'mensaje-claria.png', { title: 'Mensaje con pictogramas', text: texto });
+      $('pcMEstado').textContent = r === 'compartido' ? 'Listo para enviar.' : r === 'cancelado' ? 'Se canceló el envío.' : 'Este dispositivo no permite compartir directo: se descargó la imagen.';
+    } catch (e) { $('pcMEstado').textContent = 'No se pudo compartir. Probá con «Descargar».'; } finally { b.disabled = false; }
+  });
+  mdlg.addEventListener('close', () => { detener(true); editando = false; $('pcMostrar').focus(); });
+  $('pcMCerrar').addEventListener('click', () => mdlg.close());
   aplicarPref(); botonesVoz();
-  window.ClariaConvertidor = { convertir, get fichas() { return fichas; } };
+  window.ClariaConvertidor = { convertir, mostrar, get fichas() { return fichas; } };
 })();

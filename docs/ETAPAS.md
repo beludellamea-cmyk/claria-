@@ -149,3 +149,15 @@ Se integra el **Paquete Maestro de pictogramas** (copia íntegra en `docs/paquet
 - **Original siempre visible** y etiquetado, separado de lo generado por IA. No se guarda nada.
 - **Pruebas**: `tests/e2e-entender.mjs` (26, OCR y pdf.js reales sobre 8 documentos ficticios de `tests/fixtures/entender/`), `tests/entender-core.test.mjs`, Worker. Requiere `npm i --no-save tesseract.js@5.1.1 @tesseract.js-data/spa pdfjs-dist@3.11.174`.
 - **Pendiente de probar a mano**: IA real (el Worker nuevo se despliega desde `main`; hasta entonces `extract` responde error y la app lo explica), cámara y voz en celular, fotos reales del colegio.
+
+## Etapa 7 · «Decilo con pictogramas» (rama `decilo-con-pictogramas`)
+
+- La tarjeta de inicio «Hablar con imágenes» pasa a llamarse **Decilo con pictogramas** y abre una pantalla con dos caminos (`view-decilo`):
+  1. **Escribir y mostrar** → el convertidor existente (`convertidor.js`, vista `escribir`).
+  2. **Elegir imágenes para hablar** → el comunicador existente (`tablero.js`, vista `tablero`).
+  No se crearon herramientas nuevas: solo la pantalla de elección y el modo de pantalla completa.
+- En el convertidor, el botón principal **MOSTRAR A OTRA PERSONA** (`#pcMostrar`) abre el mensaje a pantalla completa (`#pcMostrarDlg`): pictogramas de 130–300 px según la pantalla, frase en letra grande, crédito ARASAAC visible, sin rótulos técnicos.
+- Acciones: Escuchar (solo al tocar), Cambiar un pictograma (modo edición que reutiliza el selector y la búsqueda ARASAAC existentes; la palabra sin pictograma confiable queda como texto y se avisa «N palabras para revisar»), Descargar (PNG), Compartir (menú del sistema en celulares; si no existe, descarga) y Volver.
+- `ClariaExport.compartirPNG` es ahora el único código de compartir (lo usan el convertidor y el tablero).
+- Pruebas: `tests/e2e-decilo.mjs` (12). Se actualizaron las pruebas viejas que entraban al tablero desde la tarjeta de inicio.
+- «Pantalla completa» = el mensaje ocupa toda la ventana (diálogo a 100 % del alto y ancho); no usa la API de pantalla completa del navegador (no funciona en iPhone).

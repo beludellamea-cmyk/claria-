@@ -115,5 +115,13 @@
   function descargar(blob, nombre) {
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nombre; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   }
-  return { dibujarPaginas, aPNG, aPDF, armarPDF, descargar, CREDITO, cargarImagen };
+  /** Comparte el PNG con el menú del sistema (celulares) o, si no hay, lo descarga. → 'compartido' | 'descargado' | 'cancelado' */
+  async function compartirPNG(blob, nombre, datos) {
+    const file = new File([blob], nombre, { type: 'image/png' });
+    if (typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], ...(datos || {}) }); return 'compartido'; } catch (e) { if (e && e.name === 'AbortError') return 'cancelado'; throw e; }
+    }
+    descargar(blob, nombre); return 'descargado';
+  }
+  return { dibujarPaginas, aPNG, aPDF, armarPDF, descargar, compartirPNG, CREDITO, cargarImagen };
 });

@@ -175,9 +175,8 @@
     const b = $('tbCompartir'); b.disabled = true; estado('Preparando la imagen…');
     try {
       const pags = await ClariaExport.dibujarPaginas({ titulo: 'CLARIA · Mi frase', mayus: false, tamano: 200, bloques: [{ texto, fichas: frase.map((f) => ({ orig: f.lema, estado: 'verificado', pic: { src: f.src } })) }] });
-      const blob = await ClariaExport.aPNG(pags); const file = new File([blob], 'frase-claria.png', { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'Mi frase', text: texto }); estado('Imagen lista para compartir.'); }
-      else { ClariaExport.descargar(blob, 'frase-claria.png'); estado('Se descargó la imagen. Revisá que diga lo que querés antes de enviarla.'); }
+      const blob = await ClariaExport.aPNG(pags); const r = await ClariaExport.compartirPNG(blob, 'frase-claria.png', { title: 'Mi frase', text: texto });
+      estado(r === 'compartido' ? 'Imagen lista para compartir.' : r === 'cancelado' ? 'Se canceló el envío.' : 'Se descargó la imagen. Revisá que diga lo que querés antes de enviarla.');
     } catch (e) { estado(e && e.name === 'AbortError' ? 'Se canceló el envío.' : 'No se pudo preparar la imagen. Probá de nuevo.'); } finally { b.disabled = false; pintarFrase(); }
   });
 
